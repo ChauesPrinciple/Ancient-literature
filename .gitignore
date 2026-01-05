@@ -1,0 +1,10 @@
+__pycache__/ 
+*.pyc 
+extracted/ 
+extracted_pages/ 
+terms_extracted/ 
+terms_new_extracted/ 
+terms2_extracted/ 
+text_summary_extracted/ 
+video_supp_extracted/ 
+*dump*.txt
