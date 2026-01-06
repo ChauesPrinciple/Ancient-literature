@@ -1,0 +1,148 @@
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 260px;
+    background: rgba(253, 251, 247, 0.98); /* Matching parchment bg */
+    border: 1px solid var(--border-color);
+    border-top: 2px solid var(--accent-red);
+    border-radius: 0 0 4px 4px;
+    padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+}
+
+.brand:hover .dropdown-menu,
+.dropdown-menu:hover,
+/* Ensure it works for the new top nav structure in index.html */
+.nav-brand-container:hover .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: block;
+    border-left: 2px solid transparent;
+}
+
+.dropdown-item:hover {
+    background: rgba(139, 0, 0, 0.05); /* Light red tint */
+    color: var(--accent-red);
+    padding-left: 1.25rem;
+    text-decoration: none;
+}
+
+.dropdown-item.current {
+    color: var(--text-primary);
+    border-left-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1); /* Light gold tint */
+    font-weight: 700;
+    pointer-events: none;
+}
+
+/* New Top Navigation for Index */
+.top-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand-container {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.nav-brand {
+    font-family: var(--font-display);
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    transition: background 0.3s;
+}
+
+.nav-brand:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.nav-brand::after {
+    content: '▼';
+    font-size: 0.7rem;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand-container:hover .nav-brand::after {
+    transform: rotate(180deg);
+}
+
+/* Adjust dropdown for top nav (dark background context) */
+.nav-brand-container .dropdown-menu {
+    background: rgba(5, 5, 5, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+    top: 100%;
+    margin-top: 5px;
+}
+
+.nav-brand-container .dropdown-item {
+    color: #bbb;
+}
+
+.nav-brand-container .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.nav-brand-container .dropdown-item.current {
+    color: #fff;
+    border-left-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.2);
+}
+
+/* Sidebar Dropdown Specifics */
+.sidebar .brand {
+    position: relative;
+    /* Ensure dropdown positions correctly relative to brand */
+    overflow: visible; 
+    /* Allow dropdown to spill out */
+    cursor: pointer;
+}
+
+.sidebar .brand h1::after {
+    content: '▼';
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    margin-left: 0.5rem;
+    display: inline-block; /* Ensure it respects transform */
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.sidebar .brand:hover h1::after {
+    transform: rotate(180deg);
+}
