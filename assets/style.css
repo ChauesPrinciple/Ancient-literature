@@ -735,3 +735,132 @@ footer {
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+/* Mobile Dropdown Fix - Touch-friendly */
+.brand:focus-within .dropdown-menu,
+.nav-brand-container:focus-within .dropdown-menu {
+    display: flex;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .content-area {
+        padding: 2rem 1rem;
+    }
+
+    .brand h1 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    /* Mobile dropdown - always show on sidebar for navigation */
+    .sidebar .dropdown-menu {
+        position: static;
+        width: 100%;
+        display: none;
+        margin-top: 0.5rem;
+        box-shadow: none;
+        background: rgba(0, 0, 0, 0.03);
+    }
+
+    .sidebar .brand:focus-within .dropdown-menu,
+    .sidebar .brand:active .dropdown-menu {
+        display: flex;
+    }
+
+    /* Make brand tappable */
+    .sidebar .brand {
+        cursor: pointer;
+    }
+
+    .sidebar .brand h1 {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .module-nav {
+        display: none;
+    }
+
+    .sidebar.expanded .module-nav {
+        display: flex;
+    }
+
+    .current-module {
+        display: none;
+    }
+
+    .sidebar.expanded .current-module {
+        display: block;
+    }
+
+    /* Hero adjustments */
+    .main-hero {
+        padding: 4rem 1rem;
+        background-attachment: scroll;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* Top navigation on mobile */
+    .top-nav {
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-brand {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .nav-brand-container .dropdown-menu {
+        width: 200px;
+    }
+
+    /* Module cards */
+    .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .module-card {
+        padding: 1.5rem;
+    }
+
+    /* Page navigation */
+    .page-nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .page-nav .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Buttons */
+    .btn-hero,
+    .btn-outline-light {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}
