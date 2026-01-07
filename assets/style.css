@@ -699,8 +699,8 @@ img {
     font-family: 'Cinzel', serif;
     color: var(--text-primary);
     font-size: 1.4rem;
-    /* CHANGED: Explicit, large margin-top for "Head Room" */
-    margin-top: 4rem !important;
+    /* CHANGED: Massive top margin (approx 96px) to guarantee headroom */
+    margin-top: 6rem !important;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     margin-bottom: 0.5rem;
