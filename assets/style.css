@@ -724,26 +724,6 @@ img {
     /* Pushes button to bottom */
 }
 
-/* New Button Style for Cards */
-.module-card .btn {
-    width: auto;
-    text-align: center;
-    margin: 0 1.5rem 1.5rem 1.5rem;
-    background: transparent;
-    border: 1px solid var(--accent-red);
-    color: var(--accent-red) !important;
-    padding: 0.75rem 1rem;
-    transition: all 0.2s ease;
-    align-self: flex-start;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-}
-
-.module-card:hover .btn {
-    background: var(--accent-red);
-    color: white !important;
-}
-
 /* Decorative top border for premium feel */
 .module-card::before {
     content: '';
@@ -751,15 +731,46 @@ img {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 6px;
+    /* Slightly thicker */
     background: var(--accent-gold);
-    transform: scaleX(0.7);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+    /* Removed transform: scaleX(0.7) to fix "cut off" look */
+    transition: background 0.3s ease;
 }
 
 .module-card:hover::before {
-    transform: scaleX(1);
+    background: var(--accent-red);
+    /* Color shift on hover instead of resize */
+}
+
+/* Refined Button Style for Cards */
+.module-card .btn {
+    width: calc(100% - 3rem);
+    /* Full width minus margins */
+    text-align: center;
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    background: #fff;
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red) !important;
+    padding: 1rem 0.5rem;
+    /* More vertical padding, less horizontal to ensure fit */
+    transition: all 0.2s ease;
+    align-self: center;
+    /* Center alignment */
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    /* Prevent wrapping */
+    line-height: 1.2;
+    /* Ensure clear headroom for ascenders/descenders */
+}
+
+.module-card:hover .btn {
+    background: var(--accent-red);
+    color: white !important;
+    box-shadow: 0 4px 10px rgba(139, 0, 0, 0.2);
 }
 
 .module-card:hover {
