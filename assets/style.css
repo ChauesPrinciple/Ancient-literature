@@ -706,7 +706,8 @@ img {
     font-family: 'Cinzel', serif;
     color: var(--text-primary);
     font-size: 1.4rem;
-    margin: 1.5rem 1.5rem 1rem 1.5rem;
+    /* Increased top margin for headroom, reduced bottom for balance */
+    margin: 2.5rem 1.5rem 0.5rem 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgba(212, 175, 55, 0.3);
     /* Transparent gold */
