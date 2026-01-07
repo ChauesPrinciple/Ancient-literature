@@ -674,20 +674,92 @@ img {
 
 .modules-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
     padding-bottom: 4rem;
 }
 
 .module-card {
     background: #fff;
     border: 1px solid var(--border-color);
-    padding: 2rem;
+    padding: 0;
+    /* Removing padding to allow image/header to span full width */
     border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    /* For border radius on children */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    position: relative;
+    height: 100%;
+}
+
+.module-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-gold);
+}
+
+.module-card h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    /* Transparent gold */
+    line-height: 1.3;
+}
+
+/* Make "Module X" part distinctive if we can target it, or just style the H3 generally well. */
+
+.module-card p {
+    color: var(--text-secondary);
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex-grow: 1;
+    /* Pushes button to bottom */
+}
+
+/* New Button Style for Cards */
+.module-card .btn {
+    width: auto;
+    text-align: center;
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red) !important;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+}
+
+.module-card:hover .btn {
+    background: var(--accent-red);
+    color: white !important;
+}
+
+/* Decorative top border for premium feel */
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-gold);
+    transform: scaleX(0.7);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.module-card:hover::before {
+    transform: scaleX(1);
 }
 
 .module-card:hover {
