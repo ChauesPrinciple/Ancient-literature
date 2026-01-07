@@ -673,35 +673,28 @@ img {
 }
 
 .modules-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2.5rem;
-    padding-bottom: 4rem;
-}
-
-/* Foundations Centering */
-/* Foundations Centering: Simple wrapper that treats it like a grid item but centered */
-.foundations-wrapper {
     display: flex;
-    justify-content: center;
-    margin: 0 auto 4rem auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
     width: 100%;
-    max-width: 1200px;
-    /* Match grid/accordion */
+    margin: 0 auto;
 }
 
-/* Ensure the card inside matches the grid cards exactly */
-.foundations-wrapper .module-card {
+/* Ensure cards inside the stack are wide but constrained */
+.modules-grid .module-card {
     width: 100%;
-    max-width: 320px;
-    /* Match the minmax of grid columns */
-    /* No other overrides needed to keep it identical */
+    max-width: 900px;
+    /* Slightly less than accordion's 1000px */
+    margin: 0 auto;
+    /* Ensure centering */
 }
 
 /* Accordion Styles */
 .accordion {
-    background: linear-gradient(to right, #cfaf50, #f8eebf, #cfaf50);
-    /* Premium Gold Gradient */
+    background: #fff;
+    /* Clean background */
     color: var(--accent-red);
     cursor: pointer;
     padding: 1.5rem 2rem;
@@ -714,19 +707,24 @@ img {
     text-align: center;
     border: none;
     outline: none;
-    transition: 0.4s;
+    transition: all 0.3s ease;
     font-family: 'Cinzel', serif;
     font-size: 1.8rem;
     border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     position: relative;
-    border: 1px solid #b89f45;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--accent-gold);
+    /* Gold Accent Border */
+    border-left: 6px solid var(--accent-gold);
+    /* distinctive gold accent */
+    text-shadow: none;
 }
 
 .accordion:hover,
 .accordion.active {
-    filter: brightness(1.05);
+    background: var(--bg-parchment);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .accordion:after {
@@ -828,26 +826,29 @@ img {
 
 /* Refined Button Style for Cards */
 .module-card .btn {
-    width: calc(100% - 3rem);
-    /* Full width minus margins */
+    width: auto;
+    /* Allow button to size to text */
+    min-width: 180px;
+    /* Minimum clickable area */
+    max-width: 300px;
+    /* Prevent being too wide */
     text-align: center;
-    margin: 0 1.5rem 1.5rem 1.5rem;
+    margin: 0 auto 1.5rem auto;
+    /* Center horizontally */
     background: #fff;
     border: 1px solid var(--accent-red);
     color: var(--accent-red) !important;
-    padding: 1rem 0.5rem;
-    /* More vertical padding, less horizontal to ensure fit */
+    padding: 1rem 2rem;
+    /* Balanced padding */
     transition: all 0.2s ease;
     align-self: center;
-    /* Center alignment */
+    /* Flexbox centering */
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
-    /* Prevent wrapping */
     line-height: 1.2;
-    /* Ensure clear headroom for ascenders/descenders */
 }
 
 .module-card:hover .btn {
