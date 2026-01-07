@@ -45,123 +45,129 @@
             changed the world (and built our world).</p>
     </section>
 
-    <main class="container" id="library">
-        <!-- Added display: block to ensure centering works with margin: auto -->
-        <h2
-            style="display: block; text-align: center; margin-bottom: 3rem; font-family: 'Cinzel', serif; color: #444; font-size: 3.5rem; border-bottom: 3px solid #eee; padding-bottom: 1rem; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;">
-            The Collection</h2>
-        <div class="modules-grid">
-            <div class="module-card">
-                <h3>Module 1: Foundations</h3>
-                <a href="modules/module-1-introductions/02-introduction-to-the-textbook.html" class="btn">Start
-                    Module</a>
-            </div>
+    <!-- Foundations Section: Centered and Independent -->
+    <div class="foundations-wrapper">
+        <div class="module-card">
+            <h3>Module 1: Foundations</h3>
+            <a href="modules/module-1-introductions/02-introduction-to-the-textbook.html" class="btn">Start
+                Module</a>
         </div>
+    </div>
 
-        <div class="chapter-title">
-            <span>Chapter I: The Drive</span>
-        </div>
-
-        <div class="modules-grid">
+    <!-- Chapter I -->
+    <button class="accordion">Chapter I: The Drive</button>
+    <div class="panel">
+        <div class="modules-grid" style="padding-bottom: 2rem; padding-top: 2rem;">
             <div class="module-card">
                 <h3>Module 2: Cosmogonies</h3>
                 <a href="modules/module-2-cosmogonies/02-hesiod-works-and-days-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 3: Gilgamesh</h3>
                 <a href="modules/module-3-gilgamesh/02-gilgamesh-background-and-summary.html" class="btn">Start
                     Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 4: the Inferno</h3>
                 <a href="modules/module-4-the-inferno/02-the-inferno-background-and-summary.html" class="btn">Start
                     Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 5: Don Quixote</h3>
                 <a href="modules/module-5-don-quixote/02-don-quixote-background-and-summary.html" class="btn">Start
                     Module</a>
             </div>
         </div>
+    </div>
 
-        <div class="chapter-title">
-            <span>Chapter II: The Warrior</span>
-        </div>
-
-        <div class="modules-grid">
+    <!-- Chapter II -->
+    <button class="accordion">Chapter II: The Warrior</button>
+    <div class="panel">
+        <div class="modules-grid" style="padding-bottom: 2rem; padding-top: 2rem;">
             <div class="module-card">
                 <h3>Module 6: the Iliad</h3>
                 <a href="modules/module-6-the-iliad/02-chapter-two-introduction-the-warrior.html" class="btn">Start
                     Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 7: the Bhagavad Gita</h3>
                 <a href="modules/module-7-the-bhagavad-gita/02-bhagavad-gita-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 8: Beowulf</h3>
-                <a href="modules/module-8-beowulf/02-beowulf-background-and-summary.html" class="btn">Start Module</a>
+                <a href="modules/module-8-beowulf/02-beowulf-background-and-summary.html" class="btn">Start
+                    Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 9: Song of Roland</h3>
                 <a href="modules/module-9-song-of-roland/02-song-of-roland-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 10: Hamlet</h3>
-                <a href="modules/module-10-hamlet/02-hamlet-background-and-summary.html" class="btn">Start Module</a>
+                <a href="modules/module-10-hamlet/02-hamlet-background-and-summary.html" class="btn">Start
+                    Module</a>
             </div>
         </div>
+    </div>
 
-        <div class="chapter-title">
-            <span>Chapter III: The Woman</span>
-        </div>
-
-        <div class="modules-grid">
+    <!-- Chapter III -->
+    <button class="accordion">Chapter III: The Woman</button>
+    <div class="panel">
+        <div class="modules-grid" style="padding-bottom: 2rem; padding-top: 2rem;">
             <div class="module-card">
                 <h3>Module 11: Medea</h3>
                 <a href="modules/module-11-medea/02-chapter-three-introduction-the-women.html" class="btn">Start
                     Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 12: One Thousand and One Nights</h3>
                 <a href="modules/module-12-one-thousand-and-one-nights/02-one-thousand-and-one-nights-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 13: The Wife of Bath</h3>
                 <a href="modules/module-13-the-wife-of-bath/02-wife-of-bath-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 14: the Book of the City of Ladies</h3>
                 <a href="modules/module-14-the-book-of-the-city-of-ladies/02-book-of-the-city-of-ladies-background-and-summary.html"
                     class="btn">Start Module</a>
             </div>
-
             <div class="module-card">
                 <h3>Module 15: The Final Chapter</h3>
                 <a href="modules/module-15-final-work/02-major-project-and-their-differences.html" class="btn">Start
                     Module</a>
             </div>
         </div>
+    </div>
+
     </main>
 
     <footer>
         <p>An Open Educational Resource (OER) | <a href="references.html">References & License</a></p>
     </footer>
-</body>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.classList.remove("show");
+                } else {
+                    panel.classList.add("show");
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
 
 </html>

@@ -679,23 +679,85 @@ img {
     padding-bottom: 4rem;
 }
 
-.chapter-title {
-    grid-column: 1 / -1;
-    /* Span full width if inside grid, but we will place outside */
+/* Foundations Centering */
+/* Foundations Centering: Simple wrapper that treats it like a grid item but centered */
+.foundations-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 4rem auto;
     width: 100%;
-    text-align: center;
-    margin: 4rem 0 2rem 0;
-    position: relative;
-    padding-bottom: 1rem;
+    max-width: 1200px;
+    /* Match grid/accordion */
 }
 
-.chapter-title span {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
+/* Ensure the card inside matches the grid cards exactly */
+.foundations-wrapper .module-card {
+    width: 100%;
+    max-width: 320px;
+    /* Match the minmax of grid columns */
+    /* No other overrides needed to keep it identical */
+}
+
+/* Accordion Styles */
+.accordion {
+    background: linear-gradient(to right, #cfaf50, #f8eebf, #cfaf50);
+    /* Premium Gold Gradient */
     color: var(--accent-red);
-    border-bottom: 3px solid var(--accent-gold);
-    padding-bottom: 0.5rem;
-    display: inline-block;
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 1000px;
+    /* Constrain width so it isn't "page size" */
+    display: block;
+    margin: 0 auto 1rem auto;
+    /* Center it */
+    text-align: center;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 1px solid #b89f45;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.accordion:hover,
+.accordion.active {
+    filter: brightness(1.05);
+}
+
+.accordion:after {
+    content: '▼';
+    /* Unicode character for "plus" sign (+) can be used too */
+    font-size: 1rem;
+    color: var(--accent-red);
+    float: right;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.accordion.active:after {
+    transform: rotate(180deg);
+}
+
+.panel {
+    padding: 0 1rem;
+    background-color: transparent;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    margin-bottom: 1rem;
+    opacity: 0;
+}
+
+.panel.show {
+    opacity: 1;
+    margin-bottom: 3rem;
+    /* We handle max-height in JS, but this helps the fade */
 }
 
 .welcome-section h2 {
@@ -705,17 +767,20 @@ img {
     font-size: 2.5rem;
 }
 
-padding: 0;
-border-radius: 8px;
-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-/* CHANGED: Do not spread items. Stack them from top. */
-overflow: hidden;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-position: relative;
-height: 100%;
+.module-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    padding: 0;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* CHANGED: Do not spread items. Stack them from top. */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    position: relative;
+    height: 100%;
 }
 
 .module-card h3 {
