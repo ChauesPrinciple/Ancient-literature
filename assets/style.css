@@ -417,7 +417,28 @@ video {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: block;
-    margin: 2rem 0;
+    margin: 2rem auto;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    margin: 2rem auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 /* Fix for iframes to be responsive 16:9 */
@@ -1030,4 +1051,59 @@ footer {
         margin-left: 0;
         margin-top: 0.5rem;
     }
+}
+
+/* Hero Stages Grid Layout */
+.hero-stages-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.stage-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-gold);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.stage-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--accent-red);
+}
+
+.stage-card.highlight {
+    background: rgba(139, 0, 0, 0.05);
+    border-left-color: var(--accent-red);
+}
+
+.stage-num {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    min-width: 1.5rem;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.stage-content {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.stage-content strong {
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    display: block;
+    margin-bottom: 0.25rem;
 }

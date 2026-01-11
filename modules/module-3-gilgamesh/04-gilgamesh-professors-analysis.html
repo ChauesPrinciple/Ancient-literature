@@ -31,9 +31,10 @@
                     <h3>Module 3: Gilgamesh</h3>
                 </div>
                 <div class="module-nav">
-                    <a href="02-gilgamesh-background-and-summary.html">Gilgamesh: Background and Summary</a><a
-                        href="03-gilgamesh-text.html">Gilgamesh: Text</a><a href="04-gilgamesh-professors-analysis.html"
-                        class="active-link">Professor's Analysis</a><a href="05-gilgamesh.html">Gilgamesh</a>
+                    <a href="02-gilgamesh-background-and-summary.html">Gilgamesh: Background and Summary</a>
+                    <a href="03-gilgamesh-text.html">Gilgamesh: Text</a>
+                    <a href="04-gilgamesh-professors-analysis.html" class="active-link">Professor's Analysis</a>
+                    <a href="05-gilgamesh.html">Heroic Systems</a>
                 </div>
 
                 <div class="current-module" style="margin-top: 2rem; border-top: 1px solid #ccc; padding-top: 1rem;">
@@ -54,11 +55,12 @@
 
 
 
-            <div class="callout">
-                <strong>Image Note</strong>
-                <p><em>[Image Intended: Picture of the outer wall of an ancient Babylonian structure.]</em></p>
-                <p><em>[Image Intended: Ancient clay tablet with cuneiform script inscribed on its surface.]</em>
-                </p>
+            <div class="banner-image">
+                <img src="../../assets/media/babylonian-wall.png" alt="The outer walls of Uruk, built by Gilgamesh"
+                    style="width: 100%; height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <p
+                    style="text-align: center; font-style: italic; color: #666; font-size: 0.9rem; margin-top: -1.5rem; margin-bottom: 2rem;">
+                    The outer walls of Uruk, built by Gilgamesh.</p>
             </div>
 
             <p><span class="drop-cap">A</span>t its core, Gilgamesh is the first and prototypical "Hero's Journey,"
@@ -82,184 +84,205 @@
                 leads them through great movements of departure, initiation, and return.</p>
 
             <div class="hero-cycle-container"
-                style="text-align: center; border: none; box-shadow: none; background: transparent;">
+                style="text-align: center; border: none; box-shadow: none; background: transparent; margin: 3rem 0;">
                 <div class="hero-cycle-title" style="margin-bottom: 2rem;">The Hero's Journey</div>
 
-                <!-- SVG Circular Diagram -->
-                <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg"
-                    style="max-width: 100%; height: auto; font-family: 'Cinzel', serif; background: #fff; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--accent-gold);">
-
-                    <!-- Definitions for curved text paths -->
-                    <defs>
-                        <path id="pathDeparture" d="M 400,400 m 0,-350 a 350,350 0 0,1 303.1,175" />
-                        <path id="pathInitiation" d="M 400,400 m 303.1,-175 a 350,350 0 0,1 -303.1,525" />
-                        <path id="pathReturn" d="M 400,400 m 0,350 a 350,350 0 0,1 -303.1,-525" />
-                    </defs>
-
-                    <!-- Background Sectors -->
-                    <!-- Departure (Top Right) -->
-                    <path d="M 400,400 L 400,50 A 350,350 0 0,1 703,225 Z" fill="rgba(139, 0, 0, 0.05)"
-                        stroke="var(--accent-gold)" stroke-width="2" />
-
-                    <!-- Initiation (Bottom) -->
-                    <path d="M 400,400 L 703,225 A 350,350 0 0,1 96.9,225 Z" fill="rgba(212, 175, 55, 0.1)"
-                        stroke="var(--accent-gold)" stroke-width="2" />
-
-                    <!-- Return (Top Left) -->
-                    <path d="M 400,400 L 96.9,225 A 350,350 0 0,1 400,50 Z" fill="rgba(139, 0, 0, 0.05)"
-                        stroke="var(--accent-gold)" stroke-width="2" />
-
-                    <!-- Phase Labels -->
-                    <text x="550" y="150" font-size="24" fill="var(--accent-red)" font-weight="bold"
-                        text-anchor="middle">DEPARTURE</text>
-                    <text x="400" y="650" font-size="24" fill="var(--accent-red)" font-weight="bold"
-                        text-anchor="middle">INITIATION</text>
-                    <text x="250" y="150" font-size="24" fill="var(--accent-red)" font-weight="bold"
-                        text-anchor="middle">RETURN</text>
-
-                    <!-- Separation Lines -->
-                    <line x1="400" y1="400" x2="400" y2="50" stroke="var(--accent-gold)" stroke-width="2"
-                        stroke-dasharray="5,5" />
-                    <line x1="400" y1="400" x2="703" y2="225" stroke="var(--accent-gold)" stroke-width="2"
-                        stroke-dasharray="5,5" />
-                    <line x1="400" y1="400" x2="96.9" y2="225" stroke="var(--accent-gold)" stroke-width="2"
-                        stroke-dasharray="5,5" />
-
-                    <!-- Stage Items (Approximate positions clockwise) -->
-
-                    <!-- DEPARTURE (12:00 to 4:00) -->
-                    <text x="430" y="100" font-size="15" fill="#333" font-family="'Lato', sans-serif">1. Status
-                        Quo</text>
-                    <text x="530" y="180" font-size="15" fill="#333" font-family="'Lato', sans-serif">2. Call to
-                        Adventure</text>
-                    <text x="570" y="260" font-size="15" fill="#333" font-family="'Lato', sans-serif">3.
-                        Assistance</text>
-                    <text x="550" y="340" font-size="15" fill="#333" font-family="'Lato', sans-serif">4.
-                        Departure</text>
-
-                    <!-- INITIATION (4:00 to 8:00) -->
-                    <text x="510" y="450" font-size="15" fill="#333" font-family="'Lato', sans-serif">5.
-                        Trials</text>
-                    <text x="490" y="520" font-size="15" fill="#333" font-family="'Lato', sans-serif">6. Approach to
-                        Cave</text>
-                    <text x="400" y="580" font-size="18" fill="#d00" font-weight="bold" text-anchor="middle">7.
-                        CRISIS</text>
-                    <text x="310" y="520" font-size="15" fill="#333" font-family="'Lato', sans-serif">8.
-                        Treasure</text>
-                    <text x="290" y="450" font-size="15" fill="#333" font-family="'Lato', sans-serif">9.
-                        Result</text>
-
-                    <!-- RETURN (8:00 to 12:00) -->
-                    <text x="230" y="340" font-size="15" fill="#333" font-family="'Lato', sans-serif">10.
-                        Return</text>
-                    <text x="210" y="260" font-size="18" fill="#d00" font-weight="bold">11. Resurrection</text>
-                    <text x="250" y="180" font-size="15" fill="#333" font-family="'Lato', sans-serif">12. New Status
-                        Quo</text>
-
-                    <!-- Central Hub -->
-                    <circle cx="400" cy="400" r="40" fill="var(--accent-red)" />
-                    <text x="400" y="405" font-size="14" fill="#fff" text-anchor="middle"
-                        font-family="'Cinzel', serif">HERO</text>
-                </svg>
+                <!-- Hero's Journey Diagram (Original Reference) -->
+                <img src="../../assets/media/Heroesjourney.svg" alt="The Hero's Journey Cycle"
+                    style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--accent-gold);">
             </div>
 
-            <div class="hero-stage-group">
-                <h3 class="hero-stage-title">Departure</h3>
-                <ul class="hero-stages-list">
-                    <li class="hero-stage-item">
-                        <span class="stage-name">1. Status Quo:</span>
-                        <span class="stage-desc">The hero exists in their normal world, constrained by personal or
-                            societal limitations.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">2. Call to Adventure:</span>
-                        <span class="stage-desc">A challenge, problem, or threat disrupts the hero's ordinary life,
-                            presenting an opportunity for growth.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">3. Assistance:</span>
-                        <span class="stage-desc">The hero encounters a mentor or supernatural aid who provides
-                            guidance, tools, or wisdom.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">4. Departure:</span>
-                        <span class="stage-desc">The hero crosses the threshold from the known world into the
-                            unknown, committing to the journey.</span>
-                    </li>
-                </ul>
+            <!-- Redesigned Hero Stages Grid -->
+            <!-- Redesigned Hero Stages Grid with Links -->
+            <div class="hero-stages-grid-container" style="margin: 4rem 0;">
+                <div class="stage-column">
+                    <h3
+                        style="text-align: center; color: var(--accent-red); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--accent-gold); padding-bottom: 0.5rem;">
+                        I. Departure</h3>
+                    <div class="stage-card">
+                        <span class="stage-num">1</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-status-quo">Status Quo</a></strong><br>
+                            Gilgamesh rules Uruk as a tyrant, oppressing his people and abusing his power.
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">2</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-call">Call to Adventure</a></strong><br>
+                            The creation of Enkidu and the subsequent decision to travel to the Cedar Forest for fame.
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">3</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-assistance">Assistance</a></strong><br>
+                            Gilgamesh receives counsel from the Elders and prayers from his mother, Ninsun.
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">4</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-departure">Departure</a></strong><br>
+                            Gilgamesh and Enkidu leave the safety of Uruk, crossing the threshold into the wild.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stage-column">
+                    <h3
+                        style="text-align: center; color: var(--accent-red); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--accent-gold); padding-bottom: 0.5rem;">
+                        II. Initiation</h3>
+                    <div class="stage-card">
+                        <span class="stage-num">5</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-trials">Trials</a></strong><br>
+                            They defeat Humbaba and the Bull of Heaven, proving their physical might.
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">6</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-approach">Approach</a></strong><br>
+                            Enkidu dies. Gilgamesh is struck by the terror of death and seeks Utnapishtim.
+                        </div>
+                    </div>
+                    <div class="stage-card highlight">
+                        <span class="stage-num">7</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-crisis">CRISIS</a></strong><br>
+                            Gilgamesh crosses the Waters of Death and fails the test of sleep (mortality).
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">8</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-treasure">Treasure</a></strong><br>
+                            He obtains the plant of "How-the-Old-Man-Becomes-Young" (literal immortality).
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">9</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-result">Result</a></strong><br>
+                            A snake steals the plant while he bathes. He has lost his chance at eternal youth.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stage-column">
+                    <h3
+                        style="text-align: center; color: var(--accent-red); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--accent-gold); padding-bottom: 0.5rem;">
+                        III. Return</h3>
+                    <div class="stage-card">
+                        <span class="stage-num">10</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-return">Return</a></strong><br>
+                            Gilgamesh returns to Uruk, empty-handed and weary, accompanied by Urshanabi.
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">11</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-new-life">New Life</a></strong><br>
+                            He sees the walls of Uruk not just as brick, but as his enduring legacy (Symbolic
+                            Immortality).
+                        </div>
+                    </div>
+                    <div class="stage-card">
+                        <span class="stage-num">12</span>
+                        <div class="stage-content">
+                            <strong><a href="03-gilgamesh-text.html#text-resolution">Resolution</a></strong><br>
+                            He inscribes his story on stone. He becomes the wise king who knows the ways of the world.
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="hero-stage-group">
-                <h3 class="hero-stage-title">Initiation</h3>
-                <ul class="hero-stages-list">
-                    <li class="hero-stage-item">
-                        <span class="stage-name">5. Trials:</span>
-                        <span class="stage-desc">The hero faces obstacles, enemies, and tests that challenge their
-                            resolve and build their skills.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">6. Approach:</span>
-                        <span class="stage-desc">The hero prepares for the central challenge, often facing their
-                            greatest fear.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">7. Crisis:</span>
-                        <span class="stage-desc">The hero confronts death or their greatest ordeal, experiencing a
-                            moment of profound transformation.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">8. Treasure:</span>
-                        <span class="stage-desc">Having survived the crisis, the hero gains a reward (knowledge,
-                            power, or object).</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">9. Result:</span>
-                        <span class="stage-desc">The hero deals with the consequences of the crisis and begins the
-                            journey back.</span>
-                    </li>
-                </ul>
-            </div>
+            <!-- Analysis Section -->
+            <hr style="border: 0; height: 1px; background: var(--accent-gold); margin: 4rem 0; opacity: 0.5;">
 
-            <div class="hero-stage-group">
-                <h3 class="hero-stage-title">Return</h3>
-                <ul class="hero-stages-list">
-                    <li class="hero-stage-item">
-                        <span class="stage-name">10. Return:</span>
-                        <span class="stage-desc">The hero travels back to the ordinary world, often facing final
-                            dangers.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">11. New Life:</span>
-                        <span class="stage-desc">The hero is resurrected or transformed, applying their new wisdom
-                            to the ordinary world.</span>
-                    </li>
-                    <li class="hero-stage-item">
-                        <span class="stage-name">12. Resolution:</span>
-                        <span class="stage-desc">The cycle is complete, and the hero establishes a new status quo,
-                            enlightened by their journey.</span>
-                    </li>
-                </ul>
-            </div>
+            <h3>The Beast & The Hero</h3>
+            <p>Gilgamesh's journey is not merely a physical trek across the world; it is an internal evolution from raw,
+                unchecked impulse to tempered, civilized wisdom. When we first meet Gilgamesh, "he is a bit of a
+                bastard." He is described as two-thirds divine and one-third human, a volatile ratio that manifests in
+                tyranny. He abuses his power, claiming <em>droit du seigneur</em> (the right of the lord) over new
+                brides and pressing men into labor. He is, effectively, a beast in king's clothing—ruled by appetite and
+                ego, rather than responsibility.</p>
 
-            <p>When we first meet Gilgamesh, he is a bit of a bastard. Power, it seems, has corrupted him, and his
-                people cry out for help. The gods answer and Enkidu is born. Enkidu is Gilgamesh's equal, and in a
-                sense, he "tames" Gilgamesh in the same way Shamhat tames Enkidu's impulses. There is one key
-                difference in those impulses, however: Enkidu's are fueled with purpose and compassion, whereas
-                Gilgamesh's are selfish and cruel. Why?</p>
+            <p>The intervention of the gods introduces Enkidu, a man of the wild who is Gilgamesh's mirror image. Where
+                Gilgamesh is a civilized man acting like a beast, Enkidu is a beast who must become a man. Their
+                wrestling match in the streets of Uruk is the pivotal moment of "taming" for both. Enkidu checks
+                Gilgamesh's tyranny, and Gilgamesh gives Enkidu purpose. Yet, even as friends, their early
+                exploits—killing Humbaba and the Bull of Heaven—are driven by a juvenile desire for fame. They are
+                trying to write their names in history through violence, a crude form of immortality.</p>
+
+            <h3>Becker's "Heroic Systems"</h3>
+            <p>To understand what happens next, we must look to the 20th-century cultural anthropologist <strong>Ernest
+                    Becker</strong>. In his Pulitzer Prize-winning book <em>The Denial of Death</em>, Becker argues that
+                the driving force behind human behavior is the terror of death. Because we are intelligent enough to
+                realize we will die, we spend our lives constructing "immortality projects" or "heroic systems"—cultural
+                structures that allow us to feel that we are part of something eternal, something that will outlast our
+                physical bodies.</p>
+
+            <blockquote
+                style="border-left: 4px solid var(--accent-gold); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: #555;">
+                "Man is a worm and food for worms. This is the paradox: he is out of nature and hopelessly in it; he is
+                dual, up in the stars and yet housed in a heart-pumping, breath-gasping body that belongs to a fish and
+                still has gill-slits... to have to die is a terrifying thought." — Ernest Becker
+            </blockquote>
+
+            <p>Gilgamesh begins the epic terrified of this paradox, though he masks it with bravado. His early quest for
+                fame is his initial, immature "heroic system." He attempts to create a <strong>literal
+                    immortality</strong> through deeds so great that "his name will be stamped on brick." But this
+                system collapses the moment Enkidu dies. When Gilgamesh sees the worm crawl out of his friend's nose,
+                the "terror" Becker describes shatters his defenses. Fame is no longer enough; he needs to physically
+                conquer death.</p>
+
+            <h3>The Failure of Literal Immortality</h3>
+            <p>Gilgamesh's journey across the Waters of Death to find Utnapishtim is a desperate attempt to find a
+                loophole in the human condition. He explicitly seeks <em>literal</em> immortality—to live forever in the
+                flesh. But the epic systematically strips him of this hope. He fails the test of staying awake (a
+                metaphor for death), and even when he obtains the rejuvenating plant, it is stolen by a snake (a symbol
+                of nature reclaiming its own).</p>
+
+            <p>This failure is crucial. If Gilgamesh had succeeded, the story would have no meaning for us. In purely
+                Beckerian terms, his "Return" is the acceptance that literal immortality is impossible for humans. We
+                are, inescapable, food for worms.</p>
+
+            <h3>Achieving Symbolic Immortality</h3>
+            <p>The profound resolution of the epic occurs not when Gilgamesh returns to Uruk defeated, but when he looks
+                at the walls he built. In that moment, he shifts from a quest for <em>literal</em> immortality to an
+                acceptance of <strong>symbolic immortality</strong>. He realizes that while he will die, his
+                creations—the walls of Uruk, the laws he established, and most importantly, the story inscribed on the
+                stone tablet—will endure.</p>
+
+            <p>He transitions from a "beast" fighting against the natural order to a true "hero" who upholds the
+                cultural illusion that gives life meaning. He accepts the "useful delusion" of civilization: that what
+                we build matters. By writing his story down, he grants himself the only immortality humans can actually
+                have: remembrance. In doing so, he completes the Hero's Journey not as a god who defied death, but as a
+                man who learned how to live within it.</p>
 
             </article>
 
-            <section class="discussion-prompt">
-                <h3>Reflect & Discuss</h3>
-                <p>Engage with the text and your peers using the reading questions above.</p>
-                <div class="note-area">
-                    <textarea placeholder="Write your thoughts here... (Notes are local only)"></textarea>
-                </div>
-            </section>
+
 
             <footer class="page-nav">
                 <a href="03-gilgamesh-text.html" class="nav-btn prev">← Previous</a><a href="05-gilgamesh.html"
                     class="nav-btn next">Next →</a>
+            </footer>
+
+            <footer class="site-footer">
+                <p><a href="https://chauesprinciple.github.io/Ancient-literature/">Ancient and Early Literature</a> ©
+                    2021 by <a href="https://example.com">Robert Ladd</a> is licensed under <a
+                        href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons
+                        Attribution-NoDerivatives 4.0 International</a><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
             </footer>
         </main>
     </div>
