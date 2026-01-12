@@ -525,7 +525,7 @@ img {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.callout strong {
+.callout>strong:first-child {
     display: block;
     color: var(--accent-red);
     font-family: var(--font-display);
