@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Tooltip
                     const tooltip = document.createElement('span');
                     tooltip.className = 'glossary-tooltip';
-                    tooltip.innerHTML = `<strong>${termKey}</strong>: ${glossaryData[termKey]}`;
+                    tooltip.innerHTML = `<strong>${termKey}</strong><br>${glossaryData[termKey]}`;
                     span.appendChild(tooltip);
 
                     fragment.appendChild(span);

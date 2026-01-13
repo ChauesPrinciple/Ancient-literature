@@ -1107,3 +1107,98 @@ footer {
     display: block;
     margin-bottom: 0.25rem;
 }
+
+/* Glossary Tooltip Styles */
+.glossary-term {
+    border-bottom: 2px dotted var(--accent-gold);
+    cursor: help;
+    position: relative;
+    color: var(--text-primary);
+    transition: background-color 0.2s;
+}
+
+.glossary-term:hover {
+    background-color: rgba(197, 160, 89, 0.1);
+}
+
+.glossary-tooltip {
+    visibility: hidden;
+    width: 300px;
+    background-color: #fff;
+    /* Fallback */
+    background-color: var(--bg-parchment);
+    color: var(--text-primary);
+    text-align: left;
+    border-radius: 6px;
+    padding: 1rem;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    /* Position above */
+    left: 50%;
+    margin-left: -150px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--accent-gold);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    pointer-events: none;
+    /* Prevent tooltip from blocking mouse */
+}
+
+.glossary-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--accent-gold) transparent transparent transparent;
+}
+
+.glossary-term:hover .glossary-tooltip,
+.glossary-term.active .glossary-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.glossary-tooltip strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-red);
+    font-family: var(--font-header);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .glossary-tooltip {
+        width: 250px;
+        margin-left: -125px;
+        position: fixed;
+        bottom: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+
+    .glossary-tooltip::after {
+        display: none;
+    }
+
+    /* Add backdrop for mobile */
+    .glossary-term.active::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        display: block;
+    }
+}
