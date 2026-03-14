@@ -63,64 +63,9 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   </div>
 </div>
 
-<div class="wrap">
-
-  <div class="panel">
-    <h3>2. The Ladder — S&#x2070; to S&#x00B3;</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions up to the 3-sphere. <strong>S⁰</strong> = two points (Earth and God). <strong>S¹</strong> = circle (shows <em>jyā</em>, the Sanskrit "bowstring" or sine function from ancient Indian trigonometry). <strong>S²</strong> = ordinary sphere surface. <strong>S³</strong> = the full 4D structure containing Dante's cosmos.</p>
-    <div class="dim-row">
-      <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
-      <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
-      <button class="db on" id="d2" onclick="setDim(2)">S&#x00B2;</button>
-      <button class="db" id="d3" onclick="setDim(3)">S&#x00B3;</button>
-    </div>
-    <canvas id="cLadder" height="220"></canvas>
-    <div class="eq" id="eqBox"><b>x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;</b><br>Two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;&#39;s domain.<br>Every qibla lives on this surface.</div>
-  </div>
-
-  <div class="panel">
-    <h3>3. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> A <em>single slice</em> at depth ψ with the world-line (rope) passing through it. The <em>śulba sūtras</em> (Vedic texts, 800-500 BCE) used literal ropes to measure sacred spaces. Here the rope is Dante and Virgil's path — a "world-line" (physicist John Wheeler's term for a path through spacetime). <strong>Move the slider</strong> to see how many times the rope intersects different slices, showing that Dante's journey crosses the same spherical level multiple times.</p>
-    <canvas id="cRope" height="220"></canvas>
-    <div class="sl-row" style="margin-top:8px">
-      <label>slice &psi;</label>
-      <input type="range" id="sPsi" min="0" max="100" value="50" oninput="onPsi(this.value)">
-      <span id="psiLbl">&pi;/2</span>
-    </div>
-    <div class="info" id="ropeInfo"><b>&psi; = &pi;/2 &middot; ? intersections</b><br>The single rope cut at this depth.</div>
-  </div>
-
-  <div class="panel">
-    <h3>4. The Coordinates &#8212; &psi; &theta; &phi; generate S&#x00B3;</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Three angles that locate any point on a 3-sphere. <strong>ψ</strong> (psi) = depth from Earth to God. <strong>θ</strong> (theta) = latitude on each slice. <strong>φ</strong> (phi) = longitude. Together they generate all points in S³. Adjust the sliders to explore the coordinate system.</p>
-    <canvas id="cCoord" height="220"></canvas>
-    <div class="sl-row"><label>&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50" oninput="onCoord()"><span id="lPsi">90&#xb0;</span></div>
-    <div class="sl-row"><label>&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33" oninput="onCoord()"><span id="lTheta">60&#xb0;</span></div>
-    <div class="sl-row"><label>&phi; azimuthal</label><input type="range" id="cPhi" min="0" max="100" value="0" oninput="onCoord()"><span id="lPhi">0&#xb0;</span></div>
-    <div class="params">
-      <div class="pbox">x&#x2080; = r&middot;cos&psi;<b id="vx0">0.00</b></div>
-      <div class="pbox">r&middot;sin&psi; (slice radius)<b id="vrad">1.00</b></div>
-      <div class="pbox">&#x2211;x&#x1D62;&#x00B2; (must = 1)<b id="vnorm">1.00</b></div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h3>5. Dante&#39;s S&#x00B3; &#8212; Canto XXVIII as geometry</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The nine celestial spheres from <em>Paradiso</em> Canto XXVIII (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn, Fixed Stars, Primum Mobile) mapped as slices through the 3-sphere. Move the slider to see how each sphere corresponds to a different depth ψ. At ψ=π/2, you reach the Primum Mobile — the maximum sphere, the equator of S³.</p>
-    <canvas id="cDante" height="220"></canvas>
-    <div class="sl-row" style="margin-top:8px">
-      <label>depth &psi;</label>
-      <input type="range" id="sDante" min="1" max="99" value="50" oninput="onDante(this.value)">
-      <span id="dLbl">&pi;/2</span>
-    </div>
-    <div class="info" id="danteInfo">At &psi;=&pi;/2: Primum Mobile, maximum sphere, equator of S&#x00B3;</div>
-  </div>
-
-</div>
-
 <div class="panel-full" style="margin-top:12px">
-  <h3>6. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-Bīrūnī (973-1048 CE) used spherical trigonometry to calculate this direction from any point on Earth. <strong>Left panel:</strong> Shows the qibla calculation on a 2-sphere (Earth's surface). <strong>Right panel:</strong> Shows how this same spherical geometry governs navigation on each S² slice of Dante's cosmos. Adjust observer latitude/longitude to see the qibla bearing change. This is the same mathematics that governs movement within each level of Dante's universe.</p>
+  <h3>2. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
+  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-Bīrūnī (973-1048 CE) used spherical trigonometry to calculate this direction from any point on Earth — the same triangle drawn in panel 1 above, applied to the curved surface of S². <strong>Left:</strong> Qibla on Earth’s surface. <strong>Right:</strong> That same geometry on any S² slice of S³. Adjust lat/lon to change the triangle above live.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
       <canvas id="cSphere" height="240"></canvas>
@@ -156,22 +101,84 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   </div>
 </div>
 
+<div class="wrap">
+
+  <div class="panel">
+    <h3>3. The Ladder — S&#x2070; to S&#x00B3;</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions up to the 3-sphere. <strong>S⁰</strong> = two points (Earth and God). <strong>S¹</strong> = circle (shows <em>jyā</em>, the Sanskrit "bowstring" or sine function from ancient Indian trigonometry). <strong>S²</strong> = ordinary sphere surface. <strong>S³</strong> = the full 4D structure containing Dante's cosmos.</p>
+    <div class="dim-row">
+      <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
+      <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
+      <button class="db on" id="d2" onclick="setDim(2)">S&#x00B2;</button>
+      <button class="db" id="d3" onclick="setDim(3)">S&#x00B3;</button>
+    </div>
+    <canvas id="cLadder" height="220"></canvas>
+    <div class="eq" id="eqBox"><b>x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;</b><br>Two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;&#39;s domain.<br>Every qibla lives on this surface.</div>
+  </div>
+
+  <div class="panel">
+    <h3>4. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> A <em>single slice</em> at depth ψ with the world-line (rope) passing through it. The <em>śulba sūtras</em> (Vedic texts, 800-500 BCE) used literal ropes to measure sacred spaces. Here the rope is Dante and Virgil's path — a "world-line" (physicist John Wheeler's term for a path through spacetime). <strong>Move the slider</strong> to see how many times the rope intersects different slices, showing that Dante's journey crosses the same spherical level multiple times.</p>
+    <canvas id="cRope" height="220"></canvas>
+    <div class="sl-row" style="margin-top:8px">
+      <label>slice &psi;</label>
+      <input type="range" id="sPsi" min="0" max="100" value="50" oninput="onPsi(this.value)">
+      <span id="psiLbl">&pi;/2</span>
+    </div>
+    <div class="info" id="ropeInfo"><b>&psi; = &pi;/2 &middot; ? intersections</b><br>The single rope cut at this depth.</div>
+  </div>
+
+  <div class="panel">
+    <h3>5. Dante&#39;s S&#x00B3; &#8212; Canto XXVIII as geometry</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The nine celestial spheres from <em>Paradiso</em> Canto XXVIII (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn, Fixed Stars, Primum Mobile) mapped as slices through the 3-sphere. Move the slider to see how each sphere corresponds to a different depth ψ. At ψ=π/2, you reach the Primum Mobile — the maximum sphere, the equator of S³.</p>
+    <canvas id="cDante" height="220"></canvas>
+    <div class="sl-row" style="margin-top:8px">
+      <label>depth &psi;</label>
+      <input type="range" id="sDante" min="1" max="99" value="50" oninput="onDante(this.value)">
+      <span id="dLbl">&pi;/2</span>
+    </div>
+    <div class="info" id="danteInfo">At &psi;=&pi;/2: Primum Mobile, maximum sphere, equator of S&#x00B3;</div>
+  </div>
+
+  <div class="panel">
+    <h3>6. The Coordinates &#8212; &psi; &theta; &phi; generate S&#x00B3;</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Three angles that locate any point on a 3-sphere. <strong>ψ</strong> (psi) = depth from Earth to God. <strong>θ</strong> (theta) = latitude on each slice. <strong>φ</strong> (phi) = longitude. Together they generate all points in S³. Adjust the sliders to explore the coordinate system.</p>
+    <canvas id="cCoord" height="220"></canvas>
+    <div class="sl-row"><label>&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50" oninput="onCoord()"><span id="lPsi">90&#xb0;</span></div>
+    <div class="sl-row"><label>&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33" oninput="onCoord()"><span id="lTheta">60&#xb0;</span></div>
+    <div class="sl-row"><label>&phi; azimuthal</label><input type="range" id="cPhi" min="0" max="100" value="0" oninput="onCoord()"><span id="lPhi">0&#xb0;</span></div>
+    <div class="params">
+      <div class="pbox">x&#x2080; = r&middot;cos&psi;<b id="vx0">0.00</b></div>
+      <div class="pbox">r&middot;sin&psi; (slice radius)<b id="vrad">1.00</b></div>
+      <div class="pbox">&#x2211;x&#x1D62;&#x00B2; (must = 1)<b id="vnorm">1.00</b></div>
+    </div>
+  </div>
+
+</div>
+
 <div class="panel-full" style="margin-top:12px">
-  <h3>7. Complete Object &#8212; S&#x00B3; cross-section with world-line threading through</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> <em>Stereographic projection</em> of S³ into 3D space — the canonical mathematical technique for visualizing a 4D object in 3D, the same way a globe is projected onto a 2D map. Each ring here is not a flat circle but a <strong>full 3D sphere</strong> (wireframe, with three great circles). Earth (ψ=0) sits at the origin; God (ψ=π) maps to infinity in every direction — this is what "no boundary" means. The further from the center, the closer to God. The gold rope is Dante's world-line spiraling through all the nested 3D spheres. Move the slider to highlight the sphere at a given depth ψ.</p>
-  <canvas id="cFull" height="260"></canvas>
-  <div class="sl-row" style="margin-top:8px">
-    <label>slice &psi;</label>
-    <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
-    <span id="fullPsiLbl">&pi;/2</span>
+  <h3>7. Complete Object &#8212; Klein bottle &#x2192; S&#x00B3; &#x2192; Dante&#39;s cosmos</h3>
+  <p class="info" style="margin-bottom:10px">The <strong>Klein bottle</strong> (left) is a surface with no inside, no outside, and no boundary &#x2014; you can traverse it forever without hitting an edge. In 3D it must self-intersect, but in <strong>4D it does not</strong>. This is the key: the self-intersection you see is an artifact of projecting a 4D object into 3D, exactly like a shadow of a 3D object looks flat. <strong>S&#x00B3;</strong> (right) is the 3D version: a closed 3-manifold embedded in 4D with no boundary. Earth (&psi;=0) is the origin; God (&psi;=&pi;) maps to infinity in every direction. The sacred cannot leak &#x2014; there is no outside to leak into. Dante&#39;s world-line (gold rope) threads through all the nested 3D spheres.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div>
+      <p style="color:#94a3b8;font-size:12px;text-align:center;margin-bottom:4px">Klein bottle &#x2014; rotating 3D projection (self-intersection exists only in 3D)</p>
+      <canvas id="cKlein" height="260"></canvas>
+      <div class="eq" style="margin-top:6px"><b>No inside. No outside. No boundary.</b> The tube passes through itself only because we are viewing a 4D object in 3D. In 4D: no self-intersection, no edge.</div>
+    </div>
+    <div>
+      <p style="color:#94a3b8;font-size:12px;text-align:center;margin-bottom:4px">S&#x00B3; stereographic projection &#x2014; Earth at origin, God at &infin;</p>
+      <canvas id="cFull" height="260"></canvas>
+      <div class="sl-row" style="margin-top:6px">
+        <label>slice &psi;</label>
+        <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
+        <span id="fullPsiLbl">&pi;/2</span>
+      </div>
+    </div>
   </div>
   <div class="eq" style="margin-top:8px">
     <b>x&#x2080;&#x00B2;+x&#x2081;&#x00B2;+x&#x2082;&#x00B2;+x&#x2083;&#x00B2; = r&#x00B2;</b> &nbsp;|&nbsp;
-    radius of S&#x00B2; slice at depth &psi; = <b>r&middot;sin&psi;</b> &nbsp;|&nbsp;
-    at &psi;=0: <b>Earth (punto)</b> &nbsp;|&nbsp; at &psi;=&pi;: <b>God (punto)</b><br>
-    Spherical trigonometry is the intrinsic geometry of each S&#x00B2; slice.
-    The world-line is the single rope threading all slices.
-    Yellow dots are genuine sign-change crossings of the world-line with the current slice plane.
+    r&middot;sin&psi; = slice radius &nbsp;|&nbsp; &psi;=0: <b>Earth</b> &nbsp;|&nbsp; &psi;=&pi;: <b>God (&infin;)</b><br>
+    Each highlighted ring is a full 3D sphere. The world-line spirals through all of them.
   </div>
 </div>
 
@@ -221,7 +228,7 @@ const CTX = {};
 function initCanvases() {
   const dpr = window.devicePixelRatio || 2;
   const specs = [
-    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 260], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200]
+    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 260], ['cKlein', 260], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200]
   ];
   specs.forEach(([id, cssH]) => {
     const cv = gc(id);
@@ -798,9 +805,55 @@ function onFullPsi(v) {
   const el = gc('fullPsiLbl'); if (el) el.textContent = lbl;
 }
 
+function drawKlein() {
+  const c = CTX['cKlein']; if (!c) return;
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
+  c.clearRect(0, 0, w, h);
+  const rotY = t * 0.28, rotX = 0.38;
+  const scale = Math.min(w, h) * 0.065;
+  const a = 2.2, b = 1.0;
+
+  function klein(u, v) {
+    const cu2 = Math.cos(u/2), su2 = Math.sin(u/2);
+    const R = a + b*cu2*Math.sin(v) - b*su2*Math.sin(2*v);
+    return [R*Math.cos(u), R*Math.sin(u), b*su2*Math.sin(v) + b*cu2*Math.sin(2*v)];
+  }
+
+  function proj(px, py, pz) {
+    const rx = px*Math.cos(rotY) + pz*Math.sin(rotY);
+    const rz = -px*Math.sin(rotY) + pz*Math.cos(rotY);
+    const ry2 = py*Math.cos(rotX) - rz*Math.sin(rotX);
+    const rz2 = py*Math.sin(rotX) + rz*Math.cos(rotX);
+    const persp = 4.5 / (4.5 + rz2*0.28);
+    return [cx + rx*scale*persp, cy - ry2*scale*persp, rz2];
+  }
+
+  const Nu = 36, Nv = 24;
+  const segs = [];
+  for (let iu = 0; iu < Nu; iu++) {
+    const u = iu/Nu*TAU, pts = [];
+    for (let iv = 0; iv <= Nv; iv++) pts.push(proj(...klein(u, iv/Nv*TAU)));
+    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t: 0 });
+  }
+  for (let iv = 0; iv < Nv; iv++) {
+    const v = iv/Nv*TAU, pts = [];
+    for (let iu = 0; iu <= Nu; iu++) pts.push(proj(...klein(iu/Nu*TAU, v)));
+    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t: 1 });
+  }
+  segs.sort((a,b) => a.z - b.z);
+  segs.forEach(seg => {
+    const f = Math.max(0.15, Math.min(0.85, 0.42 + seg.z*0.10));
+    c.strokeStyle = seg.t === 0 ? `rgba(93,202,165,${f.toFixed(2)})` : `rgba(239,159,39,${f.toFixed(2)})`;
+    c.lineWidth = 1;
+    c.beginPath();
+    seg.pts.forEach((p,i) => { if(i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); });
+    c.stroke();
+  });
+}
+
 function loop() {
   t += 0.018;
-  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull();
+  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull(); drawKlein();
   drawSphere(); drawQS3(); drawTriangle();
   requestAnimationFrame(loop);
 }
