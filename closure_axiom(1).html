@@ -45,27 +45,11 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <div class="intro">
 <h1>Dante's Divine Comedy as Sacred Geometry</h1>
 
-<p>This page demonstrates how Dante's cosmos in <em>The Divine Comedy</em> can be understood as a 3-sphere (S³) — a four-dimensional geometric object that is finite yet has no boundary. This is not merely mathematical abstraction; it reveals the deep structure underlying medieval cosmology, Islamic astronomy, and the theological architecture of Paradise and Hell.</p>
+<p>This page demonstrates how Dante's cosmos in <em>The Divine Comedy</em> can be understood as a 3-sphere (S³) — a four-dimensional geometric object that is finite yet has no boundary. This reveals the deep structure underlying medieval cosmology, Islamic astronomy, and the theological architecture of Paradise and Hell.</p>
 
-<h2>What You're Looking At</h2>
-<p>The visualizations below show:</p>
-<ul>
-<li><strong>The Ladder (S⁰ to S³):</strong> Click the buttons to see how spheres build from 0 dimensions (two points: Earth and God) up to the 3-sphere. The <em>jyā</em> (Sanskrit for "bowstring" or "sine") appears in S¹ as the half-chord measurement used in ancient Indian trigonometry.</li>
-<li><strong>The Rope (śulba / Wheeler world-line):</strong> Shows a <em>single slice</em> at depth ψ with the world-line (rope) passing through it. Move the slider to change which slice you're looking at. The display shows how many times the rope intersects that particular slice — demonstrating that Dante's path crosses the same spherical level multiple times during his journey through Hell, Purgatory, and Paradise.</li>
-<li><strong>Complete Object (S³ cross-section with world-line):</strong> Shows the <em>entire structure</em> — all the nested spheres from Earth (bottom) to God (top) with the world-line threading through them. The vertical axis is the journey from Earth to God. The nested ellipses are 2-sphere (S²) slices at different depths. The orange/gold rope is Dante and Virgil's actual path. The <em>śulba sūtras</em> (Vedic rope geometry, 800-500 BCE) used literal ropes to measure sacred spaces; here the rope is a "world-line" (Wheeler's term) showing the path through spacetime. Yellow dots show where the rope crosses the current slice plane.</li>
-<li><strong>Coordinates (ψ θ φ):</strong> Three angles that locate any point on a 3-sphere. <strong>ψ</strong> (psi) measures depth from Earth to God, <strong>θ</strong> (theta) is latitude on each slice, and <strong>φ</strong> (phi) is longitude. Together they generate all points in S³.</li>
-<li><strong>Dante's S³:</strong> The nine celestial spheres from <em>Paradiso</em> (Moon through Primum Mobile) mapped as slices through the 3-sphere.</li>
-<li><strong>Qibla Calculator:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-Bīrūnī (973-1048 CE) used spherical trigonometry to calculate this direction from any point on Earth — the same mathematics that governs navigation on each S² slice of Dante's cosmos.</li>
-</ul>
+<p><strong>The Key Insight:</strong> Dante describes Hell as a funnel descending to Earth's center, with Satan frozen at the bottom. But when Virgil and Dante climb down Satan's body, "down becomes up" — they emerge on the opposite side. This is <strong>antipodal geometry</strong>: Earth and God are opposite points on a sphere.</p>
 
-<h2>Why This Matters for <em>The Inferno</em></h2>
-<p>Dante describes Hell as a funnel descending to Earth's center, with Satan frozen at the bottom. But when Virgil and Dante climb down Satan's body, "down becomes up" — they emerge on the opposite side. This is <strong>antipodal geometry</strong>: Earth and God are opposite points on a sphere.</p>
-
-<p>This page uses modern 3-sphere geometry to visualize Dante's medieval cosmos. While Dante and his contemporaries did not conceive of four-dimensional spaces, they did understand the cosmos as <em>finite</em> (bounded by the Primum Mobile) yet <em>spherical</em> (with no edge to fall off). The nested structure of Hell's nine circles, Purgatory's seven terraces, and Paradise's nine celestial spheres can be mathematically modeled as slices through a 3-sphere — a modern geometric interpretation that reveals the deep symmetry in Dante's vision.</p>
-
-<h2>The Mathematics</h2>
-<p>A 3-sphere is defined by the equation: <strong>x₀² + x₁² + x₂² + x₃² = r²</strong></p>
-<p>Each "slice" at a fixed ψ angle is a 2-sphere (S²) — the surface of an ordinary sphere. As ψ varies from 0 to π, these slices grow from a point (Earth at ψ=0), expand to maximum size at the equator (ψ=π/2, the Primum Mobile), then shrink back to a point (God at ψ=π). This is a <em>modern mathematical model</em>, not medieval cosmology, but it captures the structure Dante described.</p>
+<p>While Dante and his contemporaries did not conceive of four-dimensional spaces, the nested structure of Hell's nine circles, Purgatory's seven terraces, and Paradise's nine celestial spheres can be mathematically modeled as slices through a 3-sphere. Each visualization below explores a different aspect of this geometry.</p>
 
 <p><a href="index.html">← Return to Course Home</a></p>
 </div>
@@ -74,6 +58,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>1. The Ladder — S&#x2070; to S&#x00B3;</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions up to the 3-sphere. <strong>S⁰</strong> = two points (Earth and God). <strong>S¹</strong> = circle (shows <em>jyā</em>, the Sanskrit "bowstring" or sine function from ancient Indian trigonometry). <strong>S²</strong> = ordinary sphere surface. <strong>S³</strong> = the full 4D structure containing Dante's cosmos.</p>
     <div class="dim-row">
       <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
       <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
@@ -86,6 +71,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>2. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> A <em>single slice</em> at depth ψ with the world-line (rope) passing through it. The <em>śulba sūtras</em> (Vedic texts, 800-500 BCE) used literal ropes to measure sacred spaces. Here the rope is Dante and Virgil's path — a "world-line" (physicist John Wheeler's term for a path through spacetime). <strong>Move the slider</strong> to see how many times the rope intersects different slices, showing that Dante's journey crosses the same spherical level multiple times.</p>
     <canvas id="cRope" height="220"></canvas>
     <div class="sl-row" style="margin-top:8px">
       <label>slice &psi;</label>
@@ -97,6 +83,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>3. The Coordinates &#8212; &psi; &theta; &phi; generate S&#x00B3;</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Three angles that locate any point on a 3-sphere. <strong>ψ</strong> (psi) = depth from Earth to God. <strong>θ</strong> (theta) = latitude on each slice. <strong>φ</strong> (phi) = longitude. Together they generate all points in S³. Adjust the sliders to explore the coordinate system.</p>
     <canvas id="cCoord" height="220"></canvas>
     <div class="sl-row"><label>&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50" oninput="onCoord()"><span id="lPsi">90&#xb0;</span></div>
     <div class="sl-row"><label>&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33" oninput="onCoord()"><span id="lTheta">60&#xb0;</span></div>
@@ -110,6 +97,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>4. Dante&#39;s S&#x00B3; &#8212; Canto XXVIII as geometry</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The nine celestial spheres from <em>Paradiso</em> Canto XXVIII (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn, Fixed Stars, Primum Mobile) mapped as slices through the 3-sphere. Move the slider to see how each sphere corresponds to a different depth ψ. At ψ=π/2, you reach the Primum Mobile — the maximum sphere, the equator of S³.</p>
     <canvas id="cDante" height="220"></canvas>
     <div class="sl-row" style="margin-top:8px">
       <label>depth &psi;</label>
@@ -123,6 +111,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
 <div class="panel-full">
   <h3>Complete Object &#8212; S&#x00B3; cross-section with world-line threading through</h3>
+  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>entire structure</em> — all the nested spheres from Earth (bottom) to God (top) with the world-line threading through them. The vertical axis is the journey from Earth to God. The nested ellipses are 2-sphere (S²) slices at different depths. The orange/gold rope is Dante and Virgil's actual path through Hell, Purgatory, and Paradise. <strong>Yellow dots</strong> show where the rope crosses the current slice plane (adjust slider to change which slice is highlighted). This is the complete picture of Dante's cosmos as a 3-sphere.</p>
   <canvas id="cFull" height="260"></canvas>
   <div class="sl-row" style="margin-top:8px">
     <label>slice &psi;</label>
@@ -141,6 +130,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
 <div class="panel-full" style="margin-top:12px">
   <h3>5. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
+  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-Bīrūnī (973-1048 CE) used spherical trigonometry to calculate this direction from any point on Earth. <strong>Left panel:</strong> Shows the qibla calculation on a 2-sphere (Earth's surface). <strong>Right panel:</strong> Shows how this same spherical geometry governs navigation on each S² slice of Dante's cosmos. Adjust observer latitude/longitude to see the qibla bearing change. This is the same mathematics that governs movement within each level of Dante's universe.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
       <canvas id="cSphere" height="240"></canvas>
