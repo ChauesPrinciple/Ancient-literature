@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         nodesToReplace.forEach(node => {
             let content = node.nodeValue;
+
+            // Quick check before expensive regex
+            if (!pattern.test(content)) return;
+
             const fragment = document.createDocumentFragment();
             let lastIndex = 0;
-            let match;
-            
-            // Reset pattern for this node
             pattern.lastIndex = 0;
+            let match;
 
             // Re-run regex to loop through matches
             while ((match = pattern.exec(content)) !== null) {
@@ -168,34 +170,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});
-
-// ============================================
-// MOBILE NAVIGATION TOGGLE
-// Added: 2026-03-14
-// Purpose: Enable sidebar navigation on mobile devices
-// Content Impact: NONE (functionality enhancement only)
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    const brand = document.querySelector('.sidebar .brand');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (!brand || !sidebar) return; // Graceful degradation if elements don't exist
-    
-    // Toggle sidebar on mobile when brand is clicked
-    brand.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            sidebar.classList.toggle('expanded');
-            e.stopPropagation();
-        }
-    });
-    
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768 && 
-            sidebar.classList.contains('expanded') && 
-            !sidebar.contains(e.target)) {
-            sidebar.classList.remove('expanded');
-        }
-    });
 });

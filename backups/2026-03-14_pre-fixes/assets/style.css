@@ -779,6 +779,13 @@ img {
     /* We handle max-height in JS, but this helps the fade */
 }
 
+.welcome-section h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-red);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
 .module-card {
     background: #fff;
     border: 1px solid var(--border-color);
@@ -800,7 +807,7 @@ img {
     color: var(--text-primary);
     font-size: 1.4rem;
     /* CHANGED: Massive top margin (approx 96px) to guarantee headroom */
-    margin-top: 6rem;
+    margin-top: 6rem !important;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     margin-bottom: 0.5rem;
@@ -851,7 +858,7 @@ img {
     /* Center horizontally */
     background: #fff;
     border: 1px solid var(--accent-red);
-    color: var(--accent-red);
+    color: var(--accent-red) !important;
     padding: 1rem 2rem;
     /* Balanced padding */
     transition: all 0.2s ease;
@@ -867,13 +874,29 @@ img {
 
 .module-card:hover .btn {
     background: var(--accent-red);
-    color: white;
+    color: white !important;
     box-shadow: 0 4px 10px rgba(139, 0, 0, 0.2);
 }
 
 .module-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.module-card h3 {
+    color: var(--accent-red);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.module-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.module-card .btn {
+    width: 100%;
+    text-align: center;
 }
 
 footer {

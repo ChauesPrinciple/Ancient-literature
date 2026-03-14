@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Closure Axiom</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#0a0a0f;color:#e2e8f0;padding:16px}
+.axiom-bar{text-align:center;font-style:italic;font-size:14px;color:#94a3b8;padding:12px 0 16px;border-bottom:1px solid #1e293b;margin-bottom:16px}
+.axiom-bar b{color:#fbbf24}
+.wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px}
+.panel-full{grid-column:1/-1;background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px;margin-top:12px}
+.panel h3{font-size:12px;font-weight:500;color:#475569;font-family:monospace;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px solid #1e293b}
+.dim-row{display:flex;gap:6px;margin-bottom:10px}
+.db{flex:1;padding:6px 4px;font-size:11px;font-family:monospace;background:#020617;border:1px solid #334155;border-radius:6px;color:#64748b;cursor:pointer;text-align:center;transition:all .15s}
+.db.on{background:#451a03;color:#fbbf24;border-color:#92400e}
+.eq{font-family:monospace;font-size:11px;color:#64748b;background:#020617;border-radius:6px;padding:8px 10px;margin:8px 0;line-height:1.8}
+.eq b{color:#fbbf24}
+.sl-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.sl-row label{font-size:11px;font-family:monospace;color:#475569;min-width:90px}
+.sl-row input{flex:1;height:3px;accent-color:#EF9F27;cursor:pointer}
+.sl-row span{font-size:11px;font-family:monospace;color:#e2e8f0;min-width:36px;text-align:right}
+.info{font-size:11px;color:#475569;margin-top:8px;line-height:1.5;font-family:monospace}
+.info b{color:#fbbf24}
+.params{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+.pbox{background:#020617;border-radius:6px;padding:6px 8px;font-family:monospace;font-size:10px;color:#475569;text-align:center}
+.pbox b{display:block;font-size:14px;color:#fbbf24;margin-top:2px}
+</style>
+</head>
+<body>
+
+<div class="axiom-bar">The sacred cannot leak — therefore the space it inhabits is finite, <b>closed</b>, without boundary</div>
+
+<div class="wrap">
+
+  <div class="panel">
+    <h3>1. The Ladder — S&#x2070; to S&#x00B3;</h3>
+    <div class="dim-row">
+      <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
+      <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
+      <button class="db on" id="d2" onclick="setDim(2)">S&#x00B2;</button>
+      <button class="db" id="d3" onclick="setDim(3)">S&#x00B3;</button>
+    </div>
+    <canvas id="cLadder" height="220"></canvas>
+    <div class="eq" id="eqBox"><b>x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;</b><br>Two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;&#39;s domain.<br>Every qibla lives on this surface.</div>
+  </div>
+
+  <div class="panel">
+    <h3>2. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
+    <canvas id="cRope" height="220"></canvas>
+    <div class="sl-row" style="margin-top:8px">
+      <label>slice &psi;</label>
+      <input type="range" id="sPsi" min="0" max="100" value="50" oninput="onPsi(this.value)">
+      <span id="psiLbl">&pi;/2</span>
+    </div>
+    <div class="info" id="ropeInfo"><b>&psi; = &pi;/2 &middot; ? intersections</b><br>The single rope cut at this depth.</div>
+  </div>
+
+  <div class="panel">
+    <h3>3. The Coordinates &#8212; &psi; &theta; &phi; generate S&#x00B3;</h3>
+    <canvas id="cCoord" height="220"></canvas>
+    <div class="sl-row"><label>&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50" oninput="onCoord()"><span id="lPsi">90&#xb0;</span></div>
+    <div class="sl-row"><label>&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33" oninput="onCoord()"><span id="lTheta">60&#xb0;</span></div>
+    <div class="sl-row"><label>&phi; azimuthal</label><input type="range" id="cPhi" min="0" max="100" value="0" oninput="onCoord()"><span id="lPhi">0&#xb0;</span></div>
+    <div class="params">
+      <div class="pbox">x&#x2080; = r&middot;cos&psi;<b id="vx0">0.00</b></div>
+      <div class="pbox">r&middot;sin&psi; (slice radius)<b id="vrad">1.00</b></div>
+      <div class="pbox">&#x2211;x&#x1D62;&#x00B2; (must = 1)<b id="vnorm">1.00</b></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>4. Dante&#39;s S&#x00B3; &#8212; Canto XXVIII as geometry</h3>
+    <canvas id="cDante" height="220"></canvas>
+    <div class="sl-row" style="margin-top:8px">
+      <label>depth &psi;</label>
+      <input type="range" id="sDante" min="1" max="99" value="50" oninput="onDante(this.value)">
+      <span id="dLbl">&pi;/2</span>
+    </div>
+    <div class="info" id="danteInfo">At &psi;=&pi;/2: Primum Mobile, maximum sphere, equator of S&#x00B3;</div>
+  </div>
+
+</div>
+
+<div class="panel-full">
+  <h3>Complete Object &#8212; S&#x00B3; cross-section with world-line threading through</h3>
+  <canvas id="cFull" height="260"></canvas>
+  <div class="sl-row" style="margin-top:8px">
+    <label>slice &psi;</label>
+    <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
+    <span id="fullPsiLbl">&pi;/2</span>
+  </div>
+  <div class="eq" style="margin-top:8px">
+    <b>x&#x2080;&#x00B2;+x&#x2081;&#x00B2;+x&#x2082;&#x00B2;+x&#x2083;&#x00B2; = r&#x00B2;</b> &nbsp;|&nbsp;
+    radius of S&#x00B2; slice at depth &psi; = <b>r&middot;sin&psi;</b> &nbsp;|&nbsp;
+    at &psi;=0: <b>Earth (punto)</b> &nbsp;|&nbsp; at &psi;=&pi;: <b>God (punto)</b><br>
+    Spherical trigonometry is the intrinsic geometry of each S&#x00B2; slice.
+    The world-line is the single rope threading all slices.
+    Yellow dots are genuine sign-change crossings of the world-line with the current slice plane.
+  </div>
+</div>
+
+<div class="panel-full" style="margin-top:12px">
+  <h3>5. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div>
+      <canvas id="cSphere" height="240"></canvas>
+      <div class="sl-row" style="margin-top:8px">
+        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">observer lat</label>
+        <input type="range" id="oLat" min="-80" max="80" value="40" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
+        <span id="oLatV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">40&#xb0; N</span>
+      </div>
+      <div class="sl-row">
+        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">observer lon</label>
+        <input type="range" id="oLon" min="-180" max="180" value="60" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
+        <span id="oLonV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">60&#xb0; E</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px">
+        <div class="pbox">qibla bearing<b id="rBearing">&#8212;</b></div>
+        <div class="pbox">great-circle dist<b id="rDist">&#8212;</b></div>
+        <div class="pbox">side c (N&#x2192;obs)<b id="rSideC">&#8212;</b></div>
+      </div>
+    </div>
+    <div>
+      <canvas id="cQS3" height="240"></canvas>
+      <div class="sl-row" style="margin-top:8px">
+        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">slice depth &#x03c8;</label>
+        <input type="range" id="qPsi" min="2" max="98" value="50" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
+        <span id="qPsiV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">&#x03c0;/2</span>
+      </div>
+    </div>
+  </div>
+  <div class="eq" id="eqQibla" style="margin-top:8px">
+    <b>tan Q = sin &#x394;&#x03bb; / (cos &#x03c6;&#x2081; tan &#x03c6;&#x2082; &#x2212; sin &#x03c6;&#x2081; cos &#x394;&#x03bb;)</b><br>
+    Spherical law of sines on the triangle: North Pole &#x2013; Observer &#x2013; Mecca.<br>
+    The qibla bearing Q is invariant under change of &#x03c8; &#x2014; angle is preserved on every S&#x00B2; slice. What changes is r&#x00b7;sin&#x03c8;. At &#x03c8;&#x2192;0 or &#x03c8;&#x2192;&#x03c0; the sphere collapses: <b>you are at the punto.</b>
+  </div>
+</div>
+
+<div class="panel-full" style="margin-top:12px">
+  <h3>6. The spherical triangle &#8212; sin a / sin &#x03b1; = sin b / sin &#x03b2; = sin c / sin &#x03b3; (live)</h3>
+  <canvas id="cTriangle" height="200"></canvas>
+  <div class="eq" id="eqTriangle" style="margin-top:8px">
+    <b>sin a / sin Q</b> &nbsp;=&nbsp; ratio updates with observer position
+  </div>
+</div>
+
+<script>
+const TAU = Math.PI * 2;
+const DEG = Math.PI / 180;
+const MECCA_LAT = 21.4225 * DEG;
+const MECCA_LON = 39.8262 * DEG;
+let obsLat = 40 * DEG, obsLon = 60 * DEG, qPsiVal = Math.PI / 2;
+let dim = 2, psi = Math.PI / 2, danteAngle = Math.PI / 2, fullPsi = Math.PI / 2;
+let coordPsi = Math.PI / 2, coordTheta = Math.PI / 3, coordPhi = 0;
+let t = 0;
+
+function gc(id) { return document.getElementById(id); }
+
+// Knot parameterization: world-line in S3
+// psi(t) oscillates through [0, pi] with enough variation to cross any slice multiple times
+function knotPoint(t) {
+  const ps = Math.PI / 2 + 1.1 * Math.sin(2.5 * t) * Math.cos(0.7 * t);
+  const x  = Math.cos(3 * t) * Math.sin(t * 0.5 + 0.3);
+  return { psi: Math.max(0.08, Math.min(Math.PI - 0.08, ps)), x };
+}
+
+// Find actual sign-change intersections of world-line with psi = psiSlice
+function findCrossings(psiSlice) {
+  const N = 800, range = Math.PI * 10;
+  const pts = [];
+  for (let i = 0; i <= N; i++) {
+    const tt = i / N * range;
+    pts.push(knotPoint(tt));
+  }
+  const out = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const d0 = pts[i].psi - psiSlice;
+    const d1 = pts[i + 1].psi - psiSlice;
+    if (d0 * d1 < 0) {
+      const f = -d0 / (d1 - d0);
+      out.push({ x: pts[i].x + f * (pts[i + 1].x - pts[i].x) });
+    }
+  }
+  return out;
+}
+
+// Canvas contexts — sized once at init, refreshed on resize
+const CTX = {};
+function initCanvases() {
+  const dpr = window.devicePixelRatio || 2;
+  const specs = [
+    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 260], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200]
+  ];
+  specs.forEach(([id, cssH]) => {
+    const cv = gc(id);
+    if (!cv) return;
+    cv.width  = (cv.parentElement ? cv.parentElement.clientWidth - 28 : 680) * dpr || 700;
+    cv.height = Math.round(cssH * dpr);
+    cv.style.height = cssH + 'px';
+    CTX[id] = cv.getContext('2d');
+  });
+}
+function sizeCanvas(id) { return CTX[id]; }
+window.addEventListener('resize', initCanvases);
+
+// ---- UI callbacks ----
+
+function setDim(n) {
+  dim = n;
+  [0, 1, 2, 3].forEach(i => gc('d' + i).classList.toggle('on', i === n));
+  const info = [
+    ['x&#x2080;&#x00B2; = r&#x00B2;',
+     'S&#x2070;: two antipodal points, zero angular coords.<br>The minimal closure &#8212; God and Earth.<br>The axiom produces them: insist on no outside, two poles appear.'],
+    ['x&#x2080;&#x00B2; + x&#x2081;&#x00B2; = r&#x00B2;<br>(r&middot;cos&phi;, r&middot;sin&phi;) &nbsp;&phi;&isin;[0,2&pi;)',
+     'S&#x00B9;: one angular coord &phi;. Walk to 2&pi; &#8212; you return.<br>The jy&#257; (sin&phi;) is the half-chord across this arc. First closure.'],
+    ['x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;<br>(sin&theta;cos&phi;, sin&theta;sin&phi;, cos&theta;)',
+     'S&#x00B2;: two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;\'s domain.<br>Every qibla is a geodesic on this surface.<br>The spherical law of sines operates here. Closed, boundaryless.'],
+    ['&sum;x&#x1D62;&#x00B2; = r&#x00B2; &nbsp;(i=0..3)<br>r(cos&psi;, sin&psi;cos&theta;, sin&psi;sin&theta;cos&phi;, sin&psi;sin&theta;sin&phi;)',
+     'S&#x00B3;: three angular coords (&psi;,&theta;,&phi;) &#8212; Trinity as dimensionality.<br>Dante\'s cosmos. Each S&#x00B2; slice has radius r&middot;sin&psi;.<br>The whole has no boundary. Spherical trig is geometry of each slice.']
+  ];
+  const _eqBox = gc('eqBox'); if (_eqBox) _eqBox.innerHTML = '<b>' + info[n][0] + '</b><br>' + info[n][1];
+}
+
+function onPsi(v) {
+  psi = (v / 100) * Math.PI;
+  const lbl = v == 50 ? 'π/2' : v == 0 ? '0' : v == 100 ? 'π' : psi.toFixed(2);
+  const psiEl = gc('psiLbl'); if (psiEl) psiEl.textContent = lbl;
+  const cr = findCrossings(psi);
+  let msg = '';
+  if      (v < 5)            msg = 'ψ → 0: sphere collapses to Earth punto.';
+  else if (v > 95)           msg = 'ψ → π: God punto. The rope arrives.';
+  else if (v > 45 && v < 55) msg = 'ψ=π/2: maximum sphere. Al-Bīrūnī Earth. Qibla at full span.';
+  else                       msg = 'Intermediate slice. S² of radius r·sinψ.';
+  const ri = gc('ropeInfo');
+  if (ri) ri.innerHTML = '<b>ψ = ' + lbl + ' · ' + cr.length +
+    ' intersection' + (cr.length !== 1 ? 's' : '') + '</b><br>' + msg;
+}
+
+function onCoord() {
+  coordPsi   = (gc('cPsi').value   / 100) * Math.PI;
+  coordTheta = (gc('cTheta').value / 100) * Math.PI;
+  coordPhi   = (gc('cPhi').value   / 100) * TAU;
+  const _e_lPsi = gc('lPsi'); if (_e_lPsi) _e_lPsi.textContent = Math.round(coordPsi   * 180 / Math.PI) + '\u00b0';
+  const _e_lTheta = gc('lTheta'); if (_e_lTheta) _e_lTheta.textContent = Math.round(coordTheta * 180 / Math.PI) + '\u00b0';
+  const _e_lPhi = gc('lPhi'); if (_e_lPhi) _e_lPhi.textContent = Math.round(coordPhi   * 180 / Math.PI) + '\u00b0';
+  const x0   = Math.cos(coordPsi);
+  const x1   = Math.sin(coordPsi) * Math.cos(coordTheta);
+  const x2   = Math.sin(coordPsi) * Math.sin(coordTheta) * Math.cos(coordPhi);
+  const x3   = Math.sin(coordPsi) * Math.sin(coordTheta) * Math.sin(coordPhi);
+  const norm = Math.sqrt(x0*x0 + x1*x1 + x2*x2 + x3*x3);
+  const _e_vx0 = gc('vx0'); if (_e_vx0) _e_vx0.textContent = x0.toFixed(3);
+  const _e_vrad = gc('vrad'); if (_e_vrad) _e_vrad.textContent = Math.sin(coordPsi).toFixed(3);
+  const _e_vnorm = gc('vnorm'); if (_e_vnorm) _e_vnorm.textContent = norm.toFixed(3);
+}
+
+function onDante(v) {
+  danteAngle = (v / 100) * Math.PI;
+  const lbl = v == 50 ? '&pi;/2' : danteAngle.toFixed(2);
+  const dEl = gc('dLbl'); if (dEl) dEl.textContent = lbl;
+  let msg = '';
+  if      (v < 8)          msg = '\u03c8 \u2192 0: Earth. Physical cosmos converges to a point.';
+  else if (v > 92)         msg = '\u03c8 \u2192 \u03c0: God (punto). "Seems enclosed by that which it encloses." Antipodal point of S\u00b3.';
+  else if (v > 45 && v<55) msg = '\u03c8=\u03c0/2: Primum Mobile. Maximum sphere. Physical and spiritual hemispheres meet here.';
+  else if (v < 50)         msg = 'Physical hemisphere (\u03c8<\u03c0/2). Spheres expanding from Earth.';
+  else                     msg = 'Spiritual hemisphere (\u03c8>\u03c0/2). Spheres contracting toward God.';
+  const _e_danteInfo = gc('danteInfo'); if (_e_danteInfo) _e_danteInfo.textContent = msg;
+}
+
+// ---- Drawing ----
+
+function drawLadder() {
+  const c = sizeCanvas('cLadder');
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
+  c.clearRect(0, 0, w, h);
+  c.strokeStyle = '#EF9F27'; c.fillStyle = '#EF9F27';
+
+  if (dim === 0) {
+    [[cx-100, cy],[cx+100, cy]].forEach(([px, py]) => {
+      c.beginPath(); c.arc(px, py, 14, 0, TAU); c.fill();
+    });
+    c.fillStyle = '#475569'; c.font = '22px Georgia'; c.textAlign = 'center';
+    c.fillText('Earth', cx-100, cy+50); c.fillText('God', cx+100, cy+50);
+    c.strokeStyle = '#334155'; c.lineWidth = 2; c.setLineDash([8, 6]);
+    c.beginPath(); c.moveTo(cx-86, cy); c.lineTo(cx+86, cy); c.stroke();
+    c.setLineDash([]);
+    c.fillStyle = '#334155'; c.font = '18px monospace';
+    c.fillText('r = distance', cx, cy-40);
+
+  } else if (dim === 1) {
+    const R = 100;
+    c.lineWidth = 3; c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
+    const ang = t * 0.6;
+    c.beginPath(); c.arc(cx + R*Math.cos(ang), cy + R*Math.sin(ang), 10, 0, TAU); c.fill();
+    // jya half-chord
+    c.strokeStyle = '#5DCAA5'; c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(cx + R*Math.cos(ang), cy);
+    c.lineTo(cx + R*Math.cos(ang), cy + R*Math.sin(ang));
+    c.stroke();
+    c.fillStyle = '#5DCAA5'; c.font = '20px monospace'; c.textAlign = 'left';
+    c.fillText('jy\u0101', cx + R*Math.cos(ang) + 6, (cy + cy + R*Math.sin(ang)) / 2);
+    c.fillStyle = '#475569'; c.textAlign = 'center';
+    c.font = '18px monospace';
+    c.fillText('\u03c6 = ' + (ang % TAU).toFixed(2), cx, cy + R + 40);
+
+  } else if (dim === 2) {
+    c.lineWidth = 2; c.strokeStyle = '#1e293b';
+    c.beginPath(); c.arc(cx, cy, 120, 0, TAU); c.stroke();
+    // Rotating great circle
+    c.save(); c.translate(cx, cy); c.rotate(t * 0.25); c.scale(1, 0.38);
+    c.strokeStyle = '#EF9F27'; c.lineWidth = 5;
+    c.beginPath(); c.arc(0, 0, 120, 0, TAU); c.stroke();
+    c.restore();
+    // Qibla triangle
+    for (let i = 0; i < 3; i++) {
+      const a = t * 0.4 + i * TAU / 3;
+      c.fillStyle = '#5DCAA5'; c.beginPath();
+      c.arc(cx + 120*Math.cos(a), cy + 48*Math.sin(a), 8, 0, TAU); c.fill();
+    }
+    c.fillStyle = '#334155'; c.font = '18px monospace'; c.textAlign = 'center';
+    c.fillText('spherical triangle (\u03b8,\u03c6)', cx, cy + 155);
+
+  } else {
+    // S3: nested rings showing sinpsi profile
+    const L = 7;
+    for (let i = 0; i < L; i++) {
+      const ps = i / (L-1) * Math.PI;
+      const r  = Math.sin(ps) * 110;
+      const alpha = 0.15 + 0.85 * (1 - Math.abs(i - (L-1)/2) / ((L-1)/2));
+      c.strokeStyle = 'rgba(239,159,39,' + alpha + ')';
+      c.lineWidth = (i === Math.round(L/2)) ? 4 : 1.5;
+      c.beginPath(); c.ellipse(cx, cy, r, r*0.28, 0, 0, TAU); c.stroke();
+    }
+    c.fillStyle = '#EF9F27';
+    c.beginPath(); c.arc(cx, cy+110, 8, 0, TAU); c.fill();
+    c.beginPath(); c.arc(cx, cy-110, 8, 0, TAU); c.fill();
+    c.fillStyle = '#475569'; c.font = '18px Georgia'; c.textAlign = 'center';
+    c.fillText('Earth (\u03c8=0)', cx, cy+150);
+    c.fillText('God (\u03c8=\u03c0)', cx, cy-130);
+  }
+}
+
+function drawRope() {
+  const c = sizeCanvas('cRope');
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2;
+  const y0 = h - 60, y1 = 60;
+  c.clearRect(0, 0, w, h);
+
+  // Nested S2 slices as ellipses
+  const L = 9;
+  for (let i = 0; i < L; i++) {
+    const ps = i / (L-1) * Math.PI;
+    const ry = y0 - (i / (L-1)) * (y0 - y1);
+    const rx = Math.sin(ps) * 100;
+    c.strokeStyle = '#0f172a'; c.lineWidth = 1.5;
+    c.beginPath(); c.ellipse(cx, ry, rx, rx*0.22, 0, 0, TAU); c.stroke();
+  }
+
+  // World-line: plot (knotPsi, x) as (screen_y, screen_x)
+  const N = 500, range = Math.PI * 8;
+  const pts = [];
+  for (let i = 0; i <= N; i++) {
+    const tt = i / N * range;
+    const p  = knotPoint(tt);
+    pts.push({ sx: cx + p.x * 130, sy: y0 - (p.psi / Math.PI) * (y0 - y1) });
+  }
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 3;
+  c.beginPath();
+  pts.forEach((p, i) => { if (i === 0) c.moveTo(p.sx, p.sy); else c.lineTo(p.sx, p.sy); });
+  c.stroke();
+
+  // Slice line
+  const sliceY = y0 - (psi / Math.PI) * (y0 - y1);
+  c.strokeStyle = 'rgba(239,159,39,0.25)'; c.lineWidth = 28;
+  c.beginPath(); c.moveTo(60, sliceY); c.lineTo(w-60, sliceY); c.stroke();
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 2; c.setLineDash([6, 4]);
+  c.beginPath(); c.moveTo(60, sliceY); c.lineTo(w-60, sliceY); c.stroke();
+  c.setLineDash([]);
+
+  // Sign-change intersections
+  const cr = findCrossings(psi);
+  cr.forEach(p => {
+    const sx = cx + p.x * 130;
+    c.fillStyle = '#EF9F27';
+    c.beginPath(); c.arc(sx, sliceY, 10, 0, TAU); c.fill();
+    c.strokeStyle = '#020617'; c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(sx-6, sliceY); c.lineTo(sx+6, sliceY);
+    c.moveTo(sx, sliceY-6); c.lineTo(sx, sliceY+6);
+    c.stroke();
+  });
+
+  c.fillStyle = '#334155'; c.font = '20px monospace'; c.textAlign = 'right';
+  c.fillText('Earth \u03c8=0', cx-110, y0+4);
+  c.textAlign = 'left';
+  c.fillText('God \u03c8=\u03c0', cx+80, y1+20);
+}
+
+function drawCoord() {
+  const c = sizeCanvas('cCoord');
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
+  c.clearRect(0, 0, w, h);
+  const R = 130;
+
+  // Outer S2 outline
+  c.strokeStyle = '#1e293b'; c.lineWidth = 2;
+  c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
+
+  // psi circle: vertical meridian
+  c.save(); c.translate(cx, cy);
+  c.strokeStyle = 'rgba(239,159,39,0.35)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(0, 0, R*0.3, R, 0, 0, TAU); c.stroke();
+  c.restore();
+
+  // theta circle: latitude at current theta
+  const latR = R * Math.sin(coordTheta);
+  const latY = cy - R * Math.cos(coordTheta);
+  c.strokeStyle = 'rgba(93,202,165,0.5)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(cx, latY, latR, latR*0.25, 0, 0, TAU); c.stroke();
+
+  // phi great circle: equatorial, rotated
+  c.save(); c.translate(cx, cy); c.rotate(coordPhi);
+  c.strokeStyle = 'rgba(175,169,236,0.4)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(0, 0, R, R*0.25, 0, 0, TAU); c.stroke();
+  c.restore();
+
+  // Current point
+  const px = cx + R * Math.sin(coordPsi) * Math.sin(coordTheta) * Math.cos(coordPhi);
+  const py = cy - R * (Math.cos(coordPsi)*0.7 + Math.sin(coordPsi)*Math.cos(coordTheta)*0.3);
+
+  c.strokeStyle = '#1e293b'; c.lineWidth = 1.5; c.setLineDash([4, 4]);
+  c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke();
+  c.setLineDash([]);
+
+  c.fillStyle = 'rgba(239,159,39,0.2)'; c.beginPath(); c.arc(px, py, 22, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(px, py, 9, 0, TAU); c.fill();
+
+  c.font = '20px monospace'; c.textAlign = 'center';
+  c.fillStyle = 'rgba(239,159,39,0.6)'; c.fillText('\u03c8', cx - R*0.3 - 14, cy + 10);
+  c.fillStyle = 'rgba(93,202,165,0.7)'; c.fillText('\u03b8', cx + latR + 18, latY + 6);
+  c.fillStyle = 'rgba(175,169,236,0.7)'; c.fillText('\u03c6', cx, cy + R*0.25 + 22);
+}
+
+function drawDante() {
+  const c = sizeCanvas('cDante');
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2;
+  const y0 = h - 50, y1 = 50;
+  c.clearRect(0, 0, w, h);
+
+  const labels = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Fixed Stars','Primum Mobile'];
+  const L = 9;
+  for (let i = 0; i < L; i++) {
+    const ps  = i / (L-1) * Math.PI;
+    const ry  = y0 - (i / (L-1)) * (y0 - y1);
+    const rx  = Math.sin(ps) * 120;
+    const cur = Math.abs(ps - danteAngle) < (Math.PI / (L-1)) * 0.7;
+
+    if (cur && rx > 5) {
+      c.fillStyle = 'rgba(239,159,39,0.08)';
+      c.beginPath(); c.ellipse(cx, ry, rx, rx*0.3, 0, 0, TAU); c.fill();
+    }
+    c.strokeStyle = cur ? '#EF9F27' : '#1e2a3a';
+    c.lineWidth   = cur ? 4 : 1.5;
+    c.beginPath(); c.ellipse(cx, ry, rx, rx*0.3, 0, 0, TAU); c.stroke();
+
+    if (rx > 20) {
+      c.fillStyle = '#334155'; c.font = '16px Georgia'; c.textAlign = 'left';
+      c.fillText(labels[i] || '', cx + rx + 8, ry + 6);
+    }
+  }
+
+  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(cx, y0, 9, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, y1, 9, 0, TAU); c.fill();
+  c.fillStyle = '#475569'; c.font = '18px Georgia'; c.textAlign = 'center';
+  c.fillText('Earth', cx, y0 + 28);
+  c.fillText('punto / God', cx, y1 - 14);
+}
+
+function drawFull() {
+  const c = sizeCanvas('cFull');
+  const w = c.canvas.width, h = c.canvas.height, cx = w/2;
+  const y0 = h - 50, y1 = 50;
+  c.clearRect(0, 0, w, h);
+
+  // sinpsi profile boundary curves
+  c.strokeStyle = '#0f172a'; c.lineWidth = 2;
+  for (let side = -1; side <= 1; side += 2) {
+    c.beginPath();
+    for (let i = 0; i <= 200; i++) {
+      const ps = i / 200 * Math.PI;
+      const x  = cx + side * Math.sin(ps) * 200;
+      const y  = y0 - (ps / Math.PI) * (y0 - y1);
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    c.stroke();
+  }
+
+  // Nested S2 slices
+  const L = 11;
+  for (let i = 0; i < L; i++) {
+    const ps  = i / (L-1) * Math.PI;
+    const ry  = y0 - (i / (L-1)) * (y0 - y1);
+    const rx  = Math.sin(ps) * 200;
+    const cur = Math.abs(ps - fullPsi) < Math.PI / (L-1) * 0.7;
+    c.strokeStyle = cur ? 'rgba(239,159,39,0.8)' : '#0f172a';
+    c.lineWidth   = cur ? 3 : 1;
+    c.beginPath(); c.ellipse(cx, ry, rx, rx*0.18, 0, 0, TAU); c.stroke();
+  }
+
+  // World-line
+  const N = 600, range = Math.PI * 10;
+  c.strokeStyle = 'rgba(239,159,39,0.8)'; c.lineWidth = 2.5;
+  c.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const tt = i / N * range;
+    const p  = knotPoint(tt);
+    const x  = cx + p.x * 170;
+    const y  = y0 - (p.psi / Math.PI) * (y0 - y1);
+    if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+  }
+  c.stroke();
+
+  // Current slice band
+  const sliceY = y0 - (fullPsi / Math.PI) * (y0 - y1);
+  c.strokeStyle = 'rgba(239,159,39,0.15)'; c.lineWidth = 28;
+  c.beginPath(); c.moveTo(40, sliceY); c.lineTo(w-40, sliceY); c.stroke();
+
+  // Genuine sign-change intersections
+  const cr = findCrossings(fullPsi);
+  cr.forEach(p => {
+    const sx = cx + p.x * 170;
+    c.fillStyle = '#EF9F27';
+    c.beginPath(); c.arc(sx, sliceY, 11, 0, TAU); c.fill();
+    c.strokeStyle = '#020617'; c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(sx-7, sliceY); c.lineTo(sx+7, sliceY);
+    c.moveTo(sx, sliceY-7); c.lineTo(sx, sliceY+7);
+    c.stroke();
+  });
+
+  // Qibla triangle on current slice
+  if (Math.sin(psi) > 0.1) {
+    const qr = Math.sin(psi) * 200;
+    c.strokeStyle = 'rgba(93,202,165,0.6)'; c.lineWidth = 2;
+    const verts = [];
+    for (let i = 0; i < 3; i++) {
+      const a = t * 0.3 + i * TAU / 3;
+      verts.push({ x: cx + qr*Math.cos(a), y: sliceY + qr*0.18*Math.sin(a) });
+    }
+    c.beginPath();
+    verts.forEach((v, i) => { if (i === 0) c.moveTo(v.x, v.y); else c.lineTo(v.x, v.y); });
+    c.closePath(); c.stroke();
+    verts.forEach(v => {
+      c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(v.x, v.y, 6, 0, TAU); c.fill();
+    });
+  }
+
+  // Earth and God puntos
+  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(cx, y0, 10, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, y1, 10, 0, TAU); c.fill();
+
+  c.fillStyle = '#334155'; c.font = '20px Georgia'; c.textAlign = 'center';
+  c.fillText('Earth (\u03c8=0)', cx, y0 + 30);
+  c.fillText('God / punto (\u03c8=\u03c0)', cx, y1 - 16);
+
+  c.fillStyle = '#1e293b'; c.font = '18px monospace';
+  c.fillText(
+    '\u03c8 = ' + fullPsi.toFixed(2) +
+    '   r\u00b7sin\u03c8 = ' + Math.sin(fullPsi).toFixed(3) +
+    '   ' + cr.length + ' crossing' + (cr.length !== 1 ? 's' : ''),
+    cx, h - 8
+  );
+}
+
+
+// ---- Qibla / spherical trig ----
+
+function computeQibla(lat1, lon1) {
+  const dLon = MECCA_LON - lon1;
+  const y = Math.sin(dLon) * Math.cos(MECCA_LAT);
+  const x = Math.cos(lat1) * Math.sin(MECCA_LAT) - Math.sin(lat1) * Math.cos(MECCA_LAT) * Math.cos(dLon);
+  const bearing = Math.atan2(y, x);
+  const sinHalfDlat = Math.sin((MECCA_LAT - lat1) / 2);
+  const sinHalfDlon = Math.sin(dLon / 2);
+  const a = sinHalfDlat*sinHalfDlat + Math.cos(lat1)*Math.cos(MECCA_LAT)*sinHalfDlon*sinHalfDlon;
+  const dist = 2 * Math.asin(Math.sqrt(Math.max(0, Math.min(1, a))));
+  const sideC = Math.PI / 2 - lat1;
+  return { bearing, dist, sideC };
+}
+
+function setEl(id, val) { const e = gc(id); if (e) e.textContent = val; }
+
+function updateQibla() {
+  const oLatEl = gc('oLat'), oLonEl = gc('oLon'), qPsiEl = gc('qPsi');
+  if (!oLatEl) return;
+  obsLat   = oLatEl.value * DEG;
+  obsLon   = oLonEl.value * DEG;
+  qPsiVal  = (qPsiEl.value / 100) * Math.PI;
+  setEl('oLatV', Math.round(obsLat/DEG) + '\u00b0 ' + (obsLat >= 0 ? 'N' : 'S'));
+  setEl('oLonV', Math.round(obsLon/DEG) + '\u00b0 ' + (obsLon >= 0 ? 'E' : 'W'));
+  setEl('qPsiV', qPsiEl.value == 50 ? '\u03c0/2' : qPsiVal.toFixed(2));
+  const q = computeQibla(obsLat, obsLon);
+  const bearDeg = ((q.bearing / DEG) + 360) % 360;
+  setEl('rBearing', bearDeg.toFixed(1) + '\u00b0');
+  setEl('rDist',    Math.round(q.dist * 6371).toLocaleString() + ' km');
+  setEl('rSideC',   (q.sideC / DEG).toFixed(1) + '\u00b0');
+  const dLonDeg = ((MECCA_LON - obsLon) / DEG).toFixed(1);
+  const eqEl = gc('eqQibla');
+  if (eqEl) eqEl.innerHTML =
+    '<b>tan Q = sin \u0394\u03bb / (cos \u03c6\u2081 tan \u03c6\u2082 \u2212 sin \u03c6\u2081 cos \u0394\u03bb)</b><br>' +
+    '\u03c6\u2081 = ' + (obsLat/DEG).toFixed(1) + '\u00b0, \u03c6\u2082 = ' + (MECCA_LAT/DEG).toFixed(1) + '\u00b0 (Mecca), \u0394\u03bb = ' + dLonDeg + '\u00b0<br>' +
+    '\u2192 Q = <b>' + bearDeg.toFixed(2) + '\u00b0</b> from North &nbsp;|&nbsp; dist = <b>' + Math.round(q.dist*6371).toLocaleString() + ' km</b>' +
+    ' &nbsp;|&nbsp; The qibla bearing Q is invariant across all S\u00b2 slices. At \u03c8\u21920 or \u03c8\u2192\u03c0: <b>you are at the punto.</b>';
+}
+
+function gcArc(c, lat1, lon1, lat2, lon2, cx, cy, Rx, Ry, rot, color, lw) {
+  const N = 60;
+  c.strokeStyle = color; c.lineWidth = lw;
+  let started = false;
+  c.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const tt = i / N;
+    const x1=Math.cos(lat1)*Math.cos(lon1), y1=Math.sin(lat1), z1=Math.cos(lat1)*Math.sin(lon1);
+    const x2=Math.cos(lat2)*Math.cos(lon2), y2=Math.sin(lat2), z2=Math.cos(lat2)*Math.sin(lon2);
+    const dot = Math.max(-1, Math.min(1, x1*x2+y1*y2+z1*z2));
+    const omega = Math.acos(dot);
+    let px, py, pz;
+    if (Math.abs(omega) < 1e-6) { px=x1; py=y1; pz=z1; }
+    else {
+      const s = Math.sin(omega);
+      const f1=Math.sin((1-tt)*omega)/s, f2=Math.sin(tt*omega)/s;
+      px=f1*x1+f2*x2; py=f1*y1+f2*y2; pz=f1*z1+f2*z2;
+    }
+    const lat = Math.asin(Math.max(-1,Math.min(1,py)));
+    const lon = Math.atan2(pz, px);
+    const lon2s = lon - rot;
+    const vis = Math.cos(lat)*Math.cos(lon2s) > -0.3;
+    const sx = cx + Rx*Math.cos(lat)*Math.sin(lon2s);
+    const sy = cy - Ry*Math.sin(lat);
+    if (vis) { if (!started) { c.moveTo(sx,sy); started=true; } else c.lineTo(sx,sy); }
+    else started = false;
+  }
+  c.stroke();
+}
+
+function latlonToXY(lat, lon, cx, cy, Rx, Ry, rot) {
+  const lon2 = lon - rot;
+  return {
+    x: cx + Rx*Math.cos(lat)*Math.sin(lon2),
+    y: cy - Ry*Math.sin(lat),
+    vis: Math.cos(lat)*Math.cos(lon2) > -0.3
+  };
+}
+
+function drawSphere() {
+  const c = CTX['cSphere']; if (!c) return;
+  const w=c.canvas.width, h=c.canvas.height, cx=w/2, cy=h/2, Rx=w*0.36, Ry=h*0.44;
+  c.clearRect(0,0,w,h);
+  const rot = t * 0.15 + obsLon;
+  c.strokeStyle='#1e293b'; c.lineWidth=2;
+  c.beginPath(); c.ellipse(cx,cy,Rx,Ry,0,0,TAU); c.stroke();
+  [-60,-30,0,30,60].forEach(lat => {
+    const r=Math.cos(lat*DEG);
+    c.strokeStyle='#0f172a'; c.lineWidth=1;
+    c.beginPath(); c.ellipse(cx,cy-Ry*Math.sin(lat*DEG),Rx*r,Ry*r*0.3,0,0,TAU); c.stroke();
+  });
+  c.strokeStyle='#1e293b'; c.lineWidth=1.5;
+  c.beginPath(); c.ellipse(cx,cy,Rx,Ry*0.3,0,0,TAU); c.stroke();
+  const np = latlonToXY(Math.PI/2,0,cx,cy,Rx,Ry,rot);
+  if (np.vis) {
+    c.fillStyle='#475569'; c.beginPath(); c.arc(np.x,np.y,6,0,TAU); c.fill();
+    c.fillStyle='#334155'; c.font='18px monospace'; c.textAlign='left';
+    c.fillText('N',np.x+8,np.y+6);
+  }
+  gcArc(c,Math.PI/2,0,obsLat,obsLon,cx,cy,Rx,Ry,rot,'rgba(93,202,165,0.5)',2);
+  gcArc(c,Math.PI/2,0,MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot,'rgba(93,202,165,0.5)',2);
+  gcArc(c,obsLat,obsLon,MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot,'#EF9F27',3.5);
+  const op = latlonToXY(obsLat,obsLon,cx,cy,Rx,Ry,rot);
+  if (op.vis) {
+    c.fillStyle='#5DCAA5'; c.beginPath(); c.arc(op.x,op.y,9,0,TAU); c.fill();
+    c.fillStyle='#085041'; c.font='18px Georgia'; c.textAlign='right';
+    c.fillText('observer',op.x-8,op.y+6);
+    const q=computeQibla(obsLat,obsLon);
+    const sa=q.bearing-Math.PI/2, aLen=55;
+    c.strokeStyle='#EF9F27'; c.lineWidth=2.5;
+    c.beginPath(); c.moveTo(op.x,op.y); c.lineTo(op.x+aLen*Math.cos(sa),op.y+aLen*Math.sin(sa)); c.stroke();
+    c.fillStyle='#EF9F27'; c.beginPath(); c.arc(op.x+aLen*Math.cos(sa),op.y+aLen*Math.sin(sa),5,0,TAU); c.fill();
+  }
+  const mp = latlonToXY(MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot);
+  if (mp.vis) {
+    c.fillStyle='#EF9F27'; c.beginPath(); c.arc(mp.x,mp.y,9,0,TAU); c.fill();
+    c.fillStyle='#633806'; c.font='18px Georgia'; c.textAlign='left';
+    c.fillText('Mecca',mp.x+10,mp.y+6);
+  }
+}
+
+function drawQS3() {
+  const c = CTX['cQS3']; if (!c) return;
+  const w=c.canvas.width, h=c.canvas.height, cx=w/2;
+  const y0=h-60, y1=60;
+  c.clearRect(0,0,w,h);
+  c.strokeStyle='#1e293b'; c.lineWidth=1.5;
+  for (let side=-1;side<=1;side+=2) {
+    c.beginPath();
+    for (let i=0;i<=120;i++) {
+      const ps=i/120*Math.PI;
+      const x=cx+side*Math.sin(ps)*160, y=y0-(ps/Math.PI)*(y0-y1);
+      if(i===0) c.moveTo(x,y); else c.lineTo(x,y);
+    }
+    c.stroke();
+  }
+  const L=9;
+  for (let i=0;i<L;i++) {
+    const ps=i/(L-1)*Math.PI, ry=y0-(i/(L-1))*(y0-y1), rx=Math.sin(ps)*160;
+    const cur=Math.abs(ps-qPsiVal)<Math.PI/(L-1)*0.7;
+    c.strokeStyle=cur?'rgba(239,159,39,0.7)':'#111827'; c.lineWidth=cur?3:1;
+    c.beginPath(); c.ellipse(cx,ry,rx,rx*0.2,0,0,TAU); c.stroke();
+  }
+  const earthY=y0-0.5*(y0-y1);
+  c.strokeStyle='rgba(93,202,165,0.35)'; c.lineWidth=2;
+  c.beginPath(); c.ellipse(cx,earthY,160,160*0.2,0,0,TAU); c.stroke();
+  c.fillStyle='#085041'; c.font='16px monospace'; c.textAlign='left';
+  c.fillText('\u03c8=\u03c0/2 — Earth S\u00b2 (qibla lives here)',cx-155,earthY-18);
+  const q=computeQibla(obsLat,obsLon);
+  const bearFrac=((q.bearing+Math.PI)%TAU)/TAU;
+  const qx=cx+Math.sin(bearFrac*TAU*0.5)*130;
+  c.strokeStyle='#EF9F27'; c.lineWidth=2.5;
+  c.beginPath(); c.moveTo(cx,y1+10); c.quadraticCurveTo(qx,earthY,cx,y0-10); c.stroke();
+  const sliceY=y0-(qPsiVal/Math.PI)*(y0-y1);
+  const frac=(sliceY-y1)/(y0-y1);
+  const tt=1-frac;
+  const bx=(1-tt)*(1-tt)*cx+2*tt*(1-tt)*qx+tt*tt*cx;
+  if (Math.sin(qPsiVal)>0.05) {
+    c.fillStyle='rgba(239,159,39,0.55)'; c.beginPath(); c.arc(bx,sliceY,7,0,TAU); c.fill();
+    c.strokeStyle='rgba(239,159,39,0.3)'; c.lineWidth=1.5; c.setLineDash([4,4]);
+    c.beginPath(); c.moveTo(40,sliceY); c.lineTo(w-40,sliceY); c.stroke();
+    c.setLineDash([]);
+    c.fillStyle='#334155'; c.font='16px monospace'; c.textAlign='left';
+    c.fillText('r\u00b7sin\u03c8 = '+Math.sin(qPsiVal).toFixed(3),bx+12,sliceY+5);
+  }
+  c.fillStyle='#EF9F27'; c.beginPath(); c.arc(qx,earthY,8,0,TAU); c.fill();
+  c.fillStyle='#5DCAA5'; c.beginPath(); c.arc(cx,y0,9,0,TAU); c.fill();
+  c.fillStyle='#EF9F27'; c.beginPath(); c.arc(cx,y1,9,0,TAU); c.fill();
+  c.fillStyle='#334155'; c.font='18px Georgia'; c.textAlign='center';
+  c.fillText('Earth \u03c8=0',cx,y0+26); c.fillText('God \u03c8=\u03c0',cx,y1-12);
+}
+
+function drawTriangle() {
+  const c = CTX['cTriangle']; if (!c) return;
+  const w=c.canvas.width, h=c.canvas.height, cx=w/2, cy=h/2;
+  c.clearRect(0,0,w,h);
+  const q=computeQibla(obsLat,obsLon);
+  const spread = Math.min(cx * 0.85, 200);
+  const Np={x:cx,y:Math.round(h*0.14)}, Op={x:Math.round(cx-spread),y:h-Math.round(h*0.14)}, Mp={x:Math.round(cx+spread*0.9),y:h-Math.round(h*0.14)};
+  function drawArc(p1,p2,col,lw,lbl) {
+    c.strokeStyle=col; c.lineWidth=lw;
+    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2-40;
+    c.beginPath(); c.moveTo(p1.x,p1.y); c.quadraticCurveTo(mx,my,p2.x,p2.y); c.stroke();
+    if (lbl) { c.fillStyle=col; c.font='18px monospace'; c.textAlign='center'; c.fillText(lbl,mx,my-8); }
+  }
+  drawArc(Np,Op,'rgba(93,202,165,0.7)',2,'c = \u03c0/2 \u2212 \u03c6\u2081');
+  drawArc(Np,Mp,'rgba(93,202,165,0.7)',2,'b = \u03c0/2 \u2212 \u03c6\u2082');
+  drawArc(Op,Mp,'#EF9F27',3,'a (great-circle dist)');
+  [[Np,'N','#475569'],[Op,'observer','#5DCAA5'],[Mp,'Mecca','#EF9F27']].forEach(([p,lbl,col])=>{
+    c.fillStyle=col; c.beginPath(); c.arc(p.x,p.y,9,0,TAU); c.fill();
+    c.fillStyle=col; c.font='18px Georgia'; c.textAlign='center';
+    c.fillText(lbl,p.x,p.y+(p===Np?-18:28));
+  });
+  c.strokeStyle='#EF9F27'; c.lineWidth=2;
+  c.beginPath(); c.arc(Op.x,Op.y,35,-Math.PI*0.7,-Math.PI*0.2); c.stroke();
+  const bearDeg=((q.bearing/DEG)+360)%360;
+  c.fillStyle='#EF9F27'; c.font='20px monospace'; c.textAlign='left';
+  c.fillText('Q = '+bearDeg.toFixed(1)+'\u00b0',Op.x+42,Op.y-30);
+  const sinA=Math.sin(q.dist), sinQ=Math.abs(Math.sin(q.bearing));
+  const ratio=(sinQ>0.001?(sinA/sinQ).toFixed(3):'\u221e');
+  const eqEl=gc('eqTriangle');
+  if (eqEl) eqEl.innerHTML='<b>sin a / sin Q = '+ratio+'</b>' +
+    ' &nbsp;|&nbsp; sin a = '+sinA.toFixed(4)+' &nbsp;|&nbsp; sin Q = '+sinQ.toFixed(4)+
+    ' &nbsp;|&nbsp; a = '+(q.dist/DEG).toFixed(2)+'\u00b0 &nbsp;|&nbsp; Q = '+bearDeg.toFixed(2)+'\u00b0';
+  c.fillStyle='#1e293b'; c.font='20px monospace'; c.textAlign='center';
+  c.fillText('sin a / sin Q = '+ratio,cx,h-10);
+}
+
+function onFullPsi(v) {
+  fullPsi = (v / 100) * Math.PI;
+  const lbl = v == 50 ? '\u03c0/2' : v == 0 ? '0' : v == 100 ? '\u03c0' : fullPsi.toFixed(2);
+  const el = gc('fullPsiLbl'); if (el) el.textContent = lbl;
+}
+
+function loop() {
+  t += 0.018;
+  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull();
+  drawSphere(); drawQS3(); drawTriangle();
+  requestAnimationFrame(loop);
+}
+
+// Init
+initCanvases();
+onPsi(50); onCoord(); onDante(50); setDim(2); updateQibla(); onFullPsi(50);
+loop();
+</script>
+</body>
+</html>
