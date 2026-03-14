@@ -118,7 +118,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>4. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> A <em>single slice</em> at depth ψ with the world-line (rope) passing through it. The <em>śulba sūtras</em> (Vedic texts, 800-500 BCE) used literal ropes to measure sacred spaces. Here the rope is Dante and Virgil's path — a "world-line" (physicist John Wheeler's term for a path through spacetime). <strong>Move the slider</strong> to see how many times the rope intersects different slices, showing that Dante's journey crosses the same spherical level multiple times.</p>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Dante's complete journey mapped against ψ (vertical axis). <strong>Bottom</strong> (ψ=0) = Satan at Earth's center. <strong>Middle</strong> (ψ=π/2) = Earth's surface. <strong>Top</strong> (ψ=π) = God. <span style="color:#8B1a1a">Dark red</span> = Hell: Dante descends through 9 circles (Virgil guides). <span style="color:#5DCAA5">Teal</span> = Purgatorio: 7 terraces ascending (Virgil guides). <span style="color:#EF9F27">Gold</span> = Paradise: 9 celestial spheres ascending (Beatrice guides). The <em>śulba sūtras</em> used literal ropes to measure sacred space — Wheeler called any path through spacetime a "world-line." <strong>Move the slider</strong> to cut a horizontal slice at depth ψ: the gold dots show where the journey crosses that level.</p>
     <canvas id="cRope" height="220"></canvas>
     <div class="sl-row" style="margin-top:8px">
       <label>slice &psi;</label>
@@ -184,12 +184,27 @@ let t = 0;
 
 function gc(id) { return document.getElementById(id); }
 
-// Knot parameterization: world-line in S3
-// psi(t) oscillates through [0, pi] with enough variation to cross any slice multiple times
-function knotPoint(t) {
-  const ps = Math.PI / 2 + 1.1 * Math.sin(2.5 * t) * Math.cos(0.7 * t);
-  const x  = Math.cos(3 * t) * Math.sin(t * 0.5 + 0.3);
-  return { psi: Math.max(0.08, Math.min(Math.PI - 0.08, ps)), x };
+// Structured Dante journey: Hell → Purgatorio → Paradise (cyclic)
+// s ∈ [0,π]: Hell — descent from Earth surface to Satan (ψ: π/2 → 0)
+// s ∈ [π,2π]: Purgatorio — ascent from center to surface (ψ: 0 → π/2)
+// s ∈ [2π,3π]: Paradise — ascent from surface to God (ψ: π/2 → π)
+function knotPoint(tt) {
+  const s = tt % (3 * Math.PI);
+  let ps, x;
+  if (s < Math.PI) {
+    const f = s / Math.PI;
+    ps = Math.PI/2 * (1 - f);
+    x = Math.sin(9 * f * Math.PI) * (0.75 - f * 0.45); // 9 circles, spiraling in
+  } else if (s < 2 * Math.PI) {
+    const f = (s - Math.PI) / Math.PI;
+    ps = Math.PI/2 * f;
+    x = Math.sin(7 * f * Math.PI) * 0.38; // 7 terraces of Purgatorio
+  } else {
+    const f = (s - 2 * Math.PI) / Math.PI;
+    ps = Math.PI/2 + Math.PI/2 * f;
+    x = Math.sin(9 * f * Math.PI) * 0.55; // 9 celestial spheres
+  }
+  return { psi: Math.max(0.05, Math.min(Math.PI - 0.05, ps)), x };
 }
 
 // Find actual sign-change intersections of world-line with psi = psiSlice
@@ -371,57 +386,109 @@ function drawLadder() {
 function drawRope() {
   const c = sizeCanvas('cRope');
   const w = c.canvas.width, h = c.canvas.height, cx = w/2;
-  const y0 = h - 60, y1 = 60;
+  const y0 = h - 42, y1 = 28;
   c.clearRect(0, 0, w, h);
+  function psiToY(ps) { return y0 - (ps / Math.PI) * (y0 - y1); }
 
-  // Nested S2 slices as ellipses
-  const L = 9;
-  for (let i = 0; i < L; i++) {
-    const ps = i / (L-1) * Math.PI;
-    const ry = y0 - (i / (L-1)) * (y0 - y1);
-    const rx = Math.sin(ps) * 100;
-    c.strokeStyle = '#0f172a'; c.lineWidth = 1.5;
-    c.beginPath(); c.ellipse(cx, ry, rx, rx*0.22, 0, 0, TAU); c.stroke();
+  // Background zones
+  const yHell0 = psiToY(0), yHell1 = psiToY(Math.PI/2);
+  const yPurg1 = psiToY(Math.PI/2);
+  const yPar1  = psiToY(Math.PI);
+  c.fillStyle = 'rgba(139,0,0,0.07)';
+  c.fillRect(0, yHell1, w, yHell0 - yHell1);
+  c.fillStyle = 'rgba(93,202,165,0.06)';
+  c.fillRect(0, yPurg1, w, yHell1 - yPurg1);
+  c.fillStyle = 'rgba(239,159,39,0.06)';
+  c.fillRect(0, yPar1, w, yPurg1 - yPar1);
+
+  // Named levels: Hell (left), Purgatorio+Paradise (right)
+  const hellLvls = ['1 Limbo','2 Lust','3 Gluttony','4 Greed','5 Anger','6 Heresy','7 Violence','8 Fraud','9 Treachery/Satan'];
+  for (let i = 0; i < 9; i++) {
+    const ps = Math.PI/2 * (1 - (i + 0.5) / 9);
+    const sy = psiToY(ps);
+    c.strokeStyle = 'rgba(139,0,0,0.18)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(4, sy); c.lineTo(cx - 16, sy); c.stroke();
+    c.fillStyle = 'rgba(200,60,60,0.65)'; c.font = '10px monospace'; c.textAlign = 'right';
+    c.fillText(hellLvls[i], cx - 20, sy + 3);
+  }
+  const purgLvls = ['1 Pride','2 Envy','3 Wrath','4 Sloth','5 Avarice','6 Gluttony','7 Lust'];
+  for (let i = 0; i < 7; i++) {
+    const ps = Math.PI/2 * (i + 0.5) / 7;
+    const sy = psiToY(ps);
+    c.strokeStyle = 'rgba(93,202,165,0.18)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(cx + 16, sy); c.lineTo(w - 4, sy); c.stroke();
+    c.fillStyle = 'rgba(93,202,165,0.75)'; c.font = '10px monospace'; c.textAlign = 'left';
+    c.fillText(purgLvls[i], cx + 20, sy + 3);
+  }
+  const sphLvls = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Fixed Stars','Primum Mobile'];
+  for (let i = 0; i < 9; i++) {
+    const ps = Math.PI/2 + Math.PI/2 * (i + 0.5) / 9;
+    const sy = psiToY(ps);
+    c.strokeStyle = 'rgba(239,159,39,0.18)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(cx + 16, sy); c.lineTo(w - 4, sy); c.stroke();
+    c.fillStyle = 'rgba(239,159,39,0.75)'; c.font = '10px monospace'; c.textAlign = 'left';
+    c.fillText(sphLvls[i], cx + 20, sy + 3);
   }
 
-  // World-line: plot (knotPsi, x) as (screen_y, screen_x)
-  const N = 500, range = Math.PI * 8;
-  const pts = [];
-  for (let i = 0; i <= N; i++) {
-    const tt = i / N * range;
-    const p  = knotPoint(tt);
-    pts.push({ sx: cx + p.x * 130, sy: y0 - (p.psi / Math.PI) * (y0 - y1) });
-  }
-  c.strokeStyle = '#EF9F27'; c.lineWidth = 3;
-  c.beginPath();
-  pts.forEach((p, i) => { if (i === 0) c.moveTo(p.sx, p.sy); else c.lineTo(p.sx, p.sy); });
-  c.stroke();
-
-  // Slice line
-  const sliceY = y0 - (psi / Math.PI) * (y0 - y1);
-  c.strokeStyle = 'rgba(239,159,39,0.25)'; c.lineWidth = 28;
-  c.beginPath(); c.moveTo(60, sliceY); c.lineTo(w-60, sliceY); c.stroke();
-  c.strokeStyle = '#EF9F27'; c.lineWidth = 2; c.setLineDash([6, 4]);
-  c.beginPath(); c.moveTo(60, sliceY); c.lineTo(w-60, sliceY); c.stroke();
+  // Earth-surface divider
+  const ySurf = psiToY(Math.PI/2);
+  c.strokeStyle = 'rgba(255,255,255,0.15)'; c.lineWidth = 1.5; c.setLineDash([4,3]);
+  c.beginPath(); c.moveTo(0, ySurf); c.lineTo(w, ySurf); c.stroke();
   c.setLineDash([]);
 
-  // Sign-change intersections
-  const cr = findCrossings(psi);
-  cr.forEach(p => {
-    const sx = cx + p.x * 130;
-    c.fillStyle = '#EF9F27';
-    c.beginPath(); c.arc(sx, sliceY, 10, 0, TAU); c.fill();
-    c.strokeStyle = '#020617'; c.lineWidth = 2;
+  // Guide labels
+  c.fillStyle = 'rgba(200,60,60,0.6)'; c.font = 'bold 10px monospace'; c.textAlign = 'center';
+  c.fillText('VIRGIL', cx, psiToY(Math.PI/4) + 3);
+  c.fillStyle = 'rgba(93,202,165,0.7)';
+  c.fillText('VIRGIL', cx, psiToY(Math.PI/4) + 3 + (ySurf - psiToY(Math.PI/4)) * 0.5);
+  c.fillStyle = 'rgba(239,159,39,0.7)';
+  c.fillText('BEATRICE', cx, psiToY(Math.PI * 3/4));
+
+  // Draw the three phases of the journey
+  const phases = [
+    { start: 0,           end: Math.PI,     color: '#8B1a1a', lw: 2.5 }, // Hell
+    { start: Math.PI,     end: 2*Math.PI,   color: '#5DCAA5', lw: 2.5 }, // Purgatorio
+    { start: 2*Math.PI,   end: 3*Math.PI,   color: '#EF9F27', lw: 2.5 }  // Paradise
+  ];
+  phases.forEach(ph => {
+    const n = 200;
+    c.strokeStyle = ph.color; c.lineWidth = ph.lw;
     c.beginPath();
-    c.moveTo(sx-6, sliceY); c.lineTo(sx+6, sliceY);
-    c.moveTo(sx, sliceY-6); c.lineTo(sx, sliceY+6);
+    for (let i = 0; i <= n; i++) {
+      const tt = ph.start + i/n * (ph.end - ph.start);
+      const kp = knotPoint(tt);
+      const sx = cx + kp.x * 110, sy = psiToY(kp.psi);
+      if (i === 0) c.moveTo(sx, sy); else c.lineTo(sx, sy);
+    }
     c.stroke();
   });
 
-  c.fillStyle = '#334155'; c.font = '20px monospace'; c.textAlign = 'right';
-  c.fillText('Earth \u03c8=0', cx-110, y0+4);
-  c.textAlign = 'left';
-  c.fillText('God \u03c8=\u03c0', cx+80, y1+20);
+  // Slice line
+  const sliceY = psiToY(psi);
+  c.strokeStyle = 'rgba(239,159,39,0.2)'; c.lineWidth = 22;
+  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke();
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5; c.setLineDash([5,4]);
+  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke();
+  c.setLineDash([]);
+
+  // Crossings
+  const cr = findCrossings(psi);
+  cr.forEach(p => {
+    const sx = cx + p.x * 110;
+    c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(sx, sliceY, 8, 0, TAU); c.fill();
+    c.strokeStyle = '#020617'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(sx-5,sliceY); c.lineTo(sx+5,sliceY); c.moveTo(sx,sliceY-5); c.lineTo(sx,sliceY+5); c.stroke();
+  });
+
+  // Axis labels
+  c.fillStyle = '#EF9F27'; c.font = '12px monospace'; c.textAlign = 'center';
+  c.fillText('God \u03c8=\u03c0', cx, y1 - 8);
+  c.fillStyle = '#5DCAA5';
+  c.fillText('Earth surface \u03c8=\u03c0/2', cx, ySurf - 6);
+  c.fillStyle = '#8B1a1a';
+  c.fillText('Satan \u03c8=0', cx, y0 + 18);
+  c.fillStyle = '#334155'; c.font = '12px monospace';
+  c.fillText('\u03c8=' + psi.toFixed(2) + '  |  ' + cr.length + ' crossing' + (cr.length!==1?'s':''), cx, h - 4);
 }
 
 function drawCoord() {
