@@ -157,28 +157,17 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 </div>
 
 <div class="panel-full" style="margin-top:12px">
-  <h3>7. Complete Object &#8212; Klein bottle &#x2192; S&#x00B3; &#x2192; Dante&#39;s cosmos</h3>
-  <p class="info" style="margin-bottom:10px">The <strong>Klein bottle</strong> (left) is a surface with no inside, no outside, and no boundary &#x2014; you can traverse it forever without hitting an edge. In 3D it must self-intersect, but in <strong>4D it does not</strong>. This is the key: the self-intersection you see is an artifact of projecting a 4D object into 3D, exactly like a shadow of a 3D object looks flat. <strong>S&#x00B3;</strong> (right) is the 3D version: a closed 3-manifold embedded in 4D with no boundary. Earth (&psi;=0) is the origin; God (&psi;=&pi;) maps to infinity in every direction. The sacred cannot leak &#x2014; there is no outside to leak into. Dante&#39;s world-line (gold rope) threads through all the nested 3D spheres.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-    <div>
-      <p style="color:#94a3b8;font-size:12px;text-align:center;margin-bottom:4px">Klein bottle &#x2014; rotating 3D projection (self-intersection exists only in 3D)</p>
-      <canvas id="cKlein" height="260"></canvas>
-      <div class="eq" style="margin-top:6px"><b>No inside. No outside. No boundary.</b> The tube passes through itself only because we are viewing a 4D object in 3D. In 4D: no self-intersection, no edge.</div>
-    </div>
-    <div>
-      <p style="color:#94a3b8;font-size:12px;text-align:center;margin-bottom:4px">S&#x00B3; stereographic projection &#x2014; Earth at origin, God at &infin;</p>
-      <canvas id="cFull" height="260"></canvas>
-      <div class="sl-row" style="margin-top:6px">
-        <label>slice &psi;</label>
-        <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
-        <span id="fullPsiLbl">&pi;/2</span>
-      </div>
-    </div>
+  <h3>7. Complete Object &#8212; S&#x00B3; as Klein bottle: the geometry of no boundary</h3>
+  <p class="info" style="margin-bottom:10px">The Klein bottle <em>is</em> the visualization of S&#x00B3;. Both are closed manifolds with no inside, no outside, and no boundary &#x2014; you can travel forever without hitting an edge. The self-intersection you see is a 3D projection artifact: in 4D, the tube never passes through itself, just as a 3D sphere has no self-intersection when viewed from 3D (only its 2D shadow might). S&#x00B3; is the 3D version of this same structure. Move the slider to highlight a cross-section at depth &psi;. The gold rope is Dante and Virgil&#39;s world-line threading through the structure.</p>
+  <canvas id="cFull" height="320"></canvas>
+  <div class="sl-row" style="margin-top:8px">
+    <label>slice &psi;</label>
+    <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
+    <span id="fullPsiLbl">&pi;/2</span>
   </div>
   <div class="eq" style="margin-top:8px">
-    <b>x&#x2080;&#x00B2;+x&#x2081;&#x00B2;+x&#x2082;&#x00B2;+x&#x2083;&#x00B2; = r&#x00B2;</b> &nbsp;|&nbsp;
-    r&middot;sin&psi; = slice radius &nbsp;|&nbsp; &psi;=0: <b>Earth</b> &nbsp;|&nbsp; &psi;=&pi;: <b>God (&infin;)</b><br>
-    Each highlighted ring is a full 3D sphere. The world-line spirals through all of them.
+    <b>No inside. No outside. No boundary.</b> &nbsp;|&nbsp; Gold highlight = cross-section at current &psi; &nbsp;|&nbsp; Gold rope = world-line (Dante&#39;s path)<br>
+    The self-intersection is a 3D artifact only. In 4D: no self-intersection, no edge, no outside. <b>The sacred cannot leak.</b>
   </div>
 </div>
 
@@ -228,7 +217,7 @@ const CTX = {};
 function initCanvases() {
   const dpr = window.devicePixelRatio || 2;
   const specs = [
-    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 260], ['cKlein', 260], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200]
+    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200]
   ];
   specs.forEach(([id, cssH]) => {
     const cv = gc(id);
@@ -519,75 +508,79 @@ function drawFull() {
   const c = sizeCanvas('cFull');
   const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
   c.clearRect(0, 0, w, h);
+  const rotY = t * 0.22, rotX = 0.32;
+  const scale = Math.min(w, h) * 0.072;
+  const a = 2.2, b = 1.0;
 
-  const rotY = t * 0.22;
-  const scale = Math.min(w, h) * 0.19;
+  function klein(u, v) {
+    const cu2 = Math.cos(u/2), su2 = Math.sin(u/2);
+    const R = a + b*cu2*Math.sin(v) - b*su2*Math.sin(2*v);
+    return [R*Math.cos(u), R*Math.sin(u), b*su2*Math.sin(v) + b*cu2*Math.sin(2*v)];
+  }
 
-  // Project 3D point to 2D with Y-axis rotation and mild perspective
   function proj(px, py, pz) {
-    const rx = px * Math.cos(rotY) + pz * Math.sin(rotY);
-    const rz = -px * Math.sin(rotY) + pz * Math.cos(rotY);
-    const persp = 3.5 / (3.5 + rz * 0.35);
-    return [cx + rx * scale * persp, cy - py * scale * persp];
+    const rx = px*Math.cos(rotY) + pz*Math.sin(rotY);
+    const rz = -px*Math.sin(rotY) + pz*Math.cos(rotY);
+    const ry2 = py*Math.cos(rotX) - rz*Math.sin(rotX);
+    const rz2 = py*Math.sin(rotX) + rz*Math.cos(rotX);
+    const persp = 4.5 / (4.5 + rz2*0.28);
+    return [cx + rx*scale*persp, cy - ry2*scale*persp, rz2];
   }
 
-  // Wireframe sphere of radius r: 3 great circles (XY, XZ, YZ planes)
-  function drawSphere3D(r, col, lw) {
-    if (r < 0.02 || r > 6.2) return;
-    c.strokeStyle = col; c.lineWidth = lw;
-    [[1,0,0, 0,1,0],[1,0,0, 0,0,1],[0,1,0, 0,0,1]].forEach(([ax,ay,az,bx,by,bz]) => {
-      c.beginPath();
-      for (let i = 0; i <= 64; i++) {
-        const a = i / 64 * TAU;
-        const [sx, sy] = proj(r*(Math.cos(a)*ax+Math.sin(a)*bx), r*(Math.cos(a)*ay+Math.sin(a)*by), r*(Math.cos(a)*az+Math.sin(a)*bz));
-        if (i === 0) c.moveTo(sx, sy); else c.lineTo(sx, sy);
-      }
-      c.stroke();
-    });
-  }
-
-  // Stereographic projection: psi-level on S3 maps to 3D sphere of radius tan(psi/2)
-  for (let i = 1; i <= 8; i++) {
-    const ps = i / 9 * Math.PI;
-    const r3 = Math.tan(ps / 2);
-    const isCur = Math.abs(ps - fullPsi) < Math.PI / 9 * 0.85;
-    if (isCur) {
-      drawSphere3D(r3, '#EF9F27', 2.5);
-    } else {
-      drawSphere3D(r3, 'rgba(30,58,138,' + (0.12 + 0.06*(i%2)) + ')', 1);
+  // Map psi slider to a z-cross-section of the Klein bottle
+  const sliceZ = (fullPsi / Math.PI * 2 - 1) * 1.4;
+  const Nu = 40, Nv = 28;
+  const segs = [];
+  for (let iu = 0; iu < Nu; iu++) {
+    const u = iu/Nu*TAU, pts = [], kzs = [];
+    for (let iv = 0; iv <= Nv; iv++) {
+      const [kx,ky,kz] = klein(u, iv/Nv*TAU);
+      pts.push(proj(kx, ky, kz)); kzs.push(kz);
     }
+    const hi = kzs.some((z,i) => i < kzs.length-1 && (z-sliceZ)*(kzs[i+1]-sliceZ) < 0);
+    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t:0, hi });
   }
+  for (let iv = 0; iv < Nv; iv++) {
+    const v = iv/Nv*TAU, pts = [], kzs = [];
+    for (let iu = 0; iu <= Nu; iu++) {
+      const [kx,ky,kz] = klein(iu/Nu*TAU, v);
+      pts.push(proj(kx, ky, kz)); kzs.push(kz);
+    }
+    const hi = kzs.some((z,i) => i < kzs.length-1 && (z-sliceZ)*(kzs[i+1]-sliceZ) < 0);
+    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t:1, hi });
+  }
+  segs.sort((x,y) => x.z - y.z);
+  segs.forEach(seg => {
+    if (seg.hi) {
+      c.strokeStyle = 'rgba(239,159,39,0.95)'; c.lineWidth = 3;
+    } else {
+      const f = Math.max(0.12, Math.min(0.8, 0.38 + seg.z*0.09));
+      c.strokeStyle = seg.t===0 ? `rgba(93,202,165,${f.toFixed(2)})` : `rgba(30,58,138,${f.toFixed(2)})`;
+      c.lineWidth = 1;
+    }
+    c.beginPath();
+    seg.pts.forEach((p,i) => { if(i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); });
+    c.stroke();
+  });
 
-  // World-line spiraling through 3D nested spheres
-  const N = 500, range = Math.PI * 10;
-  c.strokeStyle = 'rgba(239,159,39,0.88)'; c.lineWidth = 2.5;
+  // Dante's world-line threading through Klein bottle coordinates
+  const N = 320, range = Math.PI * 8;
+  c.strokeStyle = 'rgba(239,159,39,0.7)'; c.lineWidth = 2;
   c.beginPath();
   let wlStarted = false;
   for (let i = 0; i <= N; i++) {
     const tt = i / N * range;
     const kp = knotPoint(tt);
-    const r3 = Math.tan(kp.psi / 2);
-    if (r3 > 5.5) { wlStarted = false; continue; }
-    const phi1 = tt * 1.3, phi2 = tt * 0.8 + kp.x * 2.5;
-    const [sx, sy] = proj(r3*Math.sin(phi1)*Math.cos(phi2), r3*Math.sin(phi1)*Math.sin(phi2), r3*Math.cos(phi1));
-    if (!wlStarted) { c.moveTo(sx, sy); wlStarted = true; } else c.lineTo(sx, sy);
+    const [kx,ky,kz] = klein(kp.psi, tt*0.9 + kp.x*3);
+    const [sx,sy] = proj(kx, ky, kz);
+    if (!wlStarted) { c.moveTo(sx,sy); wlStarted=true; } else c.lineTo(sx,sy);
   }
   c.stroke();
 
-  // Earth at origin
-  const [ox, oy] = proj(0, 0, 0);
-  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(ox, oy, 9, 0, TAU); c.fill();
-
-  // Crossings count
   const cr = findCrossings(fullPsi);
   const lbl = fullPsi.toFixed(2);
-
-  c.fillStyle = '#EF9F27'; c.font = '17px Georgia'; c.textAlign = 'center';
-  c.fillText('God \u03c8=\u03c0 \u2192 \u221e  (no boundary, no edge)', cx, 22);
-  c.fillStyle = '#5DCAA5';
-  c.fillText('Earth \u03c8=0 = origin', cx, h - 26);
-  c.fillStyle = '#334155'; c.font = '13px monospace';
-  c.fillText('stereographic S\u00b3\u2192R\u00b3 | each ring = full 3D sphere | \u03c8=' + lbl + ' | r\u00b7sin\u03c8=' + Math.sin(fullPsi).toFixed(3) + ' | ' + cr.length + ' crossing' + (cr.length!==1?'s':''), cx, h - 8);
+  c.fillStyle = '#334155'; c.font = '13px monospace'; c.textAlign = 'center';
+  c.fillText('\u03c8=' + lbl + ' | ' + cr.length + ' crossing' + (cr.length!==1?'s':'') + ' | closed, no boundary, no outside', cx, h-8);
 }
 
 
@@ -805,55 +798,9 @@ function onFullPsi(v) {
   const el = gc('fullPsiLbl'); if (el) el.textContent = lbl;
 }
 
-function drawKlein() {
-  const c = CTX['cKlein']; if (!c) return;
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
-  c.clearRect(0, 0, w, h);
-  const rotY = t * 0.28, rotX = 0.38;
-  const scale = Math.min(w, h) * 0.065;
-  const a = 2.2, b = 1.0;
-
-  function klein(u, v) {
-    const cu2 = Math.cos(u/2), su2 = Math.sin(u/2);
-    const R = a + b*cu2*Math.sin(v) - b*su2*Math.sin(2*v);
-    return [R*Math.cos(u), R*Math.sin(u), b*su2*Math.sin(v) + b*cu2*Math.sin(2*v)];
-  }
-
-  function proj(px, py, pz) {
-    const rx = px*Math.cos(rotY) + pz*Math.sin(rotY);
-    const rz = -px*Math.sin(rotY) + pz*Math.cos(rotY);
-    const ry2 = py*Math.cos(rotX) - rz*Math.sin(rotX);
-    const rz2 = py*Math.sin(rotX) + rz*Math.cos(rotX);
-    const persp = 4.5 / (4.5 + rz2*0.28);
-    return [cx + rx*scale*persp, cy - ry2*scale*persp, rz2];
-  }
-
-  const Nu = 36, Nv = 24;
-  const segs = [];
-  for (let iu = 0; iu < Nu; iu++) {
-    const u = iu/Nu*TAU, pts = [];
-    for (let iv = 0; iv <= Nv; iv++) pts.push(proj(...klein(u, iv/Nv*TAU)));
-    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t: 0 });
-  }
-  for (let iv = 0; iv < Nv; iv++) {
-    const v = iv/Nv*TAU, pts = [];
-    for (let iu = 0; iu <= Nu; iu++) pts.push(proj(...klein(iu/Nu*TAU, v)));
-    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t: 1 });
-  }
-  segs.sort((a,b) => a.z - b.z);
-  segs.forEach(seg => {
-    const f = Math.max(0.15, Math.min(0.85, 0.42 + seg.z*0.10));
-    c.strokeStyle = seg.t === 0 ? `rgba(93,202,165,${f.toFixed(2)})` : `rgba(239,159,39,${f.toFixed(2)})`;
-    c.lineWidth = 1;
-    c.beginPath();
-    seg.pts.forEach((p,i) => { if(i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); });
-    c.stroke();
-  });
-}
-
 function loop() {
   t += 0.018;
-  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull(); drawKlein();
+  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull();
   drawSphere(); drawQS3(); drawTriangle();
   requestAnimationFrame(loop);
 }
