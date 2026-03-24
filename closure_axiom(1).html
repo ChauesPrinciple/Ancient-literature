@@ -130,7 +130,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>4. The Ladder — S&#x2070; to S&#x00B3;</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions to the 3-sphere. <strong>S&#x2070;</strong> = two points (Earth and God)&#8202;&#8212;&#8202;the minimal closure, what Baez calls the one-point compactification&#8217;s two poles. <strong>S&#x00B9;</strong> = circle (shows <em>jy&#257;</em>, the Sanskrit &#8220;bowstring&#8221; or sine function from ancient Indian trigonometry). <strong>S&#x00B2;</strong> = ordinary sphere surface&#8202;&#8212;&#8202;Al-B&#299;r&#363;n&#299;&#8217;s domain, where every qibla lives. <strong>S&#x00B3;</strong> = the full structure containing Dante&#8217;s cosmos. Peterson (1979): the geocentric universe forms one hemisphere, the Empyrean forms the other, glued at the Primum Mobile. Each step adds one angular coordinate; each step closes the space further.</p>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions to the 3-sphere. <strong>S&#x2070;</strong> = two points (Satan and God)&#8202;&#8212;&#8202;the minimal closure, what Baez calls the one-point compactification&#8217;s two poles. <strong>S&#x00B9;</strong> = circle (shows <em>jy&#257;</em>, the Sanskrit &#8220;bowstring&#8221; or sine function from ancient Indian trigonometry). <strong>S&#x00B2;</strong> = ordinary sphere surface&#8202;&#8212;&#8202;Al-B&#299;r&#363;n&#299;&#8217;s domain, where every qibla lives. <strong>S&#x00B3;</strong> = the full structure containing Dante&#8217;s cosmos. Peterson (1979): the geocentric universe forms one hemisphere, the Empyrean forms the other, glued at the Primum Mobile. Each step adds one angular coordinate; each step closes the space further.</p>
     <div class="dim-row">
       <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
       <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
@@ -154,15 +154,15 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   </div>
 
   <div class="panel">
-    <h3>6. Dante&#39;s S&#x00B3; &#8212; Canto XXVIII as geometry</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The nine celestial spheres from <em>Paradiso</em> Canto XXVIII (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn, Fixed Stars, Primum Mobile) mapped as slices through S&#x00B3;. Barsella and Vespri (2022) show that the angelic orders reside in the Empyrean and act as both movers and mirrors: their unsatisfied desire for God transforms into kinetic energy that drives the spheres, while they reflect divine light onto creation. Dante describes the cosmos as <em>&#8220;legato con amore in un volume / ci&#242; che per l&#8217;universo si squaderna&#8221;</em> (Par. 33, 86&#8211;87)&#8202;&#8212;&#8202;pages bound into a single book. Each sphere here is one page. Move the slider to see how each sphere corresponds to a different depth &#x03c8;. At &#x03c8;=&#x03c0;/2: the Primum Mobile, the maximum sphere, the equator of S&#x00B3; where physical and spiritual hemispheres meet.</p>
-    <canvas id="cDante" height="220"></canvas>
+    <h3>6. Dante&#39;s S&#x00B3; &#8212; the complete structure</h3>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The complete S&#x00B3; structure of Dante&#8217;s cosmos. <strong>Bottom hemisphere</strong> (&#x03c8;=0 to &#x03c8;=&#x03c0;/2): the physical world. <span style="color:#c83c3c">Hell&#8217;s 9 circles</span> descend from Earth&#8217;s surface toward Satan at the center (&#x03c8;=0), the spheres <em>shrinking</em> as you go down. After passing through Satan, <span style="color:#5DCAA5">Purgatorio&#8217;s 7 terraces</span> ascend back to Earth&#8217;s surface. <strong>Top hemisphere</strong> (&#x03c8;=&#x03c0;/2 to &#x03c8;=&#x03c0;): the spiritual world. <span style="color:#EF9F27">Paradise&#8217;s 9 celestial spheres</span> ascend from the Primum Mobile toward God&#8217;s <em>punto</em> (&#x03c8;=&#x03c0;), shrinking again. Both poles are points; the equator (&#x03c8;=&#x03c0;/2) is the maximum sphere. This is the <strong>inverted geometry</strong>: Hell and Paradise mirror each other across Earth&#8217;s surface, both converging to points. Peterson (1979) and Barsella &amp; Vespri (2022): the geocentric universe forms one hemisphere, the Empyrean the other, glued at the Primum Mobile. Dante: <em>&#8220;legato con amore in un volume / ci&#242; che per l&#8217;universo si squaderna&#8221;</em> (Par. 33, 86&#8211;87).</p>
+    <canvas id="cDante" height="340"></canvas>
     <div class="sl-row" style="margin-top:8px">
       <label>depth &psi;</label>
       <input type="range" id="sDante" min="1" max="99" value="50" oninput="onDante(this.value)">
       <span id="dLbl">&pi;/2</span>
     </div>
-    <div class="info" id="danteInfo">At &psi;=&pi;/2: Primum Mobile, maximum sphere, equator of S&#x00B3;</div>
+    <div class="info" id="danteInfo">At &psi;=&pi;/2: Earth&#8217;s surface. Maximum S&#x00B2;. Hell descends below; Paradise ascends above.</div>
   </div>
 
   <div class="panel">
@@ -272,7 +272,7 @@ const CTX = {};
 function initCanvases() {
   const dpr = window.devicePixelRatio || 2;
   const specs = [
-    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 220], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200], ['cSolids', 260]
+    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 340], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200], ['cSolids', 260]
   ];
   specs.forEach(([id, cssH]) => {
     const cv = gc(id);
@@ -341,11 +341,11 @@ function onDante(v) {
   const lbl = v == 50 ? '&pi;/2' : danteAngle.toFixed(2);
   const dEl = gc('dLbl'); if (dEl) dEl.textContent = lbl;
   let msg = '';
-  if      (v < 8)          msg = '\u03c8 \u2192 0: Earth. Physical cosmos converges to a point.';
-  else if (v > 92)         msg = '\u03c8 \u2192 \u03c0: God (punto). "Seems enclosed by that which it encloses." Antipodal point of S\u00b3.';
-  else if (v > 45 && v<55) msg = '\u03c8=\u03c0/2: Primum Mobile. Maximum sphere. Physical and spiritual hemispheres meet here.';
-  else if (v < 50)         msg = 'Physical hemisphere (\u03c8<\u03c0/2). Spheres expanding from Earth.';
-  else                     msg = 'Spiritual hemisphere (\u03c8>\u03c0/2). Spheres contracting toward God.';
+  if      (v < 8)          msg = '\u03c8 \u2192 0: Satan at Earth\u2019s center. Both hemispheres converge to a point. Florensky: down becomes up.';
+  else if (v > 92)         msg = '\u03c8 \u2192 \u03c0: God (punto). The antipodal point of S\u00b3. The sacred closes.';
+  else if (v > 45 && v<55) msg = '\u03c8=\u03c0/2: Earth\u2019s surface. Maximum S\u00b2. Hell descends below; Paradise ascends above.';
+  else if (v < 50)         msg = 'Physical hemisphere: Hell circles (left, descending) + Purgatorio terraces (right, ascending).';
+  else                     msg = 'Spiritual hemisphere: Paradise\u2019s 9 celestial spheres contracting toward God\u2019s punto.';
   const _e_danteInfo = gc('danteInfo'); if (_e_danteInfo) _e_danteInfo.textContent = msg;
 }
 
@@ -362,7 +362,7 @@ function drawLadder() {
       c.beginPath(); c.arc(px, py, 14, 0, TAU); c.fill();
     });
     c.fillStyle = '#475569'; c.font = '22px Georgia'; c.textAlign = 'center';
-    c.fillText('Earth', cx-100, cy+50); c.fillText('God', cx+100, cy+50);
+    c.fillText('Satan', cx-100, cy+50); c.fillText('God', cx+100, cy+50);
     c.strokeStyle = '#334155'; c.lineWidth = 2; c.setLineDash([8, 6]);
     c.beginPath(); c.moveTo(cx-86, cy); c.lineTo(cx+86, cy); c.stroke();
     c.setLineDash([]);
@@ -418,7 +418,7 @@ function drawLadder() {
     c.beginPath(); c.arc(cx, cy+110, 8, 0, TAU); c.fill();
     c.beginPath(); c.arc(cx, cy-110, 8, 0, TAU); c.fill();
     c.fillStyle = '#475569'; c.font = '18px Georgia'; c.textAlign = 'center';
-    c.fillText('Earth (\u03c8=0)', cx, cy+150);
+    c.fillText('Satan (\u03c8=0)', cx, cy+150);
     c.fillText('God (\u03c8=\u03c0)', cx, cy-130);
   }
 }
@@ -580,36 +580,95 @@ function drawCoord() {
 function drawDante() {
   const c = sizeCanvas('cDante');
   const w = c.canvas.width, h = c.canvas.height, cx = w/2;
-  const y0 = h - 50, y1 = 50;
+  const y0 = h - 36, y1 = 36;
   c.clearRect(0, 0, w, h);
+  function psiToY(ps) { return y0 - (ps / Math.PI) * (y0 - y1); }
+  const maxRx = Math.min(cx * 0.48, 130);
 
-  const labels = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Fixed Stars','Primum Mobile'];
-  const L = 9;
-  for (let i = 0; i < L; i++) {
-    const ps  = i / (L-1) * Math.PI;
-    const ry  = y0 - (i / (L-1)) * (y0 - y1);
-    const rx  = Math.sin(ps) * 120;
-    const cur = Math.abs(ps - danteAngle) < (Math.PI / (L-1)) * 0.7;
-
-    if (cur && rx > 5) {
-      c.fillStyle = 'rgba(239,159,39,0.08)';
-      c.beginPath(); c.ellipse(cx, ry, rx, rx*0.3, 0, 0, TAU); c.fill();
+  // S³ profile outline (sinψ curve — the "lemon" shape)
+  c.strokeStyle = '#1e293b'; c.lineWidth = 1.5;
+  for (let side = -1; side <= 1; side += 2) {
+    c.beginPath();
+    for (let i = 0; i <= 80; i++) {
+      const ps = i / 80 * Math.PI;
+      c.lineTo(cx + side * Math.sin(ps) * maxRx, psiToY(ps));
     }
-    c.strokeStyle = cur ? '#EF9F27' : '#1e2a3a';
-    c.lineWidth   = cur ? 4 : 1.5;
-    c.beginPath(); c.ellipse(cx, ry, rx, rx*0.3, 0, 0, TAU); c.stroke();
-
-    if (rx > 20) {
-      c.fillStyle = '#334155'; c.font = '16px Georgia'; c.textAlign = 'left';
-      c.fillText(labels[i] || '', cx + rx + 8, ry + 6);
-    }
+    c.stroke();
   }
 
-  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(cx, y0, 9, 0, TAU); c.fill();
-  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, y1, 9, 0, TAU); c.fill();
-  c.fillStyle = '#475569'; c.font = '18px Georgia'; c.textAlign = 'center';
-  c.fillText('Earth', cx, y0 + 28);
-  c.fillText('punto / God', cx, y1 - 14);
+  // Background hemisphere zones
+  const ySurf = psiToY(Math.PI / 2);
+  c.fillStyle = 'rgba(139,0,0,0.04)';
+  c.fillRect(cx - maxRx, ySurf, maxRx * 2, y0 - ySurf);
+  c.fillStyle = 'rgba(239,159,39,0.04)';
+  c.fillRect(cx - maxRx, y1, maxRx * 2, ySurf - y1);
+
+  // Earth surface / equator divider
+  c.strokeStyle = 'rgba(93,202,165,0.35)'; c.lineWidth = 1.5; c.setLineDash([5, 4]);
+  c.beginPath(); c.moveTo(cx - maxRx - 8, ySurf); c.lineTo(cx + maxRx + 8, ySurf); c.stroke();
+  c.setLineDash([]);
+
+  // Hell's 9 circles (ψ: π/2 → 0, descending — labels on LEFT)
+  var hellLbl = ['Limbo','Lust','Gluttony','Greed','Anger','Heresy','Violence','Fraud','Treachery'];
+  for (var i = 0; i < 9; i++) {
+    var ps = Math.PI/2 * (1 - (i + 0.5) / 9);
+    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
+    var cur = Math.abs(ps - danteAngle) < Math.PI / 20;
+    c.strokeStyle = cur ? 'rgba(200,60,60,0.8)' : 'rgba(139,0,0,0.15)';
+    c.lineWidth = cur ? 2.5 : 0.8;
+    if (rx > 2) { c.beginPath(); c.ellipse(cx, ry, rx, rx * 0.18, 0, 0, TAU); c.stroke(); }
+    c.fillStyle = cur ? 'rgba(200,60,60,0.95)' : 'rgba(200,60,60,0.3)';
+    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'right';
+    c.fillText(hellLbl[i], cx - Math.max(rx, 6) - 3, ry + 3);
+  }
+
+  // Purgatorio's 7 terraces (ψ: 0 → π/2, ascending — same hemisphere, labels on RIGHT)
+  var purgLbl = ['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'];
+  for (var i = 0; i < 7; i++) {
+    var ps = Math.PI/2 * (i + 0.5) / 7;
+    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
+    var cur = Math.abs(ps - danteAngle) < Math.PI / 16;
+    c.strokeStyle = cur ? 'rgba(93,202,165,0.6)' : 'rgba(93,202,165,0.12)';
+    c.lineWidth = 1;
+    if (rx > 4) { c.beginPath(); c.moveTo(cx + rx - 3, ry); c.lineTo(cx + rx + 3, ry); c.stroke(); }
+    c.fillStyle = cur ? 'rgba(93,202,165,0.9)' : 'rgba(93,202,165,0.3)';
+    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'left';
+    c.fillText(purgLbl[i], cx + Math.max(rx, 6) + 5, ry + 3);
+  }
+
+  // Paradise's 9 celestial spheres (ψ: π/2 → π, ascending — labels on RIGHT)
+  var sphLbl = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'];
+  for (var i = 0; i < 9; i++) {
+    var ps = Math.PI/2 + Math.PI/2 * (i + 0.5) / 9;
+    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
+    var cur = Math.abs(ps - danteAngle) < Math.PI / 20;
+    c.strokeStyle = cur ? 'rgba(239,159,39,0.8)' : 'rgba(239,159,39,0.12)';
+    c.lineWidth = cur ? 2.5 : 0.8;
+    if (rx > 2) { c.beginPath(); c.ellipse(cx, ry, rx, rx * 0.18, 0, 0, TAU); c.stroke(); }
+    c.fillStyle = cur ? 'rgba(239,159,39,0.95)' : 'rgba(239,159,39,0.3)';
+    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'left';
+    c.fillText(sphLbl[i], cx + Math.max(rx, 6) + 5, ry + 3);
+  }
+
+  // Current ψ-slice highlight band
+  var sliceY = psiToY(danteAngle);
+  c.strokeStyle = 'rgba(255,255,255,0.08)'; c.lineWidth = 14;
+  c.beginPath(); c.moveTo(cx - maxRx, sliceY); c.lineTo(cx + maxRx, sliceY); c.stroke();
+
+  // Pole dots
+  c.fillStyle = '#8B1a1a'; c.beginPath(); c.arc(cx, y0, 6, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, y1, 6, 0, TAU); c.fill();
+
+  // Axis labels
+  c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillStyle = '#8B1a1a'; c.fillText('Satan \u03c8=0', cx, y0 + 14);
+  c.fillStyle = '#EF9F27'; c.fillText('God \u03c8=\u03c0', cx, y1 - 8);
+  c.fillStyle = '#5DCAA5'; c.fillText('\u03c8=\u03c0/2 Earth surface', cx, ySurf - 8);
+
+  // Hemisphere labels
+  c.font = '9px monospace';
+  c.fillStyle = 'rgba(139,0,0,0.25)'; c.fillText('PHYSICAL HEMISPHERE', cx, (ySurf + y0) / 2 + 4);
+  c.fillStyle = 'rgba(239,159,39,0.25)'; c.fillText('SPIRITUAL HEMISPHERE', cx, (ySurf + y1) / 2 + 4);
 }
 
 function drawFull() {
@@ -861,7 +920,7 @@ function drawQS3() {
   c.fillStyle='#5DCAA5'; c.beginPath(); c.arc(cx,y0,9,0,TAU); c.fill();
   c.fillStyle='#EF9F27'; c.beginPath(); c.arc(cx,y1,9,0,TAU); c.fill();
   c.fillStyle='#334155'; c.font='18px Georgia'; c.textAlign='center';
-  c.fillText('Earth \u03c8=0',cx,y0+26); c.fillText('God \u03c8=\u03c0',cx,y1-12);
+  c.fillText('Satan \u03c8=0',cx,y0+26); c.fillText('God \u03c8=\u03c0',cx,y1-12);
 }
 
 function drawTriangle() {
