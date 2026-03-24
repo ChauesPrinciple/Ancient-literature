@@ -1,0 +1,70 @@
+
+Digital Dante
+
+    Divine Comedy Dante Course Intertextual Dante Image Sound History Text About Submit 
+
+A Possible “Geometrical” Model for the Cosmology of the Commedia: A Synthesis
+Susanna Barsella and Vincenzo Vespri (2022)
+
+1. The Hypersphere Hypothesis, or Speiser-Peterson Model
+2. What Does the Speiser-Peterson Model Not Explain about Dante’s Cosmology?
+3. Our Hypothesis: a Stereographic Model
+4. How Does it Work?
+
+Traditional representations of Dante’s cosmology do not take into account the role of the angels in connecting the Empyrean and the material heavens in the Divine Comedy. Angels, however, are essential to understand the complex architecture of Dante’s cosmos, for they preside over two fundamental functions: they set and keep in motion the nine heavenly spheres constituting the universe of creation and they are instrumental to the reflection and diffusion of divine light, which, together with celestial movement, initiate the cycle of life in the cosmos. We propose an innovative approach to Dante’s cosmology that takes these fundamental angelic operations into account and proposes its geometrical representation by resorting to a stereographic projection rather than to the traditional notion of the hypersphere, a sphere in a spatial dimension greater than 3. In our hypothesis, we assume that there is an unknowable and unrepresentable infinite reality beyond the reality of creation and which Dante describes. The cosmos Dante constructs is infinite and encompasses all of the heavenly spheres, including the Empyrean, the immaterial seat of the blessed and the angelic choirs where God manifests itself as a luminous point, but it does not coincide with the infinite divine being. Our model takes account of both dimensions of the revealed and unrevealed divine. [1]
+1. The Hypersphere Hypothesis, or Speiser-Peterson Model
+
+In the construction of Dante’s cosmology, there is a geometrical problem. According to this model, it seems that we have two distinct and separate spheres: one containing the heavens and having the earth at its center, and another immaterial sphere, the Empyrean, having the angelic choirs and the luminous point at its center. This separation is not reconciled; it contradicts the idea of continuity of beings in creation and does not reflect Dante’s sophisticated attempt to connect material and immaterial spheres by making the angelic orders both celestial movers and specula of the divine light. The mathematicians Speiser and Peterson resolved this apparent contradiction implicit in the separation of the two spheres by proposing to embed Dante’s geocentric cosmos in four spatial dimensions by means of a procedure that in mathematics is called compactification (i.e. a procedure where by adding a point, called the point at infinity, it is possible to create a closed, compact, and finite geometric figure that originally did not exist).[2] A by-product of compactification is that of adding a dimension to the initial mathematical space: this is the reason the Speiser-Peterson model is in four dimensions, because it uses a mathematical means to connect finite and infinite.[3] The hypothesis originally proposed by Speiser and Paterson, however, presents some issues.
+2. What Does the Speiser-Peterson Model not Explain about Dante’s Cosmology?
+
+There are two major issues with the Speiser-Peterson model. The main one is that the Hypersphere hypothesis does not explain (and does not even address) how the angelic orders move the celestial spheres in the way Dante describes in Paradiso 28. The other issue is that it does not explain Dante’s vision of the angelic choirs as physically placed in concentric circles. The different powers (virtues) of the orders depend on the different degree of vicinity of the angels to the luminous fons in the Empyrean, not on the physical amplitude of their circles. Another problematic element with this model is that in Dante’s time it was still not possible to conceive, in mathematical terms, a space in four dimensions. Compactification is a tool of topology, a branch of mathematics that had its origin only in the 17th century.
+3. Our Hypothesis: a Stereographic Model
+
+Our hypothesis utilizes a stereographic representation of the cosmic space Dante imagined. The stereographic projection, a map that projects a sphere (except the point of projection) onto a plane, was known in Dante’s time and can be described as the shadow you see on a floor when projecting light through a transparent and colored screen, exactly as it happens in a magic lantern.[4] We base our interpretation of Dante’s cosmology on Dante’s own description of the universe as a multitude of “pages” or “sheets” held together in a volume (“legato con amore in un volume / ciò che per l’universo si squaderna” Par. 33, 86-87).[5] Following his poetic intuition, our hypothesis assumes that Dante imagines his cosmos as composed by different layers of space. By placing one layer of space over another, each layer being a three-dimensional “sheet,” Dante creates a four- (and actually multi-) dimensional universe. Similarly, we obtain a three-dimensional object (for example a book) by placing essentially two-dimensional pages one over another. Figure 1 provides a possible representation of such spatial arrangement:
+
+Figure 1
+
+We can imagine three apparently separated “sheets” or infinite planes (hyperplanes): at the top there is represented God’s plane, which is only apparently “flat” for in its infinite dimension it includes all the other “sheets,” but which can be thought of as placed at the top of the other hyperplanes, according to the vision Dante describes as he enters the Primum Mobile (Par. 28, 25-39). Immediately below, we can imagine the plane of the Empyrean, the incorporeal heavenly seat of the angels and the blessed and where God manifests Himself as the luminous point the separate substances contemplate. Finally, at the bottom we can see the plane representing the material space of the heavens, with the earth at its center. The Purgatory, as an intermediate place between the earthly and celestial realms, gives the idea of continuity in this articulated space.
+
+The cylinder visible in the figure represents the space within which the nine angelic orders move, each placed at a different distance from the point in the Empyrean. The orders connect all the different layers since from their position they both move the spheres and enlighten them. Residing properly in the Empyrean, here represented as a hyperplane for visual simplicity but actually encircling all the other planes, the angels are the engine that moves the wheels of creation.
+4. How Does it Work?
+
+Angels reside in the Empyrean, where they enjoy the beatific vision of God. Each order directly contemplates the luminous point with a visual capacity that derives from the grace they received at creation, the additional illuminating grace they received after Lucifer’s defeat (Par. 29, 61-63), and their merit. The angels’ merit depends on their initial openness to receive God’s grace (Par. 29, 64-66). Vision elicits in them the desire to unite with God and this desire, impossible to satisfy, is transformed into the kinetic energy that produces the circular movement of the choirs around the point in the Empyrean (cfr. Purg. 18, 31-33). The different degrees of visual capacity of the orders is physically represented in terms of spatial distance from the point; as a series of nine concentric circles in a two-dimensional space, or as a “cylinder” in our three-dimensional hypothesis. As they move, the angels activate the motion of the heavenly spheres. At the same time, acting as “mirrors,” they reflect upon them the divine light they contemplate. In so doing, they activate the virtues of the heavens in influencing the sublunar world and the cycle of generation and corruption. With these two “passive” operations the angels give origin to time and life in the cosmos. The orders move the heavens according to their different virtues, which derive from their vision in the Empyrean. The highest order, the Seraphs, is thus the most powerful and therefore moves the largest sphere, which is the Primum Mobile; the Cherubs move the heaven of the Fixed Stars and so on, as Beatrice explains in Paradiso 28 (Par. 28, 64-78).
+
+In our hypothesis we aim to explain how this idea of the angelic orders in a “cylinder” corresponds and is compatible with Dante’s vision of the choirs as concentric circles surrounding the point in the Empyrean. Dante sees the choirs from bottom up in the Primum Mobile, when he observes the connection between the single orders of angels and the corresponding sphere each of the nine orders sets in motion. When Dante arrives in the Empyrean, he can see that the angels incessantly move from their circles to swarm in and out of the candid rose, like bees ceaselessly flying from their “ubi” to “pollinate” the blessed with divine light. In the Primum Mobile Dante sees the circles designed by the angelic choirs as concentric because this vision represents what he sees in perspective (like a “scorcio”) like in a stereographic projection (Figure 2).
+
+Figure 2
+
+Taking into account this perspective, we may consider Dante’s vision of the rotating angelic choirs from the Primum Mobile as representable in terms of the stereographic projection of the angelic “cylinder” (Figure 1) on the God hyperplane. Conversely, Dante’s vision of the cosmos from the Empyrean can be represented as the stereographic projection of the heavenly spheres on the hyperplane of the Earth. Figure 3 gives an idea of the resulting image if we represent in two dimensions the two projections together.
+
+Figure 3
+
+Figure 4 shows a representation of the two stereographic perspectives in three dimensions and gives a figurative synthesis of how our model works by illustrating Dante’s vision from above (looking from the Empyrean to the earth) and from below (from the Earth to the Empyrean). In the vision from below (Dante in the Primum Mobile looking upwards to the choirs), the different sheets of the book of the Universe representing the angelic choirs are projected onto the God’s plane. The vision from above (from the Empyrean down to the spheres) corresponds to the projection on the Earth’s plane of the heavenly spheres.
+
+Figure 4
+
+In Figure 4, the angels and the heavens are represented in the same spherical space, collapsing movers and their heavens. As it is possible to see, by using the stereographic projection to represent the machina mundi Dante deploys in the Commedia we are able to take into account its major feature: the pivotal role of the angels in connecting the material and the immaterial dimensions of the cosmos. The angels set in motion the cosmological machine of the Commedia and constitute a fundamental element upon which Dante’s cosmology hinges, an element that the hypersphere model does not – so far – capture.
+
+– Susanna Barsella and Vincenzo Vespri
+
+Acknowledgements: We would like to thank Dr. Arch. Fernando Recalde Leon, who created the images that accompany the article, and Arch. Gioia Barsella for editing them for their English version.
+
+Notes:
+
+[1] For a detailed exposition of the stereographic model here presented, and relative bibliography, see Susanna Barsella and Vincenzo Vespri, “Dante’s Cosmos and the Geometry of Paradise,” Italianistica, L.1 (2021): 239-252.
+
+[2] For more details, see the first 6 minutes of “Chapter 18: Compactification (part 3/3),” videos for the course MTH 427/527 Introduction to General Topology at the University at Buffalo, uploaded by mth309, November 1, 2020, https://youtu.be/Q-KRKTOhyYA. At minute 5 it is shown how to compact the open interval (0,1) in a circle.
+
+[3] To better understand the Speiser-Peterson construction, see the lecture notes of the class “L’immagine del cosmo dal Medio Evo al XXI secolo,” by Marco Bersanelli (December 12, 2009), and the figures on page 9: http://www.diesse.org/cm-files/2010/03/30/terza-lezione-percorsi-didattici-alla-luce-de-la-coscienza.pdf.
+
+[4] A stereographic projection is a map that projects a sphere (except the point of projection) onto a plane. For more details, see “Stereographic projection,” uploaded by Henry Segerman, December 12, 2013, https://youtu.be/VX-0Laeczgk.
+
+[5] For the reconstruction of the mechanics of Dante’s cosmological system we refer to Susanna Barsella, “Dante e la machina mundi. Modelli cosmologici e l’Epistola XIII,” Studi Danteschi, LXXXIV (2019): 205-265, and  “Il moto delle “etterne rote”: la cosmologia dantesca tra la Commedia e l’Epistola XIII a Cangrande della Scala,” in Nuove inchieste sull’Epistola a Cangrande. Atti della giornata di studi. Pisa 18 dicembre 2018, (Pisa: Pisa University Press, 2020), 195-224.
+
+Recommended Citation: Barsella, Susanna, and Vincenzo Vespri. “A Possible “Geometrical” Model for the Cosmology of the Commedia: A Synthesis.” Digital Dante. New York: Columbia University Libraries, 2022. https://digitaldante.columbia.edu/history/barsella-vespri-geometry/
+return to top Return to top
+Digital Dante
+
+    Divine Comedy Dante Course Intertextual Dante Image Sound History Text About Submit 
+
+Published in partnership with Columbia University Libraries
