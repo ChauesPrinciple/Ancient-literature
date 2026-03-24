@@ -143,8 +143,8 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <div class="panel">
     <h3>5. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Dante&#8217;s complete journey mapped against &#x03c8; (vertical axis). <strong>Bottom</strong> (&#x03c8;=0) = Satan at Earth&#8217;s center. <strong>Middle</strong> (&#x03c8;=&#x03c0;/2) = Earth&#8217;s surface. <strong>Top</strong> (&#x03c8;=&#x03c0;) = God. <span style="color:#8B1a1a">Dark red</span> = Hell: 9 circles descending (Virgil guides). <span style="color:#5DCAA5">Teal</span> = Purgatorio: 7 terraces ascending (Virgil guides). <span style="color:#EF9F27">Gold</span> = Paradise: 9 celestial spheres ascending (Beatrice guides). The <em>&#347;ulba s&#363;tras</em> used literal ropes to measure sacred space; Wheeler called any path through spacetime a &#8220;world-line.&#8221; Florensky (1922) identified the critical moment: when Dante passes through Satan&#8217;s body and &#8220;down becomes up,&#8221; this is a <strong>change of sheet on a Riemann surface</strong>&#8202;&#8212;&#8202;the geometrical discontinuity at &#x03c8;=0 where orientation reverses. Leibniz would call this the <em>most determined path</em>: the unique trajectory satisfying all constraints. <strong>Move the slider</strong> to cut a horizontal slice at depth &#x03c8;: the gold dots show where the journey crosses that level.</p>
-    <canvas id="cRope" height="220"></canvas>
+    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Dante&#8217;s complete journey mapped against &#x03c8; (vertical axis). <strong>Bottom</strong> (&#x03c8;=0) = Satan at Earth&#8217;s center. <strong>Middle</strong> (&#x03c8;=&#x03c0;/2) = Earth&#8217;s surface. <strong>Top</strong> (&#x03c8;=&#x03c0;) = God. <span style="color:#8B1a1a">Dark red</span> = Hell: 9 circles descending (Virgil guides). <span style="color:#5DCAA5">Teal</span> = Purgatorio: 7 terraces ascending (Virgil guides). <span style="color:#EF9F27">Gold</span> = Paradise: 9 celestial spheres ascending (Beatrice guides). The <em>&#347;ulba s&#363;tras</em> used literal ropes to measure sacred space; Wheeler called any path through spacetime a &#8220;world-line.&#8221; Florensky (1922) identified the critical moment: when Dante passes through Satan&#8217;s body and &#8220;down becomes up,&#8221; this is a <strong>change of sheet on a Riemann surface</strong>&#8202;&#8212;&#8202;the geometrical discontinuity at &#x03c8;=0 where orientation reverses. Leibniz would call this the <em>most determined path</em>: the unique trajectory satisfying all constraints. <strong>Move the slider</strong> to cut a horizontal slice at depth &#x03c8;: the width of the funnel shows the radius of the S&#x00B2; sphere at that level (sin &#x03c8;). Watch how the space narrows to a point at both poles.</p>
+    <canvas id="cRope" height="320"></canvas>
     <div class="sl-row" style="margin-top:8px">
       <label>slice &psi;</label>
       <input type="range" id="sPsi" min="0" max="100" value="50" oninput="onPsi(this.value)">
@@ -272,7 +272,7 @@ const CTX = {};
 function initCanvases() {
   const dpr = window.devicePixelRatio || 2;
   const specs = [
-    ['cLadder', 220], ['cRope', 220], ['cCoord', 220], ['cDante', 340], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200], ['cSolids', 260]
+    ['cLadder', 220], ['cRope', 320], ['cCoord', 220], ['cDante', 340], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200], ['cSolids', 260]
   ];
   specs.forEach(([id, cssH]) => {
     const cv = gc(id);
@@ -424,112 +424,149 @@ function drawLadder() {
 }
 
 function drawRope() {
-  const c = sizeCanvas('cRope');
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2;
-  const y0 = h - 42, y1 = 28;
+  var c = sizeCanvas('cRope');
+  var w = c.canvas.width, h = c.canvas.height, cx = w/2;
+  var y0 = h - 36, y1 = 28;
   c.clearRect(0, 0, w, h);
   function psiToY(ps) { return y0 - (ps / Math.PI) * (y0 - y1); }
+  var maxW = Math.min(cx * 0.42, 120);
 
-  // Background zones
-  const yHell0 = psiToY(0), yHell1 = psiToY(Math.PI/2);
-  const yPurg1 = psiToY(Math.PI/2);
-  const yPar1  = psiToY(Math.PI);
-  c.fillStyle = 'rgba(139,0,0,0.07)';
-  c.fillRect(0, yHell1, w, yHell0 - yHell1);
-  c.fillStyle = 'rgba(93,202,165,0.06)';
-  c.fillRect(0, yPurg1, w, yHell1 - yPurg1);
-  c.fillStyle = 'rgba(239,159,39,0.06)';
-  c.fillRect(0, yPar1, w, yPurg1 - yPar1);
+  // S\u00b3 profile \u2014 filled silhouette showing the funnel shape
+  // Bottom hemisphere (physical cosmos)
+  c.beginPath(); c.moveTo(cx, psiToY(0));
+  for (var i = 0; i <= 50; i++) { var ps = i/50*Math.PI/2; c.lineTo(cx + Math.sin(ps)*maxW, psiToY(ps)); }
+  for (var i = 50; i >= 0; i--) { var ps = i/50*Math.PI/2; c.lineTo(cx - Math.sin(ps)*maxW, psiToY(ps)); }
+  c.closePath(); c.fillStyle = 'rgba(139,0,0,0.06)'; c.fill();
+  // Top hemisphere (spiritual cosmos)
+  c.beginPath(); c.moveTo(cx, psiToY(Math.PI));
+  for (var i = 0; i <= 50; i++) { var ps = Math.PI/2 + i/50*Math.PI/2; c.lineTo(cx + Math.sin(ps)*maxW, psiToY(ps)); }
+  for (var i = 50; i >= 0; i--) { var ps = Math.PI/2 + i/50*Math.PI/2; c.lineTo(cx - Math.sin(ps)*maxW, psiToY(ps)); }
+  c.closePath(); c.fillStyle = 'rgba(239,159,39,0.06)'; c.fill();
 
-  // Named levels: Hell (left), Purgatorio+Paradise (right)
-  const hellLvls = ['1 Limbo','2 Lust','3 Gluttony','4 Greed','5 Anger','6 Heresy','7 Violence','8 Fraud','9 Treachery/Satan'];
-  for (let i = 0; i < 9; i++) {
-    const ps = Math.PI/2 * (1 - (i + 0.5) / 9);
-    const sy = psiToY(ps);
-    c.strokeStyle = 'rgba(139,0,0,0.18)'; c.lineWidth = 1;
-    c.beginPath(); c.moveTo(4, sy); c.lineTo(cx - 16, sy); c.stroke();
-    c.fillStyle = 'rgba(200,60,60,0.65)'; c.font = '10px monospace'; c.textAlign = 'right';
-    c.fillText(hellLvls[i], cx - 20, sy + 3);
-  }
-  const purgLvls = ['1 Pride','2 Envy','3 Wrath','4 Sloth','5 Avarice','6 Gluttony','7 Lust'];
-  for (let i = 0; i < 7; i++) {
-    const ps = Math.PI/2 * (i + 0.5) / 7;
-    const sy = psiToY(ps);
-    c.strokeStyle = 'rgba(93,202,165,0.18)'; c.lineWidth = 1;
-    c.beginPath(); c.moveTo(cx + 16, sy); c.lineTo(w - 4, sy); c.stroke();
-    c.fillStyle = 'rgba(93,202,165,0.75)'; c.font = '10px monospace'; c.textAlign = 'left';
-    c.fillText(purgLvls[i], cx + 20, sy + 3);
-  }
-  const sphLvls = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Fixed Stars','Primum Mobile'];
-  for (let i = 0; i < 9; i++) {
-    const ps = Math.PI/2 + Math.PI/2 * (i + 0.5) / 9;
-    const sy = psiToY(ps);
-    c.strokeStyle = 'rgba(239,159,39,0.18)'; c.lineWidth = 1;
-    c.beginPath(); c.moveTo(cx + 16, sy); c.lineTo(w - 4, sy); c.stroke();
-    c.fillStyle = 'rgba(239,159,39,0.75)'; c.font = '10px monospace'; c.textAlign = 'left';
-    c.fillText(sphLvls[i], cx + 20, sy + 3);
-  }
-
-  // Earth-surface divider
-  const ySurf = psiToY(Math.PI/2);
-  c.strokeStyle = 'rgba(255,255,255,0.15)'; c.lineWidth = 1.5; c.setLineDash([4,3]);
-  c.beginPath(); c.moveTo(0, ySurf); c.lineTo(w, ySurf); c.stroke();
-  c.setLineDash([]);
-
-  // Guide labels — Hell VIRGIL on left, Purgatorio VIRGIL on right, BEATRICE on right
-  c.font = 'bold 10px monospace';
-  c.fillStyle = 'rgba(200,60,60,0.6)'; c.textAlign = 'right';
-  c.fillText('VIRGIL', cx - 20, psiToY(Math.PI/4) + 3);
-  c.fillStyle = 'rgba(93,202,165,0.7)'; c.textAlign = 'left';
-  c.fillText('VIRGIL', cx + 20, psiToY(Math.PI/4) + 3);
-  c.fillStyle = 'rgba(239,159,39,0.7)'; c.textAlign = 'left';
-  c.fillText('BEATRICE', cx + 20, psiToY(Math.PI * 3/4));
-
-  // Draw the three phases of the journey
-  const phases = [
-    { start: 0,           end: Math.PI,     color: '#8B1a1a', lw: 2.5 }, // Hell
-    { start: Math.PI,     end: 2*Math.PI,   color: '#5DCAA5', lw: 2.5 }, // Purgatorio
-    { start: 2*Math.PI,   end: 3*Math.PI,   color: '#EF9F27', lw: 2.5 }  // Paradise
-  ];
-  phases.forEach(ph => {
-    const n = 200;
-    c.strokeStyle = ph.color; c.lineWidth = ph.lw;
+  // Profile outline
+  c.strokeStyle = 'rgba(30,41,59,0.45)'; c.lineWidth = 1;
+  for (var side = -1; side <= 1; side += 2) {
     c.beginPath();
-    for (let i = 0; i <= n; i++) {
-      const tt = ph.start + i/n * (ph.end - ph.start);
-      const kp = knotPoint(tt);
-      const sx = cx + kp.x * 110, sy = psiToY(kp.psi);
-      if (i === 0) c.moveTo(sx, sy); else c.lineTo(sx, sy);
-    }
+    for (var i = 0; i <= 80; i++) { var ps = i/80*Math.PI; c.lineTo(cx + side*Math.sin(ps)*maxW, psiToY(ps)); }
     c.stroke();
-  });
+  }
 
-  // Slice line
-  const sliceY = psiToY(psi);
-  c.strokeStyle = 'rgba(239,159,39,0.2)'; c.lineWidth = 22;
+  // Earth surface divider
+  var ySurf = psiToY(Math.PI/2);
+  c.strokeStyle = 'rgba(93,202,165,0.4)'; c.lineWidth = 1.5; c.setLineDash([5,4]);
+  c.beginPath(); c.moveTo(12, ySurf); c.lineTo(w-12, ySurf); c.stroke(); c.setLineDash([]);
+
+  // Arrow helper: triangle at (x,y), dir=1 means up, dir=-1 means down
+  function arrow(x, y, dir, color) {
+    c.fillStyle = color; c.beginPath();
+    c.moveTo(x-5, y + dir*6); c.lineTo(x, y - dir*6); c.lineTo(x+5, y + dir*6);
+    c.closePath(); c.fill();
+  }
+
+  // \u2014\u2014\u2014 JOURNEY PATH WITH ARROWS \u2014\u2014\u2014
+  var jOff = 8; // inset from profile edge
+
+  // Phase 1: HELL DESCENT \u2014 left edge of funnel, \u03c8=\u03c0/2 \u2192 0, going DOWN
+  c.strokeStyle = '#c83c3c'; c.lineWidth = 3.5;
+  c.beginPath();
+  for (var i = 0; i <= 40; i++) {
+    var ps = Math.PI/2*(1-i/40), x = cx - Math.sin(ps)*maxW + jOff;
+    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
+  }
+  c.stroke();
+  for (var n = 1; n <= 4; n++) { var ps = Math.PI/2*(1-n/5); arrow(cx-Math.sin(ps)*maxW+jOff, psiToY(ps), -1, '#c83c3c'); }
+
+  // Inversion arc at Satan: left \u2192 right (the flip)
+  var satanY = psiToY(0);
+  c.strokeStyle = 'rgba(200,60,60,0.5)'; c.lineWidth = 2;
+  c.beginPath(); c.arc(cx, satanY, 16, Math.PI, 0); c.stroke();
+  arrow(cx+16, satanY-3, 1, 'rgba(93,202,165,0.7)');
+
+  // Phase 2: PURGATORIO ASCENT \u2014 right edge, \u03c8=0 \u2192 \u03c0/2, going UP
+  c.strokeStyle = '#5DCAA5'; c.lineWidth = 3.5;
+  c.beginPath();
+  for (var i = 0; i <= 40; i++) {
+    var ps = Math.PI/2*i/40, x = cx + Math.sin(ps)*maxW - jOff;
+    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
+  }
+  c.stroke();
+  for (var n = 1; n <= 3; n++) { var ps = Math.PI/2*n/4; arrow(cx+Math.sin(ps)*maxW-jOff, psiToY(ps), 1, '#5DCAA5'); }
+
+  // Phase 3: PARADISE ASCENT \u2014 right edge, \u03c8=\u03c0/2 \u2192 \u03c0, going UP
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 3.5;
+  c.beginPath();
+  for (var i = 0; i <= 40; i++) {
+    var ps = Math.PI/2 + Math.PI/2*i/40, x = cx + Math.sin(ps)*maxW - jOff;
+    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
+  }
+  c.stroke();
+  for (var n = 1; n <= 4; n++) { var ps = Math.PI/2 + Math.PI/2*n/5; arrow(cx+Math.sin(ps)*maxW-jOff, psiToY(ps), 1, '#EF9F27'); }
+
+  // Level labels: Hell (left of profile), Purgatorio+Paradise (right of profile)
+  var hellLbl = ['Limbo','Lust','Gluttony','Greed','Anger','Heresy','Violence','Fraud','Treachery'];
+  for (var i = 0; i < 9; i++) {
+    var ps = Math.PI/2*(1-(i+0.5)/9), sy = psiToY(ps), lx = cx - Math.sin(ps)*maxW;
+    c.fillStyle = 'rgba(200,60,60,0.45)'; c.font = '9px monospace'; c.textAlign = 'right';
+    c.fillText(hellLbl[i], lx - 6, sy + 3);
+  }
+  var purgLbl = ['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'];
+  for (var i = 0; i < 7; i++) {
+    var ps = Math.PI/2*(i+0.5)/7, sy = psiToY(ps), rx = cx + Math.sin(ps)*maxW;
+    c.fillStyle = 'rgba(93,202,165,0.5)'; c.font = '9px monospace'; c.textAlign = 'left';
+    c.fillText(purgLbl[i], rx + 8, sy + 3);
+  }
+  var sphLbl = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'];
+  for (var i = 0; i < 9; i++) {
+    var ps = Math.PI/2 + Math.PI/2*(i+0.5)/9, sy = psiToY(ps), rx = cx + Math.sin(ps)*maxW;
+    c.fillStyle = 'rgba(239,159,39,0.5)'; c.font = '9px monospace'; c.textAlign = 'left';
+    c.fillText(sphLbl[i], rx + 8, sy + 3);
+  }
+
+  // Guide labels
+  c.font = 'bold 10px monospace';
+  c.fillStyle = 'rgba(200,60,60,0.5)'; c.textAlign = 'right';
+  c.fillText('VIRGIL', cx - maxW*0.7 - 4, (ySurf+satanY)/2 - 10);
+  c.fillStyle = 'rgba(93,202,165,0.5)'; c.textAlign = 'left';
+  c.fillText('VIRGIL', cx + maxW*0.7 + 4, (ySurf+satanY)/2 - 10);
+  c.fillStyle = 'rgba(239,159,39,0.5)'; c.textAlign = 'left';
+  c.fillText('BEATRICE', cx + maxW*0.7 + 4, (ySurf+psiToY(Math.PI))/2);
+
+  // Phase direction labels
+  c.font = 'bold 11px monospace';
+  c.fillStyle = 'rgba(200,60,60,0.4)'; c.textAlign = 'center';
+  c.fillText('\u2193 DESCENT', cx - maxW*0.55, (ySurf+satanY)/2 + 6);
+  c.fillStyle = 'rgba(93,202,165,0.4)';
+  c.fillText('\u2191 ASCENT', cx + maxW*0.55, (ySurf+satanY)/2 + 6);
+  c.fillStyle = 'rgba(239,159,39,0.4)';
+  c.fillText('\u2191 ASCENT', cx + maxW*0.55, (ySurf+psiToY(Math.PI))/2 + 6);
+
+  // \u03c8 slice indicator
+  var sliceY = psiToY(psi);
+  c.strokeStyle = 'rgba(239,159,39,0.12)'; c.lineWidth = 16;
   c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke();
   c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5; c.setLineDash([5,4]);
-  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke();
-  c.setLineDash([]);
+  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke(); c.setLineDash([]);
+  // Show sphere width at this slice
+  var sliceR = Math.sin(psi)*maxW;
+  if (sliceR > 4) {
+    c.strokeStyle = 'rgba(239,159,39,0.35)'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(cx-sliceR, sliceY); c.lineTo(cx+sliceR, sliceY); c.stroke();
+  }
 
-  // Crossings
-  const cr = findCrossings(psi);
-  cr.forEach(p => {
-    const sx = cx + p.x * 110;
-    c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(sx, sliceY, 8, 0, TAU); c.fill();
-    c.strokeStyle = '#020617'; c.lineWidth = 2;
-    c.beginPath(); c.moveTo(sx-5,sliceY); c.lineTo(sx+5,sliceY); c.moveTo(sx,sliceY-5); c.lineTo(sx,sliceY+5); c.stroke();
-  });
+  // Poles
+  c.fillStyle = '#8B1a1a'; c.beginPath(); c.arc(cx, satanY, 7, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, psiToY(Math.PI), 7, 0, TAU); c.fill();
+  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(cx, ySurf, 5, 0, TAU); c.fill();
 
-  // Axis labels
-  c.fillStyle = '#EF9F27'; c.font = '12px monospace'; c.textAlign = 'center';
-  c.fillText('God \u03c8=\u03c0', cx, y1 - 8);
-  c.fillStyle = '#5DCAA5';
-  c.fillText('Earth surface \u03c8=\u03c0/2', cx, ySurf - 6);
-  c.fillStyle = '#8B1a1a';
-  c.fillText('Satan \u03c8=0', cx, y0 + 18);
-  c.fillStyle = '#334155'; c.font = '12px monospace';
-  c.fillText('\u03c8=' + psi.toFixed(2) + '  |  ' + cr.length + ' crossing' + (cr.length!==1?'s':''), cx, h - 4);
+  // Pole labels
+  c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillStyle = '#8B1a1a'; c.fillText('Satan \u03c8=0', cx, satanY + 16);
+  c.fillStyle = '#EF9F27'; c.fillText('God \u03c8=\u03c0', cx, psiToY(Math.PI) - 10);
+  c.fillStyle = '#5DCAA5'; c.fillText('Earth \u03c8=\u03c0/2', cx, ySurf - 8);
+
+  // Info line
+  c.fillStyle = '#334155'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText('\u03c8=' + psi.toFixed(2) + '  |  sphere radius sin\u03c8 = ' + Math.sin(psi).toFixed(3), cx, h - 4);
 }
 
 function drawCoord() {
@@ -669,6 +706,33 @@ function drawDante() {
   c.font = '9px monospace';
   c.fillStyle = 'rgba(139,0,0,0.25)'; c.fillText('PHYSICAL HEMISPHERE', cx, (ySurf + y0) / 2 + 4);
   c.fillStyle = 'rgba(239,159,39,0.25)'; c.fillText('SPIRITUAL HEMISPHERE', cx, (ySurf + y1) / 2 + 4);
+
+  // Journey arrows showing direction of travel
+  function danteArrow(x, y, dir, color) {
+    c.fillStyle = color; c.beginPath();
+    c.moveTo(x-4, y+dir*5); c.lineTo(x, y-dir*5); c.lineTo(x+4, y+dir*5);
+    c.closePath(); c.fill();
+  }
+  // Hell descent arrows (left side, pointing DOWN)
+  for (var a = 1; a <= 3; a++) {
+    var ps = Math.PI/2*(1-a/4), ax = cx - Math.sin(ps)*maxRx - 12;
+    danteArrow(ax, psiToY(ps), -1, 'rgba(200,60,60,0.5)');
+  }
+  // Purgatorio ascent arrows (right side, pointing UP)
+  for (var a = 1; a <= 2; a++) {
+    var ps = Math.PI/2*a/3, ax = cx + Math.sin(ps)*maxRx + 14;
+    danteArrow(ax, psiToY(ps), 1, 'rgba(93,202,165,0.5)');
+  }
+  // Paradise ascent arrows (right side, pointing UP)
+  for (var a = 1; a <= 3; a++) {
+    var ps = Math.PI/2 + Math.PI/2*a/4, ax = cx + Math.sin(ps)*maxRx + 14;
+    danteArrow(ax, psiToY(ps), 1, 'rgba(239,159,39,0.5)');
+  }
+  // Inversion arc at Satan
+  c.strokeStyle = 'rgba(200,60,60,0.35)'; c.lineWidth = 1.5;
+  c.beginPath(); c.arc(cx, y0, 12, Math.PI, 0); c.stroke();
+  c.font = '9px monospace'; c.fillStyle = 'rgba(200,60,60,0.5)'; c.textAlign = 'center';
+  c.fillText('\u21bb inversion', cx, y0 + 26);
 }
 
 function drawFull() {
@@ -730,19 +794,22 @@ function drawFull() {
     c.stroke();
   });
 
-  // Dante's world-line threading through Klein bottle coordinates
+  // Dante's world-line threading through Klein bottle — color-coded by phase
   const N = 320, range = Math.PI * 8;
-  c.strokeStyle = 'rgba(239,159,39,0.7)'; c.lineWidth = 2;
-  c.beginPath();
-  let wlStarted = false;
-  for (let i = 0; i <= N; i++) {
-    const tt = i / N * range;
-    const kp = knotPoint(tt);
-    const [kx,ky,kz] = klein(kp.psi, tt*0.9 + kp.x*3);
-    const [sx,sy] = proj(kx, ky, kz);
-    if (!wlStarted) { c.moveTo(sx,sy); wlStarted=true; } else c.lineTo(sx,sy);
+  const phaseColors = ['rgba(200,60,60,0.7)', 'rgba(93,202,165,0.7)', 'rgba(239,159,39,0.7)'];
+  for (let ph = 0; ph < 3; ph++) {
+    const pStart = ph * Math.PI, pEnd = (ph+1) * Math.PI;
+    c.strokeStyle = phaseColors[ph]; c.lineWidth = 2.5;
+    c.beginPath(); let started = false;
+    for (let i = 0; i <= Math.floor(N/3); i++) {
+      const tt = pStart + i / Math.floor(N/3) * (pEnd - pStart);
+      const kp = knotPoint(tt);
+      const [kx,ky,kz] = klein(kp.psi, tt*0.9 + kp.x*3);
+      const [sx,sy] = proj(kx, ky, kz);
+      if (!started) { c.moveTo(sx,sy); started=true; } else c.lineTo(sx,sy);
+    }
+    c.stroke();
   }
-  c.stroke();
 
   const cr = findCrossings(fullPsi);
   const lbl = fullPsi.toFixed(2);
