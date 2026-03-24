@@ -48,7 +48,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <h2>The Thesis</h2>
 <p>Three civilizations, across two millennia, arrived at the same geometric structure: a finite space with no boundary and no outside. The <em>&#347;ulba s&#363;tras</em> (Vedic India, 800&#8211;500 BCE) used ropes stretched across fire altars to prove the Pythagorean theorem&#8202;&#8212;&#8202;centuries before Pythagoras. Al-B&#299;r&#363;n&#299; (Islamic Persia, 973&#8211;1048 CE) extended flat geometry to the sphere, calculating the <em>qibla</em> (direction of Mecca) using spherical trigonometry on S&#x00B2;. Dante Alighieri (1265&#8211;1321 CE) encoded this same geometry into the <em>Divine Comedy</em>, where Earth and God are antipodal points on a 3-sphere (S&#x00B3;)&#8202;&#8212;&#8202;finite, closed, with no outside.</p>
 
-<p>This page makes that convergence visible. Each panel builds from the triangle through the circle, sphere, and 3-sphere, following the mathematics as it develops historically and dimensionally.</p>
+<p>This page makes that convergence visible. Beginning with Plato&#8217;s cosmic geometry, each panel builds from the Platonic solids through the triangle, circle, sphere, and 3-sphere, following the mathematics as it develops historically and dimensionally.</p>
 
 <h2>The Geometry of Paradiso</h2>
 <p>In 1979, the physicist Mark Peterson demonstrated that Dante&#8217;s cosmos&#8202;&#8212;&#8202;as described in <em>Paradiso</em> Canto XXVIII&#8202;&#8212;&#8202;is a 3-sphere. The geocentric universe (Earth to Primum Mobile) forms one hemisphere; the Empyrean (angelic spheres contracting toward God&#8217;s luminous point) forms the other. They are glued at the equator of the Primum Mobile. Peterson&#8217;s conclusion: <em>&#8220;If this passage is not taken as a description of the organization of 2-spheres into a 3-sphere, then it is hard to see what the point of it is.&#8221;</em> Dante himself believed he was expressing something entirely new.</p>
@@ -66,7 +66,21 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 </div>
 
 <div class="panel-full" style="margin-bottom:12px">
-  <h3>1. The Sacred Triangle &#8212; Foundation of Sacred Geometry</h3>
+  <h3>1. The Five Closures &#8212; Platonic Solids</h3>
+  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Only five convex regular polyhedra exist. The constraint (r&#8722;2)(n&#8722;2) &lt; 4, where n is the polygon&#8217;s sides and r is the number meeting at each vertex, admits exactly five solutions. This is a <strong>closure argument</strong> analogous to the S&#x00B3; boundary argument: only these five configurations close properly into a convex solid. Plato&#8217;s <em>Timaeus</em> (c. 360 BCE) assigned each to an element&#8202;&#8212;&#8202;fire, earth, air, water&#8202;&#8212;&#8202;and reserved the dodecahedron for the cosmos itself: <em>&#8220;God used it up for the Universe in his decoration thereof.&#8221;</em> Euler&#8217;s formula V&#8722;E+F = 2 holds for all five: the topological signature of a closed surface. Kepler (1596) nested all five between the planetary orbits in his <em>Mysterium Cosmographicum</em>, seeking the same divine geometry Dante encoded in S&#x00B3;.</p>
+  <div class="dim-row">
+    <button class="db on" id="stetra" onclick="setSolid(0)">Tetra</button>
+    <button class="db" id="scube" onclick="setSolid(1)">Cube</button>
+    <button class="db" id="socta" onclick="setSolid(2)">Octa</button>
+    <button class="db" id="sdodeca" onclick="setSolid(3)">Dodeca</button>
+    <button class="db" id="sicosa" onclick="setSolid(4)">Icosa</button>
+  </div>
+  <canvas id="cSolids" height="260"></canvas>
+  <div class="eq" id="solidInfo"><b>{3,3} Tetrahedron</b> &#8212; 4 faces, 4 vertices, 6 edges<br>Plato&#8217;s element: <b>Fire</b><br>V&#8722;E+F = 4&#8722;6+4 = <b>2</b> (Euler&#8217;s formula: the topological signature of closure)</div>
+</div>
+
+<div class="panel-full" style="margin-top:12px">
+  <h3>2. The Sacred Triangle &#8212; Foundation of Sacred Geometry</h3>
   <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The spherical triangle formed by three great-circle arcs: North Pole, Observer, and Mecca. The <em>&#347;ulba s&#363;tras</em> (Vedic, 800&#8211;500 BCE) established the right triangle as the basis of sacred construction&#8202;&#8212;&#8202;the Pythagorean theorem appears in these texts centuries before Greece. Al-B&#299;r&#363;n&#299; (1000 CE) extended the triangle to the curved surface of the sphere to solve the <em>qibla</em>. <strong>The triangle is the atom of all that follows.</strong> As Barsella and Vespri (2022) demonstrated, stereographic projection&#8202;&#8212;&#8202;the map that projects a sphere onto a plane&#8202;&#8212;&#8202;was known in Dante&#8217;s time via the principle of the magic lantern. This is not anachronistic mathematics; it is the geometry Dante&#8217;s world already possessed. Adjust observer position in the Qibla panel below to see this triangle change live.</p>
   <canvas id="cTriangle" height="200"></canvas>
   <div class="eq" id="eqTriangle" style="margin-top:8px">
@@ -75,8 +89,8 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 </div>
 
 <div class="panel-full" style="margin-top:12px">
-  <h3>2. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-B&#299;r&#363;n&#299; (973&#8211;1048 CE) used spherical trigonometry to calculate this direction from any point on Earth&#8202;&#8212;&#8202;the same triangle drawn in panel 1 above, applied to the curved surface of S&#x00B2;. The qibla geodesic is the <strong>shortest path on a curved surface</strong>&#8202;&#8212;&#8202;the same principle that, centuries later, Ibn al-Haytham, Fermat, and Leibniz would generalize into the variational tradition: light follows the path of least time, matter follows the path of stationary action. The geodesic is where sacred geometry becomes physics. <strong>Left:</strong> Qibla on Earth&#8217;s surface. <strong>Right:</strong> That same geometry on any S&#x00B2; slice of S&#x00B3;. Adjust lat/lon to change the triangle above live.</p>
+  <h3>3. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
+  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-B&#299;r&#363;n&#299; (973&#8211;1048 CE) used spherical trigonometry to calculate this direction from any point on Earth&#8202;&#8212;&#8202;the same triangle drawn in panel 2 above, applied to the curved surface of S&#x00B2;. The qibla geodesic is the <strong>shortest path on a curved surface</strong>&#8202;&#8212;&#8202;the same principle that, centuries later, Ibn al-Haytham, Fermat, and Leibniz would generalize into the variational tradition: light follows the path of least time, matter follows the path of stationary action. The geodesic is where sacred geometry becomes physics. <strong>Left:</strong> Qibla on Earth&#8217;s surface. <strong>Right:</strong> That same geometry on any S&#x00B2; slice of S&#x00B3;. Adjust lat/lon to change the triangle above live.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
       <canvas id="cSphere" height="240"></canvas>
@@ -110,20 +124,6 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
     Spherical law of sines on the triangle: North Pole &#x2013; Observer &#x2013; Mecca.<br>
     The qibla bearing Q is invariant under change of &#x03c8; &#x2014; angle is preserved on every S&#x00B2; slice. What changes is r&#x00b7;sin&#x03c8;. At &#x03c8;&#x2192;0 or &#x03c8;&#x2192;&#x03c0; the sphere collapses: <b>you are at the punto.</b>
   </div>
-</div>
-
-<div class="panel-full" style="margin-top:12px">
-  <h3>3. The Five Closures &#8212; Platonic Solids</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Only five convex regular polyhedra exist. The constraint (r&#8722;2)(n&#8722;2) &lt; 4, where n is the polygon&#8217;s sides and r is the number meeting at each vertex, admits exactly five solutions. This is a <strong>closure argument</strong> analogous to the S&#x00B3; boundary argument: only these five configurations close properly into a convex solid. Plato&#8217;s <em>Timaeus</em> (c. 360 BCE) assigned each to an element&#8202;&#8212;&#8202;fire, earth, air, water&#8202;&#8212;&#8202;and reserved the dodecahedron for the cosmos itself: <em>&#8220;God used it up for the Universe in his decoration thereof.&#8221;</em> Euler&#8217;s formula V&#8722;E+F = 2 holds for all five: the topological signature of a closed surface. Kepler (1596) nested all five between the planetary orbits in his <em>Mysterium Cosmographicum</em>, seeking the same divine geometry Dante encoded in S&#x00B3;.</p>
-  <div class="dim-row">
-    <button class="db on" id="stetra" onclick="setSolid(0)">Tetra</button>
-    <button class="db" id="scube" onclick="setSolid(1)">Cube</button>
-    <button class="db" id="socta" onclick="setSolid(2)">Octa</button>
-    <button class="db" id="sdodeca" onclick="setSolid(3)">Dodeca</button>
-    <button class="db" id="sicosa" onclick="setSolid(4)">Icosa</button>
-  </div>
-  <canvas id="cSolids" height="260"></canvas>
-  <div class="eq" id="solidInfo"><b>{3,3} Tetrahedron</b> &#8212; 4 faces, 4 vertices, 6 edges<br>Plato&#8217;s element: <b>Fire</b><br>V&#8722;E+F = 4&#8722;6+4 = <b>2</b> (Euler&#8217;s formula: the topological signature of closure)</div>
 </div>
 
 <div class="wrap">
