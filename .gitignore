@@ -8,3 +8,9 @@ terms2_extracted/
 text_summary_extracted/ 
 video_supp_extracted/ 
 *dump*.txt
+backups/
+.windsurf/
+.windsurfignore
+fix_structure.ps1
+source_citation_extracted/
+supp_oer_extracted/

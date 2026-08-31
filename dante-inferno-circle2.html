@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Architecture of Sin: Hell's Funnel &amp; The Circle of Lust</title>
+    <meta name="description" content="The Architecture of Sin: Hell's Funnel &amp;amp; The Circle of Lust. Part of ENGL-2310 Early World Literature, an online anthology of ancient and medieval texts by Professor Robert Ladd.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #080810;
-            --bg-panel: #10101c;
-            --bg-panel-alt: #0c0c18;
+            --bg-deep: #1a0000;
+            --bg-panel: #2e0808;
+            --bg-panel-alt: #220404;
             --text-primary: #e8e0d0;
             --text-muted: #9a9080;
             --gold: #c5a028;
@@ -25,26 +27,35 @@
             color: var(--text-primary);
             font-family: 'Libre Baskerville', Georgia, serif;
             line-height: 1.75;
+            display: flex; flex-direction: column;
         }
+        /* ── SECTION ORDER: Funnel appears before Circle II ── */
+        .top-nav          { order: 1; }
+        .hero             { order: 2; }
+        .funnel-section      { order: 3; }
+        .four-levels-section { order: 4; }
+        .circle2-section     { order: 5; }
+        .page-footer      { order: 6; }
+        .type-section     { display: none; }
 
         /* ── NAV ── */
         .top-nav {
-            background: rgba(8,8,16,0.97);
-            border-bottom: 1px solid #2a2a3a;
+            background: rgba(20,2,2,0.97);
+            border-bottom: 1px solid #3a1515;
             padding: 1rem 2rem;
             position: sticky; top: 0; z-index: 100;
             display: flex; align-items: center; gap: 1rem;
         }
         .nav-back { color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.82rem; letter-spacing: 0.12em; opacity: 0.8; transition: opacity 0.2s; }
         .nav-back:hover { opacity: 1; }
-        .nav-sep { color: #3a3a50; }
+        .nav-sep { color: #4a2020; }
         .nav-current { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--amber); letter-spacing: 0.05em; }
 
         /* ── HERO ── */
         .hero {
             text-align: center; padding: 6rem 2rem 4rem;
-            background: radial-gradient(ellipse at 50% 0%, #1a0800 0%, var(--bg-deep) 65%);
-            border-bottom: 1px solid #2a1a0a;
+            background: radial-gradient(ellipse at 50% 0%, #3a0000 0%, var(--bg-deep) 65%);
+            border-bottom: 1px solid #3a1a0a;
             position: relative; overflow: hidden;
         }
         .hero::before {
@@ -66,10 +77,10 @@
         p:last-child { margin-bottom: 0; }
 
         /* ── GEOMETRY INTRO ── */
-        .geometry-section { padding: 4rem 2rem; background: var(--bg-panel); border-bottom: 1px solid #1a1a2a; }
+        .geometry-section { padding: 4rem 2rem; background: var(--bg-panel); border-bottom: 1px solid #2a0a0a; }
         .geometry-inner { max-width: 960px; margin: 0 auto; }
         .geometry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-        .geo-card { background: #080810; border: 1px solid #2a2a3a; border-top: 3px solid; padding: 1.5rem; }
+        .geo-card { background: #100202; border: 1px solid #3a1515; border-top: 3px solid; padding: 1.5rem; }
         .geo-card.linear { border-top-color: #5a7a9a; }
         .geo-card.circular { border-top-color: var(--gold); }
         .geo-card.spiral { border-top-color: var(--amber); }
@@ -78,57 +89,128 @@
         .geo-glyph { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
 
         /* ── FUNNEL ── */
-        .funnel-section { padding: 4rem 2rem; background: var(--bg-deep); border-bottom: 1px solid #1a1a2a; }
-        .funnel-inner { max-width: 820px; margin: 0 auto; }
-        .funnel-inner svg { width: 100%; height: auto; display: block; }
+        .funnel-section { 
+            padding: 0; 
+            background: var(--bg-deep); 
+            border-bottom: 1px solid #2a0808;
+            height: 500vh;
+            position: relative;
+        }
+        .funnel-inner { 
+            max-width: 100%; 
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+        .funnel-svg-col {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            perspective: 2000px;
+        }
+        .funnel-svg-col svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: rotateX(4deg) scale(1.02);
+            transform-origin: top center;
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+        }
+
+        .poem-col {
+            background: linear-gradient(180deg, #1e0202 0%, #160101 50%, #1a0202 100%);
+            border-left: 1px solid rgba(197,160,40,0.2);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 2px 0 20px rgba(0,0,0,0.5);
+        }
+        .poem-scroll-track {
+            padding: 3.5rem 2.5rem 4rem;
+            will-change: transform;
+        }
+        .poem-col-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.45em;
+            color: var(--amber);
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .poem-col h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+        .poem-col-translator {
+            font-size: 0.72rem;
+            color: #4a2020;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            display: block;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(197,160,40,0.12);
+        }
+        .poem-block {
+            margin-bottom: 5rem;
+        }
+        .verse-num {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.3em;
+            color: rgba(212, 130, 26, 0.5);
+            margin-bottom: 0.65rem;
+        }
+        .poem-block p {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 2.05;
+            color: #d0c9b8;
+            margin: 0;
+        }
+        .poem-ellipsis {
+            text-align: center;
+            color: rgba(197,160,40,0.3);
+            font-size: 1rem;
+            letter-spacing: 0.7em;
+            margin: 0.5rem 0 2.25rem;
+        }
+
 
         /* SVG hover / active states */
         .circle-band { cursor: pointer; transition: filter 0.15s; }
         .circle-band:hover { filter: brightness(1.4); }
         .circle-band.active-band { filter: brightness(1.6); }
 
-        /* ── CIRCLE DETAIL PANEL ── */
-        #circle-detail {
-            margin-top: 2rem;
-            background: #0d0d18;
-            border: 1px solid #2a2a3a;
-            border-radius: 6px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-        #circle-detail.visible { opacity: 1; transform: translateY(0); }
-        .detail-header {
-            padding: 1rem 1.5rem;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
-            border-bottom: 1px solid #1a1a2a;
-        }
-        .detail-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--text-primary); }
-        .detail-badge { font-size: 0.72rem; color: var(--text-muted); font-style: italic; background: rgba(255,255,255,0.04); border: 1px solid #2a2a3a; padding: 2px 9px; border-radius: 2px; }
-        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; }
-        .detail-col { padding: 1.25rem 1.5rem; }
-        .detail-col + .detail-col { border-left: 1px solid #1a1a2a; }
-        .detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; display: block; }
-        .detail-label.amber { color: var(--amber); }
-        .detail-col p { font-size: 0.85rem; margin-bottom: 1.1rem; }
-        .detail-col p:last-child { margin-bottom: 0; }
-        .detail-figures { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
-        .detail-note { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1a1a2a; font-size: 0.82rem; color: var(--text-muted); }
-        .detail-note strong { color: var(--text-primary); }
 
         /* ── FOUR LEVELS (TABS) ── */
-        .four-levels-section { padding: 5rem 2rem; background: var(--bg-panel); border-bottom: 1px solid #1a1a2a; }
+        .four-levels-section { padding: 5rem 2rem; background: var(--bg-panel); border-bottom: 1px solid #2a0808; }
         .four-levels-inner { max-width: 960px; margin: 0 auto; }
         .levels-intro { max-width: 760px; margin-bottom: 2.5rem; }
         .tab-nav {
             display: flex; gap: 0;
-            border: 1px solid #2a2a3a; border-radius: 4px; overflow: hidden;
+            border: 1px solid #3a1515; border-radius: 4px; overflow: hidden;
             margin-bottom: 0;
         }
         .tab-btn {
             flex: 1; padding: 1.1rem 1rem; text-align: center;
-            background: var(--bg-deep); border: none; border-right: 1px solid #2a2a3a;
+            background: var(--bg-deep); border: none; border-right: 1px solid #3a1515;
             cursor: pointer; transition: background 0.15s;
             font-family: inherit; color: var(--text-muted);
         }
@@ -140,7 +222,7 @@
         .tab-name { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.04em; display: block; margin-bottom: 0.15rem; }
         .tab-latin { font-size: 0.68rem; font-style: italic; display: block; }
         .tab-panels {
-            border: 1px solid #2a2a3a; border-top: none;
+            border: 1px solid #3a1515; border-top: none;
             border-radius: 0 0 4px 4px; overflow: hidden;
         }
         .tab-panel { display: none; padding: 2.5rem; background: var(--bg-deep); }
@@ -152,7 +234,7 @@
         /* ── CIRCLE 2 DEEP DIVE ── */
         .circle2-section {
             padding: 5rem 2rem;
-            background: radial-gradient(ellipse at 50% 30%, #200a00 0%, #0d0500 50%, var(--bg-deep) 85%);
+            background: radial-gradient(ellipse at 50% 30%, #350000 0%, #1a0000 50%, var(--bg-deep) 85%);
             border-top: 2px solid var(--amber); border-bottom: 2px solid var(--amber);
         }
         .circle2-inner { max-width: 1100px; margin: 0 auto; }
@@ -199,13 +281,13 @@
         .annot-block p { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.65; }
 
         /* ── TYPE / ANTI-TYPE ── */
-        .type-section { padding: 5rem 2rem; background: var(--bg-panel-alt); border-bottom: 1px solid #1a1a2a; }
+        .type-section { padding: 5rem 2rem; background: var(--bg-panel-alt); border-bottom: 1px solid #2a0808; }
         .type-inner { max-width: 1100px; margin: 0 auto; }
         .type-intro { max-width: 760px; margin-bottom: 3rem; }
         .chain-group { margin-bottom: 3rem; }
-        .chain-group-title { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1a1a2a; }
-        .chain { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid #2a2a3a; border-radius: 4px; overflow: hidden; }
-        .chain-node { padding: 1.4rem; border-right: 1px solid #2a2a3a; background: var(--bg-deep); position: relative; }
+        .chain-group-title { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid #2a0808; }
+        .chain { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid #3a1515; border-radius: 4px; overflow: hidden; }
+        .chain-node { padding: 1.4rem; border-right: 1px solid #3a1515; background: var(--bg-deep); position: relative; }
         .chain-node:last-child { border-right: none; }
         .chain-node::after { content: '→'; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 1rem; z-index: 2; background: var(--bg-deep); padding: 2px; line-height: 1; }
         .chain-node:last-child::after { display: none; }
@@ -216,9 +298,9 @@
         .chain-node.type-classical { border-top: 3px solid #8a8aca; }
         .chain-node.type-dante { border-top: 3px solid var(--amber); }
         .chain-node.type-reader { border-top: 3px solid var(--gold); background: rgba(197,160,40,0.04); }
-        .chain-node.anti-ot { border-top: 3px solid #2a4a8a; }
+        .chain-node.anti-ot { border-top: 3px solid #8a2a2a; }
         .chain-node.anti-dante { border-top: 3px solid #6a9a6a; }
-        .chain-node.anti-empty { border-top: 3px solid #3a3a3a; background: rgba(255,255,255,0.01); }
+        .chain-node.anti-empty { border-top: 3px solid #3a1515; background: rgba(255,255,255,0.01); }
         .chain-node.gallehault { border-top: 3px solid #9a5aca; }
         .chain-node.meta { border-top: 3px solid #9a5aca; background: rgba(154,90,202,0.04); }
         .type-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.25rem; font-size: 0.75rem; color: var(--text-muted); }
@@ -230,14 +312,14 @@
         .math-inner { max-width: 1100px; margin: 0 auto; }
         .math-intro { max-width: 760px; margin-bottom: 3rem; }
         .math-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 3rem; }
-        .math-card { background: var(--bg-panel); border: 1px solid #1a1a2a; border-radius: 6px; padding: 2rem; text-align: center; }
+        .math-card { background: var(--bg-panel); border: 1px solid #2a0808; border-radius: 6px; padding: 2rem; text-align: center; }
         .math-number { font-family: 'Cinzel', serif; font-size: 4rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; opacity: 0.7; }
         .math-card h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
         .math-card p { font-size: 0.83rem; color: var(--text-muted); margin: 0; }
-        .pythagorean-strip { background: var(--bg-panel); border: 1px solid #1a1a2a; border-radius: 6px; padding: 2rem; }
+        .pythagorean-strip { background: var(--bg-panel); border: 1px solid #2a0808; border-radius: 6px; padding: 2rem; }
         .pythagorean-strip h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 1.25rem; letter-spacing: 0.05em; }
         .progression { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
-        .prog-node { text-align: center; background: var(--bg-deep); border: 1px solid #2a2a3a; border-radius: 4px; padding: 0.75rem 1.25rem; min-width: 90px; }
+        .prog-node { text-align: center; background: var(--bg-deep); border: 1px solid #3a1515; border-radius: 4px; padding: 0.75rem 1.25rem; min-width: 90px; }
         .prog-num { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--gold); line-height: 1; }
         .prog-label { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
         .prog-arrow { color: var(--gold); font-size: 1.2rem; opacity: 0.5; }
@@ -246,10 +328,10 @@
         .pythagorean-strip p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
         /* ── FOOTER ── */
-        .page-footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid #1a1a2a; background: var(--bg-deep); }
+        .page-footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid #2a0808; background: var(--bg-deep); }
         .footer-link { color: var(--amber); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.82rem; letter-spacing: 0.1em; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
         .footer-link:hover { border-color: var(--amber); }
-        .footer-muted { font-size: 0.78rem; color: #3a3a50; margin-top: 1rem; font-family: 'Lato', sans-serif; }
+        .footer-muted { font-size: 0.78rem; color: #4a2020; margin-top: 1rem; font-family: 'Lato', sans-serif; }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
@@ -264,9 +346,9 @@
             .hero { padding: 4rem 1.5rem 3rem; }
             .chain { grid-template-columns: 1fr; }
             .tab-nav { flex-direction: column; }
-            .tab-btn { border-right: none; border-bottom: 1px solid #2a2a3a; }
+            .tab-btn { border-right: none; border-bottom: 1px solid #3a1515; }
             .detail-grid { grid-template-columns: 1fr; }
-            .detail-col + .detail-col { border-left: none; border-top: 1px solid #1a1a2a; }
+            .detail-col + .detail-col { border-left: none; border-top: 1px solid #2a0808; }
         }
     </style>
 </head>
@@ -286,59 +368,33 @@
     <blockquote class="hero-quote">
         "I learned that those who undergo this torment are damned because they sinned within the flesh,
         subjecting reason to the rule of lust."
-        <cite>— Canto V, tr. Allen Mandelbaum</cite>
+        <cite>Canto V, tr. Allen Mandelbaum</cite>
     </blockquote>
 </header>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 1. THE GEOMETRY                             -->
-<!-- ═══════════════════════════════════════════ -->
-<section class="geometry-section">
-    <div class="geometry-inner">
-        <span class="section-label">Framework · Trajectory &amp; Shape</span>
-        <h2>The Geometry of the Damned</h2>
-        <p>Hell is not arbitrary architecture — it is a geometric proof of the soul's condition. Two trajectories define the cosmos, and their intersection produces Hell's unmistakable shape.</p>
-        <div style="margin-top:2rem;">
-            <canvas id="geom-demo" style="width:100%;display:block;border-radius:4px 4px 0 0;"></canvas>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid #1e1e2a;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;">
-                <div style="padding:.9rem 1.1rem;border-right:1px solid #1e1e2a;background:#03040e;">
-                    <div style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:#4a6fa5;text-transform:uppercase;margin-bottom:.35rem;">Linear</div>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin:0;line-height:1.55;">Soul moves in one direction through time. Irreversible. Hell has an entrance but no exit.</p>
-                </div>
-                <div style="padding:.9rem 1.1rem;border-right:1px solid #1e1e2a;background:#030408;">
-                    <div style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:#c5a028;text-transform:uppercase;margin-bottom:.35rem;">Circular</div>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin:0;line-height:1.55;">Fallen angels orbit forever. No destination — only endless return around a void where God should be.</p>
-                </div>
-                <div style="padding:.9rem 1.1rem;background:#080304;">
-                    <div style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:#c83c28;text-transform:uppercase;margin-bottom:.35rem;">Spiral</div>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin:0;line-height:1.55;">Descent + diminishing orbit = funnel. Wide at Limbo, narrowing through each sin, terminating at Satan.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- 2. THE FULL FUNNEL (CLICKABLE)              -->
 <!-- ═══════════════════════════════════════════ -->
 <section class="funnel-section">
     <div class="funnel-inner">
-        <span class="section-label" style="margin-bottom:1.5rem;">The Full Architecture · Click Any Circle</span>
-
-        <svg viewBox="0 0 800 970" xmlns="http://www.w3.org/2000/svg" id="hell-funnel">
+        <div class="funnel-svg-col">
+            <svg viewBox="0 110 800 860" xmlns="http://www.w3.org/2000/svg" id="hell-funnel">
             <defs>
                 <filter id="glow-amber" x="-30%" y="-30%" width="160%" height="160%">
                     <feGaussianBlur stdDeviation="7" result="cb"/>
                     <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
+                <filter id="pilgrim-glow" x="-200%" y="-200%" width="500%" height="500%">
+                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
             </defs>
-            <rect width="800" height="970" fill="#06060e"/>
+            <rect width="800" height="970" fill="#0e0101"/>
 
             <!-- BANDS -->
-            <polygon id="band-ante" class="circle-band" data-circle="ante"
-                points="75,20 725,20 692.5,110 107.5,110" fill="#181828" stroke="#282840" stroke-width="1"/>
             <polygon id="band-c1" class="circle-band" data-circle="c1"
-                points="107.5,110 692.5,110 660,200 140,200" fill="#182030" stroke="#223040" stroke-width="1"/>
+                points="107.5,110 692.5,110 660,200 140,200" fill="#200a0a" stroke="#321010" stroke-width="1"/>
             <!-- C2 — glowing by default -->
             <polygon id="band-c2" class="circle-band active-band" data-circle="c2"
                 points="140,200 660,200 625.7,295 174.3,295" fill="#2a1200" stroke="#c5a028" stroke-width="2.5" filter="url(#glow-amber)"/>
@@ -356,21 +412,20 @@
             <polygon id="band-c8" class="circle-band" data-circle="c8"
                 points="308.7,667 491.3,667 459,757 341,757" fill="#1e0000" stroke="#320000" stroke-width="1"/>
             <polygon id="band-c9" class="circle-band" data-circle="c9"
-                points="341,757 459,757 425.3,850 374.7,850" fill="#050c18" stroke="#0a1830" stroke-width="1"/>
-            <polygon id="band-satan" class="circle-band" data-circle="satan"
-                points="374.7,850 425.3,850 400,950" fill="#020710" stroke="#060d20" stroke-width="1"/>
+                points="341,757 459,757 425.3,850 374.7,850" fill="#180202" stroke="#280404" stroke-width="1"/>
+
 
             <!-- WALLS -->
-            <line x1="75" y1="20" x2="400" y2="950" stroke="#282838" stroke-width="1.5" style="pointer-events:none;"/>
-            <line x1="725" y1="20" x2="400" y2="950" stroke="#282838" stroke-width="1.5" style="pointer-events:none;"/>
+            <line x1="75" y1="20" x2="374.7" y2="850" stroke="#301010" stroke-width="1.5" style="pointer-events:none;"/>
+            <line x1="725" y1="20" x2="425.3" y2="850" stroke="#301010" stroke-width="1.5" style="pointer-events:none;"/>
 
             <!-- DIVIDERS — 3D ellipse rings: back arc (dashed) + front rim (solid) -->
             <!-- Funnel mouth: y=20 rx=325 ry=49 -->
-            <path d="M 75 20 A 325 49 0 0 0 725 20" fill="none" stroke="#151520" stroke-width="1" stroke-dasharray="4,3" style="pointer-events:none;"/>
-            <path d="M 75 20 A 325 49 0 0 1 725 20" fill="none" stroke="#202030" stroke-width="1.5" style="pointer-events:none;"/>
+            <path d="M 75 20 A 325 49 0 0 0 725 20" fill="none" stroke="#1a0808" stroke-width="1" stroke-dasharray="4,3" style="pointer-events:none;"/>
+            <path d="M 75 20 A 325 49 0 0 1 725 20" fill="none" stroke="#281010" stroke-width="1.5" style="pointer-events:none;"/>
             <!-- C1 boundary: y=110 rx=292.5 ry=44 -->
-            <path d="M 107.5 110 A 292.5 44 0 0 0 692.5 110" fill="none" stroke="#1a1a28" stroke-width="0.8" stroke-dasharray="4,3" style="pointer-events:none;"/>
-            <path d="M 107.5 110 A 292.5 44 0 0 1 692.5 110" fill="none" stroke="#282838" stroke-width="1.3" style="pointer-events:none;"/>
+            <path d="M 107.5 110 A 292.5 44 0 0 0 692.5 110" fill="none" stroke="#1a0a0a" stroke-width="0.8" stroke-dasharray="4,3" style="pointer-events:none;"/>
+            <path d="M 107.5 110 A 292.5 44 0 0 1 692.5 110" fill="none" stroke="#281414" stroke-width="1.3" style="pointer-events:none;"/>
             <!-- C2 boundary: y=200 rx=260 ry=39 — highlighted amber -->
             <path d="M 140 200 A 260 39 0 0 0 660 200" fill="none" stroke="rgba(197,160,40,0.18)" stroke-width="1" stroke-dasharray="4,3" style="pointer-events:none;"/>
             <path d="M 140 200 A 260 39 0 0 1 660 200" fill="none" stroke="rgba(197,160,40,0.55)" stroke-width="1.6" style="pointer-events:none;"/>
@@ -393,31 +448,23 @@
             <path d="M 308.7 667 A 91.3 14 0 0 0 491.3 667" fill="none" stroke="#260604" stroke-width="0.6" stroke-dasharray="2,3" style="pointer-events:none;"/>
             <path d="M 308.7 667 A 91.3 14 0 0 1 491.3 667" fill="none" stroke="#360a06" stroke-width="0.9" style="pointer-events:none;"/>
             <!-- C9: y=757 rx=59 ry=9 -->
-            <path d="M 341 757 A 59 9 0 0 0 459 757" fill="none" stroke="#0e0a1c" stroke-width="0.5" stroke-dasharray="2,3" style="pointer-events:none;"/>
-            <path d="M 341 757 A 59 9 0 0 1 459 757" fill="none" stroke="#16102a" stroke-width="0.9" style="pointer-events:none;"/>
-            <!-- Satan: y=850 rx=25.3 ry=4 -->
-            <path d="M 374.7 850 A 25.3 4 0 0 0 425.3 850" fill="none" stroke="#080f1e" stroke-width="0.5" stroke-dasharray="2,2" style="pointer-events:none;"/>
-            <path d="M 374.7 850 A 25.3 4 0 0 1 425.3 850" fill="none" stroke="#0e1830" stroke-width="0.8" style="pointer-events:none;"/>
+            <path d="M 341 757 A 59 9 0 0 0 459 757" fill="none" stroke="#1a0404" stroke-width="0.5" stroke-dasharray="2,3" style="pointer-events:none;"/>
+            <path d="M 341 757 A 59 9 0 0 1 459 757" fill="none" stroke="#260808" stroke-width="0.9" style="pointer-events:none;"/>
 
             <!-- TEXT (pointer-events:none so clicks pass to polygons) -->
-            <!-- ANTE-INFERNO -->
-            <text x="400" y="54" text-anchor="middle" fill="#5858a0" font-family="Cinzel,serif" font-size="11" letter-spacing="3" style="pointer-events:none;">ANTE-INFERNO</text>
-            <text x="400" y="69" text-anchor="middle" fill="#404080" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">The Uncommitted · Rejected by Both Realms</text>
-            <text x="400" y="83" text-anchor="middle" fill="#303070" font-family="Libre Baskerville,serif" font-size="8" style="pointer-events:none;">Hornets · Snakes · Acheron River · Charon</text>
-            <text x="400" y="97" text-anchor="middle" fill="#282860" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Pope Celestine V — The Great Anti-Type of Cowardice</text>
 
             <!-- CIRCLE I -->
-            <text x="400" y="130" text-anchor="middle" fill="#3a6a9a" font-family="Cinzel,serif" font-size="11.5" letter-spacing="2" style="pointer-events:none;">I — LIMBO</text>
-            <text x="400" y="147" text-anchor="middle" fill="#2a5a8a" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">The Virtuous Pagans · No Punishment, Only Longing</text>
-            <text x="400" y="163" text-anchor="middle" fill="#1e4a7a" font-family="Libre Baskerville,serif" font-size="8" style="pointer-events:none;">Homer · Virgil · Aristotle · Plato · Socrates · Avicenna · Saladin</text>
-            <text x="400" y="177" text-anchor="middle" fill="#183a6a" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">So Close to Heaven — Forever Barred · Minos Judges Here</text>
-            <text x="400" y="191" text-anchor="middle" fill="#12305a" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Dante's guide Virgil will return here after the journey ends</text>
+            <text x="400" y="130" text-anchor="middle" fill="#8a4a3a" font-family="Cinzel,serif" font-size="11.5" letter-spacing="2" style="pointer-events:none;">I · LIMBO</text>
+            <text x="400" y="147" text-anchor="middle" fill="#7a3a2a" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">The Virtuous Pagans · No Punishment, Only Longing</text>
+            <text x="400" y="163" text-anchor="middle" fill="#6a2a1a" font-family="Libre Baskerville,serif" font-size="8" style="pointer-events:none;">Homer · Virgil · Aristotle · Plato · Socrates · Avicenna · Saladin</text>
+            <text x="400" y="177" text-anchor="middle" fill="#5a1a0a" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">So Close to Heaven. Forever Barred. Minos Judges Here</text>
+            <text x="400" y="191" text-anchor="middle" fill="#4a1008" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Dante's guide Virgil will return here after the journey ends</text>
 
             <!-- CIRCLE II — LUST -->
-            <text x="400" y="216" text-anchor="middle" fill="#f0c040" font-family="Cinzel,serif" font-size="14" letter-spacing="3" font-weight="bold" style="pointer-events:none;">II — LUST</text>
+            <text x="400" y="216" text-anchor="middle" fill="#f0c040" font-family="Cinzel,serif" font-size="14" letter-spacing="3" font-weight="bold" style="pointer-events:none;">II · LUST</text>
             <text x="400" y="234" text-anchor="middle" fill="#d4821a" font-family="Libre Baskerville,serif" font-size="10" font-style="italic" style="pointer-events:none;">Subjecting Reason to the Rule of Passion</text>
             <text x="400" y="250" text-anchor="middle" fill="#c07010" font-family="Libre Baskerville,serif" font-size="9" style="pointer-events:none;">Semiramis · Dido · Cleopatra · Helen · Achilles · Paris · Tristan</text>
-            <text x="400" y="265" text-anchor="middle" fill="#d4921a" font-family="Libre Baskerville,serif" font-size="9.5" font-weight="bold" style="pointer-events:none;">★ Paolo &amp; Francesca — The Lancelot Book — 1,000+ Souls ★</text>
+            <text x="400" y="265" text-anchor="middle" fill="#d4921a" font-family="Libre Baskerville,serif" font-size="9.5" font-weight="bold" style="pointer-events:none;">Paolo &amp; Francesca · The Lancelot Book · The Hurricane Never Rests</text>
             <text x="400" y="281" text-anchor="middle" fill="#a06010" font-family="Libre Baskerville,serif" font-size="8" style="pointer-events:none;">The Hellish Hurricane · Contrapasso: They followed passion's winds → they ARE the wind's objects</text>
             <!-- wind lines -->
             <line x1="192" y1="246" x2="238" y2="249" stroke="rgba(212,130,26,0.22)" stroke-width="1" stroke-dasharray="3,2" style="pointer-events:none;"/>
@@ -426,58 +473,53 @@
             <line x1="558" y1="255" x2="612" y2="258" stroke="rgba(212,130,26,0.18)" stroke-width="0.8" stroke-dasharray="2,2" style="pointer-events:none;"/>
 
             <!-- CIRCLE III -->
-            <text x="400" y="314" text-anchor="middle" fill="#7a5a3a" font-family="Cinzel,serif" font-size="11.5" letter-spacing="2" style="pointer-events:none;">III — GLUTTONY</text>
+            <text x="400" y="314" text-anchor="middle" fill="#7a5a3a" font-family="Cinzel,serif" font-size="11.5" letter-spacing="2" style="pointer-events:none;">III · GLUTTONY</text>
             <text x="400" y="330" text-anchor="middle" fill="#6a4a2a" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">Cerberus · Ciacco · Rotting Mud · Foul Endless Rain</text>
             <text x="400" y="345" text-anchor="middle" fill="#5a3a1a" font-family="Libre Baskerville,serif" font-size="8" style="pointer-events:none;">Prostrate in filth · Pelted · Torn by three-headed Cerberus</text>
             <text x="400" y="360" text-anchor="middle" fill="#4a2a10" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Contrapasso: Consumed excessively → consumed by decay forever</text>
 
             <!-- CIRCLE IV -->
-            <text x="400" y="396" text-anchor="middle" fill="#9a8a3a" font-family="Cinzel,serif" font-size="11" letter-spacing="2" style="pointer-events:none;">IV — GREED</text>
+            <text x="400" y="396" text-anchor="middle" fill="#9a8a3a" font-family="Cinzel,serif" font-size="11" letter-spacing="2" style="pointer-events:none;">IV · GREED</text>
             <text x="400" y="411" text-anchor="middle" fill="#8a7a2a" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">Plutus · Hoarders vs. Spendthrifts · Boulders</text>
             <text x="400" y="426" text-anchor="middle" fill="#7a6a1a" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Two groups clash endlessly · Many popes and cardinals unnamed</text>
-            <text x="400" y="440" text-anchor="middle" fill="#6a5a10" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">"Why do you hoard?" — "Why do you waste?" — No recognition between faces</text>
+            <text x="400" y="440" text-anchor="middle" fill="#6a5a10" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">"Why do you hoard?" · "Why do you waste?" No recognition between faces</text>
 
             <!-- CIRCLE V -->
-            <text x="400" y="472" text-anchor="middle" fill="#9a4a2a" font-family="Cinzel,serif" font-size="11" letter-spacing="2" style="pointer-events:none;">V — WRATH</text>
+            <text x="400" y="472" text-anchor="middle" fill="#9a4a2a" font-family="Cinzel,serif" font-size="11" letter-spacing="2" style="pointer-events:none;">V · WRATH</text>
             <text x="400" y="487" text-anchor="middle" fill="#8a3a1a" font-family="Libre Baskerville,serif" font-size="9" font-style="italic" style="pointer-events:none;">River Styx · Wrathful fight · Sullen submerged below</text>
             <text x="400" y="502" text-anchor="middle" fill="#7a2a0a" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Filippo Argenti · Gate of Dis · Fallen Angels refuse entry</text>
             <text x="400" y="516" text-anchor="middle" fill="#6a1a00" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Boundary: Upper Hell (appetite) → Lower Hell (malice)</text>
 
             <!-- CIRCLE VI -->
-            <text x="400" y="548" text-anchor="middle" fill="#cc3a1a" font-family="Cinzel,serif" font-size="10.5" letter-spacing="1.5" style="pointer-events:none;">VI — HERESY</text>
+            <text x="400" y="548" text-anchor="middle" fill="#cc3a1a" font-family="Cinzel,serif" font-size="10.5" letter-spacing="1.5" style="pointer-events:none;">VI · HERESY</text>
             <text x="400" y="562" text-anchor="middle" fill="#bb2a0a" font-family="Libre Baskerville,serif" font-size="8.5" font-style="italic" style="pointer-events:none;">City of Dis · Open Burning Tombs · Epicureans</text>
             <text x="400" y="577" text-anchor="middle" fill="#aa1a00" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Farinata · Cavalcante · Denied immortality → experience it at its worst</text>
 
             <!-- CIRCLE VII -->
-            <text x="400" y="616" text-anchor="middle" fill="#dd2a0a" font-family="Cinzel,serif" font-size="10" letter-spacing="1" style="pointer-events:none;">VII — VIOLENCE</text>
+            <text x="400" y="616" text-anchor="middle" fill="#dd2a0a" font-family="Cinzel,serif" font-size="10" letter-spacing="1" style="pointer-events:none;">VII · VIOLENCE</text>
             <text x="400" y="630" text-anchor="middle" fill="#cc1a00" font-family="Libre Baskerville,serif" font-size="8" font-style="italic" style="pointer-events:none;">Boiling Blood · Thorned Trees (Suicides) · Burning Sand</text>
             <text x="400" y="645" text-anchor="middle" fill="#bb1000" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Centaurs · Harpies · Pier della Vigna · Brunetto Latini · Usurers</text>
             <text x="400" y="659" text-anchor="middle" fill="#aa0800" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Geryon (fraud's mount) carries Dante to Circle VIII</text>
 
             <!-- CIRCLE VIII -->
-            <text x="400" y="698" text-anchor="middle" fill="#dd1a00" font-family="Cinzel,serif" font-size="10" letter-spacing="0.5" style="pointer-events:none;">VIII — FRAUD · MALEBOLGE</text>
+            <text x="400" y="698" text-anchor="middle" fill="#dd1a00" font-family="Cinzel,serif" font-size="10" letter-spacing="0.5" style="pointer-events:none;">VIII · FRAUD · MALEBOLGE</text>
             <text x="400" y="712" text-anchor="middle" fill="#cc1000" font-family="Libre Baskerville,serif" font-size="8" font-style="italic" style="pointer-events:none;">Ten Evil Ditches · Sorcerers Twisted Backward · Hypocrites in Lead</text>
             <text x="400" y="726" text-anchor="middle" fill="#bb0800" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Jason · Pope Nicholas III · Ulysses &amp; Diomedes · Mohammed</text>
             <text x="400" y="740" text-anchor="middle" fill="#aa0000" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Deliberate deception of strangers — infinite varieties of dishonesty</text>
 
             <!-- CIRCLE IX -->
-            <text x="400" y="782" text-anchor="middle" fill="#4a7aaa" font-family="Cinzel,serif" font-size="9.5" letter-spacing="1" style="pointer-events:none;">IX — TREACHERY · COCYTUS</text>
-            <text x="400" y="796" text-anchor="middle" fill="#3a6a9a" font-family="Libre Baskerville,serif" font-size="8" font-style="italic" style="pointer-events:none;">Frozen Lake · Caina · Antenora · Ptolomea · Judecca</text>
-            <text x="400" y="810" text-anchor="middle" fill="#2a5a8a" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Count Ugolino gnawing Ruggieri · Brutus · Cassius in Satan's mouths</text>
-            <text x="400" y="824" text-anchor="middle" fill="#1a4a7a" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Judas in the central mouth · Maximum distance from God's warmth</text>
-            <text x="400" y="838" text-anchor="middle" fill="#143a6a" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Coldest point — frozen by the very wings of Hell's supposed ruler</text>
+            <text x="400" y="782" text-anchor="middle" fill="#cc2a0a" font-family="Cinzel,serif" font-size="9.5" letter-spacing="1" style="pointer-events:none;">IX · TREACHERY · COCYTUS</text>
+            <text x="400" y="796" text-anchor="middle" fill="#b81a00" font-family="Libre Baskerville,serif" font-size="8" font-style="italic" style="pointer-events:none;">Frozen Lake · Caina · Antenora · Ptolomea · Judecca</text>
+            <text x="400" y="810" text-anchor="middle" fill="#a41000" font-family="Libre Baskerville,serif" font-size="7.5" style="pointer-events:none;">Count Ugolino gnawing Ruggieri · Brutus · Cassius · Judas Iscariot</text>
+            <text x="400" y="824" text-anchor="middle" fill="#900a00" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Four zones: Caina · Antenora · Ptolomea · Judecca</text>
+            <text x="400" y="838" text-anchor="middle" fill="#7c0400" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Coldest point in Hell. Maximum distance from God's warmth.</text>
 
-            <!-- SATAN -->
-            <text x="400" y="874" text-anchor="middle" fill="#2a3a5a" font-family="Cinzel,serif" font-size="9" letter-spacing="2" style="pointer-events:none;">SATAN · THE POINT</text>
-            <text x="400" y="889" text-anchor="middle" fill="#1a2a4a" font-family="Libre Baskerville,serif" font-size="7.5" font-style="italic" style="pointer-events:none;">Three Faces · Frozen to the Waist · Chews the Three Great Traitors</text>
-            <text x="400" y="904" text-anchor="middle" fill="#121a34" font-family="Libre Baskerville,serif" font-size="7" style="pointer-events:none;">Down his body → emerge at Purgatory · Down becomes Up</text>
-            <text x="400" y="918" text-anchor="middle" fill="#0c1228" font-family="Libre Baskerville,serif" font-size="6.5" style="pointer-events:none;">The origin of evil — not its ruler. Hell's most complete prisoner.</text>
 
             <!-- SIDE LABELS -->
-            <text x="55" y="155" text-anchor="middle" fill="#243050" font-family="Cinzel,serif" font-size="8" letter-spacing="1.5" transform="rotate(-90,55,155)" style="pointer-events:none;">INCONTINENCE</text>
-            <line x1="63" y1="110" x2="63" y2="295" stroke="#162040" stroke-width="1" stroke-dasharray="2,3" style="pointer-events:none;"/>
-            <line x1="59" y1="110" x2="67" y2="110" stroke="#162040" stroke-width="1" style="pointer-events:none;"/>
-            <line x1="59" y1="295" x2="67" y2="295" stroke="#162040" stroke-width="1" style="pointer-events:none;"/>
+            <text x="55" y="155" text-anchor="middle" fill="#5a2010" font-family="Cinzel,serif" font-size="8" letter-spacing="1.5" transform="rotate(-90,55,155)" style="pointer-events:none;">INCONTINENCE</text>
+            <line x1="63" y1="110" x2="63" y2="295" stroke="#3a1010" stroke-width="1" stroke-dasharray="2,3" style="pointer-events:none;"/>
+            <line x1="59" y1="110" x2="67" y2="110" stroke="#3a1010" stroke-width="1" style="pointer-events:none;"/>
+            <line x1="59" y1="295" x2="67" y2="295" stroke="#3a1010" stroke-width="1" style="pointer-events:none;"/>
 
             <text x="55" y="460" text-anchor="middle" fill="#301a0a" font-family="Cinzel,serif" font-size="8" letter-spacing="1.5" transform="rotate(-90,55,460)" style="pointer-events:none;">MALICE</text>
             <line x1="63" y1="295" x2="63" y2="667" stroke="#201000" stroke-width="1" stroke-dasharray="2,3" style="pointer-events:none;"/>
@@ -494,31 +536,73 @@
             <line x1="155" y1="200" x2="148" y2="200" stroke="rgba(212,130,26,0.55)" stroke-width="1.5" style="pointer-events:none;"/>
             <line x1="148" y1="200" x2="148" y2="295" stroke="rgba(212,130,26,0.55)" stroke-width="1.5" style="pointer-events:none;"/>
             <line x1="148" y1="295" x2="155" y2="295" stroke="rgba(212,130,26,0.55)" stroke-width="1.5" style="pointer-events:none;"/>
-        </svg>
 
-        <!-- DETAIL PANEL (populated by JS on click) -->
-        <div id="circle-detail">
-            <div class="detail-header">
-                <h3 id="detail-name">—</h3>
-                <span id="detail-badge" class="detail-badge">—</span>
-            </div>
-            <div class="detail-grid">
-                <div class="detail-col">
-                    <span class="detail-label">The Sin</span>
-                    <p id="detail-sin">—</p>
-                    <span class="detail-label amber">Contrapasso · Counter-Suffering</span>
-                    <p id="detail-contrapasso">—</p>
-                    <span class="detail-label">Key Figures</span>
-                    <p id="detail-figures" class="detail-figures">—</p>
+            <!-- Pilgrim dot: cx/cy set by JS scroll animation -->
+            <circle id="pilgrim" cx="400" cy="40" r="5" fill="#c5a028" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" filter="url(#pilgrim-glow)" style="pointer-events:none;"/>
+        </svg>
+        </div><!-- /funnel-svg-col -->
+
+        <!-- POEM COLUMN -->
+        <div class="poem-col">
+            <div class="poem-scroll-track">
+                <span class="poem-col-label">Inferno · Canto V · Lines 100–138</span>
+                <h3>Francesca Speaks:<br>The Three “Loves”</h3>
+                <span class="poem-col-translator">tr. Allen Mandelbaum</span>
+
+                <div class="stanza">
+                    <span class="verse-num">100</span>
+                    <p>"Love, that can quickly seize the gentle heart,<br>took hold of him because of the fair body<br>taken from me — how that was done still wounds me."</p>
+                    <div class="stanza-note">First “Love” → Love acts ON the beloved through beauty. Passive voice: “taken from me.” Paolo did not choose. Love seized him.</div>
                 </div>
-                <div class="detail-col">
-                    <span class="detail-label">The Punishment</span>
-                    <p id="detail-punishment">—</p>
-                    <p id="detail-note" class="detail-note">—</p>
+
+                <div class="stanza">
+                    <span class="verse-num">103</span>
+                    <p>"Love, that releases no beloved from loving,<br>took hold of me so strongly through his beauty<br>that, as you see, it has not left me yet."</p>
+                    <div class="stanza-note">Second “Love” → Reciprocal compulsion. “Has not left me yet”—even in Hell, she offers this as evidence of love’s power, not regret.</div>
+                </div>
+
+                <div class="stanza">
+                    <span class="verse-num">106</span>
+                    <p>"Love led the two of us unto one death.<br>Caina waits for him who took our life."</p>
+                    <div class="stanza-note">Third “Love” → Love as cause of death. She accurately names Gianciotto’s zone in Hell—no forgiveness offered. The eloquence of the damned.</div>
+                </div>
+
+                <div class="stanza">
+                    <span class="verse-num">121</span>
+                    <p>"There is no greater sorrow<br>than thinking back upon a happy time<br>in misery — and this your teacher knows."</p>
+                    <div class="stanza-note">She quotes Boethius’s <em>Consolation of Philosophy</em>, the text arguing reason must govern desire, while explaining why she abandoned reason for desire. The irony is total.</div>
+                </div>
+
+                <div class="stanza">
+                    <span class="verse-num">127</span>
+                    <p>"One day, to pass the time away, we read<br>of Lancelot — how love had overcome him.<br>We were alone, and we suspected nothing.<br><br>And time and time again that reading led<br>our eyes to meet, and made our faces pale,<br>and yet one point alone defeated us.<br><br>When we had read how the desired smile<br>was kissed by one who was so true a lover,<br>this one, who never shall be parted from me,<br>while all his body trembled, kissed my mouth.<br><strong>A Gallehault indeed, that book and he<br>who wrote it, too; that day we read no more."</strong></p>
+                    <div class="stanza-note">The Gallehault: the book plays the role of the go-between. The text is the seducer. Dante names his own medium as potentially dangerous. The same warning is embedded in the poem itself.</div>
+                </div>
+
+                <div class="annot-block">
+                    <div class="annot-head">The Three-Part Anaphora: “Amore, Amore, Amore”</div>
+                    <p>Each stanza opens with “Love” as grammatical subject: love <em>seized</em>, love <em>took hold</em>, love <em>led</em>. Francesca is never the subject of an active verb. This is the core theological error of her damnation — she mistakes the feeling of compulsion for evidence of innocence. The ability to narrate passionately is not the same as having chosen rightly.</p>
+                </div>
+
+                <div class="annot-block">
+                    <div class="annot-head">Why Dante Faints — And Only Here</div>
+                    <p>He does not faint at violence, fraud, or treachery. He faints here. This is structural: lust is the sin most proximate to love, and Dante (the character) is in love with Beatrice. His sympathy is not sentimentality — it is the tropological test. The poem forces the reader to experience what he experiences, then asks whether you can recover what he eventually recovers: his feet, his reason, and the path forward.</p>
+                </div>
+
+                <div class="annot-block">
+                    <div class="annot-head">The Boethius Echo</div>
+                    <p>Boethius wrote the <em>Consolation of Philosophy</em> awaiting execution — it is a sustained argument that Fortune’s gifts must never be confused with true good, and that reason must govern desire. Francesca quotes this philosopher of rational governance while narrating her abandonment of rational governance. The savage irony is entirely intentional. Intelligence without will is the tragedy of the intelligent sinner.</p>
+                </div>
+
+                <div class="annot-block">
+                    <div class="annot-head">Syndesis: The Gap Between Knowing and Doing</div>
+                    <p>The Professor’s Analysis identifies Dante’s central theme as <em>syndesis</em> — the alignment of reason and will. Francesca is eloquent, self-aware, and accurate. She knows exactly what happened. She cannot, or will not, name it as a choice. What she <em>knows</em> and what she <em>did</em> remain permanently unreconciled. Circle II is the entry point because lust is where the split between reason and will first becomes consequential enough to damn.</p>
                 </div>
             </div>
         </div>
-    </div>
+
+    </div><!-- /funnel-inner -->
+
 </section>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -546,7 +630,7 @@
             <button class="tab-btn" data-tab="t3">
                 <span class="tab-num">3</span>
                 <span class="tab-name">Moral / Tropological</span>
-                <span class="tab-latin">Applied to You, Now</span>
+                <span class="tab-latin">Applied to the Reader, Now</span>
             </button>
             <button class="tab-btn" data-tab="t4">
                 <span class="tab-num">4</span>
@@ -559,28 +643,33 @@
             <!-- TAB 1: HISTORICAL -->
             <div id="t1" class="tab-panel active">
                 <h4>What Literally Happened</h4>
-                <p>Francesca da Rimini (c.1255–1285) was the daughter of Guido da Polenta of Ravenna. She was married by political arrangement to Gianciotto Malatesta — nicknamed "the lame" — a military lord of Rimini. She fell in love with his younger brother Paolo Malatesta, who was by all accounts considerably more beautiful. Gianciotto discovered the affair and killed them both. Dante was aware of the scandal.</p>
+                <p>Francesca da Rimini (c.1255–1285) was the daughter of Guido da Polenta of Ravenna. She was married by political arrangement to Gianciotto Malatesta, nicknamed "the lame," a military lord of Rimini. She fell in love with his younger brother Paolo Malatesta, who was by all accounts considerably more beautiful. Gianciotto discovered the affair and killed them both. Dante was aware of the scandal.</p>
                 <p>On the historical level: two real people were murdered for adultery, are damned, and occupy Circle II. Dante (the character) meets them as a living man walking through Hell around 1300 CE. He records what they say.</p>
                 <p>The historical level also tells us something about Dante's political context. He is writing in Italian — not Latin — and placing a recent, recognizable scandal into an eternal framework. He assigns himself the authority to determine where real souls spend eternity. This is the audacity of the historical layer: a living poet rendering final judgment on the living and the dead.</p>
-                <blockquote>"The land where I was born lies on that shore to which the Po together with the waters that follow it descends to final rest." — Francesca locating herself historically, not symbolically</blockquote>
+                <blockquote>"The land where I was born lies on that shore to which the Po together with the waters that follow it descends to final rest." (Francesca locating herself historically, not symbolically)</blockquote>
             </div>
 
             <!-- TAB 2: ALLEGORICAL -->
             <div id="t2" class="tab-panel">
                 <h4>The Spiritual Meaning Beneath the Literal Events</h4>
-                <p>Paolo and Francesca are the allegory of the soul that removes reason from its governing throne. The hurricane is not a metaphor for passion — it <em>is</em> the spiritual state of passion without direction, purpose, or goal. They once had agency. In Hell, they have none. They are moved entirely by a force external to their will.</p>
-                <p>The allegorical reading reveals the architecture of the sin: lust is not primarily about bodies. It is about the faculty of governance — reason — being dethroned by sensation. Every soul in Circle II made the same structural error. The punishment (being driven by wind) is allegorically identical to the sin (being driven by passion). The crime and its consequence are the same thing, extended into eternity.</p>
-                <p>Note also what the allegorical reading reveals about Francesca's narration itself. She describes love as a force that <em>seized</em> him, <em>took hold of</em> her, <em>led</em> them to death. She never says: "I chose." Allegorically, this is the condition of the damned — she does not understand that the dethronement of reason was the choice. The inability to see the choice as a choice is the allegory of damnation.</p>
-                <blockquote>"Love led the two of us unto one death." — Three times she names Love as agent and herself as object. This is the allegory of the surrendered will.</blockquote>
+                <p>Paolo and Francesca are the allegory of the soul that removes reason from its governing throne. The hurricane is not a metaphor for passion. It <em>is</em> the spiritual state of passion without direction, purpose, or goal. They once had agency. In Hell, they have none. They are moved entirely by a force external to their will.</p>
+                <p>The allegorical reading reveals the architecture of the sin: lust is not primarily about bodies. It is about the faculty of governance: reason being dethroned by sensation. Every soul in Circle II made the same structural error. The punishment (being driven by wind) is allegorically identical to the sin (being driven by passion). The crime and its consequence are the same thing, extended into eternity.</p>
+                <p>Note also what the allegorical reading reveals about Francesca's narration. She describes love as a force that <em>seized</em> him, <em>took hold of</em> her, <em>led</em> them to death. She never says: "I chose." Allegorically, this is the condition of the damned. She does not understand that the dethronement of reason was the choice. The inability to see the choice as a choice is the allegory of damnation.</p>
+
+                <h4 style="margin-top:2rem; font-size:1rem;">Figure Fulfillment: Dido to Francesca</h4>
+                <p>The Professor's Analysis identifies Dante's method as Figure Fulfillment: an earlier historical figure (the Type) prefigures a later, fuller one (the Fulfillment). In Circle II, Dido is the Type and Francesca is the Fulfillment.</p>
+                <p>Dido, from Virgil's own <em>Aeneid</em>, abandoned her oath to her dead husband Sychaeus for Aeneas. When Aeneas left by divine command, she destroyed herself for love. Virgil named her in the hurricane. He knows this terrain because he wrote the earlier version of it. Dido represents the sin as consequence: she acts, suffers, and dies without explaining herself.</p>
+                <p>Francesca is the Fulfillment because she <em>speaks</em>. Semiramis is silent. Dido does not explain herself to Dante. Helen appears without words. Francesca gives the full account: the process, the mechanism (the Lancelot book), the grammar of self-exemption. What the earlier figures enacted in silence, she articulates completely. The allegorical meaning of the type-sequence is that the sin, once given language, reveals its own structure.</p>
+                <blockquote>"Love led the two of us unto one death." Three times she names Love as agent and herself as object. This is the allegory of the surrendered will, spoken by the figure who fulfills every earlier instance of it.</blockquote>
             </div>
 
             <!-- TAB 3: MORAL / TROPOLOGICAL -->
             <div id="t3" class="tab-panel">
-                <h4>What This Demands of You — Right Now, In This Reading</h4>
-                <p>This is Dante's sharpest and most dangerous move. When Francesca says <em>"A Gallehault indeed, that book and he who wrote it, too,"</em> she names the Lancelot text as the go-between that seduced them. The book played Galehaut's role: it brought their eyes together, made them pale, and engineered the fatal moment. They were reading. The text was the mechanism.</p>
-                <p>The tropological question is immediate: <strong style="color:var(--text-primary);">What is your Lancelot book?</strong> What desire, narrative, or beauty is acting as your Gallehault right now? This question is not rhetorical. Dante insists it be personal, immediate, and uncomfortable.</p>
+                <h4>What This Demands: The Reader's Test, Right Now</h4>
+                <p>This is Dante's most precise and most dangerous move. When Francesca says <em>"A Gallehault indeed, that book and he who wrote it, too,"</em> she names the Lancelot text as the go-between that seduced them. The book played Galehaut's role: it brought their eyes together, made them pale, and engineered the fatal moment. They were reading. The text was the mechanism.</p>
+                <p>The tropological question is immediate: <strong style="color:var(--text-primary);">What acts as Gallehault in this reading?</strong> What desire, narrative, or beauty engineers this moment? The question is not rhetorical. Dante insists it be personal, immediate, and uncomfortable.</p>
                 <p>Then he performs the test in real time. Dante the character <em>faints</em> at the end of Canto V — collapses with sympathy for Francesca. He does not faint in the circles of violence, fraud, or treachery. He faints here, at the first moment of real punishment, where the sin is most proximate to love. The poem forces the reader to feel everything Dante feels. Then it watches whether you recover, as Dante eventually does, or remain in the storm.</p>
-                <blockquote>"And then I fell as a dead body falls." — The tropological warning: sympathy without reason is its own form of surrender. The reader's response to Francesca <em>is</em> the moral test.</blockquote>
+                <blockquote>"And then I fell as a dead body falls." The tropological warning: sympathy without reason is its own form of surrender. The reader's response to Francesca <em>is</em> the moral test.</blockquote>
             </div>
 
             <!-- TAB 4: ANAGOGICAL -->
@@ -589,7 +678,7 @@
                 <p>Circle II is the anagogical portrait of the universal human condition: the gap between what we desire and what we should choose. Francesca is not exceptional. She is <em>representative</em> — which is why there are more than a thousand souls in the hurricane alongside her, including the most famous lovers of the ancient and medieval worlds.</p>
                 <p>The anagogical reading places Circle II at the threshold of all human history. Every person ever born has stood in this storm at some point — passion pulling toward something that reason would not approve. The question that Dante poses to all humanity, across all time, is the question of syndesis: can the will and reason be brought into alignment? Can the species learn to land?</p>
                 <p>The answer is encoded in the poem's structure. Circle II is at the top of Hell — as close to redemption as you can be while still being damned. Directly above it: Limbo. Above Limbo: the living world. The trajectory is always available. But Francesca, even speaking from Hell, tells her story with the same seductive beauty that led her there. The storm has not taught her. This is the anagogical warning: the condition of humanity is that we can be destroyed by the very faculty — passion, beauty, narrative — that also produces Dante's poem.</p>
-                <blockquote>"There is no greater sorrow than thinking back upon a happy time in misery." — She quotes Boethius — the philosopher of reason governing desire — while explaining why she abandoned reason for desire. This is what all humanity does.</blockquote>
+                <blockquote>"There is no greater sorrow than thinking back upon a happy time in misery." She quotes Boethius, the philosopher of reason governing desire, while explaining why she abandoned reason for desire. This is what all humanity does.</blockquote>
             </div>
         </div>
     </div>
@@ -600,22 +689,6 @@
 <!-- ═══════════════════════════════════════════ -->
 <section class="circle2-section">
     <div class="circle2-inner">
-        <div class="circle2-heading">
-            <span class="roman">II</span>
-            <h2>The Second Circle: <em style="color:var(--amber);">Lust</em></h2>
-            <p class="subtitle">The first circle of active punishment. The entry point of the will problem. The place where Dante faints.</p>
-        </div>
-
-        <div class="sin-box">
-            <span class="label">The Sin — Defined by Dante</span>
-            <blockquote>"I learned that those who undergo this torment are damned because they sinned within the flesh, subjecting reason to the rule of lust."</blockquote>
-            <p class="source">— Canto V, lines 37–39. The definition is precise: the sin is not passion itself — it is the <em>subordination of reason to passion</em>. The disorder of priority, not the feeling.</p>
-            <div class="contrapasso">
-                <span class="contrapasso-label">The Contrapasso · Counter-Suffering</span>
-                <p>In life they followed the winds of passion wherever they led. In death they <em>are</em> the wind's objects — the hellish hurricane never rests, drives them, wheels them, pounds them against the ruined slope. They gave themselves to passion's pull; so passion's pull is now their entire existence, forever, with no choice and no rest. The punishment does not merely fit the crime. It is the crime, extended to infinity.</p>
-            </div>
-        </div>
-
         <div class="figures-heading">The Souls of Circle II — Named by Virgil in Canto V</div>
         <div class="figures-grid">
             <div class="fig-card primary">
@@ -663,69 +736,13 @@
             <div class="fig-card">
                 <div class="fig-name">Paris &amp; Tristan</div>
                 <div class="fig-origin">Mythological &amp; Literary · Troy / Arthurian Cycle</div>
-                <p class="fig-desc">Paris stole Helen and started the Trojan War. Tristan's love for Isolde, wife of his king, is the direct literary parallel to Paolo and Francesca — another pair seduced by a love story into acting on forbidden desire. Tristan is Lancelot's mirror.</p>
-                <span class="fig-tag tag-literary">Literary · Mirrors Paolo/Francesca</span>
+                <p class="fig-desc">Paris abducted Helen and ignited the Trojan War — lust as civilizational catastrophe. Tristan loved Iseult, wife of his own king Mark, in direct parallel to Paolo and Francesca: a younger man, a forbidden love, a betrayed lord. Both Arthurian and Trojan figures show passion operating at world-historical scale.</p>
+                <span class="fig-tag tag-mythological">Mythological &amp; Literary</span>
             </div>
-        </div>
+        </div><!-- /figures-grid -->
+    </div><!-- /circle2-inner -->
+</section><!-- /circle2-section -->
 
-        <!-- FRANCESCA'S SPEECH -->
-        <div class="francesca-panel">
-            <div class="francesca-panel-header">
-                <h3>Francesca Speaks: The Three "Loves" — Canto V</h3>
-                <span class="canto-badge">Inferno V, lines 100–138 · tr. Allen Mandelbaum</span>
-            </div>
-            <div class="speech-columns">
-                <div class="speech-text-col">
-                    <div class="stanza">
-                        <p>"Love, that can quickly seize the gentle heart,<br>took hold of him because of the fair body<br>taken from me — how that was done still wounds me."</p>
-                        <div class="stanza-note">First "Love" → Love acts ON the beloved through beauty. Passive voice: "taken from me." Paolo did not choose — love seized him.</div>
-                    </div>
-                    <div class="stanza">
-                        <p>"Love, that releases no beloved from loving,<br>took hold of me so strongly through his beauty<br>that, as you see, it has not left me yet."</p>
-                        <div class="stanza-note">Second "Love" → Reciprocal compulsion. "Has not left me yet" — even in Hell, she offers this as evidence of love's power, not as regret.</div>
-                    </div>
-                    <div class="stanza">
-                        <p>"Love led the two of us unto one death.<br>Caina waits for him who took our life."</p>
-                        <div class="stanza-note">Third "Love" → Love as cause of death. She accurately names Gianciotto's zone in Hell — and offers no forgiveness. The eloquence of the damned.</div>
-                    </div>
-                    <div class="stanza">
-                        <p>"There is no greater sorrow<br>than thinking back upon a happy time<br>in misery — and this your teacher knows."</p>
-                        <div class="stanza-note">She quotes Boethius's <em>Consolation of Philosophy</em> — the text that argues reason must govern desire — while explaining why she abandoned reason for desire. The irony is total.</div>
-                    </div>
-                    <div class="stanza">
-                        <p>"One day, to pass the time away, we read<br>of Lancelot — how love had overcome him.<br>We were alone, and we suspected nothing.<br><br>
-                        And time and time again that reading led<br>our eyes to meet, and made our faces pale,<br>and yet one point alone defeated us.<br><br>
-                        When we had read how the desired smile<br>was kissed by one who was so true a lover,<br>this one, who never shall be parted from me,<br>
-                        while all his body trembled, kissed my mouth.<br>
-                        <strong>A Gallehault indeed, that book and he<br>who wrote it, too; that day we read no more."</strong></p>
-                        <div class="stanza-note">★ The Gallehault: the book plays the role of the go-between. The text is the seducer. Dante names his own medium as potentially dangerous — the same warning he embeds in the poem you are reading now.</div>
-                    </div>
-                </div>
-                <div class="speech-annot-col">
-                    <div class="annot-block">
-                        <div class="annot-head">The Three-Part Anaphora: "Amore, Amore, Amore"</div>
-                        <p>Each stanza opens with "Love" as grammatical subject: love <em>seized</em>, love <em>took hold</em>, love <em>led</em>. Francesca is never the subject of an active verb. This is the core theological error of her damnation — she mistakes the feeling of compulsion for evidence of innocence. The ability to narrate passionately is not the same as having chosen rightly.</p>
-                    </div>
-                    <div class="annot-block">
-                        <div class="annot-head">Why Dante Faints — And Only Here</div>
-                        <p>He does not faint at violence, fraud, or treachery. He faints here. This is structural: lust is the sin most proximate to love, and Dante (the character) is in love with Beatrice. His sympathy is not sentimentality — it is the tropological test. The poem forces the reader to experience what he experiences, then asks whether you can recover what he eventually recovers: his feet, his reason, and the path forward.</p>
-                    </div>
-                    <div class="annot-block">
-                        <div class="annot-head">The Boethius Echo</div>
-                        <p>Boethius wrote the <em>Consolation of Philosophy</em> awaiting execution — it is a sustained argument that Fortune's gifts must never be confused with true good, and that reason must govern desire. Francesca quotes this philosopher of rational governance while narrating her abandonment of rational governance. The savage irony is entirely intentional. Intelligence without will is the tragedy of the intelligent sinner.</p>
-                    </div>
-                    <div class="annot-block">
-                        <div class="annot-head">Syndesis: The Gap Between Knowing and Doing</div>
-                        <p>The Professor's Analysis identifies Dante's central theme as <em>syndesis</em> — the alignment of reason and will. Francesca is eloquent, self-aware, and accurate. She knows exactly what happened. She cannot, or will not, name it as a choice. What she <em>knows</em> and what she <em>did</em> remain permanently unreconciled. Circle II is the entry point because lust is where the split between reason and will first becomes consequential enough to damn.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 5. TYPE / ANTI-TYPE                         -->
 <!-- ═══════════════════════════════════════════ -->
 <section class="type-section">
     <div class="type-inner">
@@ -841,10 +858,10 @@ const circleData = {
     },
     c2: {
         name: "Circle II — Lust",
-        badge: "★ Focus of This Page · Incontinence · First Active Punishment",
+        badge: "Focus of This Page · Incontinence · First Active Punishment",
         sin: "Subjecting reason to the rule of passion — the dethronement of the soul's governing faculty by desire.",
         punishment: "The hellish hurricane: an eternal, directionless storm that never rests, driving souls with no hope, no rest, no lesser pain. Souls crash against the ruined slope.",
-        figures: "Semiramis · Dido · Cleopatra · Helen of Troy · Achilles · Paris · Tristan · Paolo Malatesta · Francesca da Rimini · +1,000 more souls",
+        figures: "Semiramis · Dido · Cleopatra · Helen of Troy · Achilles · Paris · Tristan · Paolo Malatesta · Francesca da Rimini",
         contrapasso: "They followed passion's winds in life, letting desire carry them wherever it pulled → in death they ARE the wind's property, tossed without agency, without direction, without rest. The punishment is the sin, extended to infinity.",
         note: "Circle II is the first circle of active punishment. Dante faints here — only here. It is the most human sin, the most proximate to love. As we descend, sympathy becomes impossible. This circle tests whether the reader can grieve for a sinner without endorsing the sin."
     },
@@ -906,70 +923,55 @@ const circleData = {
         name: "Circle IX — Treachery · Cocytus",
         badge: "Fraud · Betrayal of Special Trust · Maximum Distance from God",
         sin: "Betrayal of special trust relationships: family (Caina), country/party (Antenora), guests and hosts (Ptolomea), lords and benefactors (Judecca).",
-        punishment: "Frozen in the lake Cocytus at varying depths — faces up, faces down, or completely submerged in ice. Satan's wings create the freezing wind that keeps them frozen.",
-        figures: "Count Ugolino (gnawing on Archbishop Ruggieri's skull) · Brutus · Cassius · Judas Iscariot in Satan's central mouth — the three greatest traitors in Dante's cosmology",
-        contrapasso: "Their betrayal froze the bonds of love, trust, and loyalty → they are frozen. The coldest point in Hell is the farthest from God's warmth — maximum distance from love itself.",
-        note: "The ultimate irony of Hell: Satan is frozen by his own wings. His frantic, desperate flapping — the last motion of his fallen nature — creates the very cold that imprisons him. Hell's supposed ruler is also Hell's most complete prisoner."
-    },
-    satan: {
-        name: "Satan — The Terminal Point",
-        badge: "The Origin of Evil · Not Its Ruler · Maximum Distance from God",
-        sin: "The original defection from God — Lucifer's pride, the first and absolute turning away from divine love.",
-        punishment: "Frozen to his waist in the lake his own wings created. Three faces (red = blood/hatred, yellow/pale = impotence, black = poison/ignorance) — a grotesque parody of the Trinity.",
-        figures: "Judas Iscariot in the central (red) mouth — betrayer of Christ · Brutus in the black mouth · Cassius in the yellow — betrayers of Caesar · The three greatest traitors of Christian cosmology",
-        contrapasso: "He sought to be above God → he is the lowest point of the universe. He sought to rule → he is the most imprisoned being in existence. His wings, which were made for ascent, now generate only cold and stasis.",
-        note: "Dante and Virgil climb down Satan's frozen body — and at the center of the Earth, 'down' becomes 'up.' They emerge at the base of Purgatory. The exit from Hell requires passing through the lowest point and discovering that it is also the turning point toward ascent."
+        punishment: "Frozen in the lake Cocytus at varying depths: faces up, faces down, or completely submerged in ice.",
+        figures: "Count Ugolino (gnawing on Archbishop Ruggieri's skull) · Brutus · Cassius · Judas Iscariot",
+        contrapasso: "Their betrayal froze the bonds of love, trust, and loyalty. They are frozen. The coldest point in Hell is the farthest from God's warmth.",
+        note: "The four zones of Circle IX correspond to four categories of broken trust, each named for its archetypal traitor: Caina (family), Antenora (country), Ptolomea (guests), Judecca (lords and benefactors)."
     }
 };
 
 /* ═══════════════════════════════════════════════════════
-   FUNNEL CLICK INTERACTION
+   PILGRIM DOT SCROLL ANIMATION
    ═══════════════════════════════════════════════════════ */
-const detail = document.getElementById('circle-detail');
-const bands = document.querySelectorAll('.circle-band');
+const pilgrim = document.getElementById('pilgrim');
+const funnelSvg = document.getElementById('hell-funnel');
 
-function showCircle(id) {
-    const data = circleData[id];
-    if (!data) return;
+function updatePilgrimPosition() {
+    if (!pilgrim || !funnelSvg) return;
+    const funnelSection = document.querySelector('.funnel-section');
+    if (!funnelSection) return;
 
-    document.getElementById('detail-name').textContent = data.name;
-    document.getElementById('detail-badge').textContent = data.badge;
-    document.getElementById('detail-sin').textContent = data.sin;
-    document.getElementById('detail-punishment').textContent = data.punishment;
-    document.getElementById('detail-figures').textContent = data.figures;
-    document.getElementById('detail-contrapasso').textContent = data.contrapasso;
-    document.getElementById('detail-note').innerHTML = '<strong>Note:</strong> ' + data.note;
+    const rect = funnelSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    // Accent color for active circle
-    const colors = {
-        ante: '#5858a0', c1: '#3a6a9a', c2: '#c5a028', c3: '#7a5a3a',
-        c4: '#9a8a3a', c5: '#9a4a2a', c6: '#cc3a1a', c7: '#dd2a0a',
-        c8: '#dd1a00', c9: '#4a7aaa', satan: '#2a3a5a'
-    };
-    detail.style.borderTopColor = colors[id] || '#2a2a3a';
-    detail.style.borderTopWidth = '3px';
+    // Progress through the 500vh section: 0 (top of section) → 1 (bottom)
+    let progress = -rect.top / (rect.height - windowHeight);
+    progress = Math.max(0, Math.min(1, progress));
 
-    detail.classList.add('visible');
+    // Pilgrim spiral descent in SVG coordinate space
+    const currentY = 40 + (840 - 40) * progress;
+    const t = (currentY - 20) / (850 - 20);
+    const leftX    = 75  + (374.7 - 75)  * t;
+    const rightX   = 725 + (425.3 - 725) * t;
+    const halfWidth = (rightX - leftX) / 2;
+    const spiralX = 400 + Math.sin(progress * Math.PI * 2 * 3) * halfWidth * 0.85;
+    pilgrim.setAttribute('cx', spiralX.toFixed(1));
+    pilgrim.setAttribute('cy', currentY.toFixed(1));
 
-    // Update active band highlight
-    bands.forEach(b => b.classList.remove('active-band'));
-    const band = document.getElementById('band-' + id);
-    if (band) band.classList.add('active-band');
-
-    // Scroll to detail panel smoothly
-    detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Drive poem scroll track in sync with funnel descent
+    const track = document.querySelector('.poem-scroll-track');
+    if (track) {
+        const col = track.parentElement;
+        const maxTranslate = Math.max(0, track.scrollHeight - col.clientHeight);
+        track.style.transform = 'translateY(-' + (progress * maxTranslate).toFixed(1) + 'px)';
+    }
 }
 
-bands.forEach(band => {
-    band.addEventListener('click', () => {
-        showCircle(band.dataset.circle);
-    });
-});
+window.addEventListener('scroll', updatePilgrimPosition, { passive: true });
+window.addEventListener('resize', updatePilgrimPosition);
+updatePilgrimPosition();
 
-// Show Circle II by default on load
-window.addEventListener('DOMContentLoaded', () => {
-    showCircle('c2');
-});
+
 
 /* ═══════════════════════════════════════════════════════
    TAB INTERACTION

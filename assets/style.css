@@ -252,7 +252,6 @@ a:hover {
 }
 
 .btn-hero {
-    background-color: var(--primary-color);
     color: white;
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
@@ -467,6 +466,53 @@ img {
     margin: 1rem 0;
 }
 
+/* Figures & Captions */
+figure {
+    margin: 2.5rem auto;
+    text-align: center;
+}
+
+figure img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 480px;
+    width: auto;
+    max-width: 100%;
+}
+
+figcaption {
+    margin-top: 0.75rem;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Full-width banner image at top of a page */
+.banner-image {
+    margin: 0 0 2.5rem 0;
+}
+
+.banner-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 0;
+}
+
+.banner-image p,
+.banner-image figcaption {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
 /* Discussion Prompt */
 .discussion-prompt {
     margin-top: 5rem;
@@ -531,6 +577,45 @@ img {
     font-family: var(--font-display);
     margin-bottom: 0.5rem;
     font-size: 1.1em;
+}
+
+/* Themed callout box (harmonized from inline-styled alert boxes) */
+.callout-box {
+    background: #fff;
+    border-left: 4px solid var(--accent-gold);
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.callout-box p {
+    margin: 0;
+}
+
+.callout-box strong {
+    color: var(--accent-red);
+}
+
+/* Theme card grid */
+.theme-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.theme-cards .card {
+    background: #fff;
+    padding: 2rem;
+    border-top: 4px solid var(--accent-red);
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.theme-cards .card h3 {
+    margin-top: 0;
+    color: var(--accent-red);
 }
 
 /* Hero Cycle Visuals */
@@ -1094,8 +1179,15 @@ footer {
     transition: background-color 0.2s;
 }
 
-.glossary-term:hover {
+.glossary-term:hover,
+.glossary-term:focus-visible {
     background-color: rgba(197, 160, 89, 0.1);
+}
+
+.glossary-term:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 .glossary-tooltip {
@@ -1136,6 +1228,7 @@ footer {
 }
 
 .glossary-term:hover .glossary-tooltip,
+.glossary-term:focus .glossary-tooltip,
 .glossary-term.active .glossary-tooltip {
     visibility: visible;
     opacity: 1;
@@ -1145,7 +1238,7 @@ footer {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--accent-red);
-    font-family: var(--font-header);
+    font-family: var(--font-heading);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.25rem;
 }
@@ -1177,5 +1270,167 @@ footer {
         background: rgba(0, 0, 0, 0.5);
         z-index: 9998;
         display: block;
+    }
+}
+
+/* ============================================
+   UX IMPROVEMENTS — 2026-06-28
+   Additive only. Visual/interaction enhancements.
+   No content changes.
+   ============================================ */
+
+/* --- Global keyboard focus visibility --- */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.nav-btn:focus-visible,
+.accordion:focus-visible,
+.module-nav a:focus-visible,
+.dropdown-item:focus-visible,
+.home-link:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* --- Homepage module cards: responsive grid, no empty gap --- */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.modules-grid .module-card {
+    max-width: none;
+    text-align: center;
+}
+
+/* Override the legacy 6rem headroom hack (cards have no image/description) */
+.modules-grid .module-card h3 {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+/* Pin the card button to the bottom for even rows */
+.modules-grid .module-card .btn {
+    margin-top: auto;
+}
+
+/* --- Homepage "Advanced" link (moved from inline styles) --- */
+.advanced-link {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.advanced-link a {
+    color: var(--accent-red);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-red);
+}
+
+.advanced-link a:hover {
+    color: var(--accent-red-hover);
+    border-bottom-color: var(--accent-red-hover);
+}
+
+/* --- Homepage site footer (moved from inline styles) --- */
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-sidebar);
+    margin-top: 2rem;
+    color: var(--text-secondary);
+}
+
+/* --- Reading progress bar (long article pages) --- */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+    z-index: 3000;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+/* --- Back-to-top button --- */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--accent-red);
+    color: #fff;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--accent-red-hover);
+}
+
+/* --- Mobile sidebar nav toggle (visible affordance) --- */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--accent-red);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.nav-toggle .nav-toggle-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+        justify-content: center;
+    }
+
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
     }
 }

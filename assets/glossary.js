@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     span.className = 'glossary-term';
                     span.textContent = matchedText;
                     span.dataset.term = termKey;
+                    span.tabIndex = 0;
+                    span.setAttribute('role', 'button');
+                    span.setAttribute('aria-label', 'Glossary definition: ' + termKey);
 
                     // Tooltip
                     const tooltip = document.createElement('span');
@@ -167,6 +170,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelectorAll('.glossary-term.active').forEach(el => el.classList.remove('active'));
             }
         });
+
+        // Keyboard Support: Enter/Space toggles a definition, Escape dismisses all
+        document.body.addEventListener('keydown', function (e) {
+            const term = e.target.closest('.glossary-term');
+            if (term && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                term.classList.toggle('active');
+                document.querySelectorAll('.glossary-term.active').forEach(el => {
+                    if (el !== term) el.classList.remove('active');
+                });
+            } else if (e.key === 'Escape') {
+                document.querySelectorAll('.glossary-term.active').forEach(el => el.classList.remove('active'));
+            }
+        });
     }
 });
 
@@ -197,5 +214,114 @@ document.addEventListener('DOMContentLoaded', function() {
             !sidebar.contains(e.target)) {
             sidebar.classList.remove('expanded');
         }
+    });
+});
+
+// ============================================
+// VISIBLE MOBILE NAV TOGGLE (HAMBURGER)
+// Added: 2026-06-28
+// Purpose: Give the mobile sidebar a discoverable toggle button.
+// Content Impact: NONE (UI affordance only)
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const brand = sidebar ? sidebar.querySelector('.brand') : null;
+    if (!sidebar || !brand) return;
+
+    const toggle = document.createElement('button');
+    toggle.className = 'nav-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', 'sidebar-nav');
+    toggle.innerHTML = '<span class="nav-toggle-icon" aria-hidden="true">\u2630</span><span class="nav-toggle-label">Menu</span>';
+
+    // Place the toggle right after the brand block
+    brand.insertAdjacentElement('afterend', toggle);
+
+    // Tag the inner <nav> so aria-controls resolves
+    const nav = sidebar.querySelector('nav');
+    if (nav && !nav.id) nav.id = 'sidebar-nav';
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const expanded = sidebar.classList.toggle('expanded');
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+
+    // Keep aria state in sync if other handlers collapse the sidebar
+    const observer = new MutationObserver(function () {
+        toggle.setAttribute('aria-expanded',
+            sidebar.classList.contains('expanded') ? 'true' : 'false');
+    });
+    observer.observe(sidebar, { attributes: true, attributeFilter: ['class'] });
+});
+
+// ============================================
+// READING PROGRESS BAR + BACK-TO-TOP
+// Added: 2026-06-28
+// Purpose: Reading aids for long article pages.
+// Content Impact: NONE (UI elements injected at runtime)
+// Activates only on pages with a .content-area (module/article pages).
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const content = document.querySelector('.content-area');
+    if (!content) return; // Skip homepage and non-article pages
+
+    // Progress bar
+    const bar = document.createElement('div');
+    bar.className = 'reading-progress';
+    bar.setAttribute('role', 'progressbar');
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    // Back-to-top button
+    const toTop = document.createElement('button');
+    toTop.className = 'back-to-top';
+    toTop.type = 'button';
+    toTop.setAttribute('aria-label', 'Back to top');
+    toTop.innerHTML = '<span aria-hidden="true">\u2191</span>';
+    document.body.appendChild(toTop);
+
+    toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    let ticking = false;
+    function update() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        if (scrollTop > 400) {
+            toTop.classList.add('visible');
+        } else {
+            toTop.classList.remove('visible');
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    update();
+});
+
+// ============================================
+// LAZY-LOAD IMAGES
+// Added: 2026-06-28
+// Purpose: Defer offscreen images for faster first paint.
+// Content Impact: NONE (adds loading attribute only)
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const imgs = document.querySelectorAll('img:not([loading])');
+    imgs.forEach(function (img, index) {
+        // Leave the first image eager (likely above the fold)
+        if (index === 0) return;
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
     });
 });
