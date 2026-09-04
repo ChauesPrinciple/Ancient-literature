@@ -4,1133 +4,1593 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sacred Mathematics</title>
-    <meta name="description" content="Sacred Mathematics. Part of ENGL-2310 Early World Literature, an online anthology of ancient and medieval texts by Professor Robert Ladd.">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="From Plato's solids to Dante's 3-sphere. Part of ENGL-2310 Early World Literature, an online anthology of ancient and medieval texts by Professor Robert Ladd.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,serif;background:#0a0a0f;color:#e2e8f0;padding:16px;max-width:1400px;margin:0 auto}
-.axiom-bar{text-align:center;font-style:italic;font-size:14px;color:#94a3b8;padding:12px 0 16px;border-bottom:1px solid #1e293b;margin-bottom:16px}
-.axiom-bar b{color:#fbbf24}
-.intro{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin-bottom:20px;line-height:1.6}
-.intro h1{color:#fbbf24;font-size:24px;margin-bottom:12px;font-family:'Cinzel',serif}
-.intro h2{color:#cbd5e0;font-size:16px;margin:16px 0 8px;font-weight:600}
-.intro p{color:#94a3b8;font-size:14px;margin-bottom:10px}
-.intro ul{margin-left:20px;color:#94a3b8;font-size:14px}
+body{font-family:Georgia,serif;background:#0a0a0f;color:#e2e8f0;padding:0 16px 48px;max-width:1400px;margin:0 auto}
+h1{color:#fbbf24;font-size:26px;margin-bottom:10px;font-family:'Cinzel',serif}
+h2.part{font-family:'Cinzel',serif;color:#fbbf24;font-size:17px;letter-spacing:.08em;margin:34px 0 6px;padding-bottom:8px;border-bottom:1px solid #1e293b}
+h2.part span{color:#64748b;font-family:monospace;font-size:12px;letter-spacing:.2em;display:block;margin-bottom:4px}
+p.partsub{color:#94a3b8;font-size:13px;font-style:italic;margin-bottom:14px}
+nav.toc{position:sticky;top:0;z-index:20;background:rgba(10,10,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid #1e293b;padding:9px 0;margin-bottom:16px;font-family:monospace;font-size:11px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+nav.toc a{color:#94a3b8;text-decoration:none;white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus{color:#EF9F27}
+nav.toc b{color:#fbbf24;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.06em;margin-right:6px}
+.axiom-bar{text-align:center;font-style:italic;font-size:14px;color:#cbd5e1;padding:10px 0 16px}
+.axiom-bar b{color:#fbbf24;font-style:normal}
+.intro{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin-bottom:8px;line-height:1.65}
+.intro h3{color:#e2e8f0;font-size:15px;margin:18px 0 8px;font-weight:600}
+.intro h3:first-child{margin-top:0}
+.intro p{color:#cbd5e1;font-size:14px;margin-bottom:10px}
+.intro ul{margin-left:20px;color:#cbd5e1;font-size:13.5px}
 .intro li{margin-bottom:6px}
 .intro a{color:#fbbf24;text-decoration:none;border-bottom:1px dotted #fbbf24}
-.intro a:hover{color:#EF9F27}
 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.panel{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px}
-.panel-full{grid-column:1/-1;background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px;margin-top:12px}
-.panel h3{font-size:12px;font-weight:500;color:#475569;font-family:monospace;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.panel{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:15px}
+.panel-full{grid-column:1/-1;background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:15px;margin-top:12px}
+.panel h3,.panel-full h3{font-size:12px;font-weight:500;color:#94a3b8;font-family:monospace;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
 canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px solid #1e293b}
-.dim-row{display:flex;gap:6px;margin-bottom:10px}
-.db{flex:1;padding:6px 4px;font-size:11px;font-family:monospace;background:#020617;border:1px solid #334155;border-radius:6px;color:#64748b;cursor:pointer;text-align:center;transition:all .15s}
+.dim-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
+.db{flex:1;min-width:62px;padding:7px 4px;font-size:11px;font-family:monospace;background:#020617;border:1px solid #475569;border-radius:6px;color:#cbd5e1;cursor:pointer;text-align:center;transition:all .15s}
+.db:hover,.db:focus{border-color:#EF9F27;color:#EF9F27}
 .db.on{background:#451a03;color:#fbbf24;border-color:#92400e}
-.eq{font-family:monospace;font-size:11px;color:#64748b;background:#020617;border-radius:6px;padding:8px 10px;margin:8px 0;line-height:1.8}
+.eq{font-family:monospace;font-size:11.5px;color:#cbd5e1;background:#020617;border-radius:6px;padding:9px 11px;margin:8px 0;line-height:1.8}
 .eq b{color:#fbbf24}
-.sl-row{display:flex;align-items:center;gap:8px;margin:6px 0}
-.sl-row label{font-size:11px;font-family:monospace;color:#475569;min-width:90px}
+.check{font-family:monospace;font-size:11.5px;background:#020617;border:1px solid #1e293b;border-left:3px solid #5DCAA5;border-radius:6px;padding:9px 11px;margin:8px 0;line-height:1.8;color:#cbd5e1}
+.check b{color:#5DCAA5}
+.sl-row{display:flex;align-items:center;gap:9px;margin:7px 0}
+.sl-row label{font-size:11px;font-family:monospace;color:#cbd5e1;min-width:126px}
 .sl-row input{flex:1;height:3px;accent-color:#EF9F27;cursor:pointer}
-.sl-row span{font-size:11px;font-family:monospace;color:#e2e8f0;min-width:36px;text-align:right}
-.info{font-size:11px;color:#475569;margin-top:8px;line-height:1.5;font-family:monospace}
+.sl-row output{font-size:11px;font-family:monospace;color:#e2e8f0;min-width:62px;text-align:right}
+.info{font-size:12.5px;color:#cbd5e1;margin-top:8px;line-height:1.6}
 .info b{color:#fbbf24}
 .params{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
-.pbox{background:#020617;border-radius:6px;padding:6px 8px;font-family:monospace;font-size:10px;color:#475569;text-align:center}
+.pbox{background:#020617;border-radius:6px;padding:6px 8px;font-family:monospace;font-size:10px;color:#94a3b8;text-align:center}
 .pbox b{display:block;font-size:14px;color:#fbbf24;margin-top:2px}
+.note{font-size:11.5px;color:#94a3b8;font-style:italic;margin-top:6px;line-height:1.55}
+.answer{background:#0f172a;border:1px solid #1e293b;border-left:3px solid #5DCAA5;border-radius:12px;padding:18px;margin-top:12px;line-height:1.65}
+.answer h4{font-size:14px;color:#5DCAA5;margin-bottom:10px;font-family:'Cinzel',serif;letter-spacing:.03em}
+.answer p{color:#cbd5e1;font-size:13.5px;margin-bottom:10px}
+.answer p:last-child{margin-bottom:0}
+.answer b{color:#fbbf24}
+.flag{color:#f0b46a;font-style:italic;font-size:12.5px}
+.btn{background:#0f172a;border:1px solid #475569;color:#cbd5e1;font-family:monospace;font-size:11px;border-radius:6px;padding:7px 13px;cursor:pointer;margin-right:6px}
+.btn:hover,.btn:focus{border-color:#EF9F27;color:#EF9F27}
+.keylabel{font-size:13.5px;color:#cbd5e1;margin:8px 0 10px;line-height:1.6;min-height:70px}
+.keylabel .dim{color:#fbbf24;font-family:monospace;font-size:12px;letter-spacing:.04em}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr}
+  .qgrid,.agrid{grid-template-columns:1fr !important}
+  h1{font-size:21px}
+  .intro p,.intro li{font-size:13px}
+  .eq,.info,.check{font-size:11px}
+  .keylabel{min-height:104px}
+  .sl-row label{min-width:100px}
+}
 </style>
 </head>
 <body>
 
-<div class="axiom-bar">The sacred cannot leak — therefore the space it inhabits is finite, <b>closed</b>, without boundary</div>
+<nav class="toc" aria-label="Contents">
+  <b>Sacred Mathematics</b>
+  <a href="#p1">I. Closure</a>
+  <a href="#p2">II. The triangle</a>
+  <a href="#p3">III. The three-sphere</a>
+  <a href="#p4">IV. What it costs</a>
+  <span style="color:#334155">|</span>
+  <a href="#s1">1 solids</a><a href="#s2">2 triangle</a><a href="#s3">3 qibla</a><a href="#s4">4 astrolabe</a>
+  <a href="#s5">5 ladder</a><a href="#s6">6 levels</a><a href="#s7">7 journey</a><a href="#s8">8 coordinates</a>
+  <a href="#s9">9 geodesic</a><a href="#s10">10 whole object</a><a href="#s11">11 vision</a>
+</nav>
+
+<h1>Sacred Mathematics</h1>
+<div class="axiom-bar">The organizing idea: the sacred cannot leak, so the space it inhabits is finite, <b>closed</b>, and without boundary</div>
 
 <div class="intro">
-<h1>Sacred Mathematics</h1>
+<h3>What this page argues</h3>
+<p>This is a genealogy of technique. It is not a claim that three cultures independently discovered the same manifold. The <em>&#347;ulba s&#363;tras</em> (Vedic India, roughly 800 to 500 BCE) give rope-and-peg constructions for fire altars and state the relation we call the Pythagorean theorem, centuries before Pythagoras. Whether those texts contain proofs in the Greek sense, or statements with constructions that assume them, is a live question among historians of mathematics. Al-B&#299;r&#363;n&#299; (Islamic Persia, 973 to 1048 CE) carried triangle geometry onto the surface of the sphere, calculating the <em>qibla</em>, the direction of Mecca, from any point on Earth. Dante (1265 to 1321 CE) worked in a culture that had inherited both, and described a cosmos in <em>Paradiso</em> that a twentieth-century physicist identified as a 3-sphere.</p>
+<p>The tools accumulate. That is the claim, and the eleven panels below run in that order: a closure argument, then the triangle, then the sphere, then the 3-sphere and Dante's route through it, and last the question the geometry raises about freedom.</p>
 
-<h2>The Thesis</h2>
-<p>Three civilizations, across two millennia, arrived at the same geometric structure: a finite space with no boundary and no outside. The <em>&#347;ulba s&#363;tras</em> (Vedic India, 800&#8211;500 BCE) used ropes stretched across fire altars to prove the Pythagorean theorem&#8202;&#8212;&#8202;centuries before Pythagoras. Al-B&#299;r&#363;n&#299; (Islamic Persia, 973&#8211;1048 CE) extended flat geometry to the sphere, calculating the <em>qibla</em> (direction of Mecca) using spherical trigonometry on S&#x00B2;. Dante Alighieri (1265&#8211;1321 CE) encoded this same geometry into the <em>Divine Comedy</em>, where Earth and God are antipodal points on a 3-sphere (S&#x00B3;)&#8202;&#8212;&#8202;finite, closed, with no outside.</p>
+<h3>The geometry of Paradiso</h3>
+<p>In 1979 the physicist Mark Peterson argued that Dante's cosmos, as described in <em>Paradiso</em> XXVIII, is a 3-sphere. The geocentric universe from Earth out to the Primum Mobile forms one hemisphere. The Empyrean, with its angelic spheres contracting toward a luminous point, forms the other. They join at the equator of the Primum Mobile. Peterson's conclusion was that if the passage is not describing the organization of 2-spheres into a 3-sphere, it is hard to see what it is describing. Dante himself believed he was saying something new.</p>
+<p>The mathematician John Baez frames the same structure as a <b>one-point compactification</b> of three-dimensional Euclidean space. Add a single point at infinity, and that point is God, the <em>punto</em>. Satan sits at the origin, the farthest point from it. Barsella and Vespri (2021, with a synthesis for <em>Digital Dante</em> in 2022) proposed a refinement using a stereographic model, grounded in Dante's own image of the universe as pages bound into a single volume, <em>legato con amore in un volume / ci&#242; che per l'universo si squaderna</em> (Par. 33, 86 to 87). Each S&#x00B2; slice is a page and the cosmos is the book. Stereographic projection was available in Dante's period, so this is not modern mathematics imposed on a medieval poet.</p>
 
-<p>This page makes that convergence visible. Beginning with Plato&#8217;s cosmic geometry, each panel builds from the Platonic solids through the triangle, circle, sphere, and 3-sphere, following the mathematics as it develops historically and dimensionally.</p>
-
-<h2>The Geometry of Paradiso</h2>
-<p>In 1979, the physicist Mark Peterson demonstrated that Dante&#8217;s cosmos&#8202;&#8212;&#8202;as described in <em>Paradiso</em> Canto XXVIII&#8202;&#8212;&#8202;is a 3-sphere. The geocentric universe (Earth to Primum Mobile) forms one hemisphere; the Empyrean (angelic spheres contracting toward God&#8217;s luminous point) forms the other. They are glued at the equator of the Primum Mobile. Peterson&#8217;s conclusion: <em>&#8220;If this passage is not taken as a description of the organization of 2-spheres into a 3-sphere, then it is hard to see what the point of it is.&#8221;</em> Dante himself believed he was expressing something entirely new.</p>
-
-<p>The mathematician John Baez frames this as a <strong>one-point compactification</strong> of 3D Euclidean space: add a single point at infinity&#8202;&#8212;&#8202;that point is God (<em>punto</em>). Satan sits at the origin, the farthest point from God. The result is S&#x00B3;. In 2022, Barsella and Vespri proposed a refinement: a <strong>stereographic model</strong> where angels form a cylinder connecting material and spiritual hemispheres&#8202;&#8212;&#8202;the engine that sets the celestial spheres in motion. They ground this in Dante&#8217;s own metaphor: <em>&#8220;legato con amore in un volume / ci&#242; che per l&#8217;universo si squaderna&#8221;</em> (Par. 33, 86&#8211;87)&#8202;&#8212;&#8202;the universe as pages bound into a single book. Each S&#x00B2; slice is a page; the whole cosmos is the volume. Stereographic projection was known in Dante&#8217;s time; this is not modern mathematics imposed on a medieval poet.</p>
-
-<h2>Why Closure?</h2>
-<p>Leibniz&#8217;s Principle of Sufficient Reason (1714) demands: <em>&#8220;Nothing happens without a reason why it should be so rather than otherwise.&#8221;</em> A boundary in sacred space would be a brute fact&#8202;&#8212;&#8202;an edge with no sufficient reason to exist. The sacred <strong>cannot leak</strong> because no boundary is logically justified. This is not metaphor; it is the logical structure that produces S&#x00B3;. The same principle, applied to physics, generates the variational tradition: light follows the path of least time (Ibn al-Haytham &#8594; Fermat), matter follows the path of stationary action (Maupertuis &#8594; Euler &#8594; Lagrange &#8594; Hamilton). God selects the best possible world from logical space; nature selects the optimal trajectory through configuration space. The geodesic&#8202;&#8212;&#8202;the shortest path on a curved surface&#8202;&#8212;&#8202;is where sacred geometry and physics converge.</p>
-
-<p>In 1922, Pavel Florensky was the first to apply non-Euclidean geometry to the <em>Divine Comedy</em>, proposing that Dante&#8217;s passage through Satan&#8217;s body&#8202;&#8212;&#8202;where &#8220;down becomes up&#8221;&#8202;&#8212;&#8202;is a <strong>change of sheet on a Riemann surface</strong>. The substitution R &#8594; iR maps spherical trigonometry to hyperbolic trigonometry; the imaginary unit bridges positive and negative curvature. This is the same geometrical discontinuity that closes S&#x00B3;: you cannot reach the boundary because passing through the antipodal point flips your orientation. There is no edge to reach.</p>
-
-<p>Plato&#8217;s <em>Timaeus</em> (c. 360 BCE) assigned the dodecahedron&#8202;&#8212;&#8202;the most sphere-like of the five Platonic solids&#8202;&#8212;&#8202;to the cosmos itself. The Pythagorean Tetractys (1+2+3+4 = 10) structured Dante&#8217;s poem: 3 <em>cantiche</em>, 33 cantos each, plus one, totaling 100 = 10&#x00B2;. The number 9 (3&#x00D7;3) governs both Hell&#8217;s circles and Heaven&#8217;s spheres&#8202;&#8212;&#8202;the final boundary before the Decad&#8217;s return to unity. Sacred geometry is not decoration; it is the architecture.</p>
-
-<p><a href="index.html">&#8592; Return to Course Home</a></p>
+<h3>Why closure</h3>
+<p>A boundary would be an edge with nothing on the other side, and nothing to explain why the edge falls where it does. That dissatisfaction is old, and Leibniz gave it its most precise formulation four centuries after Dante in the Principle of Sufficient Reason: nothing happens without a reason why it should be so rather than otherwise. Leibniz is a later articulation of the intuition, not its source, and he cannot be Dante's reason for anything. The same principle applied to physics produced the variational tradition, in which light takes the path of least time and matter the path of stationary action. The geodesic, the shortest path on a curved surface, is where this page's geometry and that tradition meet, and it is what panel 9 draws.</p>
+<p>In 1922 Pavel Florensky was the first to read the <em>Commedia</em> through non-Euclidean geometry, proposing that Dante's passage through Satan's body, where down becomes up, is a change of sheet on a Riemann surface. Florensky was working before Peterson and reached the problem from a different direction; how far the two readings agree is a question for Dante scholarship rather than something this page settles. What is modeled here is Peterson's S&#x00B3;.</p>
+<p>Plato's <em>Timaeus</em> (around 360 BCE) assigned the dodecahedron, the most sphere-like of the five regular solids, to the cosmos itself. The Pythagorean Tetractys, 1+2+3+4 = 10, structures the poem: three <em>cantiche</em> of 33 cantos each, plus the opening canto of the <em>Inferno</em>, giving 100, which is 10 squared.</p>
 </div>
 
-<div class="panel-full" style="margin-bottom:12px">
-  <h3>1. The Five Closures &#8212; Platonic Solids</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Only five convex regular polyhedra exist. The constraint (r&#8722;2)(n&#8722;2) &lt; 4, where n is the polygon&#8217;s sides and r is the number meeting at each vertex, admits exactly five solutions. This is a <strong>closure argument</strong> analogous to the S&#x00B3; boundary argument: only these five configurations close properly into a convex solid. Plato&#8217;s <em>Timaeus</em> (c. 360 BCE) assigned each to an element&#8202;&#8212;&#8202;fire, earth, air, water&#8202;&#8212;&#8202;and reserved the dodecahedron for the cosmos itself: <em>&#8220;God used it up for the Universe in his decoration thereof.&#8221;</em> Euler&#8217;s formula V&#8722;E+F = 2 holds for all five: the topological signature of a closed surface. Kepler (1596) nested all five between the planetary orbits in his <em>Mysterium Cosmographicum</em>, seeking the same divine geometry Dante encoded in S&#x00B3;.</p>
-  <div class="dim-row">
-    <button class="db on" id="stetra" onclick="setSolid(0)">Tetra</button>
-    <button class="db" id="scube" onclick="setSolid(1)">Cube</button>
-    <button class="db" id="socta" onclick="setSolid(2)">Octa</button>
-    <button class="db" id="sdodeca" onclick="setSolid(3)">Dodeca</button>
-    <button class="db" id="sicosa" onclick="setSolid(4)">Icosa</button>
+<h2 class="part" id="p1"><span>PART I</span>Closure</h2>
+<p class="partsub">Why a finite space can have no edge, argued first where it is easiest to see.</p>
+
+<div class="panel-full" id="s1">
+  <h3>1. The five closures: Platonic solids</h3>
+  <p class="info"><b>What this shows.</b> Only five convex regular polyhedra exist. The constraint (r&minus;2)(n&minus;2) &lt; 4, where n is the number of sides of each face and r the number meeting at a vertex, admits exactly five solutions. This is a closure argument of the same family as the boundary argument for S&#x00B3;: only these configurations close. Plato's <em>Timaeus</em> assigned four to the elements and reserved the dodecahedron for the cosmos. Euler's formula V&minus;E+F = 2 holds for all five, which is the topological signature of a closed surface. Kepler nested all five between the planetary orbits in the <em>Mysterium Cosmographicum</em> (1596).</p>
+  <div class="dim-row" role="group" aria-label="Choose a solid">
+    <button type="button" class="db on" id="sol0" aria-pressed="true">Tetra</button>
+    <button type="button" class="db" id="sol1" aria-pressed="false">Cube</button>
+    <button type="button" class="db" id="sol2" aria-pressed="false">Octa</button>
+    <button type="button" class="db" id="sol3" aria-pressed="false">Dodeca</button>
+    <button type="button" class="db" id="sol4" aria-pressed="false">Icosa</button>
   </div>
-  <canvas id="cSolids" height="260"></canvas>
-  <div class="eq" id="solidInfo"><b>{3,3} Tetrahedron</b> &#8212; 4 faces, 4 vertices, 6 edges<br>Plato&#8217;s element: <b>Fire</b><br>V&#8722;E+F = 4&#8722;6+4 = <b>2</b> (Euler&#8217;s formula: the topological signature of closure)</div>
+  <canvas id="cSolids" height="260" role="img" aria-label="A rotating wireframe of the selected Platonic solid. Its counts are given in the text below."></canvas>
+  <div class="eq" id="solidInfo" aria-live="polite"></div>
 </div>
 
-<div class="panel-full" style="margin-top:12px">
-  <h3>2. The Sacred Triangle &#8212; Foundation of Sacred Geometry</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The spherical triangle formed by three great-circle arcs: North Pole, Observer, and Mecca. The <em>&#347;ulba s&#363;tras</em> (Vedic, 800&#8211;500 BCE) established the right triangle as the basis of sacred construction&#8202;&#8212;&#8202;the Pythagorean theorem appears in these texts centuries before Greece. Al-B&#299;r&#363;n&#299; (1000 CE) extended the triangle to the curved surface of the sphere to solve the <em>qibla</em>. <strong>The triangle is the atom of all that follows.</strong> As Barsella and Vespri (2022) demonstrated, stereographic projection&#8202;&#8212;&#8202;the map that projects a sphere onto a plane&#8202;&#8212;&#8202;was known in Dante&#8217;s time via the principle of the magic lantern. This is not anachronistic mathematics; it is the geometry Dante&#8217;s world already possessed. Adjust observer position in the Qibla panel below to see this triangle change live.</p>
-  <canvas id="cTriangle" height="200"></canvas>
-  <div class="eq" id="eqTriangle" style="margin-top:8px">
-    <b>sin a / sin Q</b> &nbsp;=&nbsp; ratio updates with observer position
-  </div>
+<h2 class="part" id="p2"><span>PART II</span>The triangle, and the sphere it is drawn on</h2>
+<p class="partsub">Rope geometry carried onto a curved surface, and the machine that made the result portable.</p>
+
+<div class="panel-full" id="s2">
+  <h3>2. The sacred triangle</h3>
+  <p class="info"><b>What this shows.</b> The spherical triangle whose vertices are the North Pole, an observer, and Mecca. The <em>&#347;ulba s&#363;tras</em> made the right triangle the basis of sacred construction. Al-B&#299;r&#363;n&#299; carried the triangle onto the sphere to solve the <em>qibla</em>. The figure is laid out to the <b>true side lengths and the true angles</b>, and it redraws as you move the observer in panel 3.</p>
+  <canvas id="cTriangle" height="300" role="img" aria-labelledby="triDesc"></canvas>
+  <p id="triDesc" class="sr-only">A triangle with the North Pole, the observer and Mecca at its corners, drawn to true measure from the current observer position. All numeric values appear in the readouts below.</p>
+  <div class="check" id="eqTriangle" aria-live="polite"></div>
+  <p class="note">The drawing is planar, so its three angles must sum to 180 degrees while the true spherical angles sum to more. That difference is the spherical excess, and on a unit sphere it equals the triangle's area. It is the reason a flat map of the sky always distorts something, which is what panel 4 is about.</p>
 </div>
 
-<div class="panel-full" style="margin-top:12px">
-  <h3>3. Qibla &#8212; spherical trig on the S&#x00B2; slice, geodesic extended through S&#x00B3;</h3>
-  <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The <em>qibla</em> is the direction Muslims face during prayer (toward the Kaaba in Mecca). Al-B&#299;r&#363;n&#299; (973&#8211;1048 CE) used spherical trigonometry to calculate this direction from any point on Earth&#8202;&#8212;&#8202;the same triangle drawn in panel 2 above, applied to the curved surface of S&#x00B2;. The qibla geodesic is the <strong>shortest path on a curved surface</strong>&#8202;&#8212;&#8202;the same principle that, centuries later, Ibn al-Haytham, Fermat, and Leibniz would generalize into the variational tradition: light follows the path of least time, matter follows the path of stationary action. The geodesic is where sacred geometry becomes physics. <strong>Left:</strong> Qibla on Earth&#8217;s surface. <strong>Right:</strong> That same geometry on any S&#x00B2; slice of S&#x00B3;. Adjust lat/lon to change the triangle above live.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div class="panel-full" id="s3">
+  <h3>3. Qibla: spherical trigonometry on an S&#x00B2; slice</h3>
+  <p class="info"><b>What this shows.</b> The <em>qibla</em> is the direction of the Kaaba in Mecca. Al-B&#299;r&#363;n&#299; computed it with spherical trigonometry, using the triangle in panel 2. The qibla path is a geodesic, the shortest route across a curved surface. <b>Left:</b> the qibla on Earth. <b>Right:</b> where that S&#x00B2; sits inside the 3-sphere of Part III.</p>
+  <div class="qgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
-      <canvas id="cSphere" height="240"></canvas>
-      <div class="sl-row" style="margin-top:8px">
-        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">observer lat</label>
-        <input type="range" id="oLat" min="-80" max="80" value="40" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
-        <span id="oLatV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">40&#xb0; N</span>
-      </div>
-      <div class="sl-row">
-        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">observer lon</label>
-        <input type="range" id="oLon" min="-180" max="180" value="60" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
-        <span id="oLonV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">60&#xb0; E</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px">
-        <div class="pbox">qibla bearing<b id="rBearing">&#8212;</b></div>
-        <div class="pbox">great-circle dist<b id="rDist">&#8212;</b></div>
-        <div class="pbox">side c (N&#x2192;obs)<b id="rSideC">&#8212;</b></div>
+      <canvas id="cSphere" height="240" role="img" aria-label="A rotating globe showing the observer, Mecca, and the great-circle arc between them."></canvas>
+      <div class="sl-row"><label for="oLat">observer lat</label><input type="range" id="oLat" min="-80" max="80" value="36" step="1"><output for="oLat" id="oLatV">36&deg; N</output></div>
+      <div class="sl-row"><label for="oLon">observer lon</label><input type="range" id="oLon" min="-180" max="180" value="-87" step="1"><output for="oLon" id="oLonV">87&deg; W</output></div>
+      <div class="params">
+        <div class="pbox">qibla bearing<b id="rBearing">&#183;</b></div>
+        <div class="pbox">great-circle dist<b id="rDist">&#183;</b></div>
+        <div class="pbox">side c (N to obs)<b id="rSideC">&#183;</b></div>
       </div>
     </div>
     <div>
-      <canvas id="cQS3" height="240"></canvas>
-      <div class="sl-row" style="margin-top:8px">
-        <label style="font-family:monospace;font-size:11px;color:#475569;min-width:90px">slice depth &#x03c8;</label>
-        <input type="range" id="qPsi" min="2" max="98" value="50" step="1" oninput="updateQibla()" style="flex:1;accent-color:#EF9F27">
-        <span id="qPsiV" style="font-family:monospace;font-size:11px;color:#e2e8f0;min-width:50px;text-align:right">&#x03c0;/2</span>
-      </div>
+      <canvas id="cQS3" height="240" role="img" aria-label="A profile of the 3-sphere showing which S2 slice carries the qibla."></canvas>
+      <div class="sl-row"><label for="qPsi">slice depth &psi;</label><input type="range" id="qPsi" min="2" max="98" value="50" step="1"><output for="qPsi" id="qPsiV">&pi;/2</output></div>
     </div>
   </div>
-  <div class="eq" id="eqQibla" style="margin-top:8px">
-    <b>tan Q = sin &#x394;&#x03bb; / (cos &#x03c6;&#x2081; tan &#x03c6;&#x2082; &#x2212; sin &#x03c6;&#x2081; cos &#x394;&#x03bb;)</b><br>
-    Spherical law of sines on the triangle: North Pole &#x2013; Observer &#x2013; Mecca.<br>
-    The qibla bearing Q is invariant under change of &#x03c8; &#x2014; angle is preserved on every S&#x00B2; slice. What changes is r&#x00b7;sin&#x03c8;. At &#x03c8;&#x2192;0 or &#x03c8;&#x2192;&#x03c0; the sphere collapses: <b>you are at the punto.</b>
+  <div class="eq" id="eqQibla" aria-live="polite"></div>
+</div>
+
+<div class="panel-full" id="s4">
+  <h3>4. The astrolabe: stereographic projection as a thousand-year-old machine</h3>
+  <p class="info"><b>What this shows.</b> Projection from the south celestial pole onto the plane of the equator, which is what an astrolabe's plate is. Ptolemy's <em>Planisphaerium</em> describes it; al-B&#299;r&#363;n&#299; wrote on astrolabe construction. <b>Stereographic projection is conformal: it preserves angles.</b> The cross drawn at the star marks two directions that are perpendicular on the sphere, and the readout measures the angle between their images on the flat plate. It stays at 90 degrees wherever you put the star. That is the property that makes the plate a true map of the sky's angles, and it is why the same projection can carry Dante's cosmos in panel 10.</p>
+  <canvas id="cAstro" height="560" role="img" aria-label="Left, a cross-section showing projection from the south celestial pole onto the equatorial plane. Right, the astrolabe plate with almucantars, azimuth arcs, the ecliptic, the star, and the qibla triangle."></canvas>
+  <div class="agrid" style="display:grid;grid-template-columns:1fr 1fr;gap:0 26px">
+    <div class="sl-row"><label for="aPhi">observer latitude &phi;</label><input type="range" id="aPhi" min="0" max="75" value="36" step="1"><output for="aPhi" id="lblPhi">36&deg;</output></div>
+    <div class="sl-row"><label for="aDec">star declination &delta;</label><input type="range" id="aDec" min="-23" max="75" value="30" step="1"><output for="aDec" id="lblDec">30&deg;</output></div>
+    <div class="sl-row"><label for="aHA">star hour angle</label><input type="range" id="aHA" min="0" max="359" value="54" step="1"><output for="aHA" id="lblHA">54&deg;</output></div>
+    <div class="sl-row"><label for="aDL">Mecca longitude offset</label><input type="range" id="aDL" min="0" max="180" value="114" step="1"><output for="aDL" id="lblDL">114&deg; E</output></div>
   </div>
+  <div class="check" id="astroCheck" aria-live="polite"></div>
+  <p class="note">The declination slider stops at the Tropic of Capricorn because that is where the plate's rim is. A real astrolabe cannot show stars further south either; the plate simply ends.</p>
+</div>
+
+<h2 class="part" id="p3"><span>PART III</span>The three-sphere</h2>
+<p class="partsub">One more dimension of the same move, and the route Dante takes through it.</p>
+
+<div class="wrap">
+  <div class="panel" id="s5">
+    <h3>5. The ladder: S&#x2070; to S&#x00B3;</h3>
+    <p class="info"><b>What this shows.</b> How spheres build from zero dimensions to three. Each step adds one angular coordinate and closes the space further.</p>
+    <div class="dim-row" role="group" aria-label="Choose a dimension">
+      <button type="button" class="db" id="dim0" aria-pressed="false">S&#x2070;</button>
+      <button type="button" class="db" id="dim1" aria-pressed="false">S&#x00B9;</button>
+      <button type="button" class="db on" id="dim2" aria-pressed="true">S&#x00B2;</button>
+      <button type="button" class="db" id="dim3" aria-pressed="false">S&#x00B3;</button>
+    </div>
+    <canvas id="cLadder" height="220" role="img" aria-label="A diagram of the selected sphere dimension. Its description is in the text below."></canvas>
+    <div class="eq" id="eqBox" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" id="s6">
+    <h3>6. Dante's S&#x00B3;, every named level</h3>
+    <p class="info"><b>What this shows.</b> Hell's nine circles descend from Earth's surface to Satan, the spheres shrinking. Purgatory's seven terraces rise from the surface toward the Moon. Nine celestial spheres grow from the Moon to the Primum Mobile at &psi;=&pi;/2, the largest S&#x00B2; in the cosmos. Above it nine angelic orders shrink toward God. Both poles are points. That inversion is what Peterson identified in <em>Paradiso</em> XXVIII. Widths here are the honest sin&nbsp;&psi;.</p>
+    <canvas id="cDante" height="440" role="img" aria-label="A labelled vertical profile of Dante's cosmos from Satan to God."></canvas>
+    <div class="sl-row"><label for="sDante">depth &psi;</label><input type="range" id="sDante" min="1" max="99" value="75"><output for="sDante" id="dLbl">&pi;/2</output></div>
+    <div class="info" id="danteInfo" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="panel-full" id="s7">
+  <h3>7. The journey, and why down becomes up</h3>
+  <p class="info"><b>What this shows.</b> The whole route as one continuous path. Depth is &psi;: Satan at 0, Earth's surface just above, the Primum Mobile at &pi;/2, God at &pi;. Horizontal position is where you stand on the S&#x00B2; at that depth. <b>Left of the axis is Jerusalem's hemisphere. Right is the antipodal hemisphere, where Mount Purgatory stands.</b></p>
+  <p class="info"><b>The inversion.</b> At &psi;=0 the sphere is not small, it is a single point. A path continuing straight through it has nowhere to come out except the antipode. Dante and Virgil never turn around; the sphere runs out from under them, and the angular coordinate flips by &pi;. That is the whole content of down becoming up, and it is why the descent is drawn on the left and everything after Satan on the right. Florensky located the critical moment exactly here.</p>
+  <canvas id="cRope" height="520" role="img" aria-label="A vertical profile of the 3-sphere with Dante's whole route drawn along it, the descent on the left and everything after Satan on the right."></canvas>
+  <div class="sl-row"><label for="sJourney">journey</label><input type="range" id="sJourney" min="0" max="1000" value="0"><output for="sJourney" id="jLbl">the gate</output></div>
+  <div class="sl-row"><label for="sPsi">slice &psi;</label><input type="range" id="sPsi" min="0" max="100" value="75"><output for="sPsi" id="psiLbl">&pi;/2</output></div>
+  <div class="check" id="journeyInfo" aria-live="polite"></div>
+  <div class="info" id="ropeInfo" aria-live="polite"></div>
 </div>
 
 <div class="wrap">
-
-  <div class="panel">
-    <h3>4. The Ladder — S&#x2070; to S&#x00B3;</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Click the buttons to see how spheres build from 0 dimensions to the 3-sphere. <strong>S&#x2070;</strong> = two points (Satan and God)&#8202;&#8212;&#8202;the minimal closure, what Baez calls the one-point compactification&#8217;s two poles. <strong>S&#x00B9;</strong> = circle (shows <em>jy&#257;</em>, the Sanskrit &#8220;bowstring&#8221; or sine function from ancient Indian trigonometry). <strong>S&#x00B2;</strong> = ordinary sphere surface&#8202;&#8212;&#8202;Al-B&#299;r&#363;n&#299;&#8217;s domain, where every qibla lives. <strong>S&#x00B3;</strong> = the full structure containing Dante&#8217;s cosmos. Peterson (1979): the geocentric universe forms one hemisphere, the Empyrean forms the other, glued at the Primum Mobile. Each step adds one angular coordinate; each step closes the space further.</p>
-    <div class="dim-row">
-      <button class="db" id="d0" onclick="setDim(0)">S&#x2070;</button>
-      <button class="db" id="d1" onclick="setDim(1)">S&#x00B9;</button>
-      <button class="db on" id="d2" onclick="setDim(2)">S&#x00B2;</button>
-      <button class="db" id="d3" onclick="setDim(3)">S&#x00B3;</button>
-    </div>
-    <canvas id="cLadder" height="220"></canvas>
-    <div class="eq" id="eqBox"><b>x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;</b><br>Two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;&#39;s domain.<br>Every qibla lives on this surface.</div>
-  </div>
-
-  <div class="panel">
-    <h3>5. The Rope &#8212; &#347;ulba / Wheeler world-line</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Dante&#8217;s complete journey mapped against &#x03c8; (vertical axis). <strong>Bottom</strong> (&#x03c8;=0) = Satan at Earth&#8217;s center. <strong>Middle</strong> (&#x03c8;=&#x03c0;/2) = Earth&#8217;s surface. <strong>Top</strong> (&#x03c8;=&#x03c0;) = God. <span style="color:#8B1a1a">Dark red</span> = Hell: 9 circles descending (Virgil guides). <span style="color:#5DCAA5">Teal</span> = Purgatorio: 7 terraces ascending (Virgil guides). <span style="color:#EF9F27">Gold</span> = Paradise: 9 celestial spheres ascending (Beatrice guides). The <em>&#347;ulba s&#363;tras</em> used literal ropes to measure sacred space; Wheeler called any path through spacetime a &#8220;world-line.&#8221; Florensky (1922) identified the critical moment: when Dante passes through Satan&#8217;s body and &#8220;down becomes up,&#8221; this is a <strong>change of sheet on a Riemann surface</strong>&#8202;&#8212;&#8202;the geometrical discontinuity at &#x03c8;=0 where orientation reverses. Leibniz would call this the <em>most determined path</em>: the unique trajectory satisfying all constraints. <strong>Move the slider</strong> to cut a horizontal slice at depth &#x03c8;: the width of the funnel shows the radius of the S&#x00B2; sphere at that level (sin &#x03c8;). Watch how the space narrows to a point at both poles.</p>
-    <canvas id="cRope" height="320"></canvas>
-    <div class="sl-row" style="margin-top:8px">
-      <label>slice &psi;</label>
-      <input type="range" id="sPsi" min="0" max="100" value="50" oninput="onPsi(this.value)">
-      <span id="psiLbl">&pi;/2</span>
-    </div>
-    <div class="info" id="ropeInfo"><b>&psi; = &pi;/2</b><br>Loading...</div>
-  </div>
-
-  <div class="panel">
-    <h3>6. Dante&#39;s S&#x00B3; &#8212; the complete structure</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> The complete S&#x00B3; structure of Dante&#8217;s cosmos. <strong>Bottom hemisphere</strong> (&#x03c8;=0 to &#x03c8;=&#x03c0;/2): the physical world. <span style="color:#c83c3c">Hell&#8217;s 9 circles</span> descend from Earth&#8217;s surface toward Satan at the center (&#x03c8;=0), the spheres <em>shrinking</em> as you go down. After passing through Satan, <span style="color:#5DCAA5">Purgatorio&#8217;s 7 terraces</span> ascend back to Earth&#8217;s surface. <strong>Top hemisphere</strong> (&#x03c8;=&#x03c0;/2 to &#x03c8;=&#x03c0;): the spiritual world. <span style="color:#EF9F27">Paradise&#8217;s 9 celestial spheres</span> ascend from the Primum Mobile toward God&#8217;s <em>punto</em> (&#x03c8;=&#x03c0;), shrinking again. Both poles are points; the equator (&#x03c8;=&#x03c0;/2) is the maximum sphere. This is the <strong>inverted geometry</strong>: Hell and Paradise mirror each other across Earth&#8217;s surface, both converging to points. Peterson (1979) and Barsella &amp; Vespri (2022): the geocentric universe forms one hemisphere, the Empyrean the other, glued at the Primum Mobile. Dante: <em>&#8220;legato con amore in un volume / ci&#242; che per l&#8217;universo si squaderna&#8221;</em> (Par. 33, 86&#8211;87).</p>
-    <canvas id="cDante" height="340"></canvas>
-    <div class="sl-row" style="margin-top:8px">
-      <label>depth &psi;</label>
-      <input type="range" id="sDante" min="1" max="99" value="50" oninput="onDante(this.value)">
-      <span id="dLbl">&pi;/2</span>
-    </div>
-    <div class="info" id="danteInfo">At &psi;=&pi;/2: Earth&#8217;s surface. Maximum S&#x00B2;. Hell descends below; Paradise ascends above.</div>
-  </div>
-
-  <div class="panel">
-    <h3>7. The Coordinates &#8212; &psi; &theta; &phi; generate S&#x00B3;</h3>
-    <p class="info" style="margin-bottom:10px"><strong>What this shows:</strong> Three angles that locate any point on S&#x00B3;. <strong>&#x03c8;</strong> (psi) = depth from Earth to God&#8202;&#8212;&#8202;the coordinate Dante traverses. <strong>&#x03b8;</strong> (theta) = latitude on each S&#x00B2; slice. <strong>&#x03c6;</strong> (phi) = longitude. Three coordinates for the 3-sphere, just as Dante&#8217;s poem has three <em>cantiche</em>&#8202;&#8212;&#8202;Pythagorean structure encoded in the dimensionality itself. Leibniz&#8217;s relational space: these coordinates are not positions in an absolute container but <em>relations between substances</em>. The point exists because it is discernible from other points (Leibniz&#8217;s Principle of Identity of Indiscernibles); remove the relations, and the space vanishes. Adjust the sliders to explore.</p>
-    <canvas id="cCoord" height="220"></canvas>
-    <div class="sl-row"><label>&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50" oninput="onCoord()"><span id="lPsi">90&#xb0;</span></div>
-    <div class="sl-row"><label>&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33" oninput="onCoord()"><span id="lTheta">60&#xb0;</span></div>
-    <div class="sl-row"><label>&phi; azimuthal</label><input type="range" id="cPhi" min="0" max="100" value="0" oninput="onCoord()"><span id="lPhi">0&#xb0;</span></div>
+  <div class="panel" id="s8">
+    <h3>8. The coordinates: &psi;, &theta;, &phi;</h3>
+    <p class="info"><b>What this shows.</b> Three angles locate any point on S&#x00B3;. <b>&psi;</b> is depth from Satan to God, the coordinate Dante travels. <b>&theta;</b> is latitude on each S&#x00B2; slice and <b>&phi;</b> is longitude. The norm below stays at 1 for every setting, which is what it means to be on the sphere.</p>
+    <canvas id="cCoord" height="220" role="img" aria-label="A sphere with three coordinate circles and a marked point."></canvas>
+    <div class="sl-row"><label for="cPsi">&psi; radial</label><input type="range" id="cPsi" min="0" max="100" value="50"><output for="cPsi" id="lPsi">90&deg;</output></div>
+    <div class="sl-row"><label for="cTheta">&theta; polar</label><input type="range" id="cTheta" min="0" max="100" value="33"><output for="cTheta" id="lTheta">60&deg;</output></div>
+    <div class="sl-row"><label for="cPhi">&phi; azimuthal</label><input type="range" id="cPhi" min="0" max="100" value="0"><output for="cPhi" id="lPhi">0&deg;</output></div>
     <div class="params">
-      <div class="pbox">x&#x2080; = r&middot;cos&psi;<b id="vx0">0.00</b></div>
-      <div class="pbox">r&middot;sin&psi; (slice radius)<b id="vrad">1.00</b></div>
-      <div class="pbox">&#x2211;x&#x1D62;&#x00B2; (must = 1)<b id="vnorm">1.00</b></div>
+      <div class="pbox">x&#x2080; = cos&psi;<b id="vx0">0.00</b></div>
+      <div class="pbox">sin&psi; (slice radius)<b id="vrad">1.00</b></div>
+      <div class="pbox">&Sigma;x&#x1D62;&#x00B2; (must be 1)<b id="vnorm">1.00</b></div>
     </div>
   </div>
 
-</div>
-
-<div class="panel-full" style="margin-top:12px">
-  <h3>8. Complete Object &#8212; S&#x00B3; as Klein bottle: the geometry of no boundary</h3>
-  <p class="info" style="margin-bottom:10px">The Klein bottle <em>is</em> the visualization of S&#x00B3;. Both are closed manifolds: no inside, no outside, no boundary. You can travel forever without hitting an edge. The self-intersection you see is a 3D projection artifact: in 4D, the tube never passes through itself, just as a 3D sphere has no self-intersection when viewed from 3D (only its 2D shadow might). Leibniz argued against Newton that space is not an absolute container but an <em>&#8220;order of coexistences&#8221;</em>&#8202;&#8212;&#8202;a web of relations. S&#x00B3; vindicates this: there is no &#8220;outside&#8221; for the container to sit in. Leibniz&#8217;s Principle of Identity of Indiscernibles proves it: two S&#x00B3; universes in different &#8220;locations&#8221; would be indiscernible&#8202;&#8212;&#8202;therefore identical. There is only the structure. Move the slider to highlight a cross-section at depth &#x03c8;. The gold rope is Dante&#8217;s world-line threading through the complete object.</p>
-  <canvas id="cFull" height="320"></canvas>
-  <div class="sl-row" style="margin-top:8px">
-    <label>slice &psi;</label>
-    <input type="range" id="sFullPsi" min="0" max="100" value="50" oninput="onFullPsi(this.value)">
-    <span id="fullPsiLbl">&pi;/2</span>
-  </div>
-  <div class="eq" style="margin-top:8px">
-    <b>No inside. No outside. No boundary.</b> &nbsp;|&nbsp; Gold highlight = cross-section at current &psi; &nbsp;|&nbsp; Gold rope = world-line (Dante&#39;s path)<br>
-    The self-intersection is a 3D artifact only. In 4D: no self-intersection, no edge, no outside. <b>The sacred cannot leak.</b>
+  <div class="panel" id="s9">
+    <h3>9. The geodesic: a great circle on S&#x00B3;</h3>
+    <p class="info"><b>What this shows.</b> &gamma;(t) = cos&nbsp;t&nbsp;&middot;&nbsp;u + sin&nbsp;t&nbsp;&middot;&nbsp;v, with u and v orthonormal. Every such path is a great circle, the shortest route between any two of its points, and it closes. Along this one x&#x2083; = cos&nbsp;t&nbsp;&middot;&nbsp;cos&nbsp;&tau;, so <b>&psi; runs over [&tau;, &pi;&minus;&tau;]</b> and the tilt slider sets exactly how deep the path can reach.</p>
+    <canvas id="cPilgrim" height="400" role="img" aria-label="A great circle on the 3-sphere in stereographic projection, coloured by depth, with a moving marker."></canvas>
+    <div class="sl-row"><label for="pTilt">plane tilt</label><input type="range" id="pTilt" min="0" max="157" value="0" step="1"><output for="pTilt" id="lblTilt">0&deg;</output></div>
+    <div class="sl-row"><label for="pSpin">orientation of v</label><input type="range" id="pSpin" min="0" max="628" value="0" step="1"><output for="pSpin" id="lblSpin">0&deg;</output></div>
+    <div class="sl-row"><label for="pView">viewing angle</label><input type="range" id="pView" min="0" max="628" value="50" step="1"><output for="pView" id="lblView">29&deg;</output></div>
+    <p><button type="button" class="btn" id="pMotion" aria-pressed="true">pause motion</button></p>
+    <div class="check" id="pilgrimInfo" aria-live="polite"></div>
+    <p class="note"><b>The finding.</b> Hell occupies &psi; &lt; 0.15, which is 8.6 degrees. A geodesic reaches Hell only if its plane lies within 8.6 degrees of the polar axis. Tilt past that and the path, still a perfect great circle and still the shortest route between its own points, never touches the lowest circles. Closure does not guarantee that a path passes through everything the space contains.</p>
   </div>
 </div>
 
-<div class="intro" style="margin-top:20px">
-<h2>References</h2>
+<div class="panel-full" id="s10">
+  <h3>10. The whole object: S&#x00B3; by stereographic projection</h3>
+  <p class="info">The same projection as panel 4, one dimension up. From Satan's pole, God appears as a point at the center, the angelic orders shrink toward it, the Primum Mobile is the unit sphere, and the physical cosmos expands outward with Satan at infinity. Each shell is an S&#x00B2; slice, and the coloured line is Dante's route threading all of them. Watch it leave at one point on the rim and return at the opposite one: that is the inversion of panel 7 seen from outside. <b>The radial axis is log-compressed</b> so that Satan, which projects to infinity, can be drawn at the rim.</p>
+  <canvas id="cFull" height="360" role="img" aria-label="A stereographic projection of the 3-sphere as nested shells with Dante's route drawn through them."></canvas>
+  <div class="sl-row"><label for="sFullPsi">slice &psi;</label><input type="range" id="sFullPsi" min="0" max="100" value="75"><output for="sFullPsi" id="fullPsiLbl">&pi;/2</output></div>
+  <div class="eq"><b>No inside, no outside, no boundary.</b> Gold shell is the S&#x00B2; cross-section at the current &psi;. R = cot(&psi;/2), drawn on a log radial scale. Satan goes to infinity, God to the center.</div>
+</div>
+
+<h2 class="part" id="p4"><span>PART IV</span>What the geometry costs</h2>
+<p class="partsub">If the whole of a life can be seen at once, what is left to decide?</p>
+
+<div class="panel-full" id="s11">
+  <h3>11. The ladder of vision</h3>
+  <p class="info">A Square lives in a plane. He moves freely in two directions, and the third is hidden from him not by distance but because he has no faculty that reaches it. When a Sphere passes through his world he sees a circle that grows, shrinks and vanishes. From above, the Sphere sees the whole plane at once, including the inside of A Square's house and the inside of A Square.</p>
+  <p class="info">We are in that position with respect to time. <b>We occupy four dimensions and perceive three of them</b>, one slice at a time, in an order we cannot reverse. The next slice is hidden from us the way the third dimension is hidden from A Square. Every rung below is a question about a viewer, not about how many axes the world happens to have.</p>
+  <canvas id="cVision" height="380" role="img" aria-labelledby="visDesc"></canvas>
+  <p id="visDesc" class="sr-only">Three scenes cross-fade as the slider moves. First, an agent at the present with three axes of free motion and a fan of possible futures dissolving into fog. Second, a single world-line along a time axis from birth to death, watched from above. Third, a branching tree of possible worlds with one path picked out.</p>
+  <div class="dim-row" role="group" aria-label="Choose a viewpoint">
+    <button type="button" class="db on" id="vis0" aria-pressed="true">the traveller</button>
+    <button type="button" class="db" id="vis1" aria-pressed="false">the view from eternity</button>
+    <button type="button" class="db" id="vis2" aria-pressed="false">the view over all worlds</button>
+  </div>
+  <div class="sl-row"><label for="vSlider">vision</label><input type="range" id="vSlider" min="0" max="200" value="0"><output for="vSlider" id="vLbl">3D</output></div>
+  <div class="keylabel" id="keyText" aria-live="polite"></div>
+  <p><button type="button" class="btn" id="vPlay">play the ascent</button><button type="button" class="btn" id="vReset">reset</button></p>
+
+  <div class="answer">
+    <h4>The tradition's answer</h4>
+    <p>The ladder poses a threat. If the whole of a life can be seen at once, and every alternative to it seen alongside, what is left to decide? It is worth knowing that the writers usually named on this question all faced it, and all answered that nothing is lost.</p>
+    <p><b>Boethius</b>, in the last book of the <em>Consolation</em>, argues that God's knowledge is not foreknowledge at all. It is an eternal present, and seeing does not cause. His image is the survey from a lofty height: God looks forth at all things as from a peak, and the act of vision adds no necessity to what it sees, just as your seeing a man walk does not make his walking necessary. Aquinas later refined this into the road-and-travellers form, a man in a high tower seeing every traveller at once, but the argument is Boethius's.</p>
+    <p><b>Leibniz</b> builds his distinction between the necessary and the contingent for exactly this purpose. A truth is necessary when its denial is a contradiction; contingent truths are certain without being necessary. On his account the survey of all possible worlds leaves them contingent. He is the last person who would say the third rung abolishes choice. He is also the same Leibniz whose Principle of Sufficient Reason opens this page, which is worth noticing: the principle that closes the cosmos is not the principle that closes the will.</p>
+    <p><b>Dante</b> holds the same position and gives it to Marco Lombardo, who insists that the heavens begin our motions without determining them, and that free will survives.</p>
+    <p>So the ladder is a question the <em>Commedia</em> is already answering. The poem is not adjacent to this dispute. It is inside it, and the reader has to decide whether the answer holds.</p>
+    <p class="flag">Citation note: the road-and-travellers form of the watcher image is Aquinas's refinement (in his commentary on Aristotle's <em>De Interpretatione</em> 9) of Boethius's "lofty height" survey in <em>Consolation</em> V.6; the page now attributes it accordingly. Marco Lombardo's free will speech is <em>Purgatorio</em> XVI.67-78 (core: "Lo cielo i vostri movimenti inizia" at line 73, "e libero voler" at line 76); the broader speech runs to line 145.</p>
+  </div>
+</div>
+
+<div class="intro" style="margin-top:22px">
+<h3>References</h3>
 <ul>
-<li>Peterson, Mark A. &#8220;Dante and the 3-sphere.&#8221; <em>American Journal of Physics</em> 47 (1979): 1031&#8211;1035.</li>
-<li>Barsella, Susanna, and Vincenzo Vespri. &#8220;Dante&#8217;s Cosmos and the Geometry of Paradise.&#8221; <em>Italianistica</em> L.1 (2021): 239&#8211;252.</li>
-<li>Barsella, Susanna, and Vincenzo Vespri. &#8220;A Possible &#8216;Geometrical&#8217; Model for the Cosmology of the Commedia: A Synthesis.&#8221; <em>Digital Dante</em>. Columbia University Libraries, 2022.</li>
+<li>Peterson, Mark A. "Dante and the 3-sphere." <em>American Journal of Physics</em> 47 (1979): 1031&ndash;1035.</li>
+<li>Barsella, Susanna, and Vincenzo Vespri. "Dante's Cosmos and the Geometry of Paradise." <em>Italianistica</em> L.1 (2021): 239&ndash;252.</li>
+<li>Barsella, Susanna, and Vincenzo Vespri. "A Possible 'Geometrical' Model for the Cosmology of the Commedia: A Synthesis." <em>Digital Dante</em>. Columbia University Libraries, 2022.</li>
 <li>Florensky, Pavel. <em>Mnimosti v geometrii</em> [Imaginary Numbers in Geometry]. Moscow, 1922.</li>
-<li>Baez, John. &#8220;Dante and the 3-Sphere.&#8221; <em>Azimuth</em> (blog), 18 January 2026.</li>
-<li>Leibniz, Gottfried Wilhelm. <em>Monadology</em> (1714); Clarke Correspondence (1715&#8211;1716); &#8220;Tentamen Anagogicum&#8221; (c. 1696).</li>
-<li>Blair, Matthew. &#8220;Points and Spheres: Cosmological Innovation in Dante&#8217;s Divine Comedy.&#8221; Senior Thesis, Baylor University, 2015.</li>
-<li>Plato. <em>Timaeus</em>, 55c (dodecahedron as cosmos). Trans. Benjamin Jowett.</li>
-<li>Procopio, Dennis James. &#8220;The Geometry of the Soul: Pythagorean Number Theory in Dante&#8217;s Divine Comedy.&#8221; <em>Medium</em>, 16 February 2026.</li>
-<li>Sargsyan, Arlina. &#8220;The World of Dante Alighieri&#8217;s Numbers and Symbols.&#8221; <em>Enlight Studies</em>, 31 May 2016.</li>
+<li>Baez, John. "Dante and the 3-Sphere." <em>Azimuth</em>.</li>
+<li>Leibniz, Gottfried Wilhelm. <em>Monadology</em> (1714); Clarke Correspondence (1715&ndash;1716).</li>
+<li>Boethius. <em>Consolation of Philosophy</em>, Book V.</li>
+<li>Plato. <em>Timaeus</em> 55c. Trans. Benjamin Jowett.</li>
+<li>Ptolemy. <em>Planisphaerium</em>.</li>
+<li>Kepler, Johannes. <em>Mysterium Cosmographicum</em> (1596).</li>
+<li>Abbott, Edwin A. <em>Flatland: A Romance of Many Dimensions</em> (1884).</li>
 </ul>
+<p class="note">Four citations from an earlier draft are held back pending a check of their publication details: the Baez post date, the Blair thesis, the Procopio piece and the Sargsyan piece. Restore them once confirmed.</p>
 </div>
 
 <script>
-const TAU = Math.PI * 2;
-const DEG = Math.PI / 180;
-const MECCA_LAT = 21.4225 * DEG;
-const MECCA_LON = 39.8262 * DEG;
-let obsLat = 40 * DEG, obsLon = 60 * DEG, qPsiVal = Math.PI / 2;
-let dim = 2, psi = Math.PI / 2, danteAngle = Math.PI / 2, fullPsi = Math.PI / 2, solidIdx = 0;
-let coordPsi = Math.PI / 2, coordTheta = Math.PI / 3, coordPhi = 0;
-let t = 0;
+(function () {
+'use strict';
+
+var TAU = Math.PI * 2, DEG = Math.PI / 180;
+var MECCA_LAT = 21.4225 * DEG, MECCA_LON = 39.8262 * DEG;
+var EARTH_PSI = 0.15, PURG_TOP_PSI = 0.30, PRIMUM_PSI = Math.PI / 2;
+var MAX_R = 3.0;
 
 function gc(id) { return document.getElementById(id); }
+function setTxt(id, v) { var e = gc(id); if (e) e.textContent = v; }
+function setHtml(id, v) { var e = gc(id); if (e) e.innerHTML = v; }
+function on(id, ev, fn) { var e = gc(id); if (e) e.addEventListener(ev, fn); }
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function log10(x) { return Math.log(x) / Math.LN10; }
+function dispR(R) { return clamp((log10(Math.max(1e-4, R)) + 2) / 4 * MAX_R, 0.02, MAX_R); }
 
-// Structured Dante journey: Hell → Purgatorio → Paradise (cyclic)
-// s ∈ [0,π]: Hell — descent from Earth surface to Satan (ψ: π/2 → 0)
-// s ∈ [π,2π]: Purgatorio — ascent from center to surface (ψ: 0 → π/2)
-// s ∈ [2π,3π]: Paradise — ascent from surface to God (ψ: π/2 → π)
-function knotPoint(tt) {
-  const s = tt % (3 * Math.PI);
-  let ps, x;
-  if (s < Math.PI) {
-    const f = s / Math.PI;
-    ps = Math.PI/2 * (1 - f);
-    x = Math.sin(9 * f * Math.PI) * (0.75 - f * 0.45); // 9 circles, spiraling in
-  } else if (s < 2 * Math.PI) {
-    const f = (s - Math.PI) / Math.PI;
-    ps = Math.PI/2 * f;
-    x = Math.sin(7 * f * Math.PI) * 0.38; // 7 terraces of Purgatorio
-  } else {
-    const f = (s - 2 * Math.PI) / Math.PI;
-    ps = Math.PI/2 + Math.PI/2 * f;
-    x = Math.sin(9 * f * Math.PI) * 0.55; // 9 celestial spheres
-  }
-  return { psi: Math.max(0.05, Math.min(Math.PI - 0.05, ps)), x };
+function fmtPsi(ps) {
+  if (ps < 0.005) return '0';
+  if (Math.abs(ps - Math.PI / 2) < 0.02) return 'π/2';
+  if (ps > Math.PI - 0.005) return 'π';
+  return ps.toFixed(2);
+}
+function psiToFrac(ps) {
+  if (ps <= EARTH_PSI)    return 0.25 * ps / EARTH_PSI;
+  if (ps <= PURG_TOP_PSI) return 0.25 + 0.25 * (ps - EARTH_PSI) / (PURG_TOP_PSI - EARTH_PSI);
+  if (ps <= PRIMUM_PSI)   return 0.50 + 0.25 * (ps - PURG_TOP_PSI) / (PRIMUM_PSI - PURG_TOP_PSI);
+  return 0.75 + 0.25 * (ps - PRIMUM_PSI) / (Math.PI - PRIMUM_PSI);
+}
+function fracToPsi(f) {
+  if (f <= 0.25) return f / 0.25 * EARTH_PSI;
+  if (f <= 0.50) return EARTH_PSI + (f - 0.25) / 0.25 * (PURG_TOP_PSI - EARTH_PSI);
+  if (f <= 0.75) return PURG_TOP_PSI + (f - 0.50) / 0.25 * (PRIMUM_PSI - PURG_TOP_PSI);
+  return PRIMUM_PSI + (f - 0.75) / 0.25 * (Math.PI - PRIMUM_PSI);
 }
 
-// Find actual sign-change intersections of world-line with psi = psiSlice
+var CTX = {}, CSSW = {}, CSSH = {};
+var SPECS = [['cSolids',260],['cTriangle',300],['cSphere',240],['cQS3',240],['cAstro',560],
+             ['cLadder',220],['cRope',520],['cDante',440],['cCoord',220],['cPilgrim',400],
+             ['cFull',360],['cVision',380]];
+function initCanvases() {
+  var dpr = window.devicePixelRatio || 1;
+  SPECS.forEach(function (sp) {
+    var cv = gc(sp[0]); if (!cv) return;
+    var w = Math.max(220, Math.round(cv.getBoundingClientRect().width));
+    cv.width = Math.round(w * dpr); cv.height = Math.round(sp[1] * dpr);
+    cv.style.height = sp[1] + 'px';
+    var c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    CTX[sp[0]] = c; CSSW[sp[0]] = w; CSSH[sp[0]] = sp[1];
+  });
+}
+function dims(id) { return { w: CSSW[id] || 680, h: CSSH[id] || 240 }; }
+
+var dirty = {}, visibleSet = {};
+var ANIMATED = { cSolids:1, cLadder:1, cSphere:1, cFull:1 };
+var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var t = 0, pilgrimT = 0;
+function mark(id) { dirty[id] = true; }
+function isVisible(id) { return visibleSet[id] === undefined ? true : visibleSet[id]; }
+if ('IntersectionObserver' in window) {
+  var iobs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { visibleSet[e.target.id] = e.isIntersecting; });
+  });
+  SPECS.forEach(function (sp) { var cv = gc(sp[0]); if (cv) iobs.observe(cv); });
+}
+var rzT;
+window.addEventListener('resize', function () {
+  clearTimeout(rzT);
+  rzT = setTimeout(function () { initCanvases(); SPECS.forEach(function (s) { mark(s[0]); }); }, 170);
+});
+
+/* ---------------- Dante's route ----------------
+   θ is angular position on the S² at depth ψ. Jerusalem's side is θ ≈ π, the
+   antipodal side (Mount Purgatory) is θ ≈ 0. At ψ = 0 the slice collapses to a
+   point, so a path continuing straight through emerges at the ANTIPODE. That is
+   the whole content of "down becomes up": nobody turns around, the sphere runs out. */
+var STAGES = [
+  { s0:0.00, s1:0.30, name:'Hell, descending',              guide:'Virgil',   col:'#c83c3c' },
+  { s0:0.30, s1:0.37, name:'through Satan to the antipode', guide:'Virgil',   col:'#5DCAA5' },
+  { s0:0.37, s1:0.47, name:'Mount Purgatory, ascending',    guide:'Virgil',   col:'#5DCAA5' },
+  { s0:0.47, s1:0.77, name:'the celestial spheres',         guide:'Beatrice', col:'#EF9F27' },
+  { s0:0.77, s1:1.00, name:'the Empyrean',                  guide:'Beatrice', col:'#fbbf24' }
+];
+var INVERSION_S = 0.30;
+function knotPoint(s) {
+  s = clamp(s, 0, 1);
+  var ps, th, f;
+  if (s < 0.30)      { f = s / 0.30;          ps = EARTH_PSI * (1 - f) + 0.02 * f;                 th = Math.PI + 0.12 * Math.sin(9 * f * Math.PI); }
+  else if (s < 0.37) { f = (s - 0.30) / 0.07; ps = 0.02 + (EARTH_PSI - 0.02) * f;                  th = 0.10 * Math.sin(3 * f * Math.PI); }
+  else if (s < 0.47) { f = (s - 0.37) / 0.10; ps = EARTH_PSI + (PURG_TOP_PSI - EARTH_PSI) * f;     th = 0.22 * Math.sin(7 * f * Math.PI); }
+  else if (s < 0.77) { f = (s - 0.47) / 0.30; ps = PURG_TOP_PSI + (PRIMUM_PSI - PURG_TOP_PSI) * f; th = 0.30 * Math.sin(9 * f * Math.PI); }
+  else               { f = (s - 0.77) / 0.23; ps = PRIMUM_PSI + (Math.PI - 0.02 - PRIMUM_PSI) * f; th = 0.22 * Math.sin(9 * f * Math.PI); }
+  return { psi: clamp(ps, 0.02, Math.PI - 0.02), theta: th, x: Math.cos(th) };
+}
+function stageAt(s) {
+  for (var i = 0; i < STAGES.length; i++) if (s < STAGES[i].s1 || i === STAGES.length - 1) return STAGES[i];
+  return STAGES[0];
+}
 function findCrossings(psiSlice) {
-  const N = 800, range = Math.PI * 10;
-  const pts = [];
-  for (let i = 0; i <= N; i++) {
-    const tt = i / N * range;
-    pts.push(knotPoint(tt));
-  }
-  const out = [];
-  for (let i = 0; i < pts.length - 1; i++) {
-    const d0 = pts[i].psi - psiSlice;
-    const d1 = pts[i + 1].psi - psiSlice;
-    if (d0 * d1 < 0) {
-      const f = -d0 / (d1 - d0);
-      out.push({ x: pts[i].x + f * (pts[i + 1].x - pts[i].x) });
-    }
+  var N = 800, prev = knotPoint(0), out = [];
+  for (var i = 1; i <= N; i++) {
+    var cur = knotPoint(i / N), d0 = prev.psi - psiSlice, d1 = cur.psi - psiSlice;
+    if ((d0 < 0) !== (d1 < 0) && d1 !== d0) out.push({ x: prev.x + (-d0 / (d1 - d0)) * (cur.x - prev.x) });
+    prev = cur;
   }
   return out;
 }
 
-// Canvas contexts — sized once at init, refreshed on resize
-const CTX = {};
-function initCanvases() {
-  const dpr = window.devicePixelRatio || 2;
-  const specs = [
-    ['cLadder', 220], ['cRope', 320], ['cCoord', 220], ['cDante', 340], ['cFull', 320], ['cSphere', 240], ['cQS3', 240], ['cTriangle', 200], ['cSolids', 260]
+/* ---------------- spherical trigonometry ----------------
+   Angles by the law of cosines: interior angles in [0,π], no quadrant ambiguity.
+   The angle at the pole must equal |Δλ| and the angle at the observer must equal
+   the atan2 qibla bearing. Both are printed as checks. */
+function sphericalTriangle(lat1, lon1) {
+  var dLon = MECCA_LON - lon1;
+  var s1 = Math.sin((MECCA_LAT - lat1) / 2), s2 = Math.sin(dLon / 2);
+  var hav = s1 * s1 + Math.cos(lat1) * Math.cos(MECCA_LAT) * s2 * s2;
+  var a = 2 * Math.asin(Math.sqrt(clamp(hav, 0, 1)));
+  var b = Math.PI / 2 - MECCA_LAT, c = Math.PI / 2 - lat1;
+  function ang(o, p, q) {
+    var dd = Math.sin(p) * Math.sin(q);
+    if (Math.abs(dd) < 1e-12) return 0;
+    return Math.acos(clamp((Math.cos(o) - Math.cos(p) * Math.cos(q)) / dd, -1, 1));
+  }
+  var N = ang(a, b, c), O = ang(b, a, c), M = ang(c, a, b);
+  var y = Math.sin(dLon) * Math.cos(MECCA_LAT);
+  var x = Math.cos(lat1) * Math.sin(MECCA_LAT) - Math.sin(lat1) * Math.cos(MECCA_LAT) * Math.cos(dLon);
+  var bearing = Math.atan2(y, x), bDeg = ((bearing / DEG) + 360) % 360;
+  return { a:a, b:b, c:c, N:N, O:O, M:M, dLon:dLon,
+           dlAbs: Math.abs(((dLon + Math.PI * 3) % TAU) - Math.PI),
+           bearing:bearing, bearingDeg:bDeg, interiorO: bDeg > 180 ? 360 - bDeg : bDeg,
+           excess: N + O + M - Math.PI };
+}
+
+/* ==================== 1. Platonic solids ==================== */
+var solidIdx = 0;
+var SOLIDS = (function () {
+  var P = (1 + Math.sqrt(5)) / 2;
+  function dist(a, b) { return Math.sqrt(Math.pow(a[0]-b[0],2) + Math.pow(a[1]-b[1],2) + Math.pow(a[2]-b[2],2)); }
+  function norm(vs) {
+    var r = Math.max.apply(null, vs.map(function (v) { return Math.hypot(v[0], v[1], v[2]); }));
+    return vs.map(function (v) { return [v[0]/r, v[1]/r, v[2]/r]; });
+  }
+  function edges(vs) {
+    var mn = Infinity, i, j, e = [];
+    for (i = 0; i < vs.length; i++) for (j = i+1; j < vs.length; j++) mn = Math.min(mn, dist(vs[i], vs[j]));
+    for (i = 0; i < vs.length; i++) for (j = i+1; j < vs.length; j++) if (dist(vs[i], vs[j]) < mn * 1.05) e.push([i, j]);
+    return e;
+  }
+  function mk(name, elem, sch, F, V, E, raw) { var v = norm(raw); return { name:name, elem:elem, sch:sch, F:F, V:V, E:E, v:v, e:edges(v) }; }
+  var cube = [], dod = [], ico = [];
+  [-1,1].forEach(function(a){[-1,1].forEach(function(b){[-1,1].forEach(function(k){ cube.push([a,b,k]); dod.push([a,b,k]); });});});
+  [-1,1].forEach(function(a){[-1,1].forEach(function(b){ dod.push([0,a/P,b*P]); dod.push([a/P,b*P,0]); dod.push([a*P,0,b/P]); });});
+  [-1,1].forEach(function(a){[-1,1].forEach(function(b){ ico.push([0,a,b*P]); ico.push([a,b*P,0]); ico.push([a*P,0,b]); });});
+  return [
+    mk('Tetrahedron','Fire','{3,3}',4,4,6,[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]]),
+    mk('Cube','Earth','{4,3}',6,8,12,cube),
+    mk('Octahedron','Air','{3,4}',8,6,12,[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]),
+    mk('Dodecahedron','Cosmos','{5,3}',12,20,30,dod),
+    mk('Icosahedron','Water','{3,5}',20,12,30,ico)
   ];
-  specs.forEach(([id, cssH]) => {
-    const cv = gc(id);
-    if (!cv) return;
-    cv.width  = (cv.parentElement ? cv.parentElement.clientWidth - 28 : 680) * dpr || 700;
-    cv.height = Math.round(cssH * dpr);
-    cv.style.height = cssH + 'px';
-    CTX[id] = cv.getContext('2d');
-  });
+})();
+function setSolid(n) {
+  solidIdx = n;
+  for (var i = 0; i < 5; i++) {
+    var b = gc('sol' + i); if (!b) continue;
+    b.classList.toggle('on', i === n);
+    b.setAttribute('aria-pressed', i === n ? 'true' : 'false');
+  }
+  var s = SOLIDS[n];
+  setHtml('solidInfo', '<b>' + s.sch + ' ' + s.name + '</b>: ' + s.F + ' faces, ' + s.V + ' vertices, ' + s.E + ' edges<br>' +
+    'Plato’s element: <b>' + s.elem + '</b>' + (n === 3 ? ' (the <em>Timaeus</em> reserves it for the universe)' : '') +
+    '<br>V − E + F = ' + s.V + ' − ' + s.E + ' + ' + s.F + ' = <b>2</b>, Euler’s formula, the signature of a closed surface');
 }
-function sizeCanvas(id) { return CTX[id]; }
-window.addEventListener('resize', initCanvases);
-
-// ---- UI callbacks ----
-
-function setDim(n) {
-  dim = n;
-  [0, 1, 2, 3].forEach(i => gc('d' + i).classList.toggle('on', i === n));
-  const info = [
-    ['x&#x2080;&#x00B2; = r&#x00B2;',
-     'S&#x2070;: two antipodal points, zero angular coords.<br>The minimal closure &#8212; God and Earth.<br>The axiom produces them: insist on no outside, two poles appear.'],
-    ['x&#x2080;&#x00B2; + x&#x2081;&#x00B2; = r&#x00B2;<br>(r&middot;cos&phi;, r&middot;sin&phi;) &nbsp;&phi;&isin;[0,2&pi;)',
-     'S&#x00B9;: one angular coord &phi;. Walk to 2&pi; &#8212; you return.<br>The jy&#257; (sin&phi;) is the half-chord across this arc. First closure.'],
-    ['x&#x2080;&#x00B2; + x&#x2081;&#x00B2; + x&#x2082;&#x00B2; = r&#x00B2;<br>(sin&theta;cos&phi;, sin&theta;sin&phi;, cos&theta;)',
-     'S&#x00B2;: two angular coords (&theta;,&phi;). Al-B&#299;r&#363;n&#299;\'s domain.<br>Every qibla is a geodesic on this surface.<br>The spherical law of sines operates here. Closed, boundaryless.'],
-    ['&sum;x&#x1D62;&#x00B2; = r&#x00B2; &nbsp;(i=0..3)<br>r(cos&psi;, sin&psi;cos&theta;, sin&psi;sin&theta;cos&phi;, sin&psi;sin&theta;sin&phi;)',
-     'S&#x00B3;: three angular coords (&psi;,&theta;,&phi;) &#8212; Trinity as dimensionality.<br>Dante\'s cosmos. Each S&#x00B2; slice has radius r&middot;sin&psi;.<br>The whole has no boundary. Spherical trig is geometry of each slice.']
-  ];
-  const _eqBox = gc('eqBox'); if (_eqBox) _eqBox.innerHTML = '<b>' + info[n][0] + '</b><br>' + info[n][1];
-}
-
-function onPsi(v) {
-  psi = (v / 100) * Math.PI;
-  const lbl = v == 50 ? 'π/2' : v == 0 ? '0' : v == 100 ? 'π' : psi.toFixed(2);
-  const psiEl = gc('psiLbl'); if (psiEl) psiEl.textContent = lbl;
-  const cr = findCrossings(psi);
-  let msg = '';
-  if      (v < 5)            msg = 'ψ → 0: sphere collapses to Earth punto.';
-  else if (v > 95)           msg = 'ψ → π: God punto. The rope arrives.';
-  else if (v > 45 && v < 55) msg = 'ψ=π/2: maximum sphere. Al-Bīrūnī Earth. Qibla at full span.';
-  else                       msg = 'Intermediate slice. S² of radius r·sinψ.';
-  const ri = gc('ropeInfo');
-  if (ri) ri.innerHTML = '<b>ψ = ' + lbl + ' · ' + cr.length +
-    ' intersection' + (cr.length !== 1 ? 's' : '') + '</b><br>' + msg;
-}
-
-function onCoord() {
-  coordPsi   = (gc('cPsi').value   / 100) * Math.PI;
-  coordTheta = (gc('cTheta').value / 100) * Math.PI;
-  coordPhi   = (gc('cPhi').value   / 100) * TAU;
-  const _e_lPsi = gc('lPsi'); if (_e_lPsi) _e_lPsi.textContent = Math.round(coordPsi   * 180 / Math.PI) + '\u00b0';
-  const _e_lTheta = gc('lTheta'); if (_e_lTheta) _e_lTheta.textContent = Math.round(coordTheta * 180 / Math.PI) + '\u00b0';
-  const _e_lPhi = gc('lPhi'); if (_e_lPhi) _e_lPhi.textContent = Math.round(coordPhi   * 180 / Math.PI) + '\u00b0';
-  const x0   = Math.cos(coordPsi);
-  const x1   = Math.sin(coordPsi) * Math.cos(coordTheta);
-  const x2   = Math.sin(coordPsi) * Math.sin(coordTheta) * Math.cos(coordPhi);
-  const x3   = Math.sin(coordPsi) * Math.sin(coordTheta) * Math.sin(coordPhi);
-  const norm = Math.sqrt(x0*x0 + x1*x1 + x2*x2 + x3*x3);
-  const _e_vx0 = gc('vx0'); if (_e_vx0) _e_vx0.textContent = x0.toFixed(3);
-  const _e_vrad = gc('vrad'); if (_e_vrad) _e_vrad.textContent = Math.sin(coordPsi).toFixed(3);
-  const _e_vnorm = gc('vnorm'); if (_e_vnorm) _e_vnorm.textContent = norm.toFixed(3);
-}
-
-function onDante(v) {
-  danteAngle = (v / 100) * Math.PI;
-  const lbl = v == 50 ? '&pi;/2' : danteAngle.toFixed(2);
-  const dEl = gc('dLbl'); if (dEl) dEl.textContent = lbl;
-  let msg = '';
-  if      (v < 8)          msg = '\u03c8 \u2192 0: Satan at Earth\u2019s center. Both hemispheres converge to a point. Florensky: down becomes up.';
-  else if (v > 92)         msg = '\u03c8 \u2192 \u03c0: God (punto). The antipodal point of S\u00b3. The sacred closes.';
-  else if (v > 45 && v<55) msg = '\u03c8=\u03c0/2: Earth\u2019s surface. Maximum S\u00b2. Hell descends below; Paradise ascends above.';
-  else if (v < 50)         msg = 'Physical hemisphere: Hell circles (left, descending) + Purgatorio terraces (right, ascending).';
-  else                     msg = 'Spiritual hemisphere: Paradise\u2019s 9 celestial spheres contracting toward God\u2019s punto.';
-  const _e_danteInfo = gc('danteInfo'); if (_e_danteInfo) _e_danteInfo.textContent = msg;
-}
-
-// ---- Drawing ----
-
-function drawLadder() {
-  const c = sizeCanvas('cLadder');
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
+function drawSolids() {
+  var c = CTX['cSolids']; if (!c) return;
+  var d = dims('cSolids'), w = d.w, h = d.h, cx = w/2, cy = h/2;
   c.clearRect(0, 0, w, h);
-  c.strokeStyle = '#EF9F27'; c.fillStyle = '#EF9F27';
-
-  if (dim === 0) {
-    [[cx-100, cy],[cx+100, cy]].forEach(([px, py]) => {
-      c.beginPath(); c.arc(px, py, 14, 0, TAU); c.fill();
+  var s = SOLIDS[solidIdx], rY = t * 0.35, rX = 0.4, sc = Math.min(w, h) * 0.34;
+  var pr = s.v.map(function (v) {
+    var rx = v[0]*Math.cos(rY) + v[2]*Math.sin(rY), rz = -v[0]*Math.sin(rY) + v[2]*Math.cos(rY);
+    var ry = v[1]*Math.cos(rX) - rz*Math.sin(rX), rz2 = v[1]*Math.sin(rX) + rz*Math.cos(rX);
+    var f = 3.5 / (3.5 + rz2 * 0.3);
+    return [cx + rx*sc*f, cy - ry*sc*f, rz2];
+  });
+  s.e.map(function (e) { return { i:e[0], j:e[1], z:(pr[e[0]][2] + pr[e[1]][2])/2 }; })
+    .sort(function (a, b) { return a.z - b.z; })
+    .forEach(function (e) {
+      var f = clamp(0.5 + e.z*0.35, 0.25, 0.95);
+      c.strokeStyle = 'rgba(239,159,39,' + f.toFixed(2) + ')'; c.lineWidth = 1.2 + f*1.5;
+      c.beginPath(); c.moveTo(pr[e.i][0], pr[e.i][1]); c.lineTo(pr[e.j][0], pr[e.j][1]); c.stroke();
     });
-    c.fillStyle = '#475569'; c.font = '22px Georgia'; c.textAlign = 'center';
-    c.fillText('Satan', cx-100, cy+50); c.fillText('God', cx+100, cy+50);
-    c.strokeStyle = '#334155'; c.lineWidth = 2; c.setLineDash([8, 6]);
-    c.beginPath(); c.moveTo(cx-86, cy); c.lineTo(cx+86, cy); c.stroke();
-    c.setLineDash([]);
-    c.fillStyle = '#334155'; c.font = '18px monospace';
-    c.fillText('r = distance', cx, cy-40);
-
-  } else if (dim === 1) {
-    const R = 100;
-    c.lineWidth = 3; c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
-    const ang = t * 0.6;
-    c.beginPath(); c.arc(cx + R*Math.cos(ang), cy + R*Math.sin(ang), 10, 0, TAU); c.fill();
-    // jya half-chord
-    c.strokeStyle = '#5DCAA5'; c.lineWidth = 2;
-    c.beginPath();
-    c.moveTo(cx + R*Math.cos(ang), cy);
-    c.lineTo(cx + R*Math.cos(ang), cy + R*Math.sin(ang));
-    c.stroke();
-    c.fillStyle = '#5DCAA5'; c.font = '20px monospace'; c.textAlign = 'left';
-    c.fillText('jy\u0101', cx + R*Math.cos(ang) + 6, (cy + cy + R*Math.sin(ang)) / 2);
-    c.fillStyle = '#475569'; c.textAlign = 'center';
-    c.font = '18px monospace';
-    c.fillText('\u03c6 = ' + (ang % TAU).toFixed(2), cx, cy + R + 40);
-
-  } else if (dim === 2) {
-    c.lineWidth = 2; c.strokeStyle = '#1e293b';
-    c.beginPath(); c.arc(cx, cy, 120, 0, TAU); c.stroke();
-    // Rotating great circle
-    c.save(); c.translate(cx, cy); c.rotate(t * 0.25); c.scale(1, 0.38);
-    c.strokeStyle = '#EF9F27'; c.lineWidth = 5;
-    c.beginPath(); c.arc(0, 0, 120, 0, TAU); c.stroke();
-    c.restore();
-    // Qibla triangle
-    for (let i = 0; i < 3; i++) {
-      const a = t * 0.4 + i * TAU / 3;
-      c.fillStyle = '#5DCAA5'; c.beginPath();
-      c.arc(cx + 120*Math.cos(a), cy + 48*Math.sin(a), 8, 0, TAU); c.fill();
-    }
-    c.fillStyle = '#334155'; c.font = '18px monospace'; c.textAlign = 'center';
-    c.fillText('spherical triangle (\u03b8,\u03c6)', cx, cy + 155);
-
-  } else {
-    // S3: nested rings showing sinpsi profile
-    const L = 7;
-    for (let i = 0; i < L; i++) {
-      const ps = i / (L-1) * Math.PI;
-      const r  = Math.sin(ps) * 110;
-      const alpha = 0.15 + 0.85 * (1 - Math.abs(i - (L-1)/2) / ((L-1)/2));
-      c.strokeStyle = 'rgba(239,159,39,' + alpha + ')';
-      c.lineWidth = (i === Math.round(L/2)) ? 4 : 1.5;
-      c.beginPath(); c.ellipse(cx, cy, r, r*0.28, 0, 0, TAU); c.stroke();
-    }
-    c.fillStyle = '#EF9F27';
-    c.beginPath(); c.arc(cx, cy+110, 8, 0, TAU); c.fill();
-    c.beginPath(); c.arc(cx, cy-110, 8, 0, TAU); c.fill();
-    c.fillStyle = '#475569'; c.font = '18px Georgia'; c.textAlign = 'center';
-    c.fillText('Satan (\u03c8=0)', cx, cy+150);
-    c.fillText('God (\u03c8=\u03c0)', cx, cy-130);
-  }
-}
-
-function drawRope() {
-  var c = sizeCanvas('cRope');
-  var w = c.canvas.width, h = c.canvas.height, cx = w/2;
-  var y0 = h - 36, y1 = 28;
-  c.clearRect(0, 0, w, h);
-  function psiToY(ps) { return y0 - (ps / Math.PI) * (y0 - y1); }
-  var maxW = Math.min(cx * 0.42, 120);
-
-  // S\u00b3 profile \u2014 filled silhouette showing the funnel shape
-  // Bottom hemisphere (physical cosmos)
-  c.beginPath(); c.moveTo(cx, psiToY(0));
-  for (var i = 0; i <= 50; i++) { var ps = i/50*Math.PI/2; c.lineTo(cx + Math.sin(ps)*maxW, psiToY(ps)); }
-  for (var i = 50; i >= 0; i--) { var ps = i/50*Math.PI/2; c.lineTo(cx - Math.sin(ps)*maxW, psiToY(ps)); }
-  c.closePath(); c.fillStyle = 'rgba(139,0,0,0.06)'; c.fill();
-  // Top hemisphere (spiritual cosmos)
-  c.beginPath(); c.moveTo(cx, psiToY(Math.PI));
-  for (var i = 0; i <= 50; i++) { var ps = Math.PI/2 + i/50*Math.PI/2; c.lineTo(cx + Math.sin(ps)*maxW, psiToY(ps)); }
-  for (var i = 50; i >= 0; i--) { var ps = Math.PI/2 + i/50*Math.PI/2; c.lineTo(cx - Math.sin(ps)*maxW, psiToY(ps)); }
-  c.closePath(); c.fillStyle = 'rgba(239,159,39,0.06)'; c.fill();
-
-  // Profile outline
-  c.strokeStyle = 'rgba(30,41,59,0.45)'; c.lineWidth = 1;
-  for (var side = -1; side <= 1; side += 2) {
-    c.beginPath();
-    for (var i = 0; i <= 80; i++) { var ps = i/80*Math.PI; c.lineTo(cx + side*Math.sin(ps)*maxW, psiToY(ps)); }
-    c.stroke();
-  }
-
-  // Earth surface divider
-  var ySurf = psiToY(Math.PI/2);
-  c.strokeStyle = 'rgba(93,202,165,0.4)'; c.lineWidth = 1.5; c.setLineDash([5,4]);
-  c.beginPath(); c.moveTo(12, ySurf); c.lineTo(w-12, ySurf); c.stroke(); c.setLineDash([]);
-
-  // Arrow helper: triangle at (x,y), dir=1 means up, dir=-1 means down
-  function arrow(x, y, dir, color) {
-    c.fillStyle = color; c.beginPath();
-    c.moveTo(x-5, y + dir*6); c.lineTo(x, y - dir*6); c.lineTo(x+5, y + dir*6);
-    c.closePath(); c.fill();
-  }
-
-  // \u2014\u2014\u2014 JOURNEY PATH WITH ARROWS \u2014\u2014\u2014
-  var jOff = 8; // inset from profile edge
-
-  // Phase 1: HELL DESCENT \u2014 left edge of funnel, \u03c8=\u03c0/2 \u2192 0, going DOWN
-  c.strokeStyle = '#c83c3c'; c.lineWidth = 3.5;
-  c.beginPath();
-  for (var i = 0; i <= 40; i++) {
-    var ps = Math.PI/2*(1-i/40), x = cx - Math.sin(ps)*maxW + jOff;
-    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
-  }
-  c.stroke();
-  for (var n = 1; n <= 4; n++) { var ps = Math.PI/2*(1-n/5); arrow(cx-Math.sin(ps)*maxW+jOff, psiToY(ps), -1, '#c83c3c'); }
-
-  // Inversion arc at Satan: left \u2192 right (the flip)
-  var satanY = psiToY(0);
-  c.strokeStyle = 'rgba(200,60,60,0.5)'; c.lineWidth = 2;
-  c.beginPath(); c.arc(cx, satanY, 16, Math.PI, 0); c.stroke();
-  arrow(cx+16, satanY-3, 1, 'rgba(93,202,165,0.7)');
-
-  // Phase 2: PURGATORIO ASCENT \u2014 right edge, \u03c8=0 \u2192 \u03c0/2, going UP
-  c.strokeStyle = '#5DCAA5'; c.lineWidth = 3.5;
-  c.beginPath();
-  for (var i = 0; i <= 40; i++) {
-    var ps = Math.PI/2*i/40, x = cx + Math.sin(ps)*maxW - jOff;
-    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
-  }
-  c.stroke();
-  for (var n = 1; n <= 3; n++) { var ps = Math.PI/2*n/4; arrow(cx+Math.sin(ps)*maxW-jOff, psiToY(ps), 1, '#5DCAA5'); }
-
-  // Phase 3: PARADISE ASCENT \u2014 right edge, \u03c8=\u03c0/2 \u2192 \u03c0, going UP
-  c.strokeStyle = '#EF9F27'; c.lineWidth = 3.5;
-  c.beginPath();
-  for (var i = 0; i <= 40; i++) {
-    var ps = Math.PI/2 + Math.PI/2*i/40, x = cx + Math.sin(ps)*maxW - jOff;
-    if (i===0) c.moveTo(x, psiToY(ps)); else c.lineTo(x, psiToY(ps));
-  }
-  c.stroke();
-  for (var n = 1; n <= 4; n++) { var ps = Math.PI/2 + Math.PI/2*n/5; arrow(cx+Math.sin(ps)*maxW-jOff, psiToY(ps), 1, '#EF9F27'); }
-
-  // Level labels: Hell (left of profile), Purgatorio+Paradise (right of profile)
-  var hellLbl = ['Limbo','Lust','Gluttony','Greed','Anger','Heresy','Violence','Fraud','Treachery'];
-  for (var i = 0; i < 9; i++) {
-    var ps = Math.PI/2*(1-(i+0.5)/9), sy = psiToY(ps), lx = cx - Math.sin(ps)*maxW;
-    c.fillStyle = 'rgba(200,60,60,0.45)'; c.font = '9px monospace'; c.textAlign = 'right';
-    c.fillText(hellLbl[i], lx - 6, sy + 3);
-  }
-  var purgLbl = ['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'];
-  for (var i = 0; i < 7; i++) {
-    var ps = Math.PI/2*(i+0.5)/7, sy = psiToY(ps), rx = cx + Math.sin(ps)*maxW;
-    c.fillStyle = 'rgba(93,202,165,0.5)'; c.font = '9px monospace'; c.textAlign = 'left';
-    c.fillText(purgLbl[i], rx + 8, sy + 3);
-  }
-  var sphLbl = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'];
-  for (var i = 0; i < 9; i++) {
-    var ps = Math.PI/2 + Math.PI/2*(i+0.5)/9, sy = psiToY(ps), rx = cx + Math.sin(ps)*maxW;
-    c.fillStyle = 'rgba(239,159,39,0.5)'; c.font = '9px monospace'; c.textAlign = 'left';
-    c.fillText(sphLbl[i], rx + 8, sy + 3);
-  }
-
-  // Guide labels
-  c.font = 'bold 10px monospace';
-  c.fillStyle = 'rgba(200,60,60,0.5)'; c.textAlign = 'right';
-  c.fillText('VIRGIL', cx - maxW*0.7 - 4, (ySurf+satanY)/2 - 10);
-  c.fillStyle = 'rgba(93,202,165,0.5)'; c.textAlign = 'left';
-  c.fillText('VIRGIL', cx + maxW*0.7 + 4, (ySurf+satanY)/2 - 10);
-  c.fillStyle = 'rgba(239,159,39,0.5)'; c.textAlign = 'left';
-  c.fillText('BEATRICE', cx + maxW*0.7 + 4, (ySurf+psiToY(Math.PI))/2);
-
-  // Phase direction labels
-  c.font = 'bold 11px monospace';
-  c.fillStyle = 'rgba(200,60,60,0.4)'; c.textAlign = 'center';
-  c.fillText('\u2193 DESCENT', cx - maxW*0.55, (ySurf+satanY)/2 + 6);
-  c.fillStyle = 'rgba(93,202,165,0.4)';
-  c.fillText('\u2191 ASCENT', cx + maxW*0.55, (ySurf+satanY)/2 + 6);
-  c.fillStyle = 'rgba(239,159,39,0.4)';
-  c.fillText('\u2191 ASCENT', cx + maxW*0.55, (ySurf+psiToY(Math.PI))/2 + 6);
-
-  // \u03c8 slice indicator
-  var sliceY = psiToY(psi);
-  c.strokeStyle = 'rgba(239,159,39,0.12)'; c.lineWidth = 16;
-  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke();
-  c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5; c.setLineDash([5,4]);
-  c.beginPath(); c.moveTo(0, sliceY); c.lineTo(w, sliceY); c.stroke(); c.setLineDash([]);
-  // Show sphere width at this slice
-  var sliceR = Math.sin(psi)*maxW;
-  if (sliceR > 4) {
-    c.strokeStyle = 'rgba(239,159,39,0.35)'; c.lineWidth = 2;
-    c.beginPath(); c.moveTo(cx-sliceR, sliceY); c.lineTo(cx+sliceR, sliceY); c.stroke();
-  }
-
-  // Poles
-  c.fillStyle = '#8B1a1a'; c.beginPath(); c.arc(cx, satanY, 7, 0, TAU); c.fill();
-  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, psiToY(Math.PI), 7, 0, TAU); c.fill();
-  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(cx, ySurf, 5, 0, TAU); c.fill();
-
-  // Pole labels
-  c.font = '11px monospace'; c.textAlign = 'center';
-  c.fillStyle = '#8B1a1a'; c.fillText('Satan \u03c8=0', cx, satanY + 16);
-  c.fillStyle = '#EF9F27'; c.fillText('God \u03c8=\u03c0', cx, psiToY(Math.PI) - 10);
-  c.fillStyle = '#5DCAA5'; c.fillText('Earth \u03c8=\u03c0/2', cx, ySurf - 8);
-
-  // Info line
-  c.fillStyle = '#334155'; c.font = '11px monospace'; c.textAlign = 'center';
-  c.fillText('\u03c8=' + psi.toFixed(2) + '  |  sphere radius sin\u03c8 = ' + Math.sin(psi).toFixed(3), cx, h - 4);
-}
-
-function drawCoord() {
-  const c = sizeCanvas('cCoord');
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
-  c.clearRect(0, 0, w, h);
-  const R = 130;
-
-  // Outer S2 outline
-  c.strokeStyle = '#1e293b'; c.lineWidth = 2;
-  c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
-
-  // psi circle: vertical meridian
-  c.save(); c.translate(cx, cy);
-  c.strokeStyle = 'rgba(239,159,39,0.35)'; c.lineWidth = 2;
-  c.beginPath(); c.ellipse(0, 0, R*0.3, R, 0, 0, TAU); c.stroke();
-  c.restore();
-
-  // theta circle: latitude at current theta
-  const latR = R * Math.sin(coordTheta);
-  const latY = cy - R * Math.cos(coordTheta);
-  c.strokeStyle = 'rgba(93,202,165,0.5)'; c.lineWidth = 2;
-  c.beginPath(); c.ellipse(cx, latY, latR, latR*0.25, 0, 0, TAU); c.stroke();
-
-  // phi great circle: equatorial, rotated
-  c.save(); c.translate(cx, cy); c.rotate(coordPhi);
-  c.strokeStyle = 'rgba(175,169,236,0.4)'; c.lineWidth = 2;
-  c.beginPath(); c.ellipse(0, 0, R, R*0.25, 0, 0, TAU); c.stroke();
-  c.restore();
-
-  // Current point
-  const px = cx + R * Math.sin(coordPsi) * Math.sin(coordTheta) * Math.cos(coordPhi);
-  const py = cy - R * (Math.cos(coordPsi)*0.7 + Math.sin(coordPsi)*Math.cos(coordTheta)*0.3);
-
-  c.strokeStyle = '#1e293b'; c.lineWidth = 1.5; c.setLineDash([4, 4]);
-  c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke();
-  c.setLineDash([]);
-
-  c.fillStyle = 'rgba(239,159,39,0.2)'; c.beginPath(); c.arc(px, py, 22, 0, TAU); c.fill();
-  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(px, py, 9, 0, TAU); c.fill();
-
-  c.font = '20px monospace'; c.textAlign = 'center';
-  c.fillStyle = 'rgba(239,159,39,0.6)'; c.fillText('\u03c8', cx - R*0.3 - 14, cy + 10);
-  c.fillStyle = 'rgba(93,202,165,0.7)'; c.fillText('\u03b8', cx + latR + 18, latY + 6);
-  c.fillStyle = 'rgba(175,169,236,0.7)'; c.fillText('\u03c6', cx, cy + R*0.25 + 22);
-}
-
-function drawDante() {
-  const c = sizeCanvas('cDante');
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2;
-  const y0 = h - 36, y1 = 36;
-  c.clearRect(0, 0, w, h);
-  function psiToY(ps) { return y0 - (ps / Math.PI) * (y0 - y1); }
-  const maxRx = Math.min(cx * 0.48, 130);
-
-  // S³ profile outline (sinψ curve — the "lemon" shape)
-  c.strokeStyle = '#1e293b'; c.lineWidth = 1.5;
-  for (let side = -1; side <= 1; side += 2) {
-    c.beginPath();
-    for (let i = 0; i <= 80; i++) {
-      const ps = i / 80 * Math.PI;
-      c.lineTo(cx + side * Math.sin(ps) * maxRx, psiToY(ps));
-    }
-    c.stroke();
-  }
-
-  // Background hemisphere zones
-  const ySurf = psiToY(Math.PI / 2);
-  c.fillStyle = 'rgba(139,0,0,0.04)';
-  c.fillRect(cx - maxRx, ySurf, maxRx * 2, y0 - ySurf);
-  c.fillStyle = 'rgba(239,159,39,0.04)';
-  c.fillRect(cx - maxRx, y1, maxRx * 2, ySurf - y1);
-
-  // Earth surface / equator divider
-  c.strokeStyle = 'rgba(93,202,165,0.35)'; c.lineWidth = 1.5; c.setLineDash([5, 4]);
-  c.beginPath(); c.moveTo(cx - maxRx - 8, ySurf); c.lineTo(cx + maxRx + 8, ySurf); c.stroke();
-  c.setLineDash([]);
-
-  // Hell's 9 circles (ψ: π/2 → 0, descending — labels on LEFT)
-  var hellLbl = ['Limbo','Lust','Gluttony','Greed','Anger','Heresy','Violence','Fraud','Treachery'];
-  for (var i = 0; i < 9; i++) {
-    var ps = Math.PI/2 * (1 - (i + 0.5) / 9);
-    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
-    var cur = Math.abs(ps - danteAngle) < Math.PI / 20;
-    c.strokeStyle = cur ? 'rgba(200,60,60,0.8)' : 'rgba(139,0,0,0.15)';
-    c.lineWidth = cur ? 2.5 : 0.8;
-    if (rx > 2) { c.beginPath(); c.ellipse(cx, ry, rx, rx * 0.18, 0, 0, TAU); c.stroke(); }
-    c.fillStyle = cur ? 'rgba(200,60,60,0.95)' : 'rgba(200,60,60,0.3)';
-    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'right';
-    c.fillText(hellLbl[i], cx - Math.max(rx, 6) - 3, ry + 3);
-  }
-
-  // Purgatorio's 7 terraces (ψ: 0 → π/2, ascending — same hemisphere, labels on RIGHT)
-  var purgLbl = ['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'];
-  for (var i = 0; i < 7; i++) {
-    var ps = Math.PI/2 * (i + 0.5) / 7;
-    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
-    var cur = Math.abs(ps - danteAngle) < Math.PI / 16;
-    c.strokeStyle = cur ? 'rgba(93,202,165,0.6)' : 'rgba(93,202,165,0.12)';
-    c.lineWidth = 1;
-    if (rx > 4) { c.beginPath(); c.moveTo(cx + rx - 3, ry); c.lineTo(cx + rx + 3, ry); c.stroke(); }
-    c.fillStyle = cur ? 'rgba(93,202,165,0.9)' : 'rgba(93,202,165,0.3)';
-    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'left';
-    c.fillText(purgLbl[i], cx + Math.max(rx, 6) + 5, ry + 3);
-  }
-
-  // Paradise's 9 celestial spheres (ψ: π/2 → π, ascending — labels on RIGHT)
-  var sphLbl = ['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'];
-  for (var i = 0; i < 9; i++) {
-    var ps = Math.PI/2 + Math.PI/2 * (i + 0.5) / 9;
-    var ry = psiToY(ps), rx = Math.sin(ps) * maxRx;
-    var cur = Math.abs(ps - danteAngle) < Math.PI / 20;
-    c.strokeStyle = cur ? 'rgba(239,159,39,0.8)' : 'rgba(239,159,39,0.12)';
-    c.lineWidth = cur ? 2.5 : 0.8;
-    if (rx > 2) { c.beginPath(); c.ellipse(cx, ry, rx, rx * 0.18, 0, 0, TAU); c.stroke(); }
-    c.fillStyle = cur ? 'rgba(239,159,39,0.95)' : 'rgba(239,159,39,0.3)';
-    c.font = (cur ? 'bold 10px' : '9px') + ' monospace'; c.textAlign = 'left';
-    c.fillText(sphLbl[i], cx + Math.max(rx, 6) + 5, ry + 3);
-  }
-
-  // Current ψ-slice highlight band
-  var sliceY = psiToY(danteAngle);
-  c.strokeStyle = 'rgba(255,255,255,0.08)'; c.lineWidth = 14;
-  c.beginPath(); c.moveTo(cx - maxRx, sliceY); c.lineTo(cx + maxRx, sliceY); c.stroke();
-
-  // Pole dots
-  c.fillStyle = '#8B1a1a'; c.beginPath(); c.arc(cx, y0, 6, 0, TAU); c.fill();
-  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx, y1, 6, 0, TAU); c.fill();
-
-  // Axis labels
-  c.font = '11px monospace'; c.textAlign = 'center';
-  c.fillStyle = '#8B1a1a'; c.fillText('Satan \u03c8=0', cx, y0 + 14);
-  c.fillStyle = '#EF9F27'; c.fillText('God \u03c8=\u03c0', cx, y1 - 8);
-  c.fillStyle = '#5DCAA5'; c.fillText('\u03c8=\u03c0/2 Earth surface', cx, ySurf - 8);
-
-  // Hemisphere labels
-  c.font = '9px monospace';
-  c.fillStyle = 'rgba(139,0,0,0.25)'; c.fillText('PHYSICAL HEMISPHERE', cx, (ySurf + y0) / 2 + 4);
-  c.fillStyle = 'rgba(239,159,39,0.25)'; c.fillText('SPIRITUAL HEMISPHERE', cx, (ySurf + y1) / 2 + 4);
-
-  // Journey arrows showing direction of travel
-  function danteArrow(x, y, dir, color) {
-    c.fillStyle = color; c.beginPath();
-    c.moveTo(x-4, y+dir*5); c.lineTo(x, y-dir*5); c.lineTo(x+4, y+dir*5);
-    c.closePath(); c.fill();
-  }
-  // Hell descent arrows (left side, pointing DOWN)
-  for (var a = 1; a <= 3; a++) {
-    var ps = Math.PI/2*(1-a/4), ax = cx - Math.sin(ps)*maxRx - 12;
-    danteArrow(ax, psiToY(ps), -1, 'rgba(200,60,60,0.5)');
-  }
-  // Purgatorio ascent arrows (right side, pointing UP)
-  for (var a = 1; a <= 2; a++) {
-    var ps = Math.PI/2*a/3, ax = cx + Math.sin(ps)*maxRx + 14;
-    danteArrow(ax, psiToY(ps), 1, 'rgba(93,202,165,0.5)');
-  }
-  // Paradise ascent arrows (right side, pointing UP)
-  for (var a = 1; a <= 3; a++) {
-    var ps = Math.PI/2 + Math.PI/2*a/4, ax = cx + Math.sin(ps)*maxRx + 14;
-    danteArrow(ax, psiToY(ps), 1, 'rgba(239,159,39,0.5)');
-  }
-  // Inversion arc at Satan
-  c.strokeStyle = 'rgba(200,60,60,0.35)'; c.lineWidth = 1.5;
-  c.beginPath(); c.arc(cx, y0, 12, Math.PI, 0); c.stroke();
-  c.font = '9px monospace'; c.fillStyle = 'rgba(200,60,60,0.5)'; c.textAlign = 'center';
-  c.fillText('\u21bb inversion', cx, y0 + 26);
-}
-
-function drawFull() {
-  const c = sizeCanvas('cFull');
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
-  c.clearRect(0, 0, w, h);
-  const rotY = t * 0.22, rotX = 0.32;
-  const scale = Math.min(w, h) * 0.072;
-  const a = 2.2, b = 1.0;
-
-  function klein(u, v) {
-    const cu2 = Math.cos(u/2), su2 = Math.sin(u/2);
-    const R = a + b*cu2*Math.sin(v) - b*su2*Math.sin(2*v);
-    return [R*Math.cos(u), R*Math.sin(u), b*su2*Math.sin(v) + b*cu2*Math.sin(2*v)];
-  }
-
-  function proj(px, py, pz) {
-    const rx = px*Math.cos(rotY) + pz*Math.sin(rotY);
-    const rz = -px*Math.sin(rotY) + pz*Math.cos(rotY);
-    const ry2 = py*Math.cos(rotX) - rz*Math.sin(rotX);
-    const rz2 = py*Math.sin(rotX) + rz*Math.cos(rotX);
-    const persp = 4.5 / (4.5 + rz2*0.28);
-    return [cx + rx*scale*persp, cy - ry2*scale*persp, rz2];
-  }
-
-  // Map psi slider to a z-cross-section of the Klein bottle
-  const sliceZ = (fullPsi / Math.PI * 2 - 1) * 1.4;
-  const Nu = 40, Nv = 28;
-  const segs = [];
-  for (let iu = 0; iu < Nu; iu++) {
-    const u = iu/Nu*TAU, pts = [], kzs = [];
-    for (let iv = 0; iv <= Nv; iv++) {
-      const [kx,ky,kz] = klein(u, iv/Nv*TAU);
-      pts.push(proj(kx, ky, kz)); kzs.push(kz);
-    }
-    const hi = kzs.some((z,i) => i < kzs.length-1 && (z-sliceZ)*(kzs[i+1]-sliceZ) < 0);
-    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t:0, hi });
-  }
-  for (let iv = 0; iv < Nv; iv++) {
-    const v = iv/Nv*TAU, pts = [], kzs = [];
-    for (let iu = 0; iu <= Nu; iu++) {
-      const [kx,ky,kz] = klein(iu/Nu*TAU, v);
-      pts.push(proj(kx, ky, kz)); kzs.push(kz);
-    }
-    const hi = kzs.some((z,i) => i < kzs.length-1 && (z-sliceZ)*(kzs[i+1]-sliceZ) < 0);
-    segs.push({ pts, z: pts.reduce((s,p)=>s+p[2],0)/pts.length, t:1, hi });
-  }
-  segs.sort((x,y) => x.z - y.z);
-  segs.forEach(seg => {
-    if (seg.hi) {
-      c.strokeStyle = 'rgba(239,159,39,0.95)'; c.lineWidth = 3;
-    } else {
-      const f = Math.max(0.12, Math.min(0.8, 0.38 + seg.z*0.09));
-      c.strokeStyle = seg.t===0 ? `rgba(93,202,165,${f.toFixed(2)})` : `rgba(30,58,138,${f.toFixed(2)})`;
-      c.lineWidth = 1;
-    }
-    c.beginPath();
-    seg.pts.forEach((p,i) => { if(i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); });
-    c.stroke();
+  pr.forEach(function (p) {
+    var f = clamp(0.5 + p[2]*0.4, 0.35, 1);
+    c.fillStyle = 'rgba(239,159,39,' + f.toFixed(2) + ')';
+    c.beginPath(); c.arc(p[0], p[1], 2.5 + f*2.5, 0, TAU); c.fill();
   });
+  c.fillStyle = '#94a3b8'; c.font = '12px monospace'; c.textAlign = 'center';
+  c.fillText(s.sch + ' ' + s.name + ':  V − E + F = ' + s.V + ' − ' + s.E + ' + ' + s.F + ' = 2', cx, h - 8);
+}
 
-  // Dante's world-line threading through Klein bottle — color-coded by phase
-  const N = 320, range = Math.PI * 8;
-  const phaseColors = ['rgba(200,60,60,0.7)', 'rgba(93,202,165,0.7)', 'rgba(239,159,39,0.7)'];
-  for (let ph = 0; ph < 3; ph++) {
-    const pStart = ph * Math.PI, pEnd = (ph+1) * Math.PI;
-    c.strokeStyle = phaseColors[ph]; c.lineWidth = 2.5;
-    c.beginPath(); let started = false;
-    for (let i = 0; i <= Math.floor(N/3); i++) {
-      const tt = pStart + i / Math.floor(N/3) * (pEnd - pStart);
-      const kp = knotPoint(tt);
-      const [kx,ky,kz] = klein(kp.psi, tt*0.9 + kp.x*3);
-      const [sx,sy] = proj(kx, ky, kz);
-      if (!started) { c.moveTo(sx,sy); started=true; } else c.lineTo(sx,sy);
-    }
-    c.stroke();
+/* ==================== 2. the triangle ==================== */
+var obsLat = 36 * DEG, obsLon = -87 * DEG, qPsiVal = Math.PI / 2;
+function drawTriangle() {
+  var c = CTX['cTriangle']; if (!c) return;
+  var d = dims('cTriangle'), w = d.w, h = d.h;
+  c.clearRect(0, 0, w, h);
+  var T = sphericalTriangle(obsLat, obsLon), half = T.N / 2;
+  var base = [{k:'N',x:0,y:0},
+              {k:'O',x:-Math.sin(half)*T.c, y:Math.cos(half)*T.c},
+              {k:'M',x: Math.sin(half)*T.b, y:Math.cos(half)*T.b}];
+  var pad = 58, best = null;
+  [0, Math.PI/2].forEach(function (rot) {
+    var cs = Math.cos(rot), sn = Math.sin(rot);
+    var r = base.map(function (q) { return { k:q.k, x:q.x*cs - q.y*sn, y:q.x*sn + q.y*cs }; });
+    var xs = r.map(function (q) { return q.x; }), ys = r.map(function (q) { return q.y; });
+    var mnX = Math.min.apply(null, xs), mxX = Math.max.apply(null, xs);
+    var mnY = Math.min.apply(null, ys), mxY = Math.max.apply(null, ys);
+    var sc = Math.min((w - 2*pad) / Math.max(mxX - mnX, 1e-6), (h - 2*pad) / Math.max(mxY - mnY, 1e-6));
+    if (!best || sc > best.sc) best = { sc:sc, r:r, mnX:mnX, mxX:mxX, mnY:mnY, mxY:mxY };
+  });
+  var ox = w/2 - best.sc*(best.mnX + best.mxX)/2, oy = h/2 - best.sc*(best.mnY + best.mxY)/2;
+  var P = {}; best.r.forEach(function (q) { P[q.k] = { x: ox + q.x*best.sc, y: oy + q.y*best.sc }; });
+  var N = P.N, O = P.O, M = P.M;
+  var ctr = { x:(N.x+O.x+M.x)/3, y:(N.y+O.y+M.y)/3 };
+  var degen = T.N < 0.03 || T.N > Math.PI - 0.03;
+
+  function side(p1, p2, col, lw, label) {
+    var mx = (p1.x+p2.x)/2, my = (p1.y+p2.y)/2;
+    var dx = p2.x-p1.x, dy = p2.y-p1.y, L = Math.hypot(dx,dy) || 1;
+    var nx = -dy/L, ny = dx/L;
+    if ((mx-ctr.x)*nx + (my-ctr.y)*ny < 0) { nx = -nx; ny = -ny; }
+    var bul = Math.min(24, L*0.12);
+    c.strokeStyle = col; c.lineWidth = lw;
+    c.beginPath(); c.moveTo(p1.x,p1.y);
+    c.quadraticCurveTo(mx + nx*bul*2, my + ny*bul*2, p2.x, p2.y); c.stroke();
+    c.fillStyle = col; c.font = '12px monospace';
+    c.textAlign = Math.abs(nx) > 0.5 ? (nx > 0 ? 'left' : 'right') : 'center';
+    c.fillText(label, mx + nx*(bul+20), my + ny*(bul+20) + 4);
   }
-
-  const cr = findCrossings(fullPsi);
-  const lbl = fullPsi.toFixed(2);
-  c.fillStyle = '#334155'; c.font = '13px monospace'; c.textAlign = 'center';
-  c.fillText('\u03c8=' + lbl + ' | ' + cr.length + ' crossing' + (cr.length!==1?'s':'') + ' | closed, no boundary, no outside', cx, h-8);
+  function angleArc(V, A, B, want, col, label) {
+    var LA = Math.hypot(A.x-V.x, A.y-V.y), LB = Math.hypot(B.x-V.x, B.y-V.y);
+    var rad = Math.max(16, Math.min(want, 0.30*Math.min(LA, LB)));   // never overrun its own sides
+    var a1 = Math.atan2(A.y-V.y, A.x-V.x), a2 = Math.atan2(B.y-V.y, B.x-V.x), df = a2 - a1;
+    while (df >  Math.PI) df -= TAU;
+    while (df < -Math.PI) df += TAU;
+    c.strokeStyle = col; c.lineWidth = 1.8;
+    c.beginPath(); c.arc(V.x, V.y, rad, a1, a1 + df, df < 0); c.stroke();
+    var mid = a1 + df/2, cm = Math.cos(mid);
+    c.font = '12px monospace';
+    var tw = c.measureText(label).width;
+    // grow the text away from the vertex so it never lies across its own arc
+    var al = cm > 0.2 ? 'left' : (cm < -0.2 ? 'right' : 'center');
+    var lx = V.x + cm*(rad + 12), ly = V.y + Math.sin(mid)*(rad + 12) + 4;
+    if (al === 'left')  lx = Math.min(lx, w - tw - 8);
+    if (al === 'right') lx = Math.max(lx, tw + 8);
+    if (al === 'center') lx = clamp(lx, tw/2 + 8, w - tw/2 - 8);
+    c.fillStyle = col; c.textAlign = al;
+    c.fillText(label, lx, clamp(ly, 16, h - 26));
+  }
+  function vertex(p, txt, col) {
+    var dx = p.x-ctr.x, dy = p.y-ctr.y, L = Math.hypot(dx,dy) || 1;
+    c.fillStyle = col; c.beginPath(); c.arc(p.x, p.y, 7, 0, TAU); c.fill();
+    c.font = '13px Georgia';
+    var al = dx > 8 ? 'left' : (dx < -8 ? 'right' : 'center');
+    c.textAlign = al;
+    var tw = c.measureText(txt).width;
+    var lx = p.x + dx/L*26;
+    if (al === 'left')  lx = Math.min(lx, w - tw - 8);
+    if (al === 'right') lx = Math.max(lx, tw + 8);
+    if (al === 'center') lx = clamp(lx, tw/2 + 8, w - tw/2 - 8);
+    c.fillText(txt, lx, clamp(p.y + dy/L*26 + (Math.abs(dx) <= 8 ? (dy > 0 ? 15 : -5) : 5), 16, h - 26));
+  }
+  side(N, O, 'rgba(93,202,165,0.9)', 2.2, 'c = ' + (T.c/DEG).toFixed(1) + '°');
+  side(N, M, 'rgba(93,202,165,0.9)', 2.2, 'b = ' + (T.b/DEG).toFixed(1) + '°');
+  side(O, M, '#EF9F27', 3.4, 'a = ' + (T.a/DEG).toFixed(1) + '°');
+  if (!degen) {
+    angleArc(N, O, M, 34, 'rgba(203,213,225,0.95)', 'N = ' + (T.N/DEG).toFixed(1) + '°');
+    angleArc(O, N, M, 40, '#EF9F27',                'Q = ' + (T.O/DEG).toFixed(1) + '°');
+    angleArc(M, N, O, 30, 'rgba(148,163,184,0.95)', 'M = ' + (T.M/DEG).toFixed(1) + '°');
+  }
+  vertex(N, 'North Pole', '#cbd5e1');
+  vertex(O, 'observer',   '#5DCAA5');
+  vertex(M, 'Mecca',      '#EF9F27');
+  c.fillStyle = '#94a3b8'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText(degen ? 'degenerate: pole, observer and Mecca lie on one great circle'
+                   : 'true side lengths and true angles; scale and orientation fitted to the panel', w/2, h - 10);
+}
+function triangleReadout(T) {
+  var r1 = Math.sin(T.O) > 1e-6 ? Math.sin(T.b)/Math.sin(T.O) : NaN;
+  var r2 = Math.sin(T.N) > 1e-6 ? Math.sin(T.a)/Math.sin(T.N) : NaN;
+  var ok = isFinite(r1) && isFinite(r2) && Math.abs(r1 - r2) < 1e-6;
+  setHtml('eqTriangle',
+    '<b>Check 1, law of sines.</b> sin b / sin O = ' + (isFinite(r1) ? r1.toFixed(6) : 'n/a') +
+    ' and sin a / sin N = ' + (isFinite(r2) ? r2.toFixed(6) : 'n/a') + ' ' + (ok ? '<b>equal</b>' : '(degenerate)') + '<br>' +
+    '<b>Check 2, angle at the pole.</b> law of cosines ' + (T.N/DEG).toFixed(4) + '°, |Δλ| ' + (T.dlAbs/DEG).toFixed(4) + '°<br>' +
+    '<b>Check 3, angle at the observer.</b> law of cosines ' + (T.O/DEG).toFixed(4) + '°, qibla bearing ' + T.interiorO.toFixed(4) + '°<br>' +
+    'angles N ' + (T.N/DEG).toFixed(1) + '°, observer ' + (T.O/DEG).toFixed(1) + '°, Mecca ' + (T.M/DEG).toFixed(1) +
+    '° &nbsp;|&nbsp; sum ' + ((T.N+T.O+T.M)/DEG).toFixed(1) + '° &nbsp;|&nbsp; <b>spherical excess ' + (T.excess/DEG).toFixed(1) + '°</b>');
 }
 
-
-// ---- Qibla / spherical trig ----
-
-function computeQibla(lat1, lon1) {
-  const dLon = MECCA_LON - lon1;
-  const y = Math.sin(dLon) * Math.cos(MECCA_LAT);
-  const x = Math.cos(lat1) * Math.sin(MECCA_LAT) - Math.sin(lat1) * Math.cos(MECCA_LAT) * Math.cos(dLon);
-  const bearing = Math.atan2(y, x);
-  const sinHalfDlat = Math.sin((MECCA_LAT - lat1) / 2);
-  const sinHalfDlon = Math.sin(dLon / 2);
-  const a = sinHalfDlat*sinHalfDlat + Math.cos(lat1)*Math.cos(MECCA_LAT)*sinHalfDlon*sinHalfDlon;
-  const dist = 2 * Math.asin(Math.sqrt(Math.max(0, Math.min(1, a))));
-  const sideC = Math.PI / 2 - lat1;
-  return { bearing, dist, sideC };
-}
-
-function setEl(id, val) { const e = gc(id); if (e) e.textContent = val; }
-
+/* ==================== 3. qibla ==================== */
 function updateQibla() {
-  const oLatEl = gc('oLat'), oLonEl = gc('oLon'), qPsiEl = gc('qPsi');
-  if (!oLatEl) return;
-  obsLat   = oLatEl.value * DEG;
-  obsLon   = oLonEl.value * DEG;
-  qPsiVal  = (qPsiEl.value / 100) * Math.PI;
-  setEl('oLatV', Math.round(obsLat/DEG) + '\u00b0 ' + (obsLat >= 0 ? 'N' : 'S'));
-  setEl('oLonV', Math.round(obsLon/DEG) + '\u00b0 ' + (obsLon >= 0 ? 'E' : 'W'));
-  setEl('qPsiV', qPsiEl.value == 50 ? '\u03c0/2' : qPsiVal.toFixed(2));
-  const q = computeQibla(obsLat, obsLon);
-  const bearDeg = ((q.bearing / DEG) + 360) % 360;
-  setEl('rBearing', bearDeg.toFixed(1) + '\u00b0');
-  setEl('rDist',    Math.round(q.dist * 6371).toLocaleString() + ' km');
-  setEl('rSideC',   (q.sideC / DEG).toFixed(1) + '\u00b0');
-  const dLonDeg = ((MECCA_LON - obsLon) / DEG).toFixed(1);
-  const eqEl = gc('eqQibla');
-  if (eqEl) eqEl.innerHTML =
-    '<b>tan Q = sin \u0394\u03bb / (cos \u03c6\u2081 tan \u03c6\u2082 \u2212 sin \u03c6\u2081 cos \u0394\u03bb)</b><br>' +
-    '\u03c6\u2081 = ' + (obsLat/DEG).toFixed(1) + '\u00b0, \u03c6\u2082 = ' + (MECCA_LAT/DEG).toFixed(1) + '\u00b0 (Mecca), \u0394\u03bb = ' + dLonDeg + '\u00b0<br>' +
-    '\u2192 Q = <b>' + bearDeg.toFixed(2) + '\u00b0</b> from North &nbsp;|&nbsp; dist = <b>' + Math.round(q.dist*6371).toLocaleString() + ' km</b>' +
-    ' &nbsp;|&nbsp; The qibla bearing Q is invariant across all S\u00b2 slices. At \u03c8\u21920 or \u03c8\u2192\u03c0: <b>you are at the punto.</b>';
+  obsLat = +gc('oLat').value * DEG;
+  obsLon = +gc('oLon').value * DEG;
+  qPsiVal = (+gc('qPsi').value / 100) * Math.PI;
+  setTxt('oLatV', Math.abs(Math.round(obsLat/DEG)) + '° ' + (obsLat >= 0 ? 'N' : 'S'));
+  setTxt('oLonV', Math.abs(Math.round(obsLon/DEG)) + '° ' + (obsLon >= 0 ? 'E' : 'W'));
+  setTxt('qPsiV', fmtPsi(qPsiVal));
+  var T = sphericalTriangle(obsLat, obsLon);
+  setTxt('rBearing', T.bearingDeg.toFixed(1) + '°');
+  setTxt('rDist', Math.round(T.a * 6371).toLocaleString() + ' km');
+  setTxt('rSideC', (T.c/DEG).toFixed(1) + '°');
+  setHtml('eqQibla',
+    '<b>tan Q = sin Δλ / (cos φ₁ tan φ₂ − sin φ₁ cos Δλ)</b><br>' +
+    'φ₁ = ' + (obsLat/DEG).toFixed(1) + '°, φ₂ = ' + (MECCA_LAT/DEG).toFixed(1) + '° (Mecca), Δλ = ' + (T.dLon/DEG).toFixed(1) + '°<br>' +
+    'Q = <b>' + T.bearingDeg.toFixed(2) + '°</b> from North &nbsp;|&nbsp; distance <b>' + Math.round(T.a*6371).toLocaleString() +
+    ' km</b> &nbsp;|&nbsp; the bearing does not change with ψ; what changes is the slice radius sinψ = ' + Math.sin(qPsiVal).toFixed(3));
+  triangleReadout(T);
+  mark('cTriangle'); mark('cQS3');
 }
-
 function gcArc(c, lat1, lon1, lat2, lon2, cx, cy, Rx, Ry, rot, color, lw) {
-  const N = 60;
-  c.strokeStyle = color; c.lineWidth = lw;
-  let started = false;
-  c.beginPath();
-  for (let i = 0; i <= N; i++) {
-    const tt = i / N;
-    const x1=Math.cos(lat1)*Math.cos(lon1), y1=Math.sin(lat1), z1=Math.cos(lat1)*Math.sin(lon1);
-    const x2=Math.cos(lat2)*Math.cos(lon2), y2=Math.sin(lat2), z2=Math.cos(lat2)*Math.sin(lon2);
-    const dot = Math.max(-1, Math.min(1, x1*x2+y1*y2+z1*z2));
-    const omega = Math.acos(dot);
-    let px, py, pz;
-    if (Math.abs(omega) < 1e-6) { px=x1; py=y1; pz=z1; }
-    else {
-      const s = Math.sin(omega);
-      const f1=Math.sin((1-tt)*omega)/s, f2=Math.sin(tt*omega)/s;
-      px=f1*x1+f2*x2; py=f1*y1+f2*y2; pz=f1*z1+f2*z2;
-    }
-    const lat = Math.asin(Math.max(-1,Math.min(1,py)));
-    const lon = Math.atan2(pz, px);
-    const lon2s = lon - rot;
-    const vis = Math.cos(lat)*Math.cos(lon2s) > -0.3;
-    const sx = cx + Rx*Math.cos(lat)*Math.sin(lon2s);
-    const sy = cy - Ry*Math.sin(lat);
-    if (vis) { if (!started) { c.moveTo(sx,sy); started=true; } else c.lineTo(sx,sy); }
+  var N = 64, started = false;
+  var x1=Math.cos(lat1)*Math.cos(lon1), y1=Math.sin(lat1), z1=Math.cos(lat1)*Math.sin(lon1);
+  var x2=Math.cos(lat2)*Math.cos(lon2), y2=Math.sin(lat2), z2=Math.cos(lat2)*Math.sin(lon2);
+  var om = Math.acos(clamp(x1*x2 + y1*y2 + z1*z2, -1, 1));
+  c.strokeStyle = color; c.lineWidth = lw; c.beginPath();
+  for (var i = 0; i <= N; i++) {
+    var tt = i/N, px, py, pz;
+    if (Math.abs(om) < 1e-6) { px=x1; py=y1; pz=z1; }
+    else { var sn = Math.sin(om), f1 = Math.sin((1-tt)*om)/sn, f2 = Math.sin(tt*om)/sn;
+           px = f1*x1+f2*x2; py = f1*y1+f2*y2; pz = f1*z1+f2*z2; }
+    var la = Math.asin(clamp(py,-1,1)), lo = Math.atan2(pz, px) - rot;
+    var vis = Math.cos(la)*Math.cos(lo) > -0.3;
+    var sx = cx + Rx*Math.cos(la)*Math.sin(lo), sy = cy - Ry*Math.sin(la);
+    if (vis) { if (!started) { c.moveTo(sx,sy); started = true; } else c.lineTo(sx,sy); }
     else started = false;
   }
   c.stroke();
 }
-
-function latlonToXY(lat, lon, cx, cy, Rx, Ry, rot) {
-  const lon2 = lon - rot;
-  return {
-    x: cx + Rx*Math.cos(lat)*Math.sin(lon2),
-    y: cy - Ry*Math.sin(lat),
-    vis: Math.cos(lat)*Math.cos(lon2) > -0.3
-  };
+function llXY(la, lo, cx, cy, Rx, Ry, rot) {
+  var l = lo - rot;
+  return { x: cx + Rx*Math.cos(la)*Math.sin(l), y: cy - Ry*Math.sin(la), vis: Math.cos(la)*Math.cos(l) > -0.3 };
 }
-
 function drawSphere() {
-  const c = CTX['cSphere']; if (!c) return;
-  const w=c.canvas.width, h=c.canvas.height, cx=w/2, cy=h/2, Rx=w*0.36, Ry=h*0.44;
-  c.clearRect(0,0,w,h);
-  const rot = t * 0.15 + obsLon;
-  c.strokeStyle='#1e293b'; c.lineWidth=2;
-  c.beginPath(); c.ellipse(cx,cy,Rx,Ry,0,0,TAU); c.stroke();
-  [-60,-30,0,30,60].forEach(lat => {
-    const r=Math.cos(lat*DEG);
-    c.strokeStyle='#0f172a'; c.lineWidth=1;
-    c.beginPath(); c.ellipse(cx,cy-Ry*Math.sin(lat*DEG),Rx*r,Ry*r*0.3,0,0,TAU); c.stroke();
+  var c = CTX['cSphere']; if (!c) return;
+  var d = dims('cSphere'), w = d.w, h = d.h, cx = w/2, cy = h/2, Rx = w*0.36, Ry = h*0.42;
+  c.clearRect(0, 0, w, h);
+  var rot = t*0.15 + obsLon;
+  c.strokeStyle = '#334155'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(cx, cy, Rx, Ry, 0, 0, TAU); c.stroke();
+  [-60,-30,0,30,60].forEach(function (la) {
+    var r = Math.cos(la*DEG);
+    c.strokeStyle = '#1e293b'; c.lineWidth = 1;
+    c.beginPath(); c.ellipse(cx, cy - Ry*Math.sin(la*DEG), Rx*r, Ry*r*0.3, 0, 0, TAU); c.stroke();
   });
-  c.strokeStyle='#1e293b'; c.lineWidth=1.5;
-  c.beginPath(); c.ellipse(cx,cy,Rx,Ry*0.3,0,0,TAU); c.stroke();
-  const np = latlonToXY(Math.PI/2,0,cx,cy,Rx,Ry,rot);
+  var np = llXY(Math.PI/2, 0, cx, cy, Rx, Ry, rot);
   if (np.vis) {
-    c.fillStyle='#475569'; c.beginPath(); c.arc(np.x,np.y,6,0,TAU); c.fill();
-    c.fillStyle='#334155'; c.font='18px monospace'; c.textAlign='left';
-    c.fillText('N',np.x+8,np.y+6);
+    c.fillStyle = '#cbd5e1'; c.beginPath(); c.arc(np.x, np.y, 6, 0, TAU); c.fill();
+    c.font = '14px monospace'; c.textAlign = 'left'; c.fillText('N', np.x+9, np.y+5);
   }
-  gcArc(c,Math.PI/2,0,obsLat,obsLon,cx,cy,Rx,Ry,rot,'rgba(93,202,165,0.5)',2);
-  gcArc(c,Math.PI/2,0,MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot,'rgba(93,202,165,0.5)',2);
-  gcArc(c,obsLat,obsLon,MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot,'#EF9F27',3.5);
-  const op = latlonToXY(obsLat,obsLon,cx,cy,Rx,Ry,rot);
+  gcArc(c, Math.PI/2, 0, obsLat, obsLon, cx, cy, Rx, Ry, rot, 'rgba(93,202,165,0.65)', 2);
+  gcArc(c, Math.PI/2, 0, MECCA_LAT, MECCA_LON, cx, cy, Rx, Ry, rot, 'rgba(93,202,165,0.65)', 2);
+  gcArc(c, obsLat, obsLon, MECCA_LAT, MECCA_LON, cx, cy, Rx, Ry, rot, '#EF9F27', 3.5);
+  var op = llXY(obsLat, obsLon, cx, cy, Rx, Ry, rot);
   if (op.vis) {
-    c.fillStyle='#5DCAA5'; c.beginPath(); c.arc(op.x,op.y,9,0,TAU); c.fill();
-    c.fillStyle='#085041'; c.font='18px Georgia'; c.textAlign='right';
-    c.fillText('observer',op.x-8,op.y+6);
-    const q=computeQibla(obsLat,obsLon);
-    const sa=q.bearing-Math.PI/2, aLen=55;
-    c.strokeStyle='#EF9F27'; c.lineWidth=2.5;
-    c.beginPath(); c.moveTo(op.x,op.y); c.lineTo(op.x+aLen*Math.cos(sa),op.y+aLen*Math.sin(sa)); c.stroke();
-    c.fillStyle='#EF9F27'; c.beginPath(); c.arc(op.x+aLen*Math.cos(sa),op.y+aLen*Math.sin(sa),5,0,TAU); c.fill();
+    c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(op.x, op.y, 9, 0, TAU); c.fill();
+    c.font = '13px Georgia'; c.textAlign = 'right'; c.fillText('observer', op.x-12, op.y+5);
+    var T = sphericalTriangle(obsLat, obsLon), sa = T.bearing - Math.PI/2, L = 52;
+    c.strokeStyle = '#EF9F27'; c.lineWidth = 2.5;
+    c.beginPath(); c.moveTo(op.x, op.y); c.lineTo(op.x + L*Math.cos(sa), op.y + L*Math.sin(sa)); c.stroke();
+    c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(op.x + L*Math.cos(sa), op.y + L*Math.sin(sa), 5, 0, TAU); c.fill();
   }
-  const mp = latlonToXY(MECCA_LAT,MECCA_LON,cx,cy,Rx,Ry,rot);
+  var mp = llXY(MECCA_LAT, MECCA_LON, cx, cy, Rx, Ry, rot);
   if (mp.vis) {
-    c.fillStyle='#EF9F27'; c.beginPath(); c.arc(mp.x,mp.y,9,0,TAU); c.fill();
-    c.fillStyle='#633806'; c.font='18px Georgia'; c.textAlign='left';
-    c.fillText('Mecca',mp.x+10,mp.y+6);
+    c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(mp.x, mp.y, 9, 0, TAU); c.fill();
+    c.font = '13px Georgia'; c.textAlign = 'left'; c.fillText('Mecca', mp.x+12, mp.y+5);
   }
 }
-
 function drawQS3() {
-  const c = CTX['cQS3']; if (!c) return;
-  const w=c.canvas.width, h=c.canvas.height, cx=w/2;
-  const y0=h-60, y1=60;
-  c.clearRect(0,0,w,h);
-  c.strokeStyle='#1e293b'; c.lineWidth=1.5;
-  for (let side=-1;side<=1;side+=2) {
+  var c = CTX['cQS3']; if (!c) return;
+  var d = dims('cQS3'), w = d.w, h = d.h, cx = w/2, y0 = h - 54, y1 = 54;
+  c.clearRect(0, 0, w, h);
+  var maxR = Math.min(cx*0.7, 150);
+  function yOf(ps) { return y0 - psiToFrac(ps)*(y0 - y1); }
+  c.strokeStyle = '#334155'; c.lineWidth = 1.5;
+  for (var side = -1; side <= 1; side += 2) {
     c.beginPath();
-    for (let i=0;i<=120;i++) {
-      const ps=i/120*Math.PI;
-      const x=cx+side*Math.sin(ps)*160, y=y0-(ps/Math.PI)*(y0-y1);
-      if(i===0) c.moveTo(x,y); else c.lineTo(x,y);
+    for (var i = 0; i <= 120; i++) { var ps = i/120*Math.PI; c.lineTo(cx + side*Math.sin(ps)*maxR, yOf(ps)); }
+    c.stroke();
+  }
+  [[EARTH_PSI,'rgba(93,202,165,0.8)','Earth S², where the qibla lives'],
+   [PRIMUM_PSI,'rgba(239,159,39,0.8)','Primum Mobile']].forEach(function (s) {
+    var ry = yOf(s[0]), rx = Math.sin(s[0])*maxR;
+    c.strokeStyle = s[1]; c.lineWidth = 2;
+    c.beginPath(); c.ellipse(cx, ry, Math.max(2,rx), Math.max(1,rx*0.2), 0, 0, TAU); c.stroke();
+    c.fillStyle = s[1]; c.font = '11px monospace'; c.textAlign = 'left'; c.fillText(s[2], 10, ry - 12);
+  });
+  var cy2 = yOf(qPsiVal), crx = Math.sin(qPsiVal)*maxR;
+  c.strokeStyle = 'rgba(239,159,39,0.9)'; c.lineWidth = 3;
+  c.beginPath(); c.ellipse(cx, cy2, Math.max(2,crx), Math.max(1,crx*0.2), 0, 0, TAU); c.stroke();
+  c.strokeStyle = 'rgba(239,159,39,0.35)'; c.lineWidth = 1.5; c.setLineDash([4,4]);
+  c.beginPath(); c.moveTo(20, cy2); c.lineTo(w-20, cy2); c.stroke(); c.setLineDash([]);
+  c.fillStyle = '#cbd5e1'; c.font = '12px monospace'; c.textAlign = 'left';
+  c.fillText('r sinψ = ' + Math.sin(qPsiVal).toFixed(3), cx+14, cy2+5);
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(cx, y1, 8, 0, TAU); c.fill();
+  c.fillStyle = '#c83c3c'; c.beginPath(); c.arc(cx, y0, 8, 0, TAU); c.fill();
+  c.font = '13px Georgia'; c.textAlign = 'center';
+  c.fillStyle = '#fbbf24'; c.fillText('God ψ = π', cx, y1-14);
+  c.fillStyle = '#c83c3c'; c.fillText('Satan ψ = 0', cx, y0+26);
+}
+
+/* ==================== 4. the astrolabe ==================== */
+function aVal(id) { return +gc(id).value; }
+function cel(dec, ha) { var cc = Math.cos(dec*DEG); return [cc*Math.cos(ha*DEG), cc*Math.sin(ha*DEG), Math.sin(dec*DEG)]; }
+function v3u(v) { var n = Math.hypot(v[0],v[1],v[2]) || 1; return [v[0]/n, v[1]/n, v[2]/n]; }
+function v3d(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];}
+function v3a(a,b){return [a[0]+b[0],a[1]+b[1],a[2]+b[2]];}
+function v3s(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]];}
+function v3k(a,k){return [a[0]*k,a[1]*k,a[2]*k];}
+function aStereo(P) { var dd = 1 + P[2]; return { x: P[0]/dd, y: P[1]/dd }; }
+function aDirAt(P, wv) {
+  var e = 1e-4, A = aStereo(P), B = aStereo(v3a(P, v3k(v3u(wv), e)));
+  return { x: B.x - A.x, y: B.y - A.y };
+}
+function ang2(v, w) {
+  var den = Math.hypot(v.x,v.y) * Math.hypot(w.x,w.y) || 1;
+  return Math.acos(clamp((v.x*w.x + v.y*w.y)/den, -1, 1)) / DEG;
+}
+function drawAstro() {
+  var c = CTX['cAstro']; if (!c) return;
+  var d = dims('cAstro'), w = d.w, h = d.h;
+  c.clearRect(0, 0, w, h);
+  var phi = aVal('aPhi'), dec = aVal('aDec'), ha = aVal('aHA'), dl = aVal('aDL');
+  var Z = cel(phi, 0), Np = [0,0,1], M = cel(21.4225, dl);
+  var q0 = aStereo(cel(-23.44, 90)), qr = Math.hypot(q0.x, q0.y);
+  var margin = 14, gap = 34, rightW = w * 0.46, leftW = w - rightW - gap;
+  var S = (Math.min(rightW*0.46, h*0.40) - margin) / qr, rimR = qr * S;
+  var cx2 = leftW + gap + rightW/2, cy2 = h*0.42;
+  var cx1 = leftW*0.5, cy1 = h*0.50, R = Math.min(h*0.34, leftW*0.42);
+
+  c.font = '10px monospace'; c.fillStyle = '#94a3b8'; c.textAlign = 'center';
+  c.fillText('CROSS-SECTION: projection from the south celestial pole', cx1, 14);
+  c.fillText('THE PLATE: the sky’s angles laid flat', cx2, 14);
+
+  c.strokeStyle = '#334155'; c.lineWidth = 2;
+  c.beginPath(); c.arc(cx1, cy1, R, 0, TAU); c.stroke();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx1, cy1 - R, 5, 0, TAU); c.fill();
+  c.fillStyle = '#c83c3c'; c.beginPath(); c.arc(cx1, cy1 + R, 5, 0, TAU); c.fill();
+  c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillStyle = '#EF9F27'; c.fillText('N', cx1, cy1 - R - 10);
+  c.fillStyle = '#c83c3c'; c.fillText('S (centre of projection)', cx1, cy1 + R + 17);
+  c.strokeStyle = 'rgba(148,163,184,0.4)'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(cx1 - R, cy1); c.lineTo(cx1 + R, cy1); c.stroke();
+  c.fillStyle = '#94a3b8'; c.font = '10px monospace';
+  c.fillText('equatorial plane (the plate)', cx1, cy1 + R + 34);
+  var thZ = Math.PI/2 - phi*DEG;
+  var ZX = cx1 + R*Math.sin(thZ), ZY = cy1 - R*Math.cos(thZ);
+  c.fillStyle = '#cbd5e1'; c.beginPath(); c.arc(ZX, ZY, 4, 0, TAU); c.fill();
+  c.textAlign = 'left'; c.fillText('zenith Z', ZX + 8, ZY - 6);
+  var midA = thZ/2;
+  c.strokeStyle = 'rgba(148,163,184,0.45)'; c.lineWidth = 1; c.setLineDash([3,3]);
+  c.beginPath(); c.moveTo(cx1, cy1); c.lineTo(cx1, cy1 - R); c.stroke();          // polar axis
+  c.beginPath(); c.moveTo(cx1, cy1); c.lineTo(ZX, ZY); c.stroke();                // toward the zenith
+  c.setLineDash([]);
+  c.strokeStyle = 'rgba(203,213,225,0.8)'; c.lineWidth = 1.4;
+  c.beginPath(); c.arc(cx1, cy1, R*0.26, -Math.PI/2, -Math.PI/2 + thZ); c.stroke();
+  c.fillStyle = 'rgba(203,213,225,0.95)'; c.textAlign = 'center'; c.font = '11px monospace';
+  c.fillText('φ = ' + phi + '°', cx1 + R*0.40*Math.sin(midA), cy1 - R*0.40*Math.cos(midA) + 4);
+  var thS = Math.PI/2 - dec*DEG;
+  var SxP = cx1 + R*Math.sin(thS), SyP = cy1 - R*Math.cos(thS);
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5;
+  c.beginPath(); c.moveTo(cx1, cy1 + R); c.lineTo(SxP, SyP); c.stroke();
+  c.strokeStyle = 'rgba(239,159,39,0.6)'; c.setLineDash([4,4]);
+  var tPl = (cy1 - (cy1 + R)) / (SyP - (cy1 + R)), Lx = cx1 + (SxP - cx1)*tPl;
+  c.beginPath(); c.moveTo(SxP, SyP); c.lineTo(Lx, cy1); c.stroke(); c.setLineDash([]);
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(SxP, SyP, 4, 0, TAU); c.fill();
+  c.textAlign = 'right'; c.font = '10px monospace';
+  c.fillText('star, δ = ' + dec + '°', SxP - 8, SyP - 8);
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(Lx, cy1, 4, 0, TAU); c.fill();
+  c.textAlign = 'center'; c.fillText('its image', Lx, cy1 + 16);
+
+  function P2(pt) { var q = aStereo(pt); return { x: cx2 + q.x*S, y: cy2 - q.y*S }; }
+  c.save();
+  c.beginPath(); c.arc(cx2, cy2, rimR, 0, TAU); c.clip();
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5;
+  c.beginPath(); c.arc(cx2, cy2, rimR, 0, TAU); c.stroke();
+  [[23.44,0.5],[0,0.6],[-23.44,0.6]].forEach(function (pr) {
+    var q = aStereo(cel(pr[0], 0)), rr = Math.hypot(q.x,q.y)*S;
+    c.strokeStyle = 'rgba(148,163,184,' + pr[1] + ')'; c.lineWidth = 1;
+    c.beginPath(); c.arc(cx2, cy2, rr, 0, TAU); c.stroke();
+  });
+  var e1 = v3u([-Math.sin(phi*DEG), 0, Math.cos(phi*DEG)]), e2 = [0,1,0];
+  [0,20,40,60,80].forEach(function (alt) {
+    var z = 90 - alt, first = true;
+    c.beginPath();
+    for (var b = 0; b <= TAU + 0.01; b += 0.04) {
+      var Pt = v3a(v3k(Z, Math.cos(z*DEG)), v3k(v3a(v3k(e1, Math.cos(b)), v3k(e2, Math.sin(b))), Math.sin(z*DEG)));
+      var q = P2(Pt); if (first) { c.moveTo(q.x,q.y); first = false; } else c.lineTo(q.x,q.y);
+    }
+    c.strokeStyle = alt === 0 ? 'rgba(203,213,225,0.9)' : 'rgba(93,202,165,0.32)';
+    c.lineWidth = alt === 0 ? 1.4 : 1; c.stroke();
+  });
+  [30,120,210,300].forEach(function (azd) {
+    var A = azd*DEG, H = v3u(v3a(v3k(e1, Math.cos(A)), v3k(e2, Math.sin(A))));
+    var wv = v3u(v3s(H, v3k(Z, v3d(H, Z)))), first = true;
+    c.beginPath();
+    for (var b = -1.35; b <= 1.35; b += 0.05) {
+      var q = P2(v3a(v3k(Z, Math.cos(b)), v3k(wv, Math.sin(b))));
+      if (first) { c.moveTo(q.x,q.y); first = false; } else c.lineTo(q.x,q.y);
+    }
+    c.strokeStyle = 'rgba(200,60,60,0.32)'; c.lineWidth = 1; c.stroke();
+  });
+  var first2 = true; c.beginPath();
+  for (var L2 = 0; L2 <= TAU + 0.01; L2 += 0.03) {
+    var qe = P2([Math.cos(L2), Math.cos(23.44*DEG)*Math.sin(L2), Math.sin(23.44*DEG)*Math.sin(L2)]);
+    if (first2) { c.moveTo(qe.x,qe.y); first2 = false; } else c.lineTo(qe.x,qe.y);
+  }
+  c.strokeStyle = 'rgba(251,191,36,0.6)'; c.lineWidth = 1.6; c.stroke();
+
+  var Pst = cel(dec, ha), qs = P2(Pst);
+  var tn = v3u([-Math.sin(dec*DEG)*Math.cos(ha*DEG), -Math.sin(dec*DEG)*Math.sin(ha*DEG), Math.cos(dec*DEG)]);
+  var te = v3u([-Math.sin(ha*DEG), Math.cos(ha*DEG), 0]);
+  var dn = aDirAt(Pst, tn), de = aDirAt(Pst, te);
+  var an = Math.atan2(dn.y, dn.x), ae = Math.atan2(de.y, de.x), cross = 16;
+  c.strokeStyle = '#fbbf24'; c.lineWidth = 1.8;
+  c.beginPath();
+  c.moveTo(qs.x + Math.cos(an)*cross, qs.y + Math.sin(an)*cross);
+  c.lineTo(qs.x - Math.cos(an)*cross, qs.y - Math.sin(an)*cross);
+  c.moveTo(qs.x + Math.cos(ae)*cross, qs.y + Math.sin(ae)*cross);
+  c.lineTo(qs.x - Math.cos(ae)*cross, qs.y - Math.sin(ae)*cross);
+  c.stroke();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(qs.x, qs.y, 4.5, 0, TAU); c.fill();
+
+  var w1 = v3u(v3s(Np, v3k(Z, v3d(Np, Z)))), w2 = v3u(v3s(M, v3k(Z, v3d(M, Z))));
+  function arm(wv, b1) {
+    var first = true; c.beginPath();
+    for (var b = 0; b <= b1; b += 0.03) {
+      var q = P2(v3a(v3k(Z, Math.cos(b)), v3k(wv, Math.sin(b))));
+      if (first) { c.moveTo(q.x,q.y); first = false; } else c.lineTo(q.x,q.y);
     }
     c.stroke();
   }
-  const L=9;
-  for (let i=0;i<L;i++) {
-    const ps=i/(L-1)*Math.PI, ry=y0-(i/(L-1))*(y0-y1), rx=Math.sin(ps)*160;
-    const cur=Math.abs(ps-qPsiVal)<Math.PI/(L-1)*0.7;
-    c.strokeStyle=cur?'rgba(239,159,39,0.7)':'#111827'; c.lineWidth=cur?3:1;
-    c.beginPath(); c.ellipse(cx,ry,rx,rx*0.2,0,0,TAU); c.stroke();
-  }
-  const earthY=y0-0.5*(y0-y1);
-  c.strokeStyle='rgba(93,202,165,0.35)'; c.lineWidth=2;
-  c.beginPath(); c.ellipse(cx,earthY,160,160*0.2,0,0,TAU); c.stroke();
-  c.fillStyle='#085041'; c.font='16px monospace'; c.textAlign='left';
-  c.fillText('\u03c8=\u03c0/2 — Earth S\u00b2 (qibla lives here)',cx-155,earthY-18);
-  const q=computeQibla(obsLat,obsLon);
-  const bearFrac=((q.bearing+Math.PI)%TAU)/TAU;
-  const qx=cx+Math.sin(bearFrac*TAU*0.5)*130;
-  c.strokeStyle='#EF9F27'; c.lineWidth=2.5;
-  c.beginPath(); c.moveTo(cx,y1+10); c.quadraticCurveTo(qx,earthY,cx,y0-10); c.stroke();
-  const sliceY=y0-(qPsiVal/Math.PI)*(y0-y1);
-  const frac=(sliceY-y1)/(y0-y1);
-  const tt=1-frac;
-  const bx=(1-tt)*(1-tt)*cx+2*tt*(1-tt)*qx+tt*tt*cx;
-  if (Math.sin(qPsiVal)>0.05) {
-    c.fillStyle='rgba(239,159,39,0.55)'; c.beginPath(); c.arc(bx,sliceY,7,0,TAU); c.fill();
-    c.strokeStyle='rgba(239,159,39,0.3)'; c.lineWidth=1.5; c.setLineDash([4,4]);
-    c.beginPath(); c.moveTo(40,sliceY); c.lineTo(w-40,sliceY); c.stroke();
-    c.setLineDash([]);
-    c.fillStyle='#334155'; c.font='16px monospace'; c.textAlign='left';
-    c.fillText('r\u00b7sin\u03c8 = '+Math.sin(qPsiVal).toFixed(3),bx+12,sliceY+5);
-  }
-  c.fillStyle='#EF9F27'; c.beginPath(); c.arc(qx,earthY,8,0,TAU); c.fill();
-  c.fillStyle='#5DCAA5'; c.beginPath(); c.arc(cx,y0,9,0,TAU); c.fill();
-  c.fillStyle='#EF9F27'; c.beginPath(); c.arc(cx,y1,9,0,TAU); c.fill();
-  c.fillStyle='#334155'; c.font='18px Georgia'; c.textAlign='center';
-  c.fillText('Satan \u03c8=0',cx,y0+26); c.fillText('God \u03c8=\u03c0',cx,y1-12);
+  c.strokeStyle = 'rgba(255,255,255,0.75)'; c.lineWidth = 1.6; c.setLineDash([5,4]);
+  arm(w1, 1.1); arm(w2, Math.min(1.1, Math.acos(clamp(v3d(Z, M), -1, 1)))); c.setLineDash([]);
+  var mq = P2(M), zq = P2(Z);
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(cx2, cy2, 4, 0, TAU); c.fill();
+  c.fillStyle = '#5DCAA5'; c.beginPath(); c.arc(mq.x, mq.y, 4.5, 0, TAU); c.fill();
+  c.fillStyle = '#cbd5e1'; c.beginPath(); c.arc(zq.x, zq.y, 5, 0, TAU); c.fill();
+  c.font = '10px monospace'; c.textAlign = 'left';
+  c.fillStyle = '#EF9F27'; c.fillText('star', qs.x + 9, qs.y - 9);
+  c.fillStyle = '#5DCAA5'; c.fillText('Mecca', mq.x + 10, mq.y - 8);
+  c.fillStyle = '#cbd5e1'; c.fillText('observer Z', zq.x + 10, zq.y - 10);
+  c.textAlign = 'right'; c.fillStyle = '#EF9F27'; c.fillText('pole N (centre)', cx2 - 6, cy2 + 16);
+  c.restore();
+
+  var atStar = ang2(dn, de);
+  var dz1 = aDirAt(Z, w1), dz2 = aDirAt(Z, w2), plateQ = ang2(dz1, dz2);
+  var trueQ = Math.atan2(Math.sin(dl*DEG), Math.cos(phi*DEG)*Math.tan(21.4225*DEG) - Math.sin(phi*DEG)*Math.cos(dl*DEG)) / DEG;
+  trueQ = (trueQ + 360) % 360;
+  c.font = '11px monospace'; c.textAlign = 'center'; c.fillStyle = '#5DCAA5';
+  c.fillText('angle at the star: ' + atStar.toFixed(1) + '°', cx2, cy2 + rimR + 20);
+  c.fillStyle = '#fbbf24';
+  c.fillText('qibla read off the plate: ' + plateQ.toFixed(1) + '°', cx2, cy2 + rimR + 36);
+  c.fillStyle = '#94a3b8';
+  c.fillText('qibla from the formula: ' + trueQ.toFixed(1) + '°', cx2, cy2 + rimR + 52);
+
+  setTxt('lblPhi', phi + '°'); setTxt('lblDec', dec + '°'); setTxt('lblHA', ha + '°'); setTxt('lblDL', dl + '° E');
+  setHtml('astroCheck',
+    '<b>Check 1, conformality.</b> Two directions perpendicular on the sphere (north and east at the star) project to images ' +
+    atStar.toFixed(3) + '° apart. It stays 90° wherever the star goes.<br>' +
+    '<b>Check 2, the qibla two ways.</b> read off the plate ' + plateQ.toFixed(3) +
+    '°, computed from the spherical formula ' + trueQ.toFixed(3) + '°.<br>' +
+    'Two independent routes to the same number is the reason to trust the instrument.');
 }
 
-function drawTriangle() {
-  const c = CTX['cTriangle']; if (!c) return;
-  const w=c.canvas.width, h=c.canvas.height, cx=w/2, cy=h/2;
-  c.clearRect(0,0,w,h);
-  const q=computeQibla(obsLat,obsLon);
-  const spread = Math.min(cx * 0.85, 200);
-  const Np={x:cx,y:Math.round(h*0.14)}, Op={x:Math.round(cx-spread),y:h-Math.round(h*0.14)}, Mp={x:Math.round(cx+spread*0.9),y:h-Math.round(h*0.14)};
-  function drawArc(p1,p2,col,lw,lbl) {
-    c.strokeStyle=col; c.lineWidth=lw;
-    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2-40;
-    c.beginPath(); c.moveTo(p1.x,p1.y); c.quadraticCurveTo(mx,my,p2.x,p2.y); c.stroke();
-    if (lbl) { c.fillStyle=col; c.font='18px monospace'; c.textAlign='center'; c.fillText(lbl,mx,my-8); }
+/* ==================== 5. the ladder ==================== */
+var dimN = 2;
+function setDim(n) {
+  dimN = n;
+  for (var i = 0; i < 4; i++) {
+    var b = gc('dim' + i); if (!b) continue;
+    b.classList.toggle('on', i === n);
+    b.setAttribute('aria-pressed', i === n ? 'true' : 'false');
   }
-  drawArc(Np,Op,'rgba(93,202,165,0.7)',2,'c = \u03c0/2 \u2212 \u03c6\u2081');
-  drawArc(Np,Mp,'rgba(93,202,165,0.7)',2,'b = \u03c0/2 \u2212 \u03c6\u2082');
-  drawArc(Op,Mp,'#EF9F27',3,'a (great-circle dist)');
-  [[Np,'N','#475569'],[Op,'observer','#5DCAA5'],[Mp,'Mecca','#EF9F27']].forEach(([p,lbl,col])=>{
-    c.fillStyle=col; c.beginPath(); c.arc(p.x,p.y,9,0,TAU); c.fill();
-    c.fillStyle=col; c.font='18px Georgia'; c.textAlign='center';
-    c.fillText(lbl,p.x,p.y+(p===Np?-18:28));
-  });
-  c.strokeStyle='#EF9F27'; c.lineWidth=2;
-  c.beginPath(); c.arc(Op.x,Op.y,35,-Math.PI*0.7,-Math.PI*0.2); c.stroke();
-  const bearDeg=((q.bearing/DEG)+360)%360;
-  c.fillStyle='#EF9F27'; c.font='20px monospace'; c.textAlign='left';
-  c.fillText('Q = '+bearDeg.toFixed(1)+'\u00b0',Op.x+42,Op.y-30);
-  const sinA=Math.sin(q.dist), sinQ=Math.abs(Math.sin(q.bearing));
-  const ratio=(sinQ>0.001?(sinA/sinQ).toFixed(3):'\u221e');
-  const eqEl=gc('eqTriangle');
-  if (eqEl) eqEl.innerHTML='<b>sin a / sin Q = '+ratio+'</b>' +
-    ' &nbsp;|&nbsp; sin a = '+sinA.toFixed(4)+' &nbsp;|&nbsp; sin Q = '+sinQ.toFixed(4)+
-    ' &nbsp;|&nbsp; a = '+(q.dist/DEG).toFixed(2)+'\u00b0 &nbsp;|&nbsp; Q = '+bearDeg.toFixed(2)+'\u00b0';
-  c.fillStyle='#1e293b'; c.font='20px monospace'; c.textAlign='center';
-  c.fillText('sin a / sin Q = '+ratio,cx,h-10);
-}
-
-function onFullPsi(v) {
-  fullPsi = (v / 100) * Math.PI;
-  const lbl = v == 50 ? '\u03c0/2' : v == 0 ? '0' : v == 100 ? '\u03c0' : fullPsi.toFixed(2);
-  const el = gc('fullPsiLbl'); if (el) el.textContent = lbl;
-}
-
-// ---- Platonic Solids ----
-const SOLIDS = (function() {
-  const P = (1 + Math.sqrt(5)) / 2;
-  function dist(a, b) { return Math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2 + (a[2]-b[2])**2); }
-  function norm(vs) {
-    const r = Math.max(...vs.map(v => Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])));
-    return vs.map(v => [v[0]/r, v[1]/r, v[2]/r]);
-  }
-  function autoEdges(vs) {
-    let mn = Infinity;
-    for (let i = 0; i < vs.length; i++)
-      for (let j = i+1; j < vs.length; j++) mn = Math.min(mn, dist(vs[i], vs[j]));
-    const e = [];
-    for (let i = 0; i < vs.length; i++)
-      for (let j = i+1; j < vs.length; j++) if (dist(vs[i], vs[j]) < mn * 1.05) e.push([i, j]);
-    return e;
-  }
-  function make(name, elem, schlafli, F, V, E, rawV) {
-    const v = norm(rawV);
-    return { name: name, elem: elem, schlafli: schlafli, F: F, V: V, E: E, v: v, edges: autoEdges(v) };
-  }
-  const cubeV = [];
-  for (const a of [-1,1]) for (const b of [-1,1]) for (const c of [-1,1]) cubeV.push([a,b,c]);
-  const dodecV = [];
-  for (const a of [-1,1]) for (const b of [-1,1]) for (const c of [-1,1]) dodecV.push([a,b,c]);
-  for (const a of [-1,1]) for (const b of [-1,1]) { dodecV.push([0,a/P,b*P]); dodecV.push([a/P,b*P,0]); dodecV.push([a*P,0,b/P]); }
-  const icosaV = [];
-  for (const a of [-1,1]) for (const b of [-1,1]) { icosaV.push([0,a,b*P]); icosaV.push([a,b*P,0]); icosaV.push([a*P,0,b]); }
-  return [
-    make('Tetrahedron','Fire','{3,3}',4,4,6, [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]]),
-    make('Cube','Earth','{4,3}',6,8,12, cubeV),
-    make('Octahedron','Air','{3,4}',8,6,12, [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]),
-    make('Dodecahedron','Cosmos','{5,3}',12,20,30, dodecV),
-    make('Icosahedron','Water','{3,5}',20,12,30, icosaV)
+  var info = [
+    ['x₀² = r²', 'S⁰: two antipodal points and no angular coordinate. The minimal closure. Satan and God.'],
+    ['x₀² + x₁² = r² &nbsp; (r cosφ, r sinφ)', 'S¹: one angular coordinate. Walk to 2π and you return. The Sanskrit jyā, the bowstring, is the half-chord across this arc and the ancestor of the sine.'],
+    ['x₀² + x₁² + x₂² = r²', 'S²: two angular coordinates. Al-Bīrūnī’s domain. Every qibla is a geodesic on this surface.'],
+    ['Σxᵢ² = r² (i = 0..3)<br>r(cosψ, sinψcosθ, sinψsinθcosφ, sinψsinθsinφ)', 'S³: three angular coordinates. Dante’s cosmos. The spheres grow from Satan to the Primum Mobile at ψ = π/2, then shrink to God.']
   ];
-})();
-
-function setSolid(n) {
-  solidIdx = n;
-  ['stetra','scube','socta','sdodeca','sicosa'].forEach((id, i) => { const el = gc(id); if (el) el.classList.toggle('on', i === n); });
-  const s = SOLIDS[n];
-  const info = gc('solidInfo');
-  if (info) info.innerHTML = '<b>' + s.schlafli + ' ' + s.name + '</b> \u2014 ' +
-    s.F + ' faces, ' + s.V + ' vertices, ' + s.E + ' edges<br>' +
-    'Plato\u2019s element: <b>' + s.elem + '</b>' +
-    (n === 3 ? ' \u2014 \u201cGod used it up for the Universe in his decoration thereof\u201d (<em>Timaeus</em> 55c)' : '') +
-    '<br>V\u2212E+F = ' + s.V + '\u2212' + s.E + '+' + s.F + ' = <b>2</b> (Euler\u2019s formula: the topological signature of closure)';
+  setHtml('eqBox', '<b>' + info[n][0] + '</b><br>' + info[n][1]);
+  mark('cLadder');
+}
+function drawLadder() {
+  var c = CTX['cLadder']; if (!c) return;
+  var d = dims('cLadder'), w = d.w, h = d.h, cx = w/2, cy = h/2, i, a, ps, r;
+  c.clearRect(0, 0, w, h);
+  c.strokeStyle = '#EF9F27'; c.fillStyle = '#EF9F27';
+  if (dimN === 0) {
+    [[cx-100,cy],[cx+100,cy]].forEach(function (p) { c.beginPath(); c.arc(p[0],p[1],14,0,TAU); c.fill(); });
+    c.fillStyle = '#cbd5e1'; c.font = '13px Georgia'; c.textAlign = 'center';
+    c.fillText('Satan', cx-100, cy+36); c.fillText('God', cx+100, cy+36);
+    c.strokeStyle = '#475569'; c.lineWidth = 2; c.setLineDash([8,6]);
+    c.beginPath(); c.moveTo(cx-86, cy); c.lineTo(cx+86, cy); c.stroke(); c.setLineDash([]);
+    c.fillStyle = '#94a3b8'; c.font = '12px monospace'; c.fillText('r = distance', cx, cy-30);
+  } else if (dimN === 1) {
+    var R = Math.min(100, h*0.42); c.lineWidth = 3;
+    c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
+    a = t*0.6;
+    c.beginPath(); c.arc(cx + R*Math.cos(a), cy + R*Math.sin(a), 8, 0, TAU); c.fill();
+    c.strokeStyle = '#5DCAA5'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(cx + R*Math.cos(a), cy); c.lineTo(cx + R*Math.cos(a), cy + R*Math.sin(a)); c.stroke();
+    c.fillStyle = '#5DCAA5'; c.font = '14px monospace'; c.textAlign = 'left';
+    c.fillText('jyā', cx + R*Math.cos(a) + 8, cy + R*Math.sin(a)/2);
+    c.fillStyle = '#94a3b8'; c.textAlign = 'center'; c.font = '12px monospace';
+    c.fillText('φ = ' + (a % TAU).toFixed(2), cx, cy + R + 26);
+  } else if (dimN === 2) {
+    var R2 = Math.min(110, h*0.46);
+    c.lineWidth = 2; c.strokeStyle = '#1e293b';
+    c.beginPath(); c.arc(cx, cy, R2, 0, TAU); c.stroke();
+    c.save(); c.translate(cx, cy); c.rotate(t*0.25); c.scale(1, 0.38);
+    c.strokeStyle = '#EF9F27'; c.lineWidth = 5;
+    c.beginPath(); c.arc(0, 0, R2, 0, TAU); c.stroke(); c.restore();
+    for (i = 0; i < 3; i++) {
+      a = t*0.4 + i*TAU/3; c.fillStyle = '#5DCAA5';
+      c.beginPath(); c.arc(cx + R2*Math.cos(a), cy + R2*0.4*Math.sin(a), 7, 0, TAU); c.fill();
+    }
+    c.fillStyle = '#94a3b8'; c.font = '12px monospace'; c.textAlign = 'center';
+    c.fillText('spherical triangle (θ, φ)', cx, cy + R2 + 26);
+  } else {
+    var L = 9, RR = Math.min(105, h*0.45);
+    for (i = 0; i < L; i++) {
+      ps = i/(L-1)*Math.PI; r = Math.sin(ps)*RR;
+      var eq = (i === Math.round((L-1)/2));
+      var al = 0.25 + 0.75*(1 - Math.abs(i - (L-1)/2)/((L-1)/2));
+      c.strokeStyle = eq ? 'rgba(239,159,39,0.95)' : 'rgba(239,159,39,' + al.toFixed(2) + ')';
+      c.lineWidth = eq ? 4 : 1.5;
+      c.beginPath(); c.ellipse(cx, cy, Math.max(2,r), Math.max(1,r*0.28), 0, 0, TAU); c.stroke();
+    }
+    c.fillStyle = '#c83c3c'; c.beginPath(); c.arc(cx, cy+RR, 7, 0, TAU); c.fill();
+    c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(cx, cy-RR, 7, 0, TAU); c.fill();
+    c.font = '12px Georgia'; c.textAlign = 'center';
+    c.fillStyle = '#c83c3c'; c.fillText('Satan (ψ = 0)', cx, cy+RR+24);
+    c.fillStyle = '#fbbf24'; c.fillText('God (ψ = π)', cx, cy-RR-14);
+  }
 }
 
-function drawSolids() {
-  const c = sizeCanvas('cSolids'); if (!c) return;
-  const w = c.canvas.width, h = c.canvas.height, cx = w/2, cy = h/2;
+/* ==================== 6. the journey ==================== */
+var psi = Math.PI/2, journeyS = 0;
+function onPsi(v) {
+  psi = fracToPsi(v/100);
+  setTxt('psiLbl', fmtPsi(psi));
+  var cr = findCrossings(psi), msg;
+  if (psi < 0.03) msg = 'Satan. The sphere collapses to a point.';
+  else if (psi > Math.PI - 0.1) msg = 'God, the punto. The far pole.';
+  else if (Math.abs(psi - PRIMUM_PSI) < 0.05) msg = 'The Primum Mobile. Maximum S², the equator where the two hemispheres join.';
+  else if (psi < EARTH_PSI) msg = 'Hell. The route crosses this depth twice, once in each hemisphere.';
+  else if (psi < PURG_TOP_PSI) msg = 'Purgatory, seven terraces rising from Earth’s surface.';
+  else if (psi < PRIMUM_PSI) msg = 'The celestial spheres, growing toward the Primum Mobile.';
+  else msg = 'The Empyrean, angelic orders shrinking toward God.';
+  setHtml('ropeInfo', '<b>slice ψ = ' + fmtPsi(psi) + ', ' + cr.length + ' crossing' + (cr.length !== 1 ? 's' : '') + '.</b> ' + msg);
+  mark('cRope');
+}
+function onJourney(v) {
+  journeyS = clamp(v/1000, 0, 1);
+  var kp = knotPoint(journeyS), st = stageAt(journeyS);
+  var side = kp.x < 0 ? 'Jerusalem’s hemisphere' : 'the antipodal hemisphere';
+  var atInv = Math.abs(journeyS - INVERSION_S) < 0.012;
+  setTxt('jLbl', journeyS <= 0.001 ? 'the gate' : (journeyS >= 0.999 ? 'the punto' : (journeyS*100).toFixed(0) + '%'));
+  setHtml('journeyInfo',
+    '<b>' + st.name + '</b>, guided by ' + st.guide + '.<br>' +
+    'ψ = ' + kp.psi.toFixed(3) + ', radius of this sphere sinψ = ' + Math.sin(kp.psi).toFixed(3) + ', standing in ' + side + '.' +
+    (atInv ? '<br><b>The inversion.</b> The sphere here has collapsed to a point. Continuing straight through brings you out at the antipode, and what was down is now up.' : ''));
+  mark('cRope');
+}
+function drawRope() {
+  var c = CTX['cRope']; if (!c) return;
+  var d = dims('cRope'), w = d.w, h = d.h, cx = w/2, y0 = h - 72, y1 = 34, i, ps, side;
   c.clearRect(0, 0, w, h);
-  const s = SOLIDS[solidIdx];
-  const rotY = t * 0.35, rotX = 0.4;
-  const scale = Math.min(w, h) * 0.34;
-  const projected = s.v.map(function(v) {
-    const rx = v[0]*Math.cos(rotY) + v[2]*Math.sin(rotY);
-    const rz = -v[0]*Math.sin(rotY) + v[2]*Math.cos(rotY);
-    const ry2 = v[1]*Math.cos(rotX) - rz*Math.sin(rotX);
-    const rz2 = v[1]*Math.sin(rotX) + rz*Math.cos(rotX);
-    const persp = 3.5 / (3.5 + rz2 * 0.3);
-    return [cx + rx * scale * persp, cy - ry2 * scale * persp, rz2];
-  });
-  const edgeData = s.edges.map(function(e) {
-    return { i: e[0], j: e[1], z: (projected[e[0]][2] + projected[e[1]][2]) / 2 };
-  });
-  edgeData.sort(function(a, b) { return a.z - b.z; });
-  edgeData.forEach(function(e) {
-    const f = Math.max(0.15, Math.min(0.9, 0.45 + e.z * 0.35));
-    c.strokeStyle = 'rgba(239,159,39,' + f.toFixed(2) + ')';
-    c.lineWidth = 1.2 + f * 1.5;
+  function yOf(p) { return y0 - psiToFrac(p)*(y0 - y1); }
+  var maxW = Math.min(cx*0.60, 270);
+  function wOf(p) { return Math.pow(Math.max(0, Math.sin(p)), 0.4) * maxW; }
+  function xOf(kp) { return cx + kp.x * wOf(kp.psi); }
+
+  c.fillStyle = 'rgba(200,60,60,0.05)';  c.fillRect(0, y1, cx, y0 - y1);
+  c.fillStyle = 'rgba(93,202,165,0.04)'; c.fillRect(cx, y1, w - cx, y0 - y1);
+  c.strokeStyle = 'rgba(71,85,105,0.9)'; c.lineWidth = 1;
+  for (side = -1; side <= 1; side += 2) {
     c.beginPath();
-    c.moveTo(projected[e.i][0], projected[e.i][1]);
-    c.lineTo(projected[e.j][0], projected[e.j][1]);
+    for (i = 0; i <= 90; i++) { ps = i/90*Math.PI; c.lineTo(cx + side*wOf(ps), yOf(ps)); }
+    c.stroke();
+  }
+  var yE = yOf(EARTH_PSI), yP = yOf(PRIMUM_PSI), ySat = yOf(0);
+  c.strokeStyle = 'rgba(93,202,165,0.45)'; c.lineWidth = 1.5; c.setLineDash([5,4]);
+  c.beginPath(); c.moveTo(12, yE); c.lineTo(w-12, yE); c.stroke();
+  c.strokeStyle = 'rgba(239,159,39,0.35)'; c.setLineDash([3,5]);
+  c.beginPath(); c.moveTo(12, yP); c.lineTo(w-12, yP); c.stroke();
+  c.strokeStyle = 'rgba(148,163,184,0.22)'; c.setLineDash([2,6]);
+  c.beginPath(); c.moveTo(cx, y1); c.lineTo(cx, y0); c.stroke(); c.setLineDash([]);
+
+  STAGES.forEach(function (st) {
+    c.strokeStyle = st.col; c.lineWidth = 3.4; c.beginPath();
+    for (var k = 0; k <= 220; k++) {
+      var sv = st.s0 + (st.s1 - st.s0)*(k/220), kp = knotPoint(sv);
+      if (k === 0) c.moveTo(xOf(kp), yOf(kp.psi)); else c.lineTo(xOf(kp), yOf(kp.psi));
+    }
     c.stroke();
   });
-  projected.forEach(function(p) {
-    const f = Math.max(0.25, Math.min(1, 0.5 + p[2] * 0.4));
-    c.fillStyle = 'rgba(239,159,39,' + f.toFixed(2) + ')';
-    c.beginPath(); c.arc(p[0], p[1], 2.5 + f * 2.5, 0, TAU); c.fill();
+  function arrow(sv, dir, col) {
+    var kp = knotPoint(sv), X = xOf(kp), Y = yOf(kp.psi);
+    c.fillStyle = col; c.beginPath();
+    c.moveTo(X-5, Y + dir*6); c.lineTo(X, Y - dir*6); c.lineTo(X+5, Y + dir*6); c.closePath(); c.fill();
+  }
+  [0.07,0.15,0.23].forEach(function (v) { arrow(v,-1,'#c83c3c'); });
+  [0.33,0.41,0.45].forEach(function (v) { arrow(v, 1,'#5DCAA5'); });
+  [0.55,0.65,0.73].forEach(function (v) { arrow(v, 1,'#EF9F27'); });
+  [0.82,0.89,0.96].forEach(function (v) { arrow(v, 1,'#fbbf24'); });
+
+  c.strokeStyle = 'rgba(251,191,36,0.95)'; c.lineWidth = 2.2;
+  c.beginPath(); c.arc(cx, ySat, 26, Math.PI, 0); c.stroke();
+  c.fillStyle = 'rgba(251,191,36,0.95)'; c.font = 'bold 10px monospace'; c.textAlign = 'center';
+  c.fillText('θ flips by π here: the sphere is a single point', cx, ySat + 44);
+
+  c.font = 'bold 10px monospace';
+  c.fillStyle = 'rgba(200,60,60,0.9)';  c.textAlign = 'left';  c.fillText('JERUSALEM’S HEMISPHERE', 10, y1 - 14);
+  c.fillStyle = 'rgba(93,202,165,0.9)'; c.textAlign = 'right'; c.fillText('ANTIPODAL HEMISPHERE  ·  MOUNT PURGATORY', w - 10, y1 - 14);
+
+  function band(lbls, p0, p1, col, align) {
+    c.font = '10px monospace'; c.fillStyle = col; c.textAlign = align < 0 ? 'right' : 'left';
+    for (var k = 0; k < lbls.length; k++) {
+      var pv = p0 + (p1 - p0)*(k + 0.5)/lbls.length;
+      c.fillText(lbls[k], cx + align*(wOf(pv) + 9), yOf(pv) + 3);
+    }
+  }
+  band(['Treachery','Fraud','Violence','Heresy','Anger','Greed','Gluttony','Lust','Limbo'],
+       0.02, EARTH_PSI, 'rgba(200,60,60,0.9)', -1);
+  band(['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'],
+       EARTH_PSI, PURG_TOP_PSI, 'rgba(93,202,165,0.95)', 1);
+  band(['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'],
+       PURG_TOP_PSI, PRIMUM_PSI, 'rgba(239,159,39,0.95)', 1);
+  band(['Angels','Archang.','Princip.','Powers','Virtues','Domin.','Thrones','Cherubim','Seraphim'],
+       PRIMUM_PSI, Math.PI - 0.02, 'rgba(251,191,36,0.95)', 1);
+
+  var sy = yOf(psi);
+  c.strokeStyle = 'rgba(239,159,39,0.14)'; c.lineWidth = 16;
+  c.beginPath(); c.moveTo(0, sy); c.lineTo(w, sy); c.stroke();
+  c.strokeStyle = '#EF9F27'; c.lineWidth = 1.5; c.setLineDash([5,4]);
+  c.beginPath(); c.moveTo(0, sy); c.lineTo(w, sy); c.stroke(); c.setLineDash([]);
+  findCrossings(psi).forEach(function (q) {
+    c.fillStyle = 'rgba(239,159,39,0.95)';
+    c.beginPath(); c.arc(cx + q.x*wOf(psi), sy, 4.5, 0, TAU); c.fill();
   });
-  c.fillStyle = '#334155'; c.font = '13px monospace'; c.textAlign = 'center';
-  c.fillText(s.schlafli + ' ' + s.name + ' \u2014 V\u2212E+F = ' + s.V + '\u2212' + s.E + '+' + s.F + ' = 2', cx, h - 8);
+
+  c.fillStyle = '#c83c3c'; c.beginPath(); c.arc(cx, ySat, 7, 0, TAU); c.fill();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(cx, yOf(Math.PI), 7, 0, TAU); c.fill();
+  var kpN = knotPoint(journeyS), JX = xOf(kpN), JY = yOf(kpN.psi);
+  var g = c.createRadialGradient(JX, JY, 2, JX, JY, 22);
+  g.addColorStop(0, 'rgba(255,255,255,0.9)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  c.fillStyle = g; c.beginPath(); c.arc(JX, JY, 22, 0, TAU); c.fill();
+  c.fillStyle = '#fff'; c.beginPath(); c.arc(JX, JY, 5.5, 0, TAU); c.fill();
+
+  c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillStyle = '#c83c3c'; c.fillText('Satan ψ = 0', cx, ySat + 24);
+  c.fillStyle = '#fbbf24'; c.fillText('God ψ = π', cx, yOf(Math.PI) - 12);
+  c.textAlign = 'left';
+  c.fillStyle = '#5DCAA5'; c.fillText('Earth’s surface', 12, yE - 6);
+  c.fillStyle = '#fbbf24'; c.fillText('Primum Mobile ψ = π/2', 12, yP - 6);
+  c.textAlign = 'center'; c.fillStyle = '#64748b'; c.font = '10px monospace';
+  c.fillText('ψ axis stretched below the Moon; widths eased as (sinψ)^0.4 so the deep region stays readable', cx, h - 10);
 }
 
+/* ==================== 7. the structure ==================== */
+var danteAngle = Math.PI/2;
+function onDante(v) {
+  danteAngle = fracToPsi(v/100);
+  setTxt('dLbl', fmtPsi(danteAngle));
+  var msg;
+  if (danteAngle < 0.03) msg = 'Satan at Earth’s center. Both hemispheres converge to a point.';
+  else if (danteAngle > Math.PI - 0.1) msg = 'God, the punto, the antipodal point of S³.';
+  else if (Math.abs(danteAngle - PRIMUM_PSI) < 0.05) msg = 'The Primum Mobile. Maximum S². The celestial spheres grow up to here and the Empyrean shrinks above it.';
+  else if (danteAngle < EARTH_PSI) msg = 'Hell, nine circles descending toward Satan.';
+  else if (danteAngle < PURG_TOP_PSI) msg = 'Purgatory, seven terraces rising toward the Moon.';
+  else if (danteAngle < PRIMUM_PSI) msg = 'The celestial spheres, nine, growing toward the Primum Mobile.';
+  else msg = 'The Empyrean, nine angelic orders shrinking toward God.';
+  setTxt('danteInfo', msg);
+  mark('cDante');
+}
+function drawDante() {
+  var c = CTX['cDante']; if (!c) return;
+  var d = dims('cDante'), w = d.w, h = d.h, cx = w/2, y0 = h - 40, y1 = 36, i, ps, side;
+  c.clearRect(0, 0, w, h);
+  function yOf(p) { return y0 - psiToFrac(p)*(y0 - y1); }
+  var maxRx = Math.min(cx*0.48, 130);
+  c.strokeStyle = '#334155'; c.lineWidth = 1.5;
+  for (side = -1; side <= 1; side += 2) {
+    c.beginPath();
+    for (i = 0; i <= 80; i++) { ps = i/80*Math.PI; c.lineTo(cx + side*Math.sin(ps)*maxRx, yOf(ps)); }
+    c.stroke();
+  }
+  var yS = yOf(EARTH_PSI), yPu = yOf(PURG_TOP_PSI), yPr = yOf(PRIMUM_PSI);
+  c.fillStyle = 'rgba(139,0,0,0.06)';    c.fillRect(cx-maxRx, yS,  maxRx*2, y0-yS);
+  c.fillStyle = 'rgba(93,202,165,0.05)'; c.fillRect(cx-maxRx, yPu, maxRx*2, yS-yPu);
+  c.fillStyle = 'rgba(239,159,39,0.05)'; c.fillRect(cx-maxRx, yPr, maxRx*2, yPu-yPr);
+  c.fillStyle = 'rgba(251,191,36,0.06)'; c.fillRect(cx-maxRx, y1,  maxRx*2, yPr-y1);
+  c.strokeStyle = 'rgba(93,202,165,0.4)'; c.lineWidth = 1.5; c.setLineDash([5,4]);
+  c.beginPath(); c.moveTo(cx-maxRx-8, yS); c.lineTo(cx+maxRx+8, yS); c.stroke();
+  c.strokeStyle = 'rgba(239,159,39,0.35)';
+  c.beginPath(); c.moveTo(cx-maxRx-8, yPr); c.lineTo(cx+maxRx+8, yPr); c.stroke(); c.setLineDash([]);
+
+  function band(lbls, from, to, col, cur, sd, ell) {
+    for (var k = 0; k < lbls.length; k++) {
+      var p2 = from + (to - from)*(k + 0.5)/lbls.length, ry = yOf(p2), rx = Math.sin(p2)*maxRx;
+      var isC = Math.abs(p2 - danteAngle) < Math.abs(to - from)/(2*lbls.length);
+      c.strokeStyle = isC ? cur : col; c.lineWidth = isC ? 2.5 : 0.8;
+      if (ell && rx > 2) { c.beginPath(); c.ellipse(cx, ry, rx, rx*0.18, 0, 0, TAU); c.stroke(); }
+      else if (!ell && rx > 4) { c.beginPath(); c.moveTo(cx+rx-3, ry); c.lineTo(cx+rx+3, ry); c.stroke(); }
+      c.fillStyle = isC ? cur : col;
+      c.font = (isC ? 'bold 10px' : '9px') + ' monospace';
+      c.textAlign = sd < 0 ? 'right' : 'left';
+      c.fillText(lbls[k], cx + sd*(Math.max(rx,6) + 6), ry + 3);
+    }
+  }
+  band(['Treachery','Fraud','Violence','Heresy','Anger','Greed','Gluttony','Lust','Limbo'],
+       0.02, EARTH_PSI, 'rgba(200,60,60,0.5)', 'rgba(200,60,60,1)', -1, true);
+  band(['Pride','Envy','Wrath','Sloth','Avarice','Gluttony','Lust'],
+       EARTH_PSI, PURG_TOP_PSI, 'rgba(93,202,165,0.5)', 'rgba(93,202,165,1)', 1, false);
+  band(['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Stars','P. Mobile'],
+       PURG_TOP_PSI, PRIMUM_PSI, 'rgba(239,159,39,0.5)', 'rgba(239,159,39,1)', 1, true);
+  band(['Angels','Archang.','Princip.','Powers','Virtues','Domin.','Thrones','Cherubim','Seraphim'],
+       PRIMUM_PSI, Math.PI - 0.02, 'rgba(251,191,36,0.5)', 'rgba(251,191,36,1)', 1, true);
+
+  var sy = yOf(danteAngle);
+  c.strokeStyle = 'rgba(255,255,255,0.09)'; c.lineWidth = 14;
+  c.beginPath(); c.moveTo(cx-maxRx, sy); c.lineTo(cx+maxRx, sy); c.stroke();
+  c.fillStyle = '#c83c3c'; c.beginPath(); c.arc(cx, y0, 6, 0, TAU); c.fill();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(cx, y1, 6, 0, TAU); c.fill();
+  c.strokeStyle = 'rgba(251,191,36,0.8)'; c.lineWidth = 2;
+  c.beginPath(); c.arc(cx, y0, 14, Math.PI, 0); c.stroke();
+  c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillStyle = '#c83c3c'; c.fillText('Satan ψ = 0', cx, y0 + 15);
+  c.fillStyle = '#fbbf24'; c.fillText('God ψ = π', cx, y1 - 8);
+  c.font = '9px monospace'; c.fillStyle = 'rgba(251,191,36,0.9)';
+  c.fillText('through this point is the antipode', cx, y0 + 28);
+  c.font = 'bold 9px monospace'; c.textAlign = 'left';
+  c.fillStyle = 'rgba(200,60,60,0.75)';  c.fillText('HELL', 8, (yS+y0)/2 + 4);
+  c.fillStyle = 'rgba(93,202,165,0.75)'; c.fillText('PURGATORY', 8, (yPu+yS)/2 + 4);
+  c.fillStyle = 'rgba(239,159,39,0.75)'; c.fillText('CELESTIAL', 8, (yPr+yPu)/2 + 4);
+  c.fillStyle = 'rgba(251,191,36,0.75)'; c.fillText('EMPYREAN', 8, (y1+yPr)/2 + 4);
+  c.textAlign = 'right'; c.fillStyle = 'rgba(148,163,184,0.85)'; c.font = '9px monospace';
+  c.fillText('widths are the honest sinψ', w - 6, h - 4);
+}
+
+/* ==================== 8. the coordinates ==================== */
+var coordPsi = Math.PI/2, coordTheta = Math.PI/3, coordPhi = 0;
+function onCoord() {
+  coordPsi   = (+gc('cPsi').value/100)*Math.PI;
+  coordTheta = (+gc('cTheta').value/100)*Math.PI;
+  coordPhi   = (+gc('cPhi').value/100)*TAU;
+  setTxt('lPsi', Math.round(coordPsi/DEG) + '°');
+  setTxt('lTheta', Math.round(coordTheta/DEG) + '°');
+  setTxt('lPhi', Math.round(coordPhi/DEG) + '°');
+  var x0 = Math.cos(coordPsi);
+  var x1 = Math.sin(coordPsi)*Math.cos(coordTheta);
+  var x2 = Math.sin(coordPsi)*Math.sin(coordTheta)*Math.cos(coordPhi);
+  var x3 = Math.sin(coordPsi)*Math.sin(coordTheta)*Math.sin(coordPhi);
+  setTxt('vx0', x0.toFixed(3));
+  setTxt('vrad', Math.sin(coordPsi).toFixed(3));
+  setTxt('vnorm', Math.sqrt(x0*x0+x1*x1+x2*x2+x3*x3).toFixed(3));
+  mark('cCoord');
+}
+function drawCoord() {
+  var c = CTX['cCoord']; if (!c) return;
+  var d = dims('cCoord'), w = d.w, h = d.h, cx = w/2, cy = h/2, R = Math.min(w,h)*0.42;
+  c.clearRect(0, 0, w, h);
+  c.strokeStyle = '#334155'; c.lineWidth = 2;
+  c.beginPath(); c.arc(cx, cy, R, 0, TAU); c.stroke();
+  c.save(); c.translate(cx, cy);
+  c.strokeStyle = 'rgba(239,159,39,0.5)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(0, 0, R*0.3, R, 0, 0, TAU); c.stroke(); c.restore();
+  var latR = R*Math.sin(coordTheta), latY = cy - R*Math.cos(coordTheta);
+  c.strokeStyle = 'rgba(93,202,165,0.65)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(cx, latY, Math.max(2,latR), Math.max(1,latR*0.25), 0, 0, TAU); c.stroke();
+  c.save(); c.translate(cx, cy); c.rotate(coordPhi);
+  c.strokeStyle = 'rgba(175,169,236,0.6)'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(0, 0, R, R*0.25, 0, 0, TAU); c.stroke(); c.restore();
+  var px = cx + R*Math.sin(coordPsi)*Math.sin(coordTheta)*Math.cos(coordPhi);
+  var py = cy - R*(Math.cos(coordPsi)*0.7 + Math.sin(coordPsi)*Math.cos(coordTheta)*0.3);
+  c.strokeStyle = '#475569'; c.lineWidth = 1.5; c.setLineDash([4,4]);
+  c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke(); c.setLineDash([]);
+  c.fillStyle = 'rgba(239,159,39,0.25)'; c.beginPath(); c.arc(px, py, 22, 0, TAU); c.fill();
+  c.fillStyle = '#EF9F27'; c.beginPath(); c.arc(px, py, 9, 0, TAU); c.fill();
+  c.font = '20px monospace'; c.textAlign = 'center';
+  c.fillStyle = 'rgba(239,159,39,0.9)';  c.fillText('ψ', cx - R*0.3 - 16, cy + 10);
+  c.fillStyle = 'rgba(93,202,165,0.9)';  c.fillText('θ', cx + latR + 20, latY + 6);
+  c.fillStyle = 'rgba(175,169,236,0.9)'; c.fillText('φ', cx, cy + R*0.25 + 24);
+}
+
+/* ==================== 9. the whole object ==================== */
+var fullPsi = Math.PI/2;
+function onFullPsi(v) { fullPsi = fracToPsi(v/100); setTxt('fullPsiLbl', fmtPsi(fullPsi)); }
+function drawFull() {
+  var c = CTX['cFull']; if (!c) return;
+  var d = dims('cFull'), w = d.w, h = d.h, cx = w/2, cy = h/2;
+  c.clearRect(0, 0, w, h);
+  var rY = t*0.22, rX = 0.32, sc = Math.min(w, h)*0.145;
+  function stereoR(p) { return p < 0.001 ? 1e4 : (p > Math.PI - 0.001 ? 1e-4 : Math.cos(p/2)/Math.sin(p/2)); }
+  function proj(x, y, z) {
+    var rx = x*Math.cos(rY) + z*Math.sin(rY), rz = -x*Math.sin(rY) + z*Math.cos(rY);
+    var ry = y*Math.cos(rX) - rz*Math.sin(rX), rz2 = y*Math.sin(rX) + rz*Math.cos(rX);
+    var f = 5/(5 + rz2*0.15);
+    return [cx + rx*sc*f, cy - ry*sc*f, rz2];
+  }
+  function wire(R, col, lw, al) {
+    var rc = dispR(R); if (rc < 0.03) return;
+    var i, a, p; c.strokeStyle = col; c.lineWidth = lw; c.globalAlpha = al;
+    c.beginPath();
+    for (i = 0; i <= 32; i++) { a = i/32*TAU; p = proj(rc*Math.cos(a), rc*Math.sin(a), 0); if (i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); }
+    c.stroke(); c.beginPath();
+    for (i = 0; i <= 32; i++) { a = i/32*TAU; p = proj(rc*Math.cos(a), 0, rc*Math.sin(a)); if (i===0) c.moveTo(p[0],p[1]); else c.lineTo(p[0],p[1]); }
+    c.stroke(); c.globalAlpha = 1;
+  }
+  var shells = [], i, ps;
+  for (i = 0; i < 9; i++) { ps = 0.02 + (EARTH_PSI-0.02)*(1-(i+0.5)/9); shells.push({ps:ps,col:'rgba(200,60,60,1)',lw:0.8,al:0.35}); }
+  shells.push({ps:EARTH_PSI,col:'rgba(93,202,165,1)',lw:1.5,al:0.7});
+  for (i = 0; i < 7; i++) { ps = EARTH_PSI + (PURG_TOP_PSI-EARTH_PSI)*(i+0.5)/7; shells.push({ps:ps,col:'rgba(93,202,165,1)',lw:0.6,al:0.25}); }
+  for (i = 0; i < 9; i++) { ps = PURG_TOP_PSI + (PRIMUM_PSI-PURG_TOP_PSI)*(i+0.5)/9; shells.push({ps:ps,col:'rgba(239,159,39,1)',lw:0.8,al:0.35}); }
+  shells.push({ps:PRIMUM_PSI,col:'rgba(239,159,39,1)',lw:2.5,al:0.8});
+  for (i = 0; i < 9; i++) { ps = PRIMUM_PSI + (Math.PI-0.02-PRIMUM_PSI)*(i+0.5)/9; shells.push({ps:ps,col:'rgba(251,191,36,1)',lw:0.6,al:0.25}); }
+  shells.forEach(function (s) { s.R = stereoR(s.ps); });
+  shells.sort(function (a, b) { return b.R - a.R; });
+  shells.forEach(function (s) {
+    var hi = Math.abs(s.ps - fullPsi) < 0.06;
+    wire(s.R, hi ? 'rgba(239,159,39,1)' : s.col, hi ? 3 : s.lw, hi ? 0.95 : s.al);
+  });
+
+  var cols = ['rgba(200,60,60,0.9)','rgba(93,202,165,0.9)','rgba(239,159,39,0.9)','rgba(251,191,36,0.9)'];
+  [[0,0.30,0],[0.30,0.37,1],[0.37,0.47,1],[0.47,0.77,2],[0.77,1,3]].forEach(function (ph) {
+    var N = Math.max(8, Math.floor(300*(ph[1]-ph[0]))), started = false;
+    c.strokeStyle = cols[ph[2]]; c.lineWidth = 2.5; c.beginPath();
+    for (var k = 0; k <= N; k++) {
+      var s = ph[0] + (k + 0.5)/(N + 1)*(ph[1]-ph[0]), kp = knotPoint(s);
+      var th = Math.PI/2 - 0.4, phv = kp.theta + s*2*Math.PI;
+      var x0 = Math.sin(kp.psi)*Math.cos(th)*Math.cos(phv);
+      var x1 = Math.sin(kp.psi)*Math.cos(th)*Math.sin(phv);
+      var x2 = Math.sin(kp.psi)*Math.sin(th), x3 = Math.cos(kp.psi);
+      var den = Math.max(1e-9, 1 - x3);
+      var X = x0/den, Y = x1/den, Z = x2/den, R3 = Math.sqrt(X*X + Y*Y + Z*Z);
+      if (R3 < 1e-9) continue;
+      var rd = dispR(R3)/R3, p = proj(X*rd, Y*rd, Z*rd);
+      if (!started) { c.moveTo(p[0],p[1]); started = true; } else c.lineTo(p[0],p[1]);
+    }
+    c.stroke();
+  });
+
+  c.fillStyle = 'rgba(251,191,36,0.3)'; c.beginPath(); c.arc(cx, cy, 16, 0, TAU); c.fill();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(cx, cy, 8, 0, TAU); c.fill();
+  c.font = '12px Georgia'; c.textAlign = 'center'; c.fillStyle = '#fbbf24';
+  c.fillText('God (punto)', cx, cy + 26);
+  c.fillStyle = '#c83c3c'; c.font = '11px monospace';
+  c.fillText('Satan goes to infinity, drawn at the rim', cx, h - 8);
+  var cr = findCrossings(fullPsi);
+  c.fillStyle = '#94a3b8';
+  c.fillText('ψ = ' + fullPsi.toFixed(2) + '   R = cot(ψ/2) = ' + (stereoR(fullPsi) > 999 ? '∞' : stereoR(fullPsi).toFixed(2)) +
+    ' (log scale)   ' + cr.length + ' crossing' + (cr.length !== 1 ? 's' : '') + '   closed, no boundary', cx, h - 24);
+}
+
+/* ==================== 10. the geodesic ==================== */
+var pilgrimRunning = !reduced;
+function realmOf(ps) {
+  if (ps < EARTH_PSI) return { n:'Hell', c:'#c83c3c' };
+  if (ps < PURG_TOP_PSI) return { n:'Purgatory', c:'#5DCAA5' };
+  if (ps < PRIMUM_PSI) return { n:'celestial spheres', c:'#EF9F27' };
+  return { n:'Empyrean', c:'#fbbf24' };
+}
+function drawPilgrim() {
+  var c = CTX['cPilgrim']; if (!c) return;
+  var d = dims('cPilgrim'), w = d.w, h = d.h, cx = w/2, cy = h/2;
+  c.clearRect(0, 0, w, h);
+  var tau = +gc('pTilt').value/100, sig = +gc('pSpin').value/100;
+  var u = [Math.sin(tau),0,0,Math.cos(tau)], v = [0,Math.cos(sig),Math.sin(sig),0];
+  var rY = 0.5 + (+gc('pView').value/100) + pilgrimT*0.08, rX = 0.36, sc = Math.min(w, h)*0.135;
+  function proj(x, y, z) {
+    var rx = x*Math.cos(rY) + z*Math.sin(rY), rz = -x*Math.sin(rY) + z*Math.cos(rY);
+    var ry = y*Math.cos(rX) - rz*Math.sin(rX), rz2 = y*Math.sin(rX) + rz*Math.cos(rX);
+    var pf = 3.6/(3.6 + rz2*0.18);
+    return { x: cx + rx*sc*pf, y: cy - ry*sc*pf };
+  }
+  var N = 720, pts = [], pj = [];
+  for (var i = 0; i < N; i++) {
+    var th = (i + 0.5)/N*TAU, ct = Math.cos(th), st = Math.sin(th);
+    var x0 = ct*u[0], x1 = st*v[1], x2 = st*v[2], x3 = ct*u[3];
+    var ps = Math.acos(clamp(x3, -1, 1)), den = Math.max(1e-9, 1 - x3);
+    var X = x0/den, Y = x1/den, Z = x2/den, R = Math.sqrt(X*X + Y*Y + Z*Z);
+    var k = R > 1e-9 ? dispR(R)/R : 0;
+    pts.push(ps); pj.push(proj(X*k, Y*k, Z*k));
+  }
+  var rim = proj(MAX_R, 0, 0), rimPx = Math.abs(rim.x - cx);
+  c.strokeStyle = 'rgba(200,60,60,0.3)'; c.lineWidth = 1; c.setLineDash([5,5]);
+  c.beginPath(); c.ellipse(cx, cy, rimPx, rimPx*0.36, 0, 0, TAU); c.stroke(); c.setLineDash([]);
+  c.lineWidth = 2.6;
+  for (var j = 0; j < pj.length; j++) {
+    var a = pj[j], b = pj[(j+1) % pj.length];
+    c.strokeStyle = realmOf(pts[j]).c;
+    c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke();
+  }
+  var god = proj(0, 0, 0);
+  c.fillStyle = 'rgba(251,191,36,0.25)'; c.beginPath(); c.arc(god.x, god.y, 15, 0, TAU); c.fill();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(god.x, god.y, 7, 0, TAU); c.fill();
+  c.font = '11px monospace'; c.textAlign = 'center'; c.fillStyle = '#fbbf24';
+  c.fillText('God ψ = π', god.x, god.y - 20);
+  c.fillStyle = 'rgba(200,60,60,0.95)'; c.textAlign = 'left';
+  c.fillText('Satan ψ = 0 goes to infinity, drawn at the rim', 12, 18);
+  var idx = Math.floor(((pilgrimT*0.06) % 1)*N) % N;
+  var P = pj[idx], ps2 = pts[idx], rl = realmOf(ps2);
+  var g = c.createRadialGradient(P.x, P.y, 2, P.x, P.y, 26);
+  g.addColorStop(0, 'rgba(251,191,36,0.85)'); g.addColorStop(1, 'rgba(251,191,36,0)');
+  c.fillStyle = g; c.beginPath(); c.arc(P.x, P.y, 26, 0, TAU); c.fill();
+  c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(P.x, P.y, 6, 0, TAU); c.fill();
+  c.font = '10px monospace'; c.textAlign = 'left';
+  [['Hell','#c83c3c'],['Purgatory','#5DCAA5'],['celestial','#EF9F27'],['Empyrean','#fbbf24']].forEach(function (e, k) {
+    c.fillStyle = e[1]; c.fillRect(12, h - 56 + k*12 - 6, 16, 3);
+    c.fillStyle = '#94a3b8'; c.fillText(e[0], 34, h - 56 + k*12 - 2);
+  });
+  c.font = '11px monospace'; c.textAlign = 'center'; c.fillStyle = '#94a3b8';
+  c.fillText('ψ = ' + ps2.toFixed(3) + '  |  ' + rl.n + '  |  the circle closes', cx, h - 8);
+}
+function pilgrimReadout() {
+  var tau = +gc('pTilt').value/100, lo = tau, hi = Math.PI - tau, names = [];
+  function hits(a, b) { return lo < b && hi > a; }
+  if (hits(0, EARTH_PSI)) names.push('Hell');
+  if (hits(EARTH_PSI, PURG_TOP_PSI)) names.push('Purgatory');
+  if (hits(PURG_TOP_PSI, PRIMUM_PSI)) names.push('celestial spheres');
+  if (hits(PRIMUM_PSI, Math.PI)) names.push('Empyrean');
+  setTxt('lblTilt', (tau/DEG).toFixed(0) + '°');
+  setTxt('lblSpin', ((+gc('pSpin').value/100)/DEG).toFixed(0) + '°');
+  setTxt('lblView', ((+gc('pView').value/100)/DEG).toFixed(0) + '°');
+  setHtml('pilgrimInfo',
+    'ψ range of this circle: <b>[' + lo.toFixed(3) + ', ' + hi.toFixed(3) + ']</b> radians, that is [' +
+    (lo/DEG).toFixed(1) + '°, ' + (hi/DEG).toFixed(1) + '°].<br>' +
+    'realms the path passes through: <b>' + names.join(', ') + '</b>' +
+    (lo < EARTH_PSI ? '' : ' (tilt exceeds 8.6°, so Hell is out of reach)'));
+  mark('cPilgrim');
+}
+
+/* ==================== 11. the ladder of vision ==================== */
+var vp = 0, vTarget = 0, vPlaying = false, vPlayT = 0, vLastKey = -1;
+var VKEYS = [
+  ['THE TRAVELLER',
+   'One slice, moving. Three directions of free motion and a next moment that is hidden. Freedom of movement and ignorance of the outcome arrive together, and the second is what makes the first a decision.'],
+  ['THE VIEW FROM ETERNITY &middot; totum simul',
+   'A being that perceived along the fourth dimension would see the whole life at once, birth to death, the way we see a line rather than a point. Boethius calls this eternity: the whole of unending life possessed at once.'],
+  ['THE VIEW OVER ALL WORLDS &middot; by analogy',
+   'Extend the ladder one more rung and the view takes in every world that could have been, the actual one among them. This step is an analogy rather than another axis of the manifold. Possible worlds are not somewhere you could look if only you had one more direction to look along.']
+];
+function vWeight(i) {
+  if (i === 0) return clamp(1 - vp, 0, 1);
+  if (i === 1) return clamp(1 - Math.abs(vp - 1), 0, 1);
+  return clamp(vp - 1, 0, 1);
+}
+function vProj(x, y, z, w, h) {
+  var rY = 0.62, rX = 0.38;
+  var rx = x*Math.cos(rY) + z*Math.sin(rY), rz = -x*Math.sin(rY) + z*Math.cos(rY);
+  var ry = y*Math.cos(rX) - rz*Math.sin(rX), rz2 = y*Math.sin(rX) + rz*Math.cos(rX);
+  var f = 3.4/(3.4 + rz2*0.24);
+  return { x: w/2 + rx*150*f, y: h/2 - ry*150*f };
+}
+function drawVision() {
+  var c = CTX['cVision']; if (!c) return;
+  var d = dims('cVision'), w = d.w, h = d.h;
+  c.clearRect(0, 0, w, h);
+  var w3 = vWeight(0), w4 = vWeight(1), w5 = vWeight(2);
+  function plot(p1, p2, col, lw, al) {
+    c.strokeStyle = col; c.lineWidth = lw; c.globalAlpha = al;
+    c.beginPath(); c.moveTo(p1.x, p1.y); c.lineTo(p2.x, p2.y); c.stroke(); c.globalAlpha = 1;
+  }
+  function trail(s, k) {
+    return vProj(s*0.62, -0.05*Math.sin(3.1*s) + (k||0)*0.055*s*s + (k||0)*0.045*s, 0.16*s + Math.abs(k||0)*0.05*s, w, h);
+  }
+  if (w3 > 0.01) {
+    var a = w3, cy = h/2, i, s, fogR = (0.55 + 0.45*a) * Math.min(w*0.32, h*0.62);
+    for (i = -6; i <= 6; i++) {
+      plot(vProj(i*0.28,-0.5,2.4,w,h), vProj(i*0.28,-0.5,-2.4,w,h), 'rgba(51,65,85,0.7)', 1, 0.6*a);
+      plot(vProj(-2.4,-0.5,i*0.28,w,h), vProj(2.4,-0.5,i*0.28,w,h), 'rgba(51,65,85,0.7)', 1, 0.6*a);
+    }
+    var O = vProj(0,-0.5,0,w,h), X = vProj(1.15,-0.5,0,w,h), Y = vProj(0,0.5,0,w,h), Z = vProj(0,-0.5,1.15,w,h);
+    plot(O,X,'#EF9F27',2,0.9*a); plot(O,Y,'#5DCAA5',2,0.9*a); plot(O,Z,'#c83c3c',2,0.9*a);
+    c.globalAlpha = 0.95*a; c.font = '12px monospace'; c.textAlign = 'left';
+    c.fillStyle = '#EF9F27'; c.fillText('x', X.x+6, X.y+4);
+    c.fillStyle = '#5DCAA5'; c.fillText('y', Y.x+6, Y.y+4);
+    c.fillStyle = '#c83c3c'; c.fillText('z', Z.x+6, Z.y+4);
+    c.font = '10px monospace'; c.fillStyle = 'rgba(203,213,225,0.9)';
+    c.fillText('three axes of free motion', X.x-58, X.y-10);
+    c.globalAlpha = 1;
+    c.lineWidth = 3; c.strokeStyle = '#fbbf24'; c.globalAlpha = 0.95*a; c.beginPath();
+    for (s = -2.3; s <= 0; s += 0.05) { var Pp = trail(s,0); if (s === -2.3) c.moveTo(Pp.x,Pp.y); else c.lineTo(Pp.x,Pp.y); }
+    c.stroke(); c.globalAlpha = 1;
+    for (var k = -2; k <= 2; k++) {
+      c.strokeStyle = k === 0 ? 'rgba(251,191,36,0.55)' : 'rgba(93,202,165,0.5)';
+      c.lineWidth = 1.5; c.beginPath();
+      var started = false;
+      for (var s2 = 0; s2 <= 1.9; s2 += 0.06) {
+        var Q = trail(s2, k);
+        c.globalAlpha = a*clamp((fogR - Math.hypot(Q.x - w/2, Q.y - cy))/90, 0, 1);
+        if (!started) { c.moveTo(Q.x,Q.y); started = true; } else c.lineTo(Q.x,Q.y);
+      }
+      c.stroke();
+    }
+    c.globalAlpha = 1;
+    var F = trail(1.35, 1.7);
+    c.font = '10px monospace'; c.textAlign = 'left'; c.fillStyle = 'rgba(203,213,225,0.9)';
+    c.fillText('the future is open', F.x-20, F.y+16);
+    var A = vProj(0,-0.5,0,w,h);
+    var g = c.createRadialGradient(A.x, A.y, 2, A.x, A.y, 34);
+    g.addColorStop(0,'rgba(251,191,36,0.85)'); g.addColorStop(1,'rgba(251,191,36,0)');
+    c.fillStyle = g; c.beginPath(); c.arc(A.x, A.y, 34, 0, TAU); c.fill();
+    c.fillStyle = '#fbbf24'; c.beginPath(); c.arc(A.x, A.y, 6, 0, TAU); c.fill();
+    c.font = '11px Georgia'; c.textAlign = 'center'; c.fillStyle = 'rgba(226,232,240,0.95)';
+    c.fillText('the present', A.x, A.y-16);
+    var fg = c.createRadialGradient(A.x, A.y, fogR*0.5, A.x, A.y, fogR*1.35);
+    fg.addColorStop(0,'rgba(2,6,23,0)'); fg.addColorStop(0.74,'rgba(2,6,23,0)');
+    fg.addColorStop(0.92,'rgba(2,6,23,0.88)'); fg.addColorStop(1,'rgba(2,6,23,1)');
+    c.fillStyle = fg; c.fillRect(0, 0, w, h);
+    c.strokeStyle = 'rgba(148,163,184,' + (0.22*a).toFixed(2) + ')';
+    c.lineWidth = 1; c.setLineDash([3,6]);
+    c.beginPath(); c.arc(A.x, A.y, fogR, 0, TAU); c.stroke(); c.setLineDash([]);
+    if (a > 0.6) {
+      c.font = '10px monospace'; c.textAlign = 'right'; c.fillStyle = 'rgba(148,163,184,0.95)';
+      c.fillText('the horizon of ignorance', w-12, 20);
+    }
+  }
+  if (w4 > 0.01) {
+    var a4 = w4, cx = w/2, cy4 = h/2, i4;
+    c.strokeStyle = 'rgba(148,163,184,0.5)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(24, cy4); c.lineTo(w-24, cy4); c.stroke();
+    c.fillStyle = 'rgba(148,163,184,0.9)'; c.font = '10px monospace'; c.textAlign = 'left';
+    c.fillText('t', w-18, cy4-5);
+    c.textAlign = 'center'; c.fillText('time: one direction, every point equally visible', cx, cy4+16);
+    var pts4 = [];
+    for (var xx = cx - 0.44*w; xx <= cx + 0.44*w; xx += 4) {
+      var tt = (xx - cx)/w*6.4;
+      pts4.push([xx, cy4 + Math.sin(tt)*h*0.20 + Math.sin(tt*2.7)*h*0.045]);
+    }
+    c.lineWidth = 9; c.strokeStyle = 'rgba(239,159,39,0.14)'; c.globalAlpha = a4;
+    c.beginPath(); c.moveTo(pts4[0][0], pts4[0][1]);
+    for (i4 = 1; i4 < pts4.length; i4++) c.lineTo(pts4[i4][0], pts4[i4][1]);
+    c.stroke();
+    c.lineWidth = 3.4; c.strokeStyle = '#fbbf24'; c.globalAlpha = 0.95*a4;
+    c.beginPath(); c.moveTo(pts4[0][0], pts4[0][1]);
+    for (i4 = 1; i4 < pts4.length; i4++) c.lineTo(pts4[i4][0], pts4[i4][1]);
+    c.stroke(); c.globalAlpha = 1;
+    var Sp = { x: cx, y: cy4 - h*0.33 };
+    c.fillStyle = 'rgba(203,213,225,' + (0.9*a4) + ')';
+    c.beginPath(); c.moveTo(Sp.x, Sp.y-12); c.lineTo(Sp.x-8, Sp.y+6); c.lineTo(Sp.x+8, Sp.y+6); c.closePath(); c.fill();
+    c.strokeStyle = 'rgba(148,163,184,' + (0.55*a4) + ')'; c.lineWidth = 1; c.setLineDash([4,5]);
+    [0.08,0.3,0.5,0.7,0.92].forEach(function (fr) {
+      var id2 = Math.min(pts4.length-1, Math.floor(fr*(pts4.length-1)));
+      c.beginPath(); c.moveTo(Sp.x, Sp.y+6); c.lineTo(pts4[id2][0], pts4[id2][1]); c.stroke();
+    });
+    c.setLineDash([]);
+    c.font = '10px monospace'; c.textAlign = 'center';
+    c.fillStyle = 'rgba(203,213,225,' + (0.95*a4) + ')';
+    c.fillText('the watcher on the height', Sp.x, Sp.y-18);
+    c.font = '11px monospace'; c.fillStyle = 'rgba(148,163,184,' + (0.9*a4) + ')';
+    c.textAlign = 'left';  c.fillText('birth', pts4[0][0]+4, pts4[0][1]+18);
+    c.textAlign = 'right'; c.fillText('death', pts4[pts4.length-1][0]-4, pts4[pts4.length-1][1]+18);
+    var mid = Math.floor(pts4.length/2);
+    c.strokeStyle = 'rgba(255,255,255,' + (0.8*a4) + ')'; c.lineWidth = 1.4;
+    c.beginPath(); c.arc(pts4[mid][0], pts4[mid][1], 10, 0, TAU); c.stroke();
+    c.font = '11px Georgia'; c.textAlign = 'center';
+    c.fillStyle = 'rgba(226,232,240,' + (0.95*a4) + ')';
+    c.fillText('the present, one point among all', pts4[mid][0], pts4[mid][1]-20);
+    c.font = '10px monospace'; c.fillStyle = 'rgba(148,163,184,' + (0.9*a4) + ')';
+    c.fillText('no moment is more now than another', cx, h-14);
+  }
+  if (w5 > 0.01) {
+    var a5 = w5, GOLD_PATH = [0,1,-1,0,1];
+    var nodes = [{x:0,y:0.5,gold:true}], edges = [], gens = 5;
+    for (var gg = 1; gg <= gens; gg++) {
+      var next = [];
+      nodes.forEach(function (n) {
+        var hy = n.gold ? 0.05 : 0.09;
+        for (var kk = -1; kk <= 1; kk++) {
+          var ch = { x: n.x + 1/gens, y: n.y + kk*hy, gold: n.gold && kk === GOLD_PATH[gg-1] };
+          edges.push([n, ch]); next.push(ch);
+        }
+      });
+      nodes = next;
+    }
+    function PP(n) { return { x: 40 + n.x*(w-80), y: h*0.16 + n.y*(h - h*0.32) }; }
+    c.lineWidth = 1.1;
+    edges.forEach(function (e) {
+      var A2 = PP(e[0]), B2 = PP(e[1]);
+      c.strokeStyle = e[1].gold ? 'rgba(251,191,36,0.95)' : 'rgba(100,116,139,0.55)';
+      c.globalAlpha = (e[1].gold ? 0.95 : 0.42)*a5;
+      c.beginPath(); c.moveTo(A2.x, A2.y); c.lineTo(B2.x, B2.y); c.stroke();
+    });
+    c.globalAlpha = 1;
+    var leaf = null;
+    nodes.forEach(function (n) {
+      if (n.x >= 0.99) {
+        if (n.gold) leaf = n;
+        c.fillStyle = n.gold ? '#fbbf24' : 'rgba(148,163,184,0.8)';
+        c.globalAlpha = (n.gold ? 1 : 0.55)*a5;
+        c.beginPath(); c.arc(PP(n).x, PP(n).y, n.gold ? 4 : 2.2, 0, TAU); c.fill();
+      }
+    });
+    c.globalAlpha = 1;
+    c.font = '10px monospace'; c.textAlign = 'left'; c.fillStyle = 'rgba(148,163,184,' + (0.9*a5) + ')';
+    c.fillText('worlds where the Commedia was never written', 52, h*0.30);
+    c.fillText('worlds where Plato never set pen to wax', 52, h*0.52);
+    if (leaf) {
+      var G2 = PP(leaf);
+      c.textAlign = 'right'; c.fillStyle = 'rgba(251,191,36,' + (0.95*a5) + ')';
+      c.fillText('the actual world, the one that is', G2.x-8, G2.y-10);
+    }
+    c.textAlign = 'center'; c.fillStyle = 'rgba(148,163,184,' + (0.9*a5) + ')';
+    c.fillText('every possible world visible at once', w/2, h-14);
+  }
+  if (w4 > 0.25 && w4 < 0.97) {
+    c.fillStyle = 'rgba(2,6,23,' + (0.5*Math.sin(Math.PI*clamp((w4-0.25)/0.72, 0, 1))).toFixed(3) + ')';
+    c.fillRect(0, 0, w, h);
+  }
+  var ki = vp < 0.45 ? 0 : (vp < 1.55 ? 1 : 2);
+  if (ki !== vLastKey) {
+    vLastKey = ki;
+    setHtml('keyText', '<span class="dim">' + VKEYS[ki][0] + '</span><br>' + VKEYS[ki][1]);
+    for (var b = 0; b < 3; b++) {
+      var bt = gc('vis' + b);
+      bt.className = 'db' + (b === ki ? ' on' : '');
+      bt.setAttribute('aria-pressed', b === ki ? 'true' : 'false');
+    }
+  }
+  setTxt('vLbl', ['3D','4D','5D'][ki] + (Math.abs(vp - ki) < 0.02 ? '' : ' →'));
+}
+
+/* ==================== loop ==================== */
+var DRAW = { cSolids:drawSolids, cTriangle:drawTriangle, cSphere:drawSphere, cQS3:drawQS3,
+             cAstro:drawAstro, cLadder:drawLadder, cRope:drawRope, cDante:drawDante,
+             cCoord:drawCoord, cPilgrim:drawPilgrim, cFull:drawFull, cVision:drawVision };
 function loop() {
-  t += 0.018;
-  drawLadder(); drawRope(); drawCoord(); drawDante(); drawFull();
-  drawSphere(); drawQS3(); drawTriangle(); drawSolids();
+  if (!document.hidden) {
+    if (!reduced) t += 0.018;
+    if (pilgrimRunning && !reduced) { pilgrimT += 0.018; mark('cPilgrim'); }
+    if (vPlaying) {
+      vPlayT += 1/60;
+      if (vPlayT < 1.1) vTarget = 0;
+      else if (vPlayT < 2.6) vTarget = Math.min(1, (vPlayT - 1.1)/1.5);
+      else if (vPlayT < 4.2) vTarget = 1;
+      else if (vPlayT < 5.8) vTarget = Math.min(2, 1 + (vPlayT - 4.2)/1.6);
+      else vTarget = 2;
+      if (vPlayT > 7.4) vPlaying = false;
+      mark('cVision');
+    }
+    if (Math.abs(vTarget - vp) > 0.0004) {
+      vp += (vTarget - vp)*(reduced ? 1 : 0.085);
+      gc('vSlider').value = Math.round(vp*100);
+      mark('cVision');
+    }
+    SPECS.forEach(function (sp) {
+      var id = sp[0];
+      if (!isVisible(id)) return;
+      if (ANIMATED[id]) { DRAW[id](); return; }
+      if (dirty[id]) { DRAW[id](); dirty[id] = false; }
+    });
+  }
   requestAnimationFrame(loop);
 }
 
-// Init
+/* ==================== wiring ==================== */
+for (var si = 0; si < 5; si++) (function (n) { on('sol' + n, 'click', function () { setSolid(n); }); })(si);
+for (var di = 0; di < 4; di++) (function (n) { on('dim' + n, 'click', function () { setDim(n); }); })(di);
+for (var vi = 0; vi < 3; vi++) (function (n) {
+  on('vis' + n, 'click', function () { vTarget = n; vPlaying = false; vPlayT = 0; mark('cVision'); });
+})(vi);
+['oLat','oLon','qPsi'].forEach(function (id) { on(id, 'input', updateQibla); });
+['aPhi','aDec','aHA','aDL'].forEach(function (id) { on(id, 'input', function () { mark('cAstro'); }); });
+['cPsi','cTheta','cPhi'].forEach(function (id) { on(id, 'input', onCoord); });
+['pTilt','pSpin','pView'].forEach(function (id) { on(id, 'input', pilgrimReadout); });
+on('sPsi', 'input', function () { onPsi(this.value); });
+on('sJourney', 'input', function () { onJourney(this.value); });
+on('sDante', 'input', function () { onDante(this.value); });
+on('sFullPsi', 'input', function () { onFullPsi(this.value); });
+on('vSlider', 'input', function () { vTarget = this.value/100; vPlaying = false; vPlayT = 0; mark('cVision'); });
+on('vPlay', 'click', function () { vPlaying = true; vTarget = vp; vPlayT = 0; mark('cVision'); });
+on('vReset', 'click', function () { vTarget = 0; vPlaying = false; vPlayT = 0; mark('cVision'); });
+on('pMotion', 'click', function () {
+  pilgrimRunning = !pilgrimRunning;
+  this.textContent = pilgrimRunning ? 'pause motion' : 'resume motion';
+  this.setAttribute('aria-pressed', pilgrimRunning ? 'true' : 'false');
+  mark('cPilgrim');
+});
+
 initCanvases();
-onPsi(50); onCoord(); onDante(50); setDim(2); updateQibla(); onFullPsi(50); setSolid(0);
+setSolid(0); setDim(2);
+updateQibla(); onCoord(); pilgrimReadout();
+onPsi(75); onJourney(0); onDante(75); onFullPsi(75);
+SPECS.forEach(function (sp) { mark(sp[0]); DRAW[sp[0]](); });
 loop();
+
+})();
 </script>
 </body>
 </html>

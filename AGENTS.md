@@ -212,22 +212,57 @@ Required:
 
 This file is special. It is a fully self-contained interactive mathematics visualization page. It has its own internal CSS and JavaScript — it does **not** load `assets/style.css` or `glossary.js`.
 
-See `.windsurf/workflows/closure-axiom.md` for the complete agent workflow covering its architecture, domain knowledge (S³ geometry, qibla calculation, Dante's cosmos, Klein bottle), canvas inventory, drawing functions, and hard rules from previous sessions.
+See `.windsurf/workflows/closure-axiom.md` for the complete agent workflow covering its architecture, domain knowledge (S³ geometry, qibla calculation, Dante's cosmos), canvas inventory, drawing functions, and hard rules from previous sessions.
 
-**Quick reference — 7 panels:**
-1. Sacred Triangle — spherical triangle (North Pole, Observer, Mecca)
-2. Qibla — Al-Bīrūnī's spherical trig on S²/S³
-3. Ladder — S⁰ → S¹ → S² → S³ dimension explorer
-4. The Rope — Dante's structured world-line (Hell/Purgatorio/Paradise)
-5. Dante's S³ — 9 celestial spheres as ψ-slices
-6. Coordinates — ψ/θ/φ explorer
-7. Complete Object — Klein bottle IS the S³ visualization (one canvas, not two)
+**Quick reference — 12 panels (4 parts, 11 numbered sections + references):**
+
+Part I — Closure:
+1. Platonic Solids — five closures, Euler V−E+F=2
+
+Part II — The triangle, and the sphere it is drawn on:
+2. Sacred Triangle — spherical triangle (North Pole, Observer, Mecca)
+3. Qibla — Al-Bīrūnī's spherical trig on S²/S³
+4. Astrolabe — stereographic projection from south celestial pole to equatorial plane; conformality test; qibla triangle overlay
+
+Part III — The three-sphere:
+5. Ladder — S⁰ → S¹ → S² → S³ dimension explorer
+6. Dante's S³ — ψ-slices showing spheres growing to Primum Mobile, shrinking to God
+7. The Rope (journey) — Dante's world-line (Hell/Purgatory/Celestial/Empyrean); down-becomes-up inversion
+8. Coordinates — ψ/θ/φ explorer
+9. Geodesic — great circle on S³; γ(t) = cos t · u + sin t · v; tilt controls ψ range
+10. Whole Object — S³ by stereographic projection (Peterson model + Florensky vs Peterson framing)
+
+Part IV — What the geometry costs:
+11. Ladder of Vision — Boethius/Leibniz/Dante on free will and eternal vision; 3D/4D/5D metaphor
+
+**Canvas IDs (12):** cSolids, cTriangle, cSphere, cQS3, cAstro, cLadder, cRope, cDante, cCoord, cPilgrim, cFull, cVision
+
+**ψ-mapping (Peterson's model):**
+- ψ=0: Satan (Earth's center) — pole
+- ψ≈0.15: Earth's surface
+- ψ≈0.30: Top of Purgatory (approximately Moon's sphere)
+- ψ=π/2: Primum Mobile — equator, maximum S² (where hemispheres glue)
+- ψ=π: God (punto) — pole
+- Celestial spheres GROW from Purgatory to Primum Mobile
+- Empyrean angelic orders SHRINK from Primum Mobile to God
 
 **Hard rules for this file:**
-- Klein bottle and S³ are the SAME canvas (panel 7). Never split them.
-- Panel order is fixed (Triangle+Qibla adjacent; Rope+Dante adjacent).
-- `cKlein` canvas no longer exists — it was merged into `cFull`.
-- The world-line (`knotPoint()`) encodes the actual three-phase journey structure. Do not replace with arbitrary math.
+- Panel 10 (whole object) uses stereographic projection of S³ (from Satan's pole). The Klein bottle has been removed entirely.
+- Florensky (non-orientable) vs Peterson (S³, orientable) is presented as a live disagreement, not a merger.
+- Panel order is fixed: 1-2-3-4-5-6-7-8-9-10-11. Triangle+Qibla (2+3) adjacent; Dante+Rope (6+7) adjacent; Geodesic+Whole (9+10) in wrap pair.
+- `cKlein` canvas no longer exists. Panel 10 uses `cFull` for stereographic S³.
+- The world-line (`knotPoint()`) encodes the journey structure. Do not replace with arbitrary math.
+- ψ panels (Rope, Dante, QS3) draw the vertical axis through `psiToFrac()`/`fracToPsi()`: Hell, Purgatory, Celestial, Empyrean each get one quarter of the axis. Sphere widths still use sinψ exactly. The Rope/Dante sliders travel on this display axis (value 75 = Primum Mobile).
+- Panel 10 uses true stereographic R = cot(ψ/2) but draws it on a log radial scale (`dispR()`), so the Primum Mobile (R=1) sits at half-radius. Both scalings are stated on the canvases/captions; do not remove the notes.
+- Panel 4 (astrolabe) and panel 10 (whole object) both use stereographic projection — panel 4 on S², panel 10 on S³. The cross-reference between them is explicit in the prose.
+- Panel 9 (geodesic): γ(t) = cos t · u + sin t · v with u,v orthonormal. ψ range is [τ, π−τ] where τ is the tilt. This is a true great circle on S³.
+- Panel 11 (ladder of vision): the 3D/4D/5D framing is an interpretive visualization metaphor, not a literal mathematical claim. Citations verified: the "lofty height" survey image is Boethius's (Consolation V.6); the road-and-travellers form is Aquinas's refinement (commentary on De Interpretatione 9); Marco Lombardo's free will speech is Purg. XVI.67-78 (broader speech to 145).
+- All canvases use CSS-pixel drawing with `ctx.setTransform(dpr,0,0,dpr,0,0)` for retina support. Drawing functions use `dims(id)` for dimensions, not `c.canvas.width/height`.
+- Static panels use dirty flags and only redraw on slider input. Animated panels redraw every frame.
+- `IntersectionObserver` skips off-screen canvases. `prefers-reduced-motion` stops animation.
+- The script is wrapped in an IIFE `(function(){ 'use strict'; ... })()` — internal functions are not on `window`. Test via DOM events, not direct function calls.
+- `favicon.svg` exists in the repo root and is referenced by the page.
+- The word "sharp" is forbidden in this course's voice rules. Do not reintroduce it.
 
 ---
 
@@ -240,8 +275,8 @@ git push origin main
 ```
 
 Examples of good commit messages:
-- `"Rope panel: structured journey Hell/Purgatorio/Paradise with named circles, Virgil/Beatrice guides"`
-- `"Klein bottle IS the S3 visualization: single canvas, psi cross-section + world-line"`
+- `"Rope panel: structured journey Hell/Purgatory/Celestial/Empyrean with named circles, Virgil/Beatrice guides"`
+- `"Stereographic S3 visualization: nested spheres from Satan(infinity) to God(center), Florensky vs Peterson"`
 - `"Fix ordering: Triangle+Qibla adjacent, Rope+Dante adjacent"`
 
 ---
