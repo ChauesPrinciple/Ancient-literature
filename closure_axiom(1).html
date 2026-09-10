@@ -14,7 +14,7 @@
 body{font-family:Georgia,serif;background:#0a0a0f;color:#e2e8f0;padding:0 16px 48px;max-width:1400px;margin:0 auto}
 h1{color:#fbbf24;font-size:26px;margin-bottom:10px;font-family:'Cinzel',serif}
 h2.part{font-family:'Cinzel',serif;color:#fbbf24;font-size:17px;letter-spacing:.08em;margin:34px 0 6px;padding-bottom:8px;border-bottom:1px solid #1e293b}
-h2.part span{color:#64748b;font-family:monospace;font-size:12px;letter-spacing:.2em;display:block;margin-bottom:4px}
+h2.part span{color:#7b8794;font-family:monospace;font-size:12px;letter-spacing:.2em;display:block;margin-bottom:4px}
 p.partsub{color:#94a3b8;font-size:13px;font-style:italic;margin-bottom:14px}
 nav.toc{position:sticky;top:0;z-index:20;background:rgba(10,10,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid #1e293b;padding:9px 0;margin-bottom:16px;font-family:monospace;font-size:11px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
 nav.toc a{color:#94a3b8;text-decoration:none;white-space:nowrap}
@@ -162,7 +162,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
     <div class="sl-row"><label for="aPhi">observer latitude &phi;</label><input type="range" id="aPhi" min="0" max="75" value="36" step="1"><output for="aPhi" id="lblPhi">36&deg;</output></div>
     <div class="sl-row"><label for="aDec">star declination &delta;</label><input type="range" id="aDec" min="-23" max="75" value="30" step="1"><output for="aDec" id="lblDec">30&deg;</output></div>
     <div class="sl-row"><label for="aHA">star hour angle</label><input type="range" id="aHA" min="0" max="359" value="54" step="1"><output for="aHA" id="lblHA">54&deg;</output></div>
-    <div class="sl-row"><label for="aDL">Mecca longitude offset</label><input type="range" id="aDL" min="0" max="180" value="114" step="1"><output for="aDL" id="lblDL">114&deg; E</output></div>
+    <div class="sl-row"><label for="aDL">Mecca longitude offset</label><input type="range" id="aDL" min="0" max="180" value="127" step="1"><output for="aDL" id="lblDL">127&deg; E</output></div>
   </div>
   <div class="check" id="astroCheck" aria-live="polite"></div>
   <p class="note">The declination slider stops at the Tropic of Capricorn because that is where the plate's rim is. A real astrolabe cannot show stars further south either; the plate simply ends.</p>
@@ -198,14 +198,14 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   <h3>7. The journey, and why down becomes up</h3>
   <p class="info"><b>What this shows.</b> The whole route as one continuous path. Depth is &psi;: Satan at 0, Earth's surface just above, the Primum Mobile at &pi;/2, God at &pi;. Horizontal position is where you stand on the S&#x00B2; at that depth. <b>Left of the axis is Jerusalem's hemisphere. Right is the antipodal hemisphere, where Mount Purgatory stands.</b></p>
   <p class="info"><b>The inversion.</b> At &psi;=0 the sphere is not small, it is a single point. A path continuing straight through it has nowhere to come out except the antipode. Dante and Virgil never turn around; the sphere runs out from under them, and the angular coordinate flips by &pi;. That is the whole content of down becoming up, and it is why the descent is drawn on the left and everything after Satan on the right. Florensky located the critical moment exactly here.</p>
-  <p class="info"><b>The Klein bottle below is an analogy for the same inversion in one lower dimension.</b> A Klein bottle is a 2D surface that cannot live in 3D without passing through itself. In 4D it fits cleanly. The self-intersection you see in 3D is the shadow of a smooth crossing in 4D, and Dante's passage through Satan is, by analogy, the same kind of crossing: in three dimensions it looks like the path pierces itself, but in the 3-sphere it threads through the pole and comes out the antipode, inverted. The analogy is suggestive, not a structural identity: the Klein bottle is non-orientable, while S&#x00B3; is orientable. Rotate the 4D view and the self-intersection opens into a clean tube.</p>
+  <p class="info"><b>The Klein bottle below is a different kind of 4D-in-3D object, shown for contrast.</b> A Klein bottle is a 2D surface that provably cannot embed in 3D without self-intersection. In 4D it fits cleanly. This is NOT what happens at Satan's pole: S&#x00B3; is smooth, simply connected, and orientable everywhere, including at &psi;=0. The "down becomes up" inversion is a coordinate artifact of polar coordinates (&theta; becoming undefined at the pole, the way longitude becomes undefined at Earth's poles), not a topological crossing. The Klein bottle is shown here because it is the canonical example of a 4th dimension resolving what looks like a paradox in 3, but the two phenomena are unrelated: the Klein bottle is non-orientable, S&#x00B3; is orientable, and no rotation of the Klein bottle in 4D can eliminate all self-intersections in the 3D projection. The slider changes which crossings are visible, but cannot remove them all.</p>
   <canvas id="cRope" height="520" role="img" aria-label="A vertical profile of the 3-sphere with Dante's whole route drawn along it, the descent on the left and everything after Satan on the right."></canvas>
   <div class="sl-row"><label for="sJourney">journey</label><input type="range" id="sJourney" min="0" max="1000" value="0"><output for="sJourney" id="jLbl">the gate</output></div>
   <div class="sl-row"><label for="sPsi">slice &psi;</label><input type="range" id="sPsi" min="0" max="100" value="75"><output for="sPsi" id="psiLbl">&pi;/2</output></div>
   <div class="check" id="journeyInfo" aria-live="polite"></div>
   <div class="info" id="ropeInfo" aria-live="polite"></div>
+  <p id="kleinDesc" class="sr-only">A Klein bottle rendered as a 4D object projected into 3D. The bottle self-intersects in every 3D projection; no rotation can eliminate all crossings, because the Klein bottle provably cannot embed in R3. Dante's journey is traced as a coloured path along the surface: descent in red, ascent in gold. A slider rotates the object in the fourth dimension, changing which crossings are visible.</p>
   <canvas id="cKlein" height="400" role="img" aria-labelledby="kleinDesc"></canvas>
-  <p id="kleinDesc" class="sr-only">A Klein bottle rendered as a 4D object projected into 3D. The bottle self-intersects in the 3D projection. Dante's journey is traced as a coloured path along the surface: descent in red, ascent in gold, meeting at the self-intersection circle where Satan sits. A slider rotates the object in the fourth dimension, opening the self-intersection into a clean tube.</p>
   <div class="sl-row"><label for="kRot">4D rotation</label><input type="range" id="kRot" min="0" max="628" value="0" step="1"><output for="kRot" id="kRotV">0&deg;</output></div>
   <div class="sl-row"><label for="kView">viewing angle</label><input type="range" id="kView" min="0" max="628" value="80" step="1"><output for="kView" id="kViewV">46&deg;</output></div>
   <div class="check" id="kleinInfo" aria-live="polite"></div>
@@ -235,7 +235,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
     <div class="sl-row"><label for="pView">viewing angle</label><input type="range" id="pView" min="0" max="628" value="50" step="1"><output for="pView" id="lblView">29&deg;</output></div>
     <p><button type="button" class="btn" id="pMotion" aria-pressed="true">pause motion</button></p>
     <div class="check" id="pilgrimInfo" aria-live="polite"></div>
-    <p class="note"><b>The finding.</b> Every geodesic, no matter how tilted, crosses the equatorial slice &psi; = &pi;/2, the Primum Mobile. The maximum depth reached is arccos(&minus;a), which equals &pi; only when a = 1, that is, only when the plane contains the polar axis. Hell occupies &psi; < 0.15, which is 8.6 degrees; a geodesic reaches Hell only if its plane is tilted less than 8.6 degrees from the polar axis. Tilt past that and the path, still a perfect great circle and still the shortest route between its own points, never touches the lowest circles. Closure does not guarantee that a path passes through everything the space contains. The Klein bottle in panel 7 is, by analogy, the lower-dimensional shadow of the same kind of crossing: a 2D surface that crosses itself in 3D but threads cleanly in 4D, the way this geodesic threads the pole and comes out inverted. The analogy is suggestive, not a structural identity.</p>
+    <p class="note"><b>The finding.</b> Every geodesic, no matter how tilted, crosses the equatorial slice &psi; = &pi;/2, the Primum Mobile. The maximum depth reached is arccos(&minus;a), which equals &pi; only when a = 1, that is, only when the plane contains the polar axis. Hell occupies &psi; < 0.15, which is 8.6 degrees; a geodesic reaches Hell only if its plane is tilted less than 8.6 degrees from the polar axis. Tilt past that and the path, still a perfect great circle and still the shortest route between its own points, never touches the lowest circles. Closure does not guarantee that a path passes through everything the space contains. The Klein bottle in panel 7 is shown there as a contrast, not a parallel: it is a non-orientable surface that provably cannot embed in 3D, while S&#x00B3; is orientable and smooth at every point, including the pole where &theta; flips.</p>
   </div>
 </div>
 
@@ -278,6 +278,8 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
 <h2 class="part" id="p5"><span>PART V</span>The question that won't die</h2>
 <p class="partsub">The closure argument applied to existence itself, and what three centuries of physics and philosophy have made of it.</p>
+<p class="info">The word "closure" has been doing double work through this page. Geometric closure means a surface with no boundary, no edge, no outside: the sphere closes on itself, and so does the 3-sphere. Explanatory closure means the Principle of Sufficient Reason: everything has a reason, and the chain of reasons terminates. The two senses are not the same thing. The page has been using their resonance as a thread, not as a proof. But the thread now reaches its end. The geometry of closure, pushed as far as it goes, produces a question that explanatory closure cannot answer.</p>
+<p class="info">Part IV asked whether seeing the whole of a life at once costs the choices in it. The tradition says no: Boethius, Leibniz, and Dante all hold that the survey from eternity leaves the will intact. But that answer, even if it holds, leaves a deeper question standing. The survey from eternity sees the whole chain of causes. What explains there being a chain at all? The move from "does the chain threaten free will?" to "what explains the chain?" is the move from Part IV to Part V.</p>
 
 <div class="panel-full" id="s12">
   <h3>12. Why is there something rather than nothing?</h3>
@@ -291,7 +293,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   <div class="sl-row"><label for="qSlider">attempt</label><input type="range" id="qSlider" min="0" max="6" value="0" step="1"><output for="qSlider" id="qLbl">1</output></div>
   <div class="check" id="qInfo" aria-live="polite"></div>
 
-  <p class="info"><b>1. The quantum vacuum.</b> Quantum field theory says the vacuum is not empty. It fluctuates. Virtual particles appear and vanish. Edward Tryon argued in <em>Nature</em> in 1973 that the entire universe could have arisen as a vacuum fluctuation costing zero net energy. Lawrence Krauss expanded this into <em>A Universe from Nothing</em> (2012). The philosopher of physics David Albert reviewed the book in the <em>New York Times</em> and dismantled it in a single essay: the vacuum contains fields, contains laws, contains structure. Calling it nothing is a semantic move, not a physical one. The book explained how something can come from a quantum vacuum. It did not explain why there is a quantum vacuum.</p>
+  <p class="info"><b>1. The quantum vacuum.</b> Quantum field theory says the vacuum is not empty. It fluctuates. Virtual particles appear and vanish. Edward Tryon argued in <em>Nature</em> in 1973 that the entire universe could have arisen as a vacuum fluctuation costing zero net energy. Lawrence Krauss expanded this into <em>A Universe from Nothing</em> (2012). The philosopher of physics David Albert reviewed the book in the <em>New York Times</em> and dismantled it in a single essay: the vacuum contains fields, contains laws, contains structure. Calling it nothing is a semantic move, not a physical one. The title works as provocation. As ontology, it trades on an equivocation between "empty of matter" and "empty of everything," and the trade is visible the moment you ask what the vacuum is made of.</p>
 
   <p class="info"><b>2. Eternal inflation.</b> Alan Guth's 1981 paper in <em>Physical Review D</em> proposed a brief phase of exponential expansion to fix two problems in the Big Bang model. The mathematics showed that once inflation starts, in most models it never fully stops. Andrei Linde developed chaotic inflation in 1983. Alexander Vilenkin built the eternal inflation framework, in which inflation continues forever in some regions while pocket universes bud off in others. In 2003, Borde, Guth, and Vilenkin proved a theorem in <em>Physical Review Letters</em> showing that even eternal inflation, on average, must have had a past boundary. The beginning came back through the exit door. And the framework still requires an inflaton field, initial conditions, and initial laws to exist in the first place.</p>
 
@@ -299,7 +301,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 
   <p class="info"><b>4. The mathematical universe.</b> Max Tegmark, publishing in <em>Foundations of Physics</em> in 2008, proposed that physical reality does not merely correspond to a mathematical structure but is one. All mathematically consistent structures exist, and the universe you experience is your subjective view from inside one of them. The hypothesis inverts Eugene Wigner's 1960 question, "why is mathematics so unreasonably effective at describing physical reality?" by removing the distinction between the description and the thing. But even if reality is mathematics, the question has not gone away. It has migrated. You no longer ask why physical things exist. You ask why mathematical structures do.</p>
 
-  <p class="info"><b>5. The instability of nothing.</b> Sidney Coleman's work on quantum tunneling in the 1970s showed that empty configurations under quantum rules are not always stable. A false vacuum can decay. Alexander Vilenkin modeled a universe emerging from no classical spacetime via quantum tunneling in 1982. James Hartle and Stephen Hawking proposed the no-boundary condition in 1983, in which the question of what came before dissolves into a smoothly rounded four-dimensional geometry. The critiques all point to the same weakness: to describe a state as unstable, you need laws of quantum mechanics already in place. You need degrees of freedom to fluctuate. You need something for tunneling to occur within. The models describe how a universe can appear given quantum mechanics. Quantum mechanics itself remains unexplained.</p>
+  <p class="info"><b>5. The instability of nothing.</b> Sidney Coleman's work on quantum tunneling in the 1970s showed that empty configurations under quantum rules are not always stable. A false vacuum can decay. Alexander Vilenkin modeled a universe emerging from no classical spacetime via quantum tunneling in 1982. James Hartle and Stephen Hawking proposed the no-boundary condition in 1983, in which the question of what came before dissolves into a smoothly rounded four-dimensional geometry. The critiques all point to the same weakness: to describe a state as unstable, you need laws of quantum mechanics already in place. You need degrees of freedom to fluctuate. You need something for tunneling to occur within. Remove the quantum apparatus and the instability vanishes with it. What remains is not nothing doing something, but something doing something to something else.</p>
 
   <p class="info"><b>6. The word that means nothing.</b> Beginning in the early 2000s, philosophers noticed that every physics proposal defined nothing differently: quantum vacuum, absence of matter, absence of space, absence of laws, absence of potential. Each definition imported some quantity of structure to make the proposal work. David Albert's 2012 review of Krauss made the case most publicly. Adolf Grünbaum argued in the <em>British Journal for the Philosophy of Science</em> that the question contains a hidden assumption: that nothingness is the natural default state requiring exception. Jim Holt's <em>Why Does the World Exist?</em> (2012) surveyed the arguments and found no working definition. Derek Parfit's 1998 essay "Why Anything? Why This?" in the <em>London Review of Books</em> laid out the problem in pages of arguments no one has yet closed. Bede Rundle argued in his 2004 Oxford book that nothing is not a coherent alternative to something, and that the original question dissolves entirely. Others argue the dissolution is a dodge.</p>
 
@@ -317,7 +319,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <li>Barsella, Susanna, and Vincenzo Vespri. "Dante's Cosmos and the Geometry of Paradise." <em>Italianistica</em> L.1 (2021): 239&ndash;252.</li>
 <li>Barsella, Susanna, and Vincenzo Vespri. "A Possible 'Geometrical' Model for the Cosmology of the Commedia: A Synthesis." <em>Digital Dante</em>. Columbia University Libraries, 2022.</li>
 <li>Florensky, Pavel. <em>Mnimosti v geometrii</em> [Imaginary Numbers in Geometry]. Moscow, 1922.</li>
-<li>Baez, John. "Dante and the 3-Sphere." <em>Azimuth</em> (blog post, not peer-reviewed; used here as a framing reference, not as a primary source).</li>
+<li>Baez, John. "Dante and the 3-Sphere." <em>Azimuth</em>, January 18, 2026 (blog post, not peer-reviewed; used here as a framing reference, not as a primary source).</li>
 <li>Leibniz, Gottfried Wilhelm. <em>Principles of Nature and Grace Based on Reason</em> (1714), &sect;7; <em>Monadology</em> (1714); Clarke Correspondence (1715&ndash;1716).</li>
 <li>Boethius. <em>Consolation of Philosophy</em>, Book V.</li>
 <li>Plato. <em>Timaeus</em> 55c. Trans. Benjamin Jowett.</li>
@@ -331,13 +333,13 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <li>Coleman, Sidney. "Fate of the False Vacuum." <em>Physical Review D</em> 15 (1977): 2929&ndash;2936.</li>
 <li>Parfit, Derek. "Why Anything? Why This?" <em>London Review of Books</em> 20, no. 2 (1998); 20, no. 3 (1998).</li>
 <li>Holt, Jim. <em>Why Does the World Exist? An Existential Detective Story.</em> Liveright, 2012.</li>
-<li>Nozick, Robert. <em>Philosophical Explanations.</em> Harvard University Press, 1981. Chapter 6.</li>
+<li>Nozick, Robert. <em>Philosophical Explanations.</em> Harvard University Press, 1981. Chapter 6 (chapter number unverified; pending check against physical copy).</li>
 <li>Weinberg, Steven. <em>Dreams of a Final Theory.</em> Pantheon, 1993.</li>
 <li>Hawking, Stephen. <em>A Brief History of Time.</em> Bantam, 1988.</li>
 <li>Rundle, Bede. <em>Why There Is Something Rather than Nothing.</em> Oxford University Press, 2004.</li>
 <li>Wigner, Eugene. "The Unreasonable Effectiveness of Mathematics in the Natural Sciences." <em>Communications on Pure and Applied Mathematics</em> 13 (1960): 1&ndash;14.</li>
 </ul>
-<p class="note">Four citations from an earlier draft are held back pending a check of their publication details: the Baez post date, the Blair thesis, the Procopio piece and the Sargsyan piece. Restore them once confirmed.</p>
+<p class="note">Three citations from an earlier draft are held back pending a check of their publication details: the Blair thesis, the Procopio piece and the Sargsyan piece. Restore them once confirmed. The Baez post date has been confirmed and added.</p>
 </div>
 
 <script>
@@ -1728,14 +1730,12 @@ function drawKlein() {
   c.textAlign = 'right';
   var rotDeg = Math.round(alpha / DEG) % 360;
   c.fillText('4D rotation: ' + rotDeg + '°', w - 12, 18);
-  c.fillText(rotDeg === 0 ? '← self-intersection visible' : 'self-intersection opening', w - 12, 32);
+  c.fillText('self-intersections persist at all angles', w - 12, 32);
 
   /* update readout */
-  var selfInt = Math.abs(Math.sin(alpha)) > 0.05;
   setHtml('kleinInfo', '<b>4D rotation:</b> ' + rotDeg + '°. ' +
-    (selfInt ? 'Self-intersection visible in 3D projection. In 4D the surface is smooth.' :
-     'Self-intersection resolved. The 4D rotation opens the crossing into a clean tube.') +
-    '<br><b>Path:</b> red descent through Satan (u=π), gold ascent toward God (u=2π). The path never turns around.');
+    'The Klein bottle cannot embed in R³ at any rotation angle; the slider changes which crossings are visible, but cannot remove them all. In 4D the surface is smooth and non-self-intersecting.' +
+    '<br><b>Contrast with S³:</b> at ψ=0 (Satan\'s pole), S³ is smooth, simply connected, and orientable. The "down becomes up" inversion is a coordinate artifact of polar coordinates, not a topological crossing. The Klein bottle is shown here as the canonical 4D-in-3D object, not as a model of Dante\'s inversion.');
   setTxt('kRotV', rotDeg + '°');
   setTxt('kViewV', Math.round(view / DEG) + '°');
 }
