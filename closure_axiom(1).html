@@ -93,7 +93,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <div class="axiom-bar">The organizing idea: the sacred cannot leak, so the space it inhabits is finite, <b>closed</b>, and without boundary</div>
 
 <div class="intro">
-<h3>What this page argues</h3>
+<h3>The genealogy of a technique</h3>
 <p>This is a genealogy of technique. It is not a claim that three cultures independently discovered the same manifold. The <em>&#347;ulba s&#363;tras</em> (Vedic India, roughly 800 to 500 BCE) give rope-and-peg constructions for fire altars and state the relation we call the Pythagorean theorem, centuries before Pythagoras. Whether those texts contain proofs in the Greek sense, or statements with constructions that assume them, is a live question among historians of mathematics. Al-B&#299;r&#363;n&#299; (Islamic Persia, 973 to 1048 CE) carried triangle geometry onto the surface of the sphere, calculating the <em>qibla</em>, the direction of Mecca, from any point on Earth. Dante (1265 to 1321 CE) worked in a culture that had inherited both, and described a cosmos in <em>Paradiso</em> that a twentieth-century physicist identified as a 3-sphere.</p>
 <p>The tools accumulate. That is the claim, and the twelve panels below run in that order: a closure argument, then the triangle, then the sphere, then the 3-sphere and Dante's route through it, the question the geometry raises about freedom, and last the question Leibniz asked about existence itself, which three centuries of physics and philosophy have not closed.</p>
 
@@ -127,35 +127,31 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
 <h2 class="part" id="p2"><span>PART II</span>The triangle, and the sphere it is drawn on</h2>
 <p class="partsub">Rope geometry carried onto a curved surface, and the machine that made the result portable.</p>
 
-<div class="panel-full" id="s2">
-  <h3>2. The sacred triangle</h3>
-  <p class="info"><b>What this shows.</b> The spherical triangle whose vertices are the North Pole, an observer, and Mecca. The <em>&#347;ulba s&#363;tras</em> made the right triangle the basis of sacred construction. Al-B&#299;r&#363;n&#299; carried the triangle onto the sphere to solve the <em>qibla</em>. The figure is laid out to the <b>true side lengths and the true angles</b>, and it redraws as you move the observer in panel 3.</p>
-  <canvas id="cTriangle" height="300" role="img" aria-labelledby="triDesc"></canvas>
-  <p id="triDesc" class="sr-only">A triangle with the North Pole, the observer and Mecca at its corners, drawn to true measure from the current observer position. All numeric values appear in the readouts below.</p>
-  <div class="check" id="eqTriangle" aria-live="polite"></div>
-  <p class="note">The drawing is planar, so its three angles must sum to 180 degrees while the true spherical angles sum to more. That difference is the spherical excess, and on a unit sphere it equals the triangle's area. It is the reason a flat map of the sky always distorts something, which is what panel 4 is about.</p>
-</div>
-
-<div class="panel-full" id="s3">
-  <h3>3. Qibla: spherical trigonometry on an S&#x00B2; slice</h3>
-  <p class="info"><b>What this shows.</b> The <em>qibla</em> is the direction of the Kaaba in Mecca. Al-B&#299;r&#363;n&#299; computed it with spherical trigonometry, using the triangle in panel 2. The qibla path is a geodesic, the shortest route across a curved surface. <b>Left:</b> the qibla on Earth. <b>Right:</b> where that S&#x00B2; sits inside the 3-sphere of Part III.</p>
-  <div class="qgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-    <div>
-      <canvas id="cSphere" height="240" role="img" aria-label="A rotating globe showing the observer, Mecca, and the great-circle arc between them."></canvas>
-      <div class="sl-row"><label for="oLat">observer lat</label><input type="range" id="oLat" min="-80" max="80" value="36" step="1"><output for="oLat" id="oLatV">36&deg; N</output></div>
-      <div class="sl-row"><label for="oLon">observer lon</label><input type="range" id="oLon" min="-180" max="180" value="-87" step="1"><output for="oLon" id="oLonV">87&deg; W</output></div>
-      <div class="params">
-        <div class="pbox">qibla bearing<b id="rBearing">&#183;</b></div>
-        <div class="pbox">great-circle dist<b id="rDist">&#183;</b></div>
-        <div class="pbox">side c (N to obs)<b id="rSideC">&#183;</b></div>
-      </div>
-    </div>
-    <div>
-      <canvas id="cQS3" height="240" role="img" aria-label="A profile of the 3-sphere showing which S2 slice carries the qibla."></canvas>
-      <div class="sl-row"><label for="qPsi">slice depth &psi;</label><input type="range" id="qPsi" min="2" max="98" value="50" step="1"><output for="qPsi" id="qPsiV">&pi;/2</output></div>
-    </div>
+<div class="wrap">
+  <div class="panel" id="s2">
+    <h3>2. The sacred triangle</h3>
+    <p class="info"><b>What this shows.</b> The spherical triangle whose vertices are the North Pole, an observer, and Mecca. The <em>&#347;ulba s&#363;tras</em> made the right triangle the basis of sacred construction. Al-B&#299;r&#363;n&#299; carried the triangle onto the sphere to solve the <em>qibla</em>. The figure is laid out to the <b>true side lengths and the true angles</b>, and it redraws as you move the observer in panel 3.</p>
+    <canvas id="cTriangle" height="300" role="img" aria-labelledby="triDesc"></canvas>
+    <p id="triDesc" class="sr-only">A triangle with the North Pole, the observer and Mecca at its corners, drawn to true measure from the current observer position. All numeric values appear in the readouts below.</p>
+    <div class="check" id="eqTriangle" aria-live="polite"></div>
+    <p class="note">The drawing is planar, so its three angles must sum to 180 degrees while the true spherical angles sum to more. That difference is the spherical excess, and on a unit sphere it equals the triangle's area. It is the reason a flat map of the sky always distorts something, which is what panel 4 is about.</p>
   </div>
-  <div class="eq" id="eqQibla" aria-live="polite"></div>
+
+  <div class="panel" id="s3">
+    <h3>3. Qibla: spherical trigonometry on an S&#x00B2; slice</h3>
+    <p class="info"><b>What this shows.</b> The <em>qibla</em> is the direction of the Kaaba in Mecca. Al-B&#299;r&#363;n&#299; computed it with spherical trigonometry, using the triangle in panel 2. The qibla path is a geodesic, the shortest route across a curved surface. <b>Left:</b> the qibla on Earth. <b>Right:</b> where that S&#x00B2; sits inside the 3-sphere of Part III.</p>
+    <canvas id="cSphere" height="240" role="img" aria-label="A rotating globe showing the observer, Mecca, and the great-circle arc between them."></canvas>
+    <div class="sl-row"><label for="oLat">observer lat</label><input type="range" id="oLat" min="-80" max="80" value="36" step="1"><output for="oLat" id="oLatV">36&deg; N</output></div>
+    <div class="sl-row"><label for="oLon">observer lon</label><input type="range" id="oLon" min="-180" max="180" value="-87" step="1"><output for="oLon" id="oLonV">87&deg; W</output></div>
+    <div class="params">
+      <div class="pbox">qibla bearing<b id="rBearing">&#183;</b></div>
+      <div class="pbox">great-circle dist<b id="rDist">&#183;</b></div>
+      <div class="pbox">side c (N to obs)<b id="rSideC">&#183;</b></div>
+    </div>
+    <canvas id="cQS3" height="180" role="img" aria-label="A profile of the 3-sphere showing which S2 slice carries the qibla."></canvas>
+    <div class="sl-row"><label for="qPsi">slice depth &psi;</label><input type="range" id="qPsi" min="2" max="98" value="50" step="1"><output for="qPsi" id="qPsiV">&pi;/2</output></div>
+    <div class="eq" id="eqQibla" aria-live="polite"></div>
+  </div>
 </div>
 
 <div class="panel-full" id="s4">
@@ -202,11 +198,17 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   <h3>7. The journey, and why down becomes up</h3>
   <p class="info"><b>What this shows.</b> The whole route as one continuous path. Depth is &psi;: Satan at 0, Earth's surface just above, the Primum Mobile at &pi;/2, God at &pi;. Horizontal position is where you stand on the S&#x00B2; at that depth. <b>Left of the axis is Jerusalem's hemisphere. Right is the antipodal hemisphere, where Mount Purgatory stands.</b></p>
   <p class="info"><b>The inversion.</b> At &psi;=0 the sphere is not small, it is a single point. A path continuing straight through it has nowhere to come out except the antipode. Dante and Virgil never turn around; the sphere runs out from under them, and the angular coordinate flips by &pi;. That is the whole content of down becoming up, and it is why the descent is drawn on the left and everything after Satan on the right. Florensky located the critical moment exactly here.</p>
+  <p class="info"><b>The Klein bottle below is the same inversion in one lower dimension.</b> A Klein bottle is a 2D surface that cannot live in 3D without passing through itself. In 4D it fits cleanly. The self-intersection you see in 3D is the shadow of a smooth crossing in 4D, and Dante's passage through Satan is the same kind of crossing: in three dimensions it looks like the path pierces itself, but in the 3-sphere it threads through the pole and comes out the antipode, inverted. Rotate the 4D view and the self-intersection opens into a clean tube.</p>
   <canvas id="cRope" height="520" role="img" aria-label="A vertical profile of the 3-sphere with Dante's whole route drawn along it, the descent on the left and everything after Satan on the right."></canvas>
   <div class="sl-row"><label for="sJourney">journey</label><input type="range" id="sJourney" min="0" max="1000" value="0"><output for="sJourney" id="jLbl">the gate</output></div>
   <div class="sl-row"><label for="sPsi">slice &psi;</label><input type="range" id="sPsi" min="0" max="100" value="75"><output for="sPsi" id="psiLbl">&pi;/2</output></div>
   <div class="check" id="journeyInfo" aria-live="polite"></div>
   <div class="info" id="ropeInfo" aria-live="polite"></div>
+  <canvas id="cKlein" height="400" role="img" aria-labelledby="kleinDesc"></canvas>
+  <p id="kleinDesc" class="sr-only">A Klein bottle rendered as a 4D object projected into 3D. The bottle self-intersects in the 3D projection. Dante's journey is traced as a coloured path along the surface: descent in red, ascent in gold, meeting at the self-intersection circle where Satan sits. A slider rotates the object in the fourth dimension, opening the self-intersection into a clean tube.</p>
+  <div class="sl-row"><label for="kRot">4D rotation</label><input type="range" id="kRot" min="0" max="628" value="0" step="1"><output for="kRot" id="kRotV">0&deg;</output></div>
+  <div class="sl-row"><label for="kView">viewing angle</label><input type="range" id="kView" min="0" max="628" value="80" step="1"><output for="kView" id="kViewV">46&deg;</output></div>
+  <div class="check" id="kleinInfo" aria-live="polite"></div>
 </div>
 
 <div class="wrap">
@@ -233,7 +235,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
     <div class="sl-row"><label for="pView">viewing angle</label><input type="range" id="pView" min="0" max="628" value="50" step="1"><output for="pView" id="lblView">29&deg;</output></div>
     <p><button type="button" class="btn" id="pMotion" aria-pressed="true">pause motion</button></p>
     <div class="check" id="pilgrimInfo" aria-live="polite"></div>
-    <p class="note"><b>The finding.</b> Hell occupies &psi; &lt; 0.15, which is 8.6 degrees. A geodesic reaches Hell only if its plane lies within 8.6 degrees of the polar axis. Tilt past that and the path, still a perfect great circle and still the shortest route between its own points, never touches the lowest circles. Closure does not guarantee that a path passes through everything the space contains.</p>
+    <p class="note"><b>The finding.</b> Hell occupies &psi; &lt; 0.15, which is 8.6 degrees. A geodesic reaches Hell only if its plane lies within 8.6 degrees of the polar axis. Tilt past that and the path, still a perfect great circle and still the shortest route between its own points, never touches the lowest circles. Closure does not guarantee that a path passes through everything the space contains. The Klein bottle in panel 7 is the lower-dimensional shadow of this same geometry: a 2D surface that crosses itself in 3D but threads cleanly in 4D, the way this geodesic threads the pole and comes out inverted.</p>
   </div>
 </div>
 
@@ -264,7 +266,7 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   <p><button type="button" class="btn" id="vPlay">play the ascent</button><button type="button" class="btn" id="vReset">reset</button></p>
 
   <div class="answer">
-    <h4>The tradition's answer</h4>
+    <h4>Eternal vision and the will that remains</h4>
     <p>The ladder poses a threat. If the whole of a life can be seen at once, and every alternative to it seen alongside, what is left to decide? It is worth knowing that the writers usually named on this question all faced it, and all answered that nothing is lost.</p>
     <p><b>Boethius</b>, in the last book of the <em>Consolation</em>, argues that God's knowledge is not foreknowledge at all. It is an eternal present, and seeing does not cause. His image is the survey from a lofty height: God looks forth at all things as from a peak, and the act of vision adds no necessity to what it sees, just as your seeing a man walk does not make his walking necessary. Aquinas later refined this into the road-and-travellers form, a man in a high tower seeing every traveller at once, but the argument is Boethius's.</p>
     <p><b>Leibniz</b> builds his distinction between the necessary and the contingent for exactly this purpose. A truth is necessary when its denial is a contradiction; contingent truths are certain without being necessary. On his account the survey of all possible worlds leaves them contingent. He is the last person who would say the third rung abolishes choice. He is also the same Leibniz whose Principle of Sufficient Reason opens this page, which is worth noticing: the principle that closes the cosmos is not the principle that closes the will.</p>
@@ -282,7 +284,12 @@ canvas{width:100%;display:block;background:#020617;border-radius:8px;border:1px 
   <p class="info">The Principle of Sufficient Reason, which opens this page and which Leibniz gave its most precise formulation in 1714, says that everything that exists has an explanation for why it exists. The rule holds for every object, every event, every chain of causes. Applied to the universe itself, it produces a question Leibniz wrote down in section seven of <em>Principles of Nature and Grace Based on Reason</em>: why is there something rather than nothing? The chain of causes runs backward through your life, through your parents' lives, through history, through geology, through the stars that forged the atoms in your body, through the Big Bang, and then the chain runs out. There is nothing prior. The rule that worked for everything inside the universe collapses when you supply it to the universe itself.</p>
   <p class="info">Three centuries of the most rigorous minds in Europe and beyond have taken the question up. Kant called it illegitimate, an attempt by reason to think beyond its own limits. Hegel replied that legitimate or not, the question kept posing itself. Heidegger declared it the fundamental question of metaphysics and circled it for four decades. Wittgenstein wrote in the <em>Tractatus</em> that the mystical is not how the world is, but that it is. None of them closed it. In the twentieth and twenty-first centuries, physicists inherited the question and brought their own tools. The tools are powerful. The question sits where it started.</p>
 
-  <p class="info">The attempts sort into eight families. Each is intellectually serious. Each fails at the same joint: it explains a shape existence could take given some prior structure, and leaves the prior structure unexplained.</p>
+  <p class="info">The attempts sort into eight families. Each is intellectually serious. Each fails at the same joint: it explains a shape existence could take given some prior structure, and leaves the prior structure unexplained. The chain below makes the pattern visible: every attempt closes one link and opens another, and the bottom is always a gap.</p>
+
+  <canvas id="cQuestion" height="440" role="img" aria-labelledby="qDesc"></canvas>
+  <p id="qDesc" class="sr-only">A vertical chain of seven nodes, one for each attempt to answer Leibniz's question. Each node has a solid link above, meaning what it explains, and a dashed link below, meaning what it assumes but does not explain. The chain ends in a gap marked with a question mark. The selected attempt's details appear in the readout below.</p>
+  <div class="sl-row"><label for="qSlider">attempt</label><input type="range" id="qSlider" min="0" max="6" value="0" step="1"><output for="qSlider" id="qLbl">1</output></div>
+  <div class="check" id="qInfo" aria-live="polite"></div>
 
   <p class="info"><b>1. The quantum vacuum.</b> Quantum field theory says the vacuum is not empty. It fluctuates. Virtual particles appear and vanish. Edward Tryon argued in <em>Nature</em> in 1973 that the entire universe could have arisen as a vacuum fluctuation costing zero net energy. Lawrence Krauss expanded this into <em>A Universe from Nothing</em> (2012). The philosopher of physics David Albert reviewed the book in the <em>New York Times</em> and dismantled it in a single essay: the vacuum contains fields, contains laws, contains structure. Calling it nothing is a semantic move, not a physical one. The book explained how something can come from a quantum vacuum. It did not explain why there is a quantum vacuum.</p>
 
@@ -370,9 +377,9 @@ function fracToPsi(f) {
 }
 
 var CTX = {}, CSSW = {}, CSSH = {};
-var SPECS = [['cSolids',260],['cTriangle',300],['cSphere',240],['cQS3',240],['cAstro',560],
+var SPECS = [['cSolids',260],['cTriangle',300],['cSphere',240],['cQS3',180],['cAstro',560],
              ['cLadder',220],['cRope',520],['cDante',440],['cCoord',220],['cPilgrim',400],
-             ['cFull',360],['cVision',380]];
+             ['cFull',360],['cVision',380],['cQuestion',440],['cKlein',400]];
 function initCanvases() {
   var dpr = window.devicePixelRatio || 1;
   SPECS.forEach(function (sp) {
@@ -387,7 +394,7 @@ function initCanvases() {
 function dims(id) { return { w: CSSW[id] || 680, h: CSSH[id] || 240 }; }
 
 var dirty = {}, visibleSet = {};
-var ANIMATED = { cSolids:1, cLadder:1, cSphere:1, cFull:1 };
+var ANIMATED = { cSolids:1, cLadder:1, cSphere:1, cFull:1, cKlein:1 };
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var t = 0, pilgrimT = 0;
 function mark(id) { dirty[id] = true; }
@@ -1568,14 +1575,305 @@ function drawVision() {
   setTxt('vLbl', ['3D','4D','5D'][ki] + (Math.abs(vp - ki) < 0.02 ? '' : ' →'));
 }
 
+/* ==================== Klein bottle (4D in 3D) ==================== */
+var kleinRot = 0, kleinView = 80 * DEG, kleinUser = false;
+function kleinPoint(u, v, alpha) {
+  /* 4D Klein bottle embedding, projected to 3D via 4D rotation in x2-x3 plane */
+  var R = 2.2, r = 0.7;
+  var x0 = (R + r * Math.cos(v)) * Math.cos(u);
+  var x1 = (R + r * Math.cos(v)) * Math.sin(u);
+  var x2 = r * Math.sin(v) * Math.cos(u / 2);
+  var x3 = r * Math.sin(v) * Math.sin(u / 2);
+  /* rotate in x2-x3 plane by alpha */
+  var c = Math.cos(alpha), s = Math.sin(alpha);
+  var x2r = x2 * c - x3 * s;
+  /* project to 3D: (x0, x1, x2r) */
+  return [x0, x1, x2r];
+}
+function kleinProject(p, viewAngle, cx, cy, scale) {
+  /* simple 3D rotation around y-axis, then orthographic projection */
+  var ca = Math.cos(viewAngle), sa = Math.sin(viewAngle);
+  var xr = p[0] * ca + p[2] * sa;
+  var zr = -p[0] * sa + p[2] * ca;
+  var yr = p[1];
+  return [cx + xr * scale, cy - yr * scale, zr];
+}
+function drawKlein() {
+  var c = CTX.cKlein, d = dims('cKlein'), w = d.w, h = d.h;
+  c.clearRect(0, 0, w, h);
+  var cx = w / 2, cy = h / 2;
+  var scale = Math.min(w, h) / 7.5;
+  var alpha = kleinRot;
+  var view = kleinView;
+
+  /* collect surface points with depth for painter's algorithm */
+  var pts = [];
+  var NU = 48, NV = 24;
+  for (var i = 0; i <= NU; i++) {
+    for (var j = 0; j <= NV; j++) {
+      var u = i / NU * TAU;
+      var v = j / NV * TAU;
+      var p4 = kleinPoint(u, v, alpha);
+      var p3 = kleinProject(p4, view, cx, cy, scale);
+      pts.push({ u: u, v: v, x: p3[0], y: p3[1], z: p3[2], phase: u / TAU });
+    }
+  }
+
+  /* draw surface as quads, sorted by depth (painter's algorithm) */
+  var quads = [];
+  for (var i = 0; i < NU; i++) {
+    for (var j = 0; j < NV; j++) {
+      var i00 = i * (NV + 1) + j;
+      var i10 = (i + 1) * (NV + 1) + j;
+      var i11 = (i + 1) * (NV + 1) + (j + 1);
+      var i01 = i * (NV + 1) + (j + 1);
+      var avgZ = (pts[i00].z + pts[i10].z + pts[i11].z + pts[i01].z) / 4;
+      var up = i / NU * TAU;
+      /* color by phase: descent (red) for u < pi, ascent (gold) for u > pi */
+      var t = up / Math.PI;
+      var r, g, b;
+      if (t < 1) {
+        /* descent: dark red to bright red */
+        var f = t;
+        r = 180 + 60 * f; g = 30 + 20 * f; b = 20 + 10 * f;
+      } else {
+        /* ascent: gold */
+        var f = (t - 1);
+        r = 240; g = 180 + 20 * f; b = 40 + 30 * f;
+      }
+      /* darken by depth */
+      var depth = 1 - avgZ / (scale * 4);
+      depth = clamp(depth, 0.3, 1);
+      r = Math.round(r * depth);
+      g = Math.round(g * depth);
+      b = Math.round(b * depth);
+      quads.push({
+        z: avgZ,
+        p: [pts[i00], pts[i10], pts[i11], pts[i01]],
+        fill: 'rgb(' + r + ',' + g + ',' + b + ')'
+      });
+    }
+  }
+  quads.sort(function (a, b) { return a.z - b.z; });
+  quads.forEach(function (q) {
+    c.fillStyle = q.fill;
+    c.strokeStyle = q.fill;
+    c.lineWidth = 0.5;
+    c.beginPath();
+    c.moveTo(q.p[0].x, q.p[0].y);
+    for (var k = 1; k < 4; k++) c.lineTo(q.p[k].x, q.p[k].y);
+    c.closePath();
+    c.fill();
+    c.stroke();
+  });
+
+  /* draw Dante's journey path: fix v=0, trace u from 0 to 2pi */
+  var path = [];
+  for (var i = 0; i <= 120; i++) {
+    var u = i / 120 * TAU;
+    var p4 = kleinPoint(u, 0, alpha);
+    var p3 = kleinProject(p4, view, cx, cy, scale);
+    path.push({ x: p3[0], y: p3[1], z: p3[2], u: u });
+  }
+  /* draw path in segments, colored by phase */
+  for (var i = 0; i < path.length - 1; i++) {
+    var up = path[i].u;
+    if (up < Math.PI) {
+      c.strokeStyle = '#ff4444';
+    } else {
+      c.strokeStyle = '#fbbf24';
+    }
+    c.lineWidth = 3;
+    c.beginPath();
+    c.moveTo(path[i].x, path[i].y);
+    c.lineTo(path[i + 1].x, path[i + 1].y);
+    c.stroke();
+  }
+
+  /* mark the inversion point at u=pi (Satan) */
+  var invP = kleinPoint(Math.PI, 0, alpha);
+  var inv3 = kleinProject(invP, view, cx, cy, scale);
+  c.fillStyle = '#ff0066';
+  c.beginPath();
+  c.arc(inv3[0], inv3[1], 6, 0, TAU);
+  c.fill();
+  c.strokeStyle = '#fff';
+  c.lineWidth = 1.5;
+  c.stroke();
+  c.fillStyle = '#ff0066';
+  c.font = 'bold 11px monospace';
+  c.textAlign = 'center';
+  c.fillText('Satan', inv3[0], inv3[1] - 12);
+
+  /* mark God at u=0/2pi (the closing point) */
+  var godP = kleinPoint(0, 0, alpha);
+  var god3 = kleinProject(godP, view, cx, cy, scale);
+  c.fillStyle = '#fbbf24';
+  c.beginPath();
+  c.arc(god3[0], god3[1], 5, 0, TAU);
+  c.fill();
+  c.fillStyle = '#fbbf24';
+  c.font = 'bold 10px monospace';
+  c.fillText('God', god3[0], god3[1] - 10);
+
+  /* labels */
+  c.fillStyle = '#94a3b8';
+  c.font = '10px monospace';
+  c.textAlign = 'left';
+  c.fillText('red = descent (Hell)', 12, 18);
+  c.fillStyle = '#fbbf24';
+  c.fillText('gold = ascent (Purgatory → Paradise)', 12, 32);
+  c.fillStyle = '#94a3b8';
+  c.textAlign = 'right';
+  var rotDeg = Math.round(alpha / DEG) % 360;
+  c.fillText('4D rotation: ' + rotDeg + '°', w - 12, 18);
+  c.fillText(rotDeg === 0 ? '← self-intersection visible' : 'self-intersection opening', w - 12, 32);
+
+  /* update readout */
+  var selfInt = Math.abs(Math.sin(alpha)) > 0.05;
+  setHtml('kleinInfo', '<b>4D rotation:</b> ' + rotDeg + '°. ' +
+    (selfInt ? 'Self-intersection visible in 3D projection. In 4D the surface is smooth.' :
+     'Self-intersection resolved. The 4D rotation opens the crossing into a clean tube.') +
+    '<br><b>Path:</b> red descent through Satan (u=π), gold ascent toward God (u=2π). The path never turns around.');
+  setTxt('kRotV', rotDeg + '°');
+  setTxt('kViewV', Math.round(view / DEG) + '°');
+}
+
+/* ==================== question chain ==================== */
+var ATTEMPTS = [
+  {n:'Quantum vacuum',     explains:'universe from vacuum fluctuation',  assumes:'quantum fields, laws of QFT',         who:'Tryon 1973, Krauss 2012'},
+  {n:'Eternal inflation',  explains:'flat, uniform Big Bang',            assumes:'inflaton field, initial laws',        who:'Guth 1981, Linde, Vilenkin'},
+  {n:'Anthropic escape',   explains:'our physical constants',            assumes:'ensemble of 10^500 vacua',           who:'Douglas 2003, Susskind'},
+  {n:'Mathematical univ.',  explains:'effectiveness of mathematics',     assumes:'existence of math structures',        who:'Tegmark 2008'},
+  {n:'Instability of nil', explains:'universe from quantum tunneling',   assumes:'laws of quantum mechanics',           who:'Coleman 1977, Vilenkin 1982'},
+  {n:'The word "nothing"', explains:'nothing is incoherent',             assumes:'the question is well-formed',        who:'Albert, Grunbaum, Holt, Parfit'},
+  {n:'Question persists',  explains:'300 years of attempts',             assumes:'the question has an answer',         who:'Nozick, Weinberg, Hawking'},
+];
+var qSel = 0;
+function qReadout() {
+  var a = ATTEMPTS[qSel];
+  setHtml('qInfo', '<b>EXPLAINS:</b> ' + a.explains + '<br><b>ASSUMES:</b> ' + a.assumes + '<br><b>SOURCES:</b> ' + a.who);
+  setTxt('qLbl', (qSel + 1).toString());
+  mark('cQuestion');
+}
+function drawQuestion() {
+  var c = CTX.cQuestion, d = dims('cQuestion'), w = d.w, h = d.h;
+  c.clearRect(0, 0, w, h);
+  var cx = w / 2;
+  var topY = 36, botY = h - 56;
+  var n = ATTEMPTS.length;
+  var dy = (botY - topY) / (n - 1);
+
+  for (var i = 0; i < n; i++) {
+    var y = topY + i * dy;
+    var sel = (i === qSel);
+    var r = sel ? 15 : 10;
+
+    /* link above: what this explains (solid) */
+    if (i > 0) {
+      var pr = (i - 1 === qSel) ? 15 : 10;
+      c.strokeStyle = sel ? '#fbbf24' : '#475569';
+      c.lineWidth = sel ? 2.5 : 1.2;
+      c.setLineDash([]);
+      c.beginPath();
+      c.moveTo(cx, y - dy + pr);
+      c.lineTo(cx, y - r);
+      c.stroke();
+    }
+
+    /* link below: what this assumes (dashed = unexplained) */
+    if (i < n - 1) {
+      var nr = (i + 1 === qSel) ? 15 : 10;
+      c.strokeStyle = sel ? '#EF9F27' : '#334155';
+      c.lineWidth = sel ? 2 : 1;
+      c.setLineDash([5, 5]);
+      c.beginPath();
+      c.moveTo(cx, y + r);
+      c.lineTo(cx, y + dy - nr);
+      c.stroke();
+      c.setLineDash([]);
+    }
+
+    /* node */
+    c.fillStyle = sel ? '#fbbf24' : '#0f172a';
+    c.strokeStyle = sel ? '#fbbf24' : '#475569';
+    c.lineWidth = sel ? 2.5 : 1.5;
+    c.beginPath();
+    c.arc(cx, y, r, 0, TAU);
+    c.fill();
+    c.stroke();
+
+    /* number in node */
+    c.fillStyle = sel ? '#020617' : '#94a3b8';
+    c.font = (sel ? 'bold 13px' : '10px') + ' monospace';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.fillText(i + 1, cx, y);
+
+    /* label right of node */
+    c.fillStyle = sel ? '#fbbf24' : '#64748b';
+    c.font = (sel ? '13px' : '10.5px') + ' monospace';
+    c.textAlign = 'left';
+    c.fillText(ATTEMPTS[i].n, cx + r + 12, y);
+
+    /* selected: explains/assumes annotations to the left */
+    if (sel) {
+      c.textAlign = 'right';
+      c.font = '10px monospace';
+      c.fillStyle = '#5DCAA5';
+      c.fillText('EXPLAINS', cx - r - 14, y - 10);
+      c.fillStyle = '#cbd5e1';
+      c.fillText(a_explains_short(i), cx - r - 14, y + 4);
+      c.fillStyle = '#EF9F27';
+      c.fillText('ASSUMES', cx - r - 14, y + 18);
+      c.fillStyle = '#94a3b8';
+      c.fillText(a_assumes_short(i), cx - r - 14, y + 32);
+    }
+  }
+
+  /* the gap at the bottom */
+  var lastY = botY;
+  c.strokeStyle = '#EF9F27';
+  c.lineWidth = 2;
+  c.setLineDash([3, 7]);
+  c.beginPath();
+  c.moveTo(cx, lastY + 15);
+  c.lineTo(cx, h - 22);
+  c.stroke();
+  c.setLineDash([]);
+
+  /* question mark */
+  c.fillStyle = '#EF9F27';
+  c.font = 'bold 22px monospace';
+  c.textAlign = 'center';
+  c.textBaseline = 'middle';
+  c.fillText('?', cx, h - 12);
+
+  /* label for the gap */
+  c.fillStyle = '#94a3b8';
+  c.font = '10px monospace';
+  c.textAlign = 'left';
+  c.fillText('unexplained', cx + 18, h - 12);
+}
+function a_explains_short(i) {
+  var s = ATTEMPTS[i].explains;
+  return s.length > 28 ? s.slice(0, 26) + '..' : s;
+}
+function a_assumes_short(i) {
+  var s = ATTEMPTS[i].assumes;
+  return s.length > 28 ? s.slice(0, 26) + '..' : s;
+}
+
 /* ==================== loop ==================== */
 var DRAW = { cSolids:drawSolids, cTriangle:drawTriangle, cSphere:drawSphere, cQS3:drawQS3,
              cAstro:drawAstro, cLadder:drawLadder, cRope:drawRope, cDante:drawDante,
-             cCoord:drawCoord, cPilgrim:drawPilgrim, cFull:drawFull, cVision:drawVision };
+             cCoord:drawCoord, cPilgrim:drawPilgrim, cFull:drawFull, cVision:drawVision,
+             cQuestion:drawQuestion, cKlein:drawKlein };
 function loop() {
   if (!document.hidden) {
     if (!reduced) t += 0.018;
     if (pilgrimRunning && !reduced) { pilgrimT += 0.018; mark('cPilgrim'); }
+    if (!reduced && !kleinUser) { kleinRot += 0.006; if (kleinRot > TAU) kleinRot -= TAU; }
     if (vPlaying) {
       vPlayT += 1/60;
       if (vPlayT < 1.1) vTarget = 0;
@@ -1624,10 +1922,13 @@ on('pMotion', 'click', function () {
   this.setAttribute('aria-pressed', pilgrimRunning ? 'true' : 'false');
   mark('cPilgrim');
 });
+on('qSlider', 'input', function () { qSel = parseInt(this.value, 10); qReadout(); });
+on('kRot', 'input', function () { kleinRot = parseInt(this.value, 10) * DEG; kleinUser = true; mark('cKlein'); });
+on('kView', 'input', function () { kleinView = parseInt(this.value, 10) * DEG; mark('cKlein'); });
 
 initCanvases();
 setSolid(0); setDim(2);
-updateQibla(); onCoord(); pilgrimReadout();
+updateQibla(); onCoord(); pilgrimReadout(); qReadout();
 onPsi(75); onJourney(0); onDante(75); onFullPsi(75);
 SPECS.forEach(function (sp) { mark(sp[0]); DRAW[sp[0]](); });
 loop();

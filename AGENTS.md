@@ -214,20 +214,20 @@ This file is special. It is a fully self-contained interactive mathematics visua
 
 See `.windsurf/workflows/closure-axiom.md` for the complete agent workflow covering its architecture, domain knowledge (S³ geometry, qibla calculation, Dante's cosmos), canvas inventory, drawing functions, and hard rules from previous sessions.
 
-**Quick reference — 12 panels (5 parts, 12 numbered sections + references):**
+**Quick reference — 14 panels (5 parts, 12 numbered sections + references):**
 
 Part I — Closure:
 1. Platonic Solids — five closures, Euler V−E+F=2
 
 Part II — The triangle, and the sphere it is drawn on:
 2. Sacred Triangle — spherical triangle (North Pole, Observer, Mecca)
-3. Qibla — Al-Bīrūnī's spherical trig on S²/S³
+3. Qibla — Al-Bīrūnī's spherical trig on S²/S³ (sections 2+3 side by side in .wrap)
 4. Astrolabe — stereographic projection from south celestial pole to equatorial plane; conformality test; qibla triangle overlay
 
 Part III — The three-sphere:
 5. Ladder — S⁰ → S¹ → S² → S³ dimension explorer
 6. Dante's S³ — ψ-slices showing spheres growing to Primum Mobile, shrinking to God
-7. The Rope (journey) — Dante's world-line (Hell/Purgatory/Celestial/Empyrean); down-becomes-up inversion
+7. The Rope (journey) — Dante's world-line (Hell/Purgatory/Celestial/Empyrean); down-becomes-up inversion; Klein bottle canvas showing 4D-in-3D self-intersection with 4D rotation slider
 8. Coordinates — ψ/θ/φ explorer
 9. Geodesic — great circle on S³; γ(t) = cos t · u + sin t · v; tilt controls ψ range
 10. Whole Object — S³ by stereographic projection (Peterson model + Florensky vs Peterson framing)
@@ -236,9 +236,9 @@ Part IV — What the geometry costs:
 11. Ladder of Vision — Boethius/Leibniz/Dante on free will and eternal vision; 3D/4D/5D metaphor
 
 Part V — The question that won't die:
-12. Why Is There Something Rather Than Nothing? — Leibniz's PSR applied to existence itself; 8 attempts (quantum vacuum, eternal inflation, anthropic/multiverse, mathematical universe, instability of nothing, the word "nothing", the question's persistence); prose-only, no canvas; connects the page's closure arc to its philosophical limit
+12. Why Is There Something Rather Than Nothing? — Leibniz's PSR applied to existence itself; 7 attempts visualized as a chain of nodes (cQuestion canvas) where each explains one link and assumes the next; connects the page's closure arc to its philosophical limit
 
-**Canvas IDs (12):** cSolids, cTriangle, cSphere, cQS3, cAstro, cLadder, cRope, cDante, cCoord, cPilgrim, cFull, cVision
+**Canvas IDs (14):** cSolids, cTriangle, cSphere, cQS3, cAstro, cLadder, cRope, cDante, cCoord, cPilgrim, cFull, cVision, cQuestion, cKlein
 
 **ψ-mapping (Peterson's model):**
 - ψ=0: Satan (Earth's center) — pole
@@ -250,17 +250,17 @@ Part V — The question that won't die:
 - Empyrean angelic orders SHRINK from Primum Mobile to God
 
 **Hard rules for this file:**
-- Panel 10 (whole object) uses stereographic projection of S³ (from Satan's pole). The Klein bottle has been removed entirely.
+- Panel 10 (whole object) uses stereographic projection of S³ (from Satan's pole) via `cFull`.
+- Panel 7 (journey) now includes a Klein bottle canvas (`cKlein`) showing the 4D-in-3D inversion. The Klein bottle self-intersects in 3D projection; a 4D rotation slider opens the crossing into a clean tube. Dante's journey is traced as a coloured path (red descent, gold ascent) meeting at Satan (u=π). The Klein bottle is the lower-dimensional shadow of the same topological crossing that the geodesic in panel 9 and the world-line in panel 7 display.
 - Florensky (non-orientable) vs Peterson (S³, orientable) is presented as a live disagreement, not a merger.
-- Panel order is fixed: 1-2-3-4-5-6-7-8-9-10-11. Triangle+Qibla (2+3) adjacent; Dante+Rope (6+7) adjacent; Geodesic+Whole (9+10) in wrap pair.
-- `cKlein` canvas no longer exists. Panel 10 uses `cFull` for stereographic S³.
+- Panel order is fixed: 1-2-3-4-5-6-7-8-9-10-11-12. Sections 2+3 are side by side in a `.wrap` grid (the triangle and the qibla it solves); Dante+Rope (6+7) adjacent; Geodesic+Whole (9+10) in wrap pair.
 - The world-line (`knotPoint()`) encodes the journey structure. Do not replace with arbitrary math.
 - ψ panels (Rope, Dante, QS3) draw the vertical axis through `psiToFrac()`/`fracToPsi()`: Hell, Purgatory, Celestial, Empyrean each get one quarter of the axis. Sphere widths still use sinψ exactly. The Rope/Dante sliders travel on this display axis (value 75 = Primum Mobile).
 - Panel 10 uses true stereographic R = cot(ψ/2) but draws it on a log radial scale (`dispR()`), so the Primum Mobile (R=1) sits at half-radius. Both scalings are stated on the canvases/captions; do not remove the notes.
 - Panel 4 (astrolabe) and panel 10 (whole object) both use stereographic projection — panel 4 on S², panel 10 on S³. The cross-reference between them is explicit in the prose.
 - Panel 9 (geodesic): γ(t) = cos t · u + sin t · v with u,v orthonormal. ψ range is [τ, π−τ] where τ is the tilt. This is a true great circle on S³.
 - Panel 11 (ladder of vision): the 3D/4D/5D framing is an interpretive visualization metaphor, not a literal mathematical claim. Citations verified: the "lofty height" survey image is Boethius's (Consolation V.6); the road-and-travellers form is Aquinas's refinement (commentary on De Interpretatione 9); Marco Lombardo's free will speech is Purg. XVI.67-78 (broader speech to 145).
-- Panel 12 (the question): prose-only, no canvas. Presents 8 attempts to answer Leibniz's question "why is there something rather than nothing?" Each attempt is presented with its proponents and publications, then its critique. The pattern: every proposal explains a shape existence could take given some prior structure, and leaves the prior structure unexplained. The section connects the page's closure arc (śulba sūtras → al-Bīrūnī → Dante → Leibniz) to its philosophical limit. References for this section include Tryon (1973), Guth (1981), BGV (2003), Tegmark (2008), Coleman (1977), Parfit (1998), Holt (2012), Nozick (1981), Weinberg (1993), Hawking (1988), Rundle (2004), Wigner (1960).
+- Panel 12 (the question): includes a `cQuestion` canvas showing a vertical chain of 7 nodes, one per attempt to answer Leibniz's question. Each node has a solid link above (what it explains) and a dashed link below (what it assumes but does not explain). The chain ends in a gap marked with a question mark. A slider selects an attempt and displays its details. The pattern: every proposal explains a shape existence could take given some prior structure, and leaves the prior structure unexplained. The section connects the page's closure arc (śulba sūtras → al-Bīrūnī → Dante → Leibniz) to its philosophical limit. References for this section include Tryon (1973), Guth (1981), BGV (2003), Tegmark (2008), Coleman (1977), Parfit (1998), Holt (2012), Nozick (1981), Weinberg (1993), Hawking (1988), Rundle (2004), Wigner (1960).
 - All canvases use CSS-pixel drawing with `ctx.setTransform(dpr,0,0,dpr,0,0)` for retina support. Drawing functions use `dims(id)` for dimensions, not `c.canvas.width/height`.
 - Static panels use dirty flags and only redraw on slider input. Animated panels redraw every frame.
 - `IntersectionObserver` skips off-screen canvases. `prefers-reduced-motion` stops animation.
