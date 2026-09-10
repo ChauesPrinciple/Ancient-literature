@@ -214,7 +214,7 @@ This file is special. It is a fully self-contained interactive mathematics visua
 
 See `.windsurf/workflows/closure-axiom.md` for the complete agent workflow covering its architecture, domain knowledge (S³ geometry, qibla calculation, Dante's cosmos), canvas inventory, drawing functions, and hard rules from previous sessions.
 
-**Quick reference — 12 panels (4 parts, 11 numbered sections + references):**
+**Quick reference — 12 panels (5 parts, 12 numbered sections + references):**
 
 Part I — Closure:
 1. Platonic Solids — five closures, Euler V−E+F=2
@@ -234,6 +234,9 @@ Part III — The three-sphere:
 
 Part IV — What the geometry costs:
 11. Ladder of Vision — Boethius/Leibniz/Dante on free will and eternal vision; 3D/4D/5D metaphor
+
+Part V — The question that won't die:
+12. Why Is There Something Rather Than Nothing? — Leibniz's PSR applied to existence itself; 8 attempts (quantum vacuum, eternal inflation, anthropic/multiverse, mathematical universe, instability of nothing, the word "nothing", the question's persistence); prose-only, no canvas; connects the page's closure arc to its philosophical limit
 
 **Canvas IDs (12):** cSolids, cTriangle, cSphere, cQS3, cAstro, cLadder, cRope, cDante, cCoord, cPilgrim, cFull, cVision
 
@@ -257,6 +260,7 @@ Part IV — What the geometry costs:
 - Panel 4 (astrolabe) and panel 10 (whole object) both use stereographic projection — panel 4 on S², panel 10 on S³. The cross-reference between them is explicit in the prose.
 - Panel 9 (geodesic): γ(t) = cos t · u + sin t · v with u,v orthonormal. ψ range is [τ, π−τ] where τ is the tilt. This is a true great circle on S³.
 - Panel 11 (ladder of vision): the 3D/4D/5D framing is an interpretive visualization metaphor, not a literal mathematical claim. Citations verified: the "lofty height" survey image is Boethius's (Consolation V.6); the road-and-travellers form is Aquinas's refinement (commentary on De Interpretatione 9); Marco Lombardo's free will speech is Purg. XVI.67-78 (broader speech to 145).
+- Panel 12 (the question): prose-only, no canvas. Presents 8 attempts to answer Leibniz's question "why is there something rather than nothing?" Each attempt is presented with its proponents and publications, then its critique. The pattern: every proposal explains a shape existence could take given some prior structure, and leaves the prior structure unexplained. The section connects the page's closure arc (śulba sūtras → al-Bīrūnī → Dante → Leibniz) to its philosophical limit. References for this section include Tryon (1973), Guth (1981), BGV (2003), Tegmark (2008), Coleman (1977), Parfit (1998), Holt (2012), Nozick (1981), Weinberg (1993), Hawking (1988), Rundle (2004), Wigner (1960).
 - All canvases use CSS-pixel drawing with `ctx.setTransform(dpr,0,0,dpr,0,0)` for retina support. Drawing functions use `dims(id)` for dimensions, not `c.canvas.width/height`.
 - Static panels use dirty flags and only redraw on slider input. Animated panels redraw every frame.
 - `IntersectionObserver` skips off-screen canvases. `prefers-reduced-motion` stops animation.
