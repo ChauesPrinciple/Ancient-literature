@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Annotation and the Margin | Ancient Literature</title>
+    <meta name="description" content="Social Annotation and the Margin | Ancient Literature. Part of ENGL-2310 Early World Literature, an online anthology of ancient and medieval texts by Professor Robert Ladd.">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand" tabindex="0">
+                <h1>Ancient<br>Literature</h1>
+    <div class="dropdown-menu">
+        <a href="https://chauesprinciple.github.io/Ancient-literature/" class="dropdown-item current">Ancient Literature</a>
+        <a href="https://chauesprinciple.github.io/Tokyo-in-Film/" class="dropdown-item">Tokyo in Film</a>
+    </div>
+            </div>
+            <nav>
+                <a href="../../index.html">← Course Home</a>
+                <div class="current-module">
+                    <h3>For Instructors Only  (hidden from students)</h3>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <header class="page-header">
+                <h2>Social Annotation and the Margin</h2>
+            </header>
+
+            <article class="prose">
+
+<h2>What the margin is</h2>
+
+<p>Every primary-text page in this anthology carries an annotation layer called the margin. A student selects any paragraph or stanza and writes a note beside it: a comment, a question, a gloss, a text-to-text connection, a note on how the passage should sound aloud, or a personal response. Notes from the whole class appear in the same margin, threaded under the passage they are about.</p>
+
+<p>This is social annotation: collaborative notetaking in the margins of a shared text. The practice is old. Medieval readers wrote glosses and drolleries in the margins of exactly the kind of manuscripts this course teaches. The digital version moves the class conversation literally into the text: a question about a word sits next to the word itself, rather than in a discussion forum the student has to navigate away to. When students annotate the <em>Inferno</em> or <em>Beowulf</em>, they are working in the same marginal tradition as the scribes who copied those poems.</p>
+
+<h2>Why it is worth using</h2>
+
+<p>The strongest evidence is a 2023 study by Virginia Clinton-Lisell (<em>Research in Learning Technology</em>): students who annotated their textbook together reported significantly more choice, competence, relatedness, and interest than students taking reading quizzes. Annotation count, reading time, and note length all correlated with course grades. But in regression, only <strong>active reading time</strong> uniquely predicted grades. The likely mechanism is not that the comments are brilliant; it is that annotation makes students actually read, actively.</p>
+
+<p>The margin is built around that finding. It measures active reading time per student per text. The clock runs only while the page is on screen and the reader is interacting; a tab left open in the background does not count, and the class view reports it alongside note counts.</p>
+
+<h2>How to use it</h2>
+
+<ul>
+<li><strong>Seed the text.</strong> Add your own annotations before students arrive; open-ended conversation starters work best. Instructor notes carry a red badge. The evidence is consistent on this point: students should see some annotations when they first open a text.</li>
+<li><strong>Set a modest requirement.</strong> Open the class view on any text page to set how many notes are required and which kinds count. Three to six per text is a reasonable starting point.</li>
+<li><strong>Use it instead of, or before, the discussion board.</strong> The standard critique of discussion forums is that they detach conversation from the reading: read the text, set it aside, then go somewhere else to talk about it. The margin removes that gap.</li>
+<li><strong>Grade lightly or not at all.</strong> A simple rubric, a completion check, or no grade at all are all defensible. What the research rewards is the reading itself.</li>
+</ul>
+
+<h2>Tensions to hold</h2>
+
+<ul>
+<li><strong>Correlation is not causation.</strong> The active-reading mechanism is the best-supported account, but the studies are small and the field is young.</li>
+<li><strong>Equity cuts both ways.</strong> Annotation can give students room to speak from their own experience, and it can reproduce harm; microaggressions in the margin need the same attention they would need aloud. Read what your students write.</li>
+<li><strong>Required annotation erodes autonomy.</strong> Requirement raises relatedness and participation but lowers perceived autonomy relative to voluntary notetaking. A modest requirement plus genuinely open prompts is the practical middle path.</li>
+</ul>
+
+<h2>Turning on shared mode (Firebase)</h2>
+
+<p>Without a backend, the margin runs in preview mode: notes are saved in each reader's own browser and are not shared. To make the margin genuinely social, connect it to a free Firebase project:</p>
+
+<ol>
+<li>Create a project at <a href="https://console.firebase.google.com/">console.firebase.google.com</a> (the free Spark plan is sufficient).</li>
+<li>In Build → Authentication, enable the <strong>Anonymous</strong> provider. Readers are signed in silently; they never see a login screen.</li>
+<li>In Build → Firestore Database, create a database (production mode, any region).</li>
+<li>In Project settings → General, register a web app and copy the <code>firebaseConfig</code> values into <code>assets/margins.js</code> (the <code>MARGINS_FIREBASE</code> block at the top).</li>
+<li>Open any primary-text page in a browser, open the margin, and post a note as yourself. Then find your anonymous uid in Firebase console → Authentication → Users, and add it to <code>MARGINS_INSTRUCTORS</code> in <code>assets/margins.js</code>. That is what makes your notes post as instructor and shows you the class view.</li>
+<li>Set the Firestore security rules (below) so students can only write their own data and only you can write guide notes and settings.</li>
+</ol>
+
+<pre style="background:#f4f4f4;padding:1rem;border-radius:6px;overflow-x:auto;font-size:.85rem;">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /readers/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+    match /profiles/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+    match /guide/{doc} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid in ["PASTE_YOUR_UID_HERE"];
+    }
+  }
+}</pre>
+
+<p>Data layout: each reader owns one document, <code>readers/{uid}</code>, holding all their notes and per-text reading seconds. Instructor-seeded notes live in <code>guide/notes</code>; the requirement settings live in <code>guide/settings</code>; display names live in <code>profiles/{uid}</code>. A note stores its text id, its passage index, a quote if the reader highlighted one, and a text hint used to re-anchor it if the page is ever edited.</p>
+
+<h2>Sources</h2>
+
+<ul>
+<li>Clinton-Lisell, Virginia. "Social annotation: student perceptions and grades." <em>Research in Learning Technology</em> (2023).</li>
+<li>Farber, Katy. "Social Annotation in the Digital Age." <em>Edutopia</em> (2019).</li>
+<li>Kalir, Remi, quoted in Farber, on annotation as a millennium-old social practice, and on seeding texts.</li>
+<li>DePaul Teaching Commons, guide to Hypothesis in D2L, on practitioner practices (seeding, rubrics, replacing discussion boards).</li>
+</ul>
+
+            </article>
+
+            <footer class="page-nav">
+                <a href="04-zoom-information-for-instructors.html" class="nav-btn prev">← Previous</a><a href="../../index.html" class="nav-btn next">Course Home →</a>
+            </footer>
+
+            <footer class="site-footer">
+                <p><a href="https://chauesprinciple.github.io/Ancient-literature/">Ancient and Early Literature</a> ©
+                    2021 by <a href="https://chauesprinciple.github.io/Ancient-literature/">Robert Ladd</a> is licensed under <a
+                        href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons
+                        Attribution-NoDerivatives 4.0 International</a><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                        src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
+                        style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+            </footer>
+</main>
+    </div>
+    <script src="../../assets/glossary.js"></script>
+</body>
+
+</html>

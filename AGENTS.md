@@ -32,11 +32,12 @@ A complete online academic textbook for **ENGL-2310: Early World Literature**, t
 │   ├── style.css                      ← MASTER stylesheet (1204 lines)
 │   ├── dropdown.css                   ← DUPLICATE of style.css (do not reference)
 │   ├── glossary.js                    ← auto-highlights 69 terms across all pages
+│   ├── margins.js                     ← social annotation layer for primary-text pages (see "The Margin" below)
 │   └── media/                         ← hero images and media
 └── modules/
     ├── getting-started/               ← 11 files: syllabus, netiquette, intro
     ├── assignments-and-engagement/    ← 6 files
-    ├── for-instructors-only-hidden-from-students/  ← 4 files (hidden from students)
+    ├── for-instructors-only-hidden-from-students/  ← 5 files (hidden from students)
     ├── module-1-introductions/        ← 3 files
     ├── module-2-cosmogonies/          ← 5 files
     ├── module-3-gilgamesh/            ← 4 files
@@ -271,6 +272,32 @@ Part V — The question that won't die:
 - The script is wrapped in an IIFE `(function(){ 'use strict'; ... })()` — internal functions are not on `window`. Test via DOM events, not direct function calls.
 - `favicon.svg` exists in the repo root and is referenced by the page.
 - The word "sharp" is forbidden in this course's voice rules. Do not reintroduce it.
+
+---
+
+## The Margin (assets/margins.js)
+
+A social-annotation layer, adapted from a prototype ("Margins Reader"), loaded on all 14 primary-text pages via one script tag: `<script src="../../assets/margins.js" data-text="SLUG"></script>` immediately after the glossary.js tag.
+
+**Pages carrying it (data-text slug):** popol-vuh, works-and-days, gilgamesh, inferno, don-quixote, iliad, bhagavad-gita (file is misspelled `03-the-bhagavad-ghita.html`, slug is spelled correctly), beowulf, song-of-roland, hamlet, medea, one-thousand-nights, wife-of-bath, city-of-ladies.
+
+**Architecture:**
+- Scans `article.prose` for annotatable blocks (`p`, `blockquote`, `li` with non-empty text, excluding nav/aside/footer). Each gets `data-mga` index, `mg-block` class, tabindex, role=button.
+- Notes anchor to block index + a 60-char text `hint` used to re-anchor if the page is edited (`resolveAnchor()`).
+- Six note kinds: comment, question, gloss, connection, performance, response. Replies are notes with `parent` set.
+- Active reading time: 5s ticks while page is visible and user acted within 60s; flushed to storage every 60s and on tab-hide. Per Clinton-Lisell 2023, active reading time (not note count) is what predicts grades — this is measured deliberately.
+- Instructor = uid in `MARGINS_INSTRUCTORS` array (top of file). Instructor notes write to `guide/notes` and get a red badge; instructor sees the Class view dashboard (per-reader counts, active minutes, requirement editor).
+- Settings (`required` per text, `counts` kinds) live in `guide/settings`.
+
+**Storage:**
+- Shared mode: Firebase anonymous auth + Firestore compat SDK 10.14.1 loaded from gstatic CDN. Collections: `readers/{uid}` (per-user notes + reading seconds), `guide/notes`, `guide/settings`, `profiles/{uid}` (display names). Security rules and setup steps are documented in `modules/for-instructors-only-hidden-from-students/05-social-annotation-and-the-margin.html`.
+- Local/preview mode: if `MARGINS_FIREBASE.apiKey` still starts with `PASTE_`, or SDK load fails, notes save to `localStorage` under `margins-{slug}` and the footer offers a Student/Instructor role toggle for demoing.
+
+**Rules:**
+- All stored note data is untrusted — always render through `esc()`. `cleanNote/cleanNotes/cleanPerson/cleanSettings` validate everything read from the store.
+- Injected CSS is scoped under `mg-` prefixes; it does not touch `style.css`.
+- Do not remove the script tag from a text page without also deciding what happens to that text's stored notes.
+- Deleting a note with replies leaves a tombstone ("This note was deleted") rather than breaking threads.
 
 ---
 
